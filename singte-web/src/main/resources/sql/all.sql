@@ -143,6 +143,24 @@ create table st_menu
 create index st_menu_idx_menu_group_weight
     on st_menu (menu_group, weight);
 
+create table st_spider
+(
+    id            int auto_increment
+        primary key,
+    spider_name   varchar(100)  null comment '爬虫名字',
+    start_url     varchar(255)  null comment '开始链接',
+    pager_rule    varchar(1000) null comment '分页规则',
+    link_rule     varchar(1000) null comment '文章页规则',
+    title_rule    varchar(1000) null comment '标题规则',
+    content_rule  varchar(1000) null comment '内容规则',
+    summary_rule  varchar(1000) null comment '摘要规则',
+    category_rule varchar(1000) null comment '分类规则',
+    keyword_rule  varchar(1000) null comment '关键词规则',
+    spider_status char(10)      null comment '爬虫状态，1-启用，0-禁用',
+    create_time   datetime      null comment '创建时间'
+)
+    comment '爬虫表' charset = utf8;
+
 create table st_user
 (
     id          int auto_increment comment '用户id'

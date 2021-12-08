@@ -26,7 +26,7 @@
         </javaTypeResolver>
 
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="cn.sixlab.minesoft.singte.models" targetProject="./">
+        <javaModelGenerator targetPackage="cn.sixlab.minesoft.singte.core.models" targetProject="./">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -37,12 +37,12 @@
         </sqlMapGenerator>
 
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.sixlab.minesoft.singte.mapper" targetProject="./">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.sixlab.minesoft.singte.core.mapper" targetProject="./">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
 
-        <table tableName="st_config" domainObjectName="StConfig" enableCountByExample="false"
+        <table tableName="st_spider" domainObjectName="StSpider" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
