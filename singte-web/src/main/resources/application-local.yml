@@ -1,0 +1,26 @@
+server:
+  port: 10000
+
+spring:
+  freemarker:
+    cache: false
+    settings:
+      template_exception_handler: html_debug
+
+logging:
+  config: classpath:logback-console.xml
+  level:
+    ROOT: info
+    cn:
+      sixlab:
+        minesoft:
+          singte: debug
+
+st:
+  db:
+    jdbc: 127.0.0.1:3306/singte
+    username: root
+    pwd: 123456
+  jwt:
+    secret: random
+    expire: 3600

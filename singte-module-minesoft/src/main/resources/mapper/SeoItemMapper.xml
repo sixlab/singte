@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sixlab.minesoft.singte.core.mapper.SeoItemMapper" >
+  <resultMap id="BaseResultMap" type="cn.sixlab.minesoft.singte.module.minesoft.models.SeoItem" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="data_type" property="dataType" jdbcType="VARCHAR" />
+    <result column="data_url" property="dataUrl" jdbcType="VARCHAR" />
+    <result column="user" property="user" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, data_type, data_url, user, category, weight, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from seo_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from seo_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.SeoItem" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into seo_item (uid, data_type, data_url, 
+      user, category, weight, 
+      create_time)
+    values (#{uid,jdbcType=VARCHAR}, #{dataType,jdbcType=VARCHAR}, #{dataUrl,jdbcType=VARCHAR}, 
+      #{user,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.SeoItem" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into seo_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="dataType != null" >
+        data_type,
+      </if>
+      <if test="dataUrl != null" >
+        data_url,
+      </if>
+      <if test="user != null" >
+        user,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataUrl != null" >
+        #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.SeoItem" >
+    update seo_item
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        data_type = #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataUrl != null" >
+        data_url = #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.SeoItem" >
+    update seo_item
+    set uid = #{uid,jdbcType=VARCHAR},
+      data_type = #{dataType,jdbcType=VARCHAR},
+      data_url = #{dataUrl,jdbcType=VARCHAR},
+      user = #{user,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+<!--  -->
+  <select id="selectItems" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from seo_item
+
+    <if test="dataType != null and dataType != '' ">
+      where data_type = #{dataType,jdbcType=VARCHAR}
+    </if>
+
+    order by weight
+  </select>
+
+  <select id="selectByCategory" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from seo_item
+    where category = #{category,jdbcType=VARCHAR}
+    order by weight
+  </select>
+
+  <select id="selectUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from seo_item
+    where uid = #{uid,jdbcType=VARCHAR}
+    and data_type = #{dataType,jdbcType=VARCHAR}
+    limit 1
+  </select>
+</mapper>

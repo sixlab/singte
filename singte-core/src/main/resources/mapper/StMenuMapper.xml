@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sixlab.minesoft.singte.core.mapper.StMenuMapper" >
+  <resultMap id="BaseResultMap" type="cn.sixlab.minesoft.singte.core.models.StMenu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_link" property="menuLink" jdbcType="VARCHAR" />
+    <result column="menu_group" property="menuGroup" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, menu_name, menu_link, menu_group, weight, intro, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from st_menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from st_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sixlab.minesoft.singte.core.models.StMenu" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into st_menu (menu_name, menu_link, menu_group, 
+      weight, intro, create_time
+      )
+    values (#{menuName,jdbcType=VARCHAR}, #{menuLink,jdbcType=VARCHAR}, #{menuGroup,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sixlab.minesoft.singte.core.models.StMenu" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into st_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuLink != null" >
+        menu_link,
+      </if>
+      <if test="menuGroup != null" >
+        menu_group,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLink != null" >
+        #{menuLink,jdbcType=VARCHAR},
+      </if>
+      <if test="menuGroup != null" >
+        #{menuGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.minesoft.singte.core.models.StMenu" >
+    update st_menu
+    <set >
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLink != null" >
+        menu_link = #{menuLink,jdbcType=VARCHAR},
+      </if>
+      <if test="menuGroup != null" >
+        menu_group = #{menuGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sixlab.minesoft.singte.core.models.StMenu" >
+    update st_menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_link = #{menuLink,jdbcType=VARCHAR},
+      menu_group = #{menuGroup,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=INTEGER},
+      intro = #{intro,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+<!--  -->
+  <select id="selectGroupMenus" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from st_menu
+    where menu_group = #{menuGroup,jdbcType=VARCHAR}
+    order by weight
+  </select>
+</mapper>

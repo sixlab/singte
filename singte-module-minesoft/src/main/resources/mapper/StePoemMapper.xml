@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sixlab.minesoft.singte.core.mapper.StePoemMapper" >
+  <resultMap id="BaseResultMap" type="cn.sixlab.minesoft.singte.module.minesoft.models.StePoem" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="poem_name" property="poemName" jdbcType="VARCHAR" />
+    <result column="poem_author" property="poemAuthor" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.sixlab.minesoft.singte.module.minesoft.models.StePoem" extends="BaseResultMap" >
+    <result column="poem_content" property="poemContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, poem_name, poem_author, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    poem_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ste_poem
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ste_poem
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.StePoem" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ste_poem (poem_name, poem_author, create_time, 
+      poem_content)
+    values (#{poemName,jdbcType=VARCHAR}, #{poemAuthor,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{poemContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.StePoem" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ste_poem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="poemName != null" >
+        poem_name,
+      </if>
+      <if test="poemAuthor != null" >
+        poem_author,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="poemContent != null" >
+        poem_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="poemName != null" >
+        #{poemName,jdbcType=VARCHAR},
+      </if>
+      <if test="poemAuthor != null" >
+        #{poemAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poemContent != null" >
+        #{poemContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.StePoem" >
+    update ste_poem
+    <set >
+      <if test="poemName != null" >
+        poem_name = #{poemName,jdbcType=VARCHAR},
+      </if>
+      <if test="poemAuthor != null" >
+        poem_author = #{poemAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poemContent != null" >
+        poem_content = #{poemContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.StePoem" >
+    update ste_poem
+    set poem_name = #{poemName,jdbcType=VARCHAR},
+      poem_author = #{poemAuthor,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      poem_content = #{poemContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.StePoem" >
+    update ste_poem
+    set poem_name = #{poemName,jdbcType=VARCHAR},
+      poem_author = #{poemAuthor,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+<!--  -->
+
+  <select id="selectPoems" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Boolean" >
+
+select
+    <include refid="Base_Column_List" />
+
+    <if test=" withBLOBs " >
+      ,
+      <include refid="Blob_Column_List" />
+    </if>
+
+    from ste_poem
+    order by id
+
+  </select>
+</mapper>

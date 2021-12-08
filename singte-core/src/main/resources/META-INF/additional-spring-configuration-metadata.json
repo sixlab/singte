@@ -1,0 +1,39 @@
+{
+  "properties": [
+    {
+      "name": "st.db.publicKey",
+      "type": "java.lang.String",
+      "description": "数据库密码加密公钥."
+    },
+    {
+      "name": "st.db.version",
+      "type": "java.lang.String",
+      "description": "数据库表结构版本."
+    },
+    {
+      "name": "st.db.jdbc",
+      "type": "java.lang.String",
+      "description": "JDBC的部分 IP:端口/数据库."
+    },
+    {
+      "name": "st.db.username",
+      "type": "java.lang.String",
+      "description": "数据库的用户名."
+    },
+    {
+      "name": "st.db.pwd",
+      "type": "java.lang.String",
+      "description": "数据库加密后的密码."
+    },
+    {
+      "name": "st.jwt.secret",
+      "type": "java.lang.String",
+      "description": "JWT 用的 secret."
+    },
+    {
+      "name": "st.jwt.expire",
+      "type": "java.lang.String",
+      "description": "JWT 过期秒数."
+    }
+  ]
+}

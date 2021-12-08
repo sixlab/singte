@@ -1,0 +1,88 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    remoteip:
+      remote-ip-header: x-forwarded-for
+      protocol-header: x-forwarded-proto
+      port-header: X-Forwarded-Port
+    threads:
+      max: 0
+  servlet:
+    session:
+      timeout: 30s
+  forward-headers-strategy: native
+
+spring:
+  profiles:
+    active: local
+  application:
+    name: singte
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  mvc:
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: file:./st_static,classpath:/static/
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+  freemarker:
+    prefer-file-system-access: false
+    content-type: text/html; charset=utf-8
+    settings:
+      number_format: 0.##
+      datetime_format: yyyy-MM-dd HH:mm:ss
+      auto_include: frame/index.ftlh
+      template_exception_handler: rethrow
+    template-loader-path: file:./st_templates,classpath:/templates/
+  aop:
+    auto: true
+  datasource:
+    url: jdbc:mysql://${st.db.jdbc}?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8
+    username: ${st.db.username}
+    password: ${st.db.pwd}
+    driverClassName: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #下面为连接池补充设置
+      initialSize: 5
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录,配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      connectionProperties: druid.filters=stat,slf4j;druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+      removeAbandoned: true
+      removeAbandonedTimeout: 1800
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: cn.sixlab.minesoft.singte.models
+  configuration:
+    map-underscore-to-camel-case: true
+    local-cache-scope: statement
+    call-setters-on-nulls: true
+
+# 分页配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+st:
+  db:
+    version: 4

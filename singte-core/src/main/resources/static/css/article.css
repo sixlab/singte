@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+/*detail详情页*/
+.detail_left{ width:892px;}
+.detail_left .title li{ float:left; margin-right:5px;}
+.detail_left .title{ height:43px; line-height:43px; border-bottom:1px solid #e0e0e0; width:892px;}
+.artical{ padding-bottom:64px;}
+.artical .origin li{ float:left; margin-left:10px; color:#999;}
+.artical .origin li a{color:#999;}
+.artical .view{ color:#999;border:1px solid #e0e0e0; width:80px; border-radius:3px; padding:6px 0; text-align:center;}
+.artical h1 a{ font-size:28px; color:#333; height:112px; line-height:112px;}
+.artical .abstract{ padding:14px 20px; border:1px solid #e0e0e0; margin-top:18px;margin-bottom: 30px;}
+.artical p{ text-indent:2em; line-height:30px; padding-bottom:30px;}
+.artical .bottom{ height:30px; line-height:30px;}
+.artical .share img{ vertical-align:middle;}
+.artical .bottom span{ color:#999;}
+.artical .bottom  a{ margin-left:10px;}

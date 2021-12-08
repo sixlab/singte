@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sixlab.minesoft.singte.core.mapper.StePoemNameMapper" >
+  <resultMap id="BaseResultMap" type="cn.sixlab.minesoft.singte.module.minesoft.models.StePoemName" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="poem_id" property="poemId" jdbcType="INTEGER" />
+    <result column="atom_id" property="atomId" jdbcType="INTEGER" />
+    <result column="name_keywords" property="nameKeywords" jdbcType="VARCHAR" />
+    <result column="people_name" property="peopleName" jdbcType="VARCHAR" />
+    <result column="poem_name" property="poemName" jdbcType="VARCHAR" />
+    <result column="atom_content" property="atomContent" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, poem_id, atom_id, name_keywords, people_name, poem_name, atom_content, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ste_poem_name
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ste_poem_name
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.StePoemName" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ste_poem_name (poem_id, atom_id, name_keywords, 
+      people_name, poem_name, atom_content, 
+      create_time)
+    values (#{poemId,jdbcType=INTEGER}, #{atomId,jdbcType=INTEGER}, #{nameKeywords,jdbcType=VARCHAR}, 
+      #{peopleName,jdbcType=VARCHAR}, #{poemName,jdbcType=VARCHAR}, #{atomContent,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.StePoemName" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ste_poem_name
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="poemId != null" >
+        poem_id,
+      </if>
+      <if test="atomId != null" >
+        atom_id,
+      </if>
+      <if test="nameKeywords != null" >
+        name_keywords,
+      </if>
+      <if test="peopleName != null" >
+        people_name,
+      </if>
+      <if test="poemName != null" >
+        poem_name,
+      </if>
+      <if test="atomContent != null" >
+        atom_content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="poemId != null" >
+        #{poemId,jdbcType=INTEGER},
+      </if>
+      <if test="atomId != null" >
+        #{atomId,jdbcType=INTEGER},
+      </if>
+      <if test="nameKeywords != null" >
+        #{nameKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleName != null" >
+        #{peopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="poemName != null" >
+        #{poemName,jdbcType=VARCHAR},
+      </if>
+      <if test="atomContent != null" >
+        #{atomContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.StePoemName" >
+    update ste_poem_name
+    <set >
+      <if test="poemId != null" >
+        poem_id = #{poemId,jdbcType=INTEGER},
+      </if>
+      <if test="atomId != null" >
+        atom_id = #{atomId,jdbcType=INTEGER},
+      </if>
+      <if test="nameKeywords != null" >
+        name_keywords = #{nameKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleName != null" >
+        people_name = #{peopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="poemName != null" >
+        poem_name = #{poemName,jdbcType=VARCHAR},
+      </if>
+      <if test="atomContent != null" >
+        atom_content = #{atomContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sixlab.minesoft.singte.module.minesoft.models.StePoemName" >
+    update ste_poem_name
+    set poem_id = #{poemId,jdbcType=INTEGER},
+      atom_id = #{atomId,jdbcType=INTEGER},
+      name_keywords = #{nameKeywords,jdbcType=VARCHAR},
+      people_name = #{peopleName,jdbcType=VARCHAR},
+      poem_name = #{poemName,jdbcType=VARCHAR},
+      atom_content = #{atomContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+<!--  -->
+
+  <select id="selectPoemNames" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ste_poem_name
+    order by id
+  </select>
+</mapper>

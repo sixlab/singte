@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sixlab.minesoft.singte.core.mapper.StArticleMapper" >
+  <resultMap id="BaseResultMap" type="cn.sixlab.minesoft.singte.core.models.StArticle" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="view_count" property="viewCount" jdbcType="INTEGER" />
+    <result column="thumb_count" property="thumbCount" jdbcType="INTEGER" />
+    <result column="publish_status" property="publishStatus" jdbcType="CHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.sixlab.minesoft.singte.core.models.StArticle" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, alias, title, author, keywords, summary, category, category_id, view_count, thumb_count, 
+    publish_status, publish_time, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from st_article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from st_article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sixlab.minesoft.singte.core.models.StArticle" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into st_article (alias, title, author, 
+      keywords, summary, category, 
+      category_id, view_count, thumb_count, 
+      publish_status, publish_time, create_time, 
+      content)
+    values (#{alias,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{keywords,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, #{thumbCount,jdbcType=INTEGER}, 
+      #{publishStatus,jdbcType=CHAR}, #{publishTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sixlab.minesoft.singte.core.models.StArticle" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into st_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="alias != null" >
+        alias,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="viewCount != null" >
+        view_count,
+      </if>
+      <if test="thumbCount != null" >
+        thumb_count,
+      </if>
+      <if test="publishStatus != null" >
+        publish_status,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="alias != null" >
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null" >
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="thumbCount != null" >
+        #{thumbCount,jdbcType=INTEGER},
+      </if>
+      <if test="publishStatus != null" >
+        #{publishStatus,jdbcType=CHAR},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.minesoft.singte.core.models.StArticle" >
+    update st_article
+    <set >
+      <if test="alias != null" >
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null" >
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="thumbCount != null" >
+        thumb_count = #{thumbCount,jdbcType=INTEGER},
+      </if>
+      <if test="publishStatus != null" >
+        publish_status = #{publishStatus,jdbcType=CHAR},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sixlab.minesoft.singte.core.models.StArticle" >
+    update st_article
+    set alias = #{alias,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      thumb_count = #{thumbCount,jdbcType=INTEGER},
+      publish_status = #{publishStatus,jdbcType=CHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sixlab.minesoft.singte.core.models.StArticle" >
+    update st_article
+    set alias = #{alias,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      thumb_count = #{thumbCount,jdbcType=INTEGER},
+      publish_status = #{publishStatus,jdbcType=CHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+<!--  -->
+
+  <select id="selectHot" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from st_article
+    where publish_status = '1'
+    order by view_count desc
+    limit ${size}
+  </select>
+
+
+  <select id="selectLast" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from st_article
+    where publish_status = '1'
+    order by publish_time desc
+    limit ${size}
+  </select>
+
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    select
+      max(id)
+    from st_article
+    where publish_status = '1'
+  </select>
+
+  <select id="selectRandom" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from st_article
+    where publish_status = '1'
+    and id >= ( rand() * ${max} )
+    <if test="excludeIds != null and excludeIds.size>0">
+      and id not in
+          <foreach collection="excludeIds" item="item" separator="," open="(" close=")" index="">
+            #{item, jdbcType=NUMERIC}
+          </foreach>
+    </if>
+    limit 1
+  </select>
+
+  <select id="selectByCategory" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from st_article
+    where publish_status = '1'
+    <if test="category != null and category != ''">
+      and category = #{category,jdbcType=VARCHAR}
+    </if>
+    order by publish_time desc
+  </select>
+
+  <select id="selectByAlias" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from st_article
+    where publish_status = '1'
+    <if test="alias != null and alias != ''">
+      and alias = #{alias,jdbcType=VARCHAR}
+    </if>
+    order by id desc
+    limit 1
+  </select>
+
+  <update id="addView" parameterType="java.lang.Integer">
+    update st_article
+    set view_count = view_count + 1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByDate" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from st_article
+    where publish_status = '1'
+    and publish_time >= #{begin, jdbcType=TIMESTAMP}
+    and publish_time &lt; #{end, jdbcType=TIMESTAMP}
+    order by publish_time desc
+  </select>
+
+</mapper>
