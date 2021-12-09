@@ -6,6 +6,8 @@ import java.util.Date;
 public class StSpider implements Serializable {
     private Integer id;
 
+    private String spiderType;
+
     private String spiderName;
 
     private String startUrl;
@@ -28,6 +30,8 @@ public class StSpider implements Serializable {
 
     private Date createTime;
 
+    private String urlParam;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -36,6 +40,14 @@ public class StSpider implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getSpiderType() {
+        return spiderType;
+    }
+
+    public void setSpiderType(String spiderType) {
+        this.spiderType = spiderType == null ? null : spiderType.trim();
     }
 
     public String getSpiderName() {
@@ -124,5 +136,13 @@ public class StSpider implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUrlParam() {
+        return urlParam;
+    }
+
+    public void setUrlParam(String urlParam) {
+        this.urlParam = urlParam == null ? null : urlParam.trim();
     }
 }

@@ -22,4 +22,8 @@ public class CtxHolder implements ApplicationContextAware {
         return context.getBean(clazz);
     }
 
+    public static <T> T getBean(String name, Class<T> clazz) {
+        return (T) context.getBean(name);
+    }
+
 }

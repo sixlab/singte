@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StConst {
+    public static final String YES = "1";
+    public static final String No = "0";
+
     public final static String ST_VERSION   = "st_version";
     public final static String ST_WX_NAME   = "st_wx_name";
     public final static String ST_WX_QR     = "st_wx_qr";
@@ -30,4 +33,6 @@ public class StConst {
     public static final long SECONDS_MIN_25 = SECONDS_MIN_1 * 25;
     public static final long SECONDS_MIN_30 = SECONDS_MIN_1 * 30;
     public static final long SECONDS_MIN_35 = SECONDS_MIN_1 * 35;
+
+    public final static String ST_SPIDER_PL = "page_link";
 }
