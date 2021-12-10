@@ -326,4 +326,13 @@
     order by publish_time desc
   </select>
 
+  <select id="selectBySourceUrl" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from st_article
+    where source_url = #{sourceUrl,jdbcType=VARCHAR}
+    limit 1
+  </select>
 </mapper>

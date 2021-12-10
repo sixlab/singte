@@ -3,8 +3,6 @@ package cn.sixlab.minesoft.singte.core.schedule;
 import cn.sixlab.minesoft.singte.core.common.spider.SpiderJob;
 import cn.sixlab.minesoft.singte.core.common.utils.CtxHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.mapper.StArticleMapper;
-import cn.sixlab.minesoft.singte.core.mapper.StCategoryMapper;
 import cn.sixlab.minesoft.singte.core.mapper.StSpiderMapper;
 import cn.sixlab.minesoft.singte.core.models.StSpider;
 import org.springframework.beans.factory.annotation.Autowired;

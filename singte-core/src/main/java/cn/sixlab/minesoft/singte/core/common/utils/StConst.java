@@ -34,5 +34,6 @@ public class StConst {
     public static final long SECONDS_MIN_30 = SECONDS_MIN_1 * 30;
     public static final long SECONDS_MIN_35 = SECONDS_MIN_1 * 35;
 
-    public final static String ST_SPIDER_PL = "page_link";
+    public final static String ST_PUBLISH_WILL = "0";
+    public final static String ST_PUBLISH_DID = "1";
 }

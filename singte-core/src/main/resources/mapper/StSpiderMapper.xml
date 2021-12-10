@@ -1,32 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sixlab.minesoft.singte.core.mapper.StSpiderMapper">
-  <resultMap id="BaseResultMap" type="cn.sixlab.minesoft.singte.core.models.StSpider">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="spider_type" jdbcType="VARCHAR" property="spiderType" />
-    <result column="spider_name" jdbcType="VARCHAR" property="spiderName" />
-    <result column="start_url" jdbcType="VARCHAR" property="startUrl" />
-    <result column="pager_rule" jdbcType="VARCHAR" property="pagerRule" />
-    <result column="link_rule" jdbcType="VARCHAR" property="linkRule" />
-    <result column="title_rule" jdbcType="VARCHAR" property="titleRule" />
-    <result column="content_rule" jdbcType="VARCHAR" property="contentRule" />
-    <result column="summary_rule" jdbcType="VARCHAR" property="summaryRule" />
-    <result column="category_rule" jdbcType="VARCHAR" property="categoryRule" />
-    <result column="keyword_rule" jdbcType="VARCHAR" property="keywordRule" />
-    <result column="spider_status" jdbcType="CHAR" property="spiderStatus" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sixlab.minesoft.singte.core.mapper.StSpiderMapper" >
+  <resultMap id="BaseResultMap" type="cn.sixlab.minesoft.singte.core.models.StSpider" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="spider_type" property="spiderType" jdbcType="VARCHAR" />
+    <result column="spider_name" property="spiderName" jdbcType="VARCHAR" />
+    <result column="start_url" property="startUrl" jdbcType="VARCHAR" />
+    <result column="pager_rule" property="pagerRule" jdbcType="VARCHAR" />
+    <result column="link_rule" property="linkRule" jdbcType="VARCHAR" />
+    <result column="title_rule" property="titleRule" jdbcType="VARCHAR" />
+    <result column="content_rule" property="contentRule" jdbcType="VARCHAR" />
+    <result column="summary_rule" property="summaryRule" jdbcType="VARCHAR" />
+    <result column="category_rule" property="categoryRule" jdbcType="VARCHAR" />
+    <result column="keyword_rule" property="keywordRule" jdbcType="VARCHAR" />
+    <result column="wait_times" property="waitTimes" jdbcType="INTEGER" />
+    <result column="spider_status" property="spiderStatus" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.sixlab.minesoft.singte.core.models.StSpider">
-    <result column="url_param" jdbcType="LONGVARCHAR" property="urlParam" />
+  <resultMap id="ResultMapWithBLOBs" type="cn.sixlab.minesoft.singte.core.models.StSpider" extends="BaseResultMap" >
+    <result column="url_param" property="urlParam" jdbcType="LONGVARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, spider_type, spider_name, start_url, pager_rule, link_rule, title_rule, content_rule, 
-    summary_rule, category_rule, keyword_rule, spider_status, create_time
+    summary_rule, category_rule, keyword_rule, wait_times, spider_status, create_time
   </sql>
-  <sql id="Blob_Column_List">
+  <sql id="Blob_Column_List" >
     url_param
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
@@ -34,159 +35,168 @@
     from st_spider
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from st_spider
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+  <insert id="insert" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into st_spider (spider_type, spider_name, start_url, 
       pager_rule, link_rule, title_rule, 
       content_rule, summary_rule, category_rule, 
-      keyword_rule, spider_status, create_time, 
-      url_param)
+      keyword_rule, wait_times, spider_status, 
+      create_time, url_param)
     values (#{spiderType,jdbcType=VARCHAR}, #{spiderName,jdbcType=VARCHAR}, #{startUrl,jdbcType=VARCHAR}, 
       #{pagerRule,jdbcType=VARCHAR}, #{linkRule,jdbcType=VARCHAR}, #{titleRule,jdbcType=VARCHAR}, 
       #{contentRule,jdbcType=VARCHAR}, #{summaryRule,jdbcType=VARCHAR}, #{categoryRule,jdbcType=VARCHAR}, 
-      #{keywordRule,jdbcType=VARCHAR}, #{spiderStatus,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{urlParam,jdbcType=LONGVARCHAR})
+      #{keywordRule,jdbcType=VARCHAR}, #{waitTimes,jdbcType=INTEGER}, #{spiderStatus,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{urlParam,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+  <insert id="insertSelective" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into st_spider
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="spiderType != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="spiderType != null" >
         spider_type,
       </if>
-      <if test="spiderName != null">
+      <if test="spiderName != null" >
         spider_name,
       </if>
-      <if test="startUrl != null">
+      <if test="startUrl != null" >
         start_url,
       </if>
-      <if test="pagerRule != null">
+      <if test="pagerRule != null" >
         pager_rule,
       </if>
-      <if test="linkRule != null">
+      <if test="linkRule != null" >
         link_rule,
       </if>
-      <if test="titleRule != null">
+      <if test="titleRule != null" >
         title_rule,
       </if>
-      <if test="contentRule != null">
+      <if test="contentRule != null" >
         content_rule,
       </if>
-      <if test="summaryRule != null">
+      <if test="summaryRule != null" >
         summary_rule,
       </if>
-      <if test="categoryRule != null">
+      <if test="categoryRule != null" >
         category_rule,
       </if>
-      <if test="keywordRule != null">
+      <if test="keywordRule != null" >
         keyword_rule,
       </if>
-      <if test="spiderStatus != null">
+      <if test="waitTimes != null" >
+        wait_times,
+      </if>
+      <if test="spiderStatus != null" >
         spider_status,
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         create_time,
       </if>
-      <if test="urlParam != null">
+      <if test="urlParam != null" >
         url_param,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="spiderType != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="spiderType != null" >
         #{spiderType,jdbcType=VARCHAR},
       </if>
-      <if test="spiderName != null">
+      <if test="spiderName != null" >
         #{spiderName,jdbcType=VARCHAR},
       </if>
-      <if test="startUrl != null">
+      <if test="startUrl != null" >
         #{startUrl,jdbcType=VARCHAR},
       </if>
-      <if test="pagerRule != null">
+      <if test="pagerRule != null" >
         #{pagerRule,jdbcType=VARCHAR},
       </if>
-      <if test="linkRule != null">
+      <if test="linkRule != null" >
         #{linkRule,jdbcType=VARCHAR},
       </if>
-      <if test="titleRule != null">
+      <if test="titleRule != null" >
         #{titleRule,jdbcType=VARCHAR},
       </if>
-      <if test="contentRule != null">
+      <if test="contentRule != null" >
         #{contentRule,jdbcType=VARCHAR},
       </if>
-      <if test="summaryRule != null">
+      <if test="summaryRule != null" >
         #{summaryRule,jdbcType=VARCHAR},
       </if>
-      <if test="categoryRule != null">
+      <if test="categoryRule != null" >
         #{categoryRule,jdbcType=VARCHAR},
       </if>
-      <if test="keywordRule != null">
+      <if test="keywordRule != null" >
         #{keywordRule,jdbcType=VARCHAR},
       </if>
-      <if test="spiderStatus != null">
+      <if test="waitTimes != null" >
+        #{waitTimes,jdbcType=INTEGER},
+      </if>
+      <if test="spiderStatus != null" >
         #{spiderStatus,jdbcType=CHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="urlParam != null">
+      <if test="urlParam != null" >
         #{urlParam,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider" >
     update st_spider
-    <set>
-      <if test="spiderType != null">
+    <set >
+      <if test="spiderType != null" >
         spider_type = #{spiderType,jdbcType=VARCHAR},
       </if>
-      <if test="spiderName != null">
+      <if test="spiderName != null" >
         spider_name = #{spiderName,jdbcType=VARCHAR},
       </if>
-      <if test="startUrl != null">
+      <if test="startUrl != null" >
         start_url = #{startUrl,jdbcType=VARCHAR},
       </if>
-      <if test="pagerRule != null">
+      <if test="pagerRule != null" >
         pager_rule = #{pagerRule,jdbcType=VARCHAR},
       </if>
-      <if test="linkRule != null">
+      <if test="linkRule != null" >
         link_rule = #{linkRule,jdbcType=VARCHAR},
       </if>
-      <if test="titleRule != null">
+      <if test="titleRule != null" >
         title_rule = #{titleRule,jdbcType=VARCHAR},
       </if>
-      <if test="contentRule != null">
+      <if test="contentRule != null" >
         content_rule = #{contentRule,jdbcType=VARCHAR},
       </if>
-      <if test="summaryRule != null">
+      <if test="summaryRule != null" >
         summary_rule = #{summaryRule,jdbcType=VARCHAR},
       </if>
-      <if test="categoryRule != null">
+      <if test="categoryRule != null" >
         category_rule = #{categoryRule,jdbcType=VARCHAR},
       </if>
-      <if test="keywordRule != null">
+      <if test="keywordRule != null" >
         keyword_rule = #{keywordRule,jdbcType=VARCHAR},
       </if>
-      <if test="spiderStatus != null">
+      <if test="waitTimes != null" >
+        wait_times = #{waitTimes,jdbcType=INTEGER},
+      </if>
+      <if test="spiderStatus != null" >
         spider_status = #{spiderStatus,jdbcType=CHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="urlParam != null">
+      <if test="urlParam != null" >
         url_param = #{urlParam,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider" >
     update st_spider
     set spider_type = #{spiderType,jdbcType=VARCHAR},
       spider_name = #{spiderName,jdbcType=VARCHAR},
@@ -198,12 +208,13 @@
       summary_rule = #{summaryRule,jdbcType=VARCHAR},
       category_rule = #{categoryRule,jdbcType=VARCHAR},
       keyword_rule = #{keywordRule,jdbcType=VARCHAR},
+      wait_times = #{waitTimes,jdbcType=INTEGER},
       spider_status = #{spiderStatus,jdbcType=CHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       url_param = #{urlParam,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider">
+  <update id="updateByPrimaryKey" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider" >
     update st_spider
     set spider_type = #{spiderType,jdbcType=VARCHAR},
       spider_name = #{spiderName,jdbcType=VARCHAR},
@@ -215,190 +226,7 @@
       summary_rule = #{summaryRule,jdbcType=VARCHAR},
       category_rule = #{categoryRule,jdbcType=VARCHAR},
       keyword_rule = #{keywordRule,jdbcType=VARCHAR},
-      spider_status = #{spiderStatus,jdbcType=CHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="cn.sixlab.minesoft.singte.core.models.StSpider">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="spider_type" jdbcType="VARCHAR" property="spiderType" />
-    <result column="spider_name" jdbcType="VARCHAR" property="spiderName" />
-    <result column="start_url" jdbcType="VARCHAR" property="startUrl" />
-    <result column="pager_rule" jdbcType="VARCHAR" property="pagerRule" />
-    <result column="link_rule" jdbcType="VARCHAR" property="linkRule" />
-    <result column="title_rule" jdbcType="VARCHAR" property="titleRule" />
-    <result column="content_rule" jdbcType="VARCHAR" property="contentRule" />
-    <result column="summary_rule" jdbcType="VARCHAR" property="summaryRule" />
-    <result column="category_rule" jdbcType="VARCHAR" property="categoryRule" />
-    <result column="keyword_rule" jdbcType="VARCHAR" property="keywordRule" />
-    <result column="spider_status" jdbcType="CHAR" property="spiderStatus" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, spider_type, spider_name, start_url, pager_rule, link_rule, title_rule, content_rule, 
-    summary_rule, category_rule, keyword_rule, spider_status, create_time
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from st_spider
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from st_spider
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into st_spider (spider_type, spider_name, start_url, 
-      pager_rule, link_rule, title_rule, 
-      content_rule, summary_rule, category_rule, 
-      keyword_rule, spider_status, create_time
-      )
-    values (#{spiderType,jdbcType=VARCHAR}, #{spiderName,jdbcType=VARCHAR}, #{startUrl,jdbcType=VARCHAR}, 
-      #{pagerRule,jdbcType=VARCHAR}, #{linkRule,jdbcType=VARCHAR}, #{titleRule,jdbcType=VARCHAR}, 
-      #{contentRule,jdbcType=VARCHAR}, #{summaryRule,jdbcType=VARCHAR}, #{categoryRule,jdbcType=VARCHAR}, 
-      #{keywordRule,jdbcType=VARCHAR}, #{spiderStatus,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into st_spider
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="spiderType != null">
-        spider_type,
-      </if>
-      <if test="spiderName != null">
-        spider_name,
-      </if>
-      <if test="startUrl != null">
-        start_url,
-      </if>
-      <if test="pagerRule != null">
-        pager_rule,
-      </if>
-      <if test="linkRule != null">
-        link_rule,
-      </if>
-      <if test="titleRule != null">
-        title_rule,
-      </if>
-      <if test="contentRule != null">
-        content_rule,
-      </if>
-      <if test="summaryRule != null">
-        summary_rule,
-      </if>
-      <if test="categoryRule != null">
-        category_rule,
-      </if>
-      <if test="keywordRule != null">
-        keyword_rule,
-      </if>
-      <if test="spiderStatus != null">
-        spider_status,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="spiderType != null">
-        #{spiderType,jdbcType=VARCHAR},
-      </if>
-      <if test="spiderName != null">
-        #{spiderName,jdbcType=VARCHAR},
-      </if>
-      <if test="startUrl != null">
-        #{startUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="pagerRule != null">
-        #{pagerRule,jdbcType=VARCHAR},
-      </if>
-      <if test="linkRule != null">
-        #{linkRule,jdbcType=VARCHAR},
-      </if>
-      <if test="titleRule != null">
-        #{titleRule,jdbcType=VARCHAR},
-      </if>
-      <if test="contentRule != null">
-        #{contentRule,jdbcType=VARCHAR},
-      </if>
-      <if test="summaryRule != null">
-        #{summaryRule,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryRule != null">
-        #{categoryRule,jdbcType=VARCHAR},
-      </if>
-      <if test="keywordRule != null">
-        #{keywordRule,jdbcType=VARCHAR},
-      </if>
-      <if test="spiderStatus != null">
-        #{spiderStatus,jdbcType=CHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider">
-    update st_spider
-    <set>
-      <if test="spiderType != null">
-        spider_type = #{spiderType,jdbcType=VARCHAR},
-      </if>
-      <if test="spiderName != null">
-        spider_name = #{spiderName,jdbcType=VARCHAR},
-      </if>
-      <if test="startUrl != null">
-        start_url = #{startUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="pagerRule != null">
-        pager_rule = #{pagerRule,jdbcType=VARCHAR},
-      </if>
-      <if test="linkRule != null">
-        link_rule = #{linkRule,jdbcType=VARCHAR},
-      </if>
-      <if test="titleRule != null">
-        title_rule = #{titleRule,jdbcType=VARCHAR},
-      </if>
-      <if test="contentRule != null">
-        content_rule = #{contentRule,jdbcType=VARCHAR},
-      </if>
-      <if test="summaryRule != null">
-        summary_rule = #{summaryRule,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryRule != null">
-        category_rule = #{categoryRule,jdbcType=VARCHAR},
-      </if>
-      <if test="keywordRule != null">
-        keyword_rule = #{keywordRule,jdbcType=VARCHAR},
-      </if>
-      <if test="spiderStatus != null">
-        spider_status = #{spiderStatus,jdbcType=CHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.sixlab.minesoft.singte.core.models.StSpider">
-    update st_spider
-    set spider_type = #{spiderType,jdbcType=VARCHAR},
-      spider_name = #{spiderName,jdbcType=VARCHAR},
-      start_url = #{startUrl,jdbcType=VARCHAR},
-      pager_rule = #{pagerRule,jdbcType=VARCHAR},
-      link_rule = #{linkRule,jdbcType=VARCHAR},
-      title_rule = #{titleRule,jdbcType=VARCHAR},
-      content_rule = #{contentRule,jdbcType=VARCHAR},
-      summary_rule = #{summaryRule,jdbcType=VARCHAR},
-      category_rule = #{categoryRule,jdbcType=VARCHAR},
-      keyword_rule = #{keywordRule,jdbcType=VARCHAR},
+      wait_times = #{waitTimes,jdbcType=INTEGER},
       spider_status = #{spiderStatus,jdbcType=CHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
@@ -407,6 +235,8 @@
   <select id="selectByStatus" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
     from st_spider
     where spider_status = #{status,jdbcType=CHAR}
     order by id

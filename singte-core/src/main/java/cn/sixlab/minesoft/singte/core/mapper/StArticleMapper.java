@@ -36,4 +36,6 @@ public interface StArticleMapper {
     void addView(@Param("id")Integer id);
 
     List<StArticle> selectByDate(@Param("begin") Date begin, @Param("end") Date end);
+
+    StArticle selectBySourceUrl(@Param("sourceUrl") String sourceUrl);
 }

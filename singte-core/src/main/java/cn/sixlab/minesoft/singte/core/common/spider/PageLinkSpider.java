@@ -28,19 +28,21 @@ public class PageLinkSpider extends SpiderJob {
     }
 
     private void crawPage(StSpider spider, String pageUrl) {
-        Document dom = fetchDom(pageUrl);
+        Document dom = fetchDom(pageUrl, spider.getWaitTimes());
 
         JXDocument jxd = new JXDocument(dom.getAllElements());
         List<JXNode> rs = jxd.selN(spider.getLinkRule());
 
         for (JXNode node : rs) {
             String link = String.valueOf(node.value());
-            crawContent(link, spider);
+            if (isCrawed(link)) {
+                crawContent(link, spider);
+            }
         }
     }
 
     private void crawContent(String url, StSpider spider) {
-        Document dom = fetchDom(url);
+        Document dom = fetchDom(url, spider.getWaitTimes());
 
         JXDocument jxd = new JXDocument(dom.getAllElements());
         JXNode titleNode = jxd.selNOne(spider.getTitleRule());
@@ -77,7 +79,8 @@ public class PageLinkSpider extends SpiderJob {
                 article.setKeywords(StringUtils.join(keywordList, ","));
             }
         }
+        article.setSourceUrl(url);
 
-        saveContent(spider, url, article);
+        saveContent(spider, article);
     }
 }

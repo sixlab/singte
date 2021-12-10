@@ -26,6 +26,8 @@ public class StSpider implements Serializable {
 
     private String keywordRule;
 
+    private Integer waitTimes;
+
     private String spiderStatus;
 
     private Date createTime;
@@ -120,6 +122,14 @@ public class StSpider implements Serializable {
 
     public void setKeywordRule(String keywordRule) {
         this.keywordRule = keywordRule == null ? null : keywordRule.trim();
+    }
+
+    public Integer getWaitTimes() {
+        return waitTimes;
+    }
+
+    public void setWaitTimes(Integer waitTimes) {
+        this.waitTimes = waitTimes;
     }
 
     public String getSpiderStatus() {
