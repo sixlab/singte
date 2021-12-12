@@ -1,7 +1,7 @@
 package cn.sixlab.minesoft.singte.core.common.init;
 
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.mapper.StConfigMapper;
+import cn.sixlab.minesoft.singte.core.dao.StConfigDao;
 import cn.sixlab.minesoft.singte.core.models.StConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -17,7 +17,7 @@ import java.util.Date;
 public class ConfigInit implements ApplicationRunner {
 
     @Autowired
-    private StConfigMapper configMapper;
+    private StConfigDao configMapper;
 
     @Override
     @Transactional

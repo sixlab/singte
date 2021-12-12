@@ -3,7 +3,7 @@ package cn.sixlab.minesoft.singte.core.controller;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.mapper.StDataMapper;
+import cn.sixlab.minesoft.singte.core.dao.StDataDao;
 import cn.sixlab.minesoft.singte.core.models.StData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.Random;
 public class DataController extends BaseController {
 
     @Autowired
-    private StDataMapper dataMapper;
+    private StDataDao dataMapper;
 
     @GetMapping(value = "/page/{random}")
     public String page(ModelMap modelMap, @PathVariable Integer random) {

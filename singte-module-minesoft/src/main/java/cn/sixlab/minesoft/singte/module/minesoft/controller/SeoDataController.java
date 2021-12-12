@@ -2,8 +2,8 @@ package cn.sixlab.minesoft.singte.module.minesoft.controller;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.mapper.SeoDataMapper;
-import cn.sixlab.minesoft.singte.core.mapper.SeoItemMapper;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.SeoDataDao;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.SeoItemDao;
 import cn.sixlab.minesoft.singte.module.minesoft.models.SeoData;
 import cn.sixlab.minesoft.singte.module.minesoft.models.SeoItem;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -20,10 +20,10 @@ import java.util.*;
 public class SeoDataController extends BaseController {
 
     @Autowired
-    private SeoItemMapper itemMapper;
+    private SeoItemDao itemMapper;
 
     @Autowired
-    private SeoDataMapper dataMapper;
+    private SeoDataDao dataMapper;
 
     @GetMapping(value = "/list")
     public String list(ModelMap modelMap) {

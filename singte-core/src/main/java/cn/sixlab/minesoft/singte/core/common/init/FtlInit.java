@@ -4,7 +4,7 @@ import cn.sixlab.minesoft.singte.core.common.directive.ArticlesDirective;
 import cn.sixlab.minesoft.singte.core.common.directive.ConfigDirective;
 import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.mapper.StMenuMapper;
+import cn.sixlab.minesoft.singte.core.dao.StMenuDao;
 import cn.sixlab.minesoft.singte.core.models.StMenu;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateModelException;
@@ -37,7 +37,7 @@ public class FtlInit implements ApplicationRunner {
     private Configuration configuration;
 
     @Autowired
-    private StMenuMapper menuMapper;
+    private StMenuDao menuMapper;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

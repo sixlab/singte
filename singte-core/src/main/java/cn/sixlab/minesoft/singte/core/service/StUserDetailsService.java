@@ -1,6 +1,6 @@
 package cn.sixlab.minesoft.singte.core.service;
 
-import cn.sixlab.minesoft.singte.core.mapper.StUserMapper;
+import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +18,7 @@ import java.util.List;
 public class StUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private StUserMapper userMapper;
+    private StUserDao userMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) {

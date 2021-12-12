@@ -6,6 +6,9 @@ spring:
     cache: false
     settings:
       template_exception_handler: rethrow
+  data:
+    mongodb:
+      uri: mongodb://singte:123456@localhost:27017/singte
 
 logging:
   level:
@@ -16,10 +19,6 @@ logging:
           singte: debug
 
 st:
-  db:
-    jdbc: "待替换 127.0.0.1:3306/singte"
-    username: "待替换 root"
-    pwd: "待替换 123456"
   jwt:
     secret: "待替换 random"
     expire: 3600

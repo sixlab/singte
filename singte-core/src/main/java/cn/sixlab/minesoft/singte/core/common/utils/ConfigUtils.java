@@ -1,6 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.utils;
 
-import cn.sixlab.minesoft.singte.core.mapper.StConfigMapper;
+import cn.sixlab.minesoft.singte.core.dao.StConfigDao;
 import cn.sixlab.minesoft.singte.core.models.StConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.Date;
 public class ConfigUtils {
 
     @Autowired
-    private StConfigMapper configMapper;
+    private StConfigDao configMapper;
 
     public String getConfig(String key) {
         StConfig config = configMapper.selectByKey(key);

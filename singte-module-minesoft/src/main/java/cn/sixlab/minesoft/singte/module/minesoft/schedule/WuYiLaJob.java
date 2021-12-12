@@ -2,8 +2,8 @@ package cn.sixlab.minesoft.singte.module.minesoft.schedule;
 
 import cn.sixlab.minesoft.singte.core.common.utils.HttpUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
-import cn.sixlab.minesoft.singte.core.mapper.SeoDataMapper;
-import cn.sixlab.minesoft.singte.core.mapper.SeoItemMapper;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.SeoDataDao;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.SeoItemDao;
 import cn.sixlab.minesoft.singte.module.minesoft.models.SeoData;
 import cn.sixlab.minesoft.singte.module.minesoft.models.SeoItem;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -15,7 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class WuYiLaJob {
@@ -24,10 +27,10 @@ public class WuYiLaJob {
     public static String GROUP = "-1001521805818";
 
     @Autowired
-    private SeoDataMapper dataMapper;
+    private SeoDataDao dataMapper;
 
     @Autowired
-    private SeoItemMapper itemMapper;
+    private SeoItemDao itemMapper;
 
     @Scheduled(cron = "0 2 0 * * ?")
     public void job() {

@@ -1,8 +1,8 @@
 package cn.sixlab.minesoft.singte.core.common.spider;
 
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.mapper.StArticleMapper;
-import cn.sixlab.minesoft.singte.core.mapper.StCategoryMapper;
+import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
+import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
 import cn.sixlab.minesoft.singte.core.models.StSpider;
@@ -18,10 +18,10 @@ import java.util.Date;
 public abstract class SpiderJob {
 
     @Autowired
-    private StArticleMapper articleMapper;
+    private StArticleDao articleMapper;
 
     @Autowired
-    private StCategoryMapper categoryMapper;
+    private StCategoryDao categoryMapper;
 
     public abstract void craw(StSpider spider);
 

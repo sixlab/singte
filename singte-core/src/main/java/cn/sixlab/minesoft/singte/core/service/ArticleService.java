@@ -1,11 +1,9 @@
 package cn.sixlab.minesoft.singte.core.service;
 
-import cn.sixlab.minesoft.singte.core.mapper.StArticleMapper;
-import cn.sixlab.minesoft.singte.core.mapper.StCategoryMapper;
+import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
+import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +19,10 @@ import java.util.List;
 public class ArticleService {
 
     @Autowired
-    private StArticleMapper articleMapper;
+    private StArticleDao articleMapper;
 
     @Autowired
-    private StCategoryMapper categoryMapper;
+    private StCategoryDao categoryMapper;
 
     public List<StArticle> topHot(int size) {
         return articleMapper.selectHot(size);
@@ -81,8 +79,7 @@ public class ArticleService {
         return false;
     }
 
-    public PageInfo<StArticle> selectByDate(String date, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+    public List<StArticle> selectByDate(String date, int pageNum, int pageSize) {
 
         Date begin = null;
         if(StringUtils.isNotEmpty(date)){
@@ -99,16 +96,14 @@ public class ArticleService {
 
         Date end = DateUtils.addDays(begin, 1);
 
-        List<StArticle> articleList = articleMapper.selectByDate(begin, end);
+        List<StArticle> articleList = articleMapper.selectByDate(begin, end, pageNum, pageSize);
 
-        return new PageInfo<>(articleList);
+        return articleList;
     }
 
-    public PageInfo<StArticle> selectCategory(String category, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+    public List<StArticle> selectCategory(String category, int pageNum, int pageSize) {
+        List<StArticle> articleList = articleMapper.selectByCategory(category, pageNum, pageSize);
 
-        List<StArticle> articleList = articleMapper.selectByCategory(category);
-
-        return new PageInfo<>(articleList);
+        return articleList;
     }
 }

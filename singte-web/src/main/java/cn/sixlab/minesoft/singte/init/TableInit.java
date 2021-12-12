@@ -4,7 +4,7 @@ import cn.sixlab.minesoft.singte.core.common.config.StProperties;
 import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.IoUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.mapper.StConfigMapper;
+import cn.sixlab.minesoft.singte.core.dao.StConfigDao;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -24,7 +24,7 @@ public class TableInit implements ApplicationRunner {
     private ConfigUtils configUtils;
 
     @Autowired
-    private StConfigMapper configMapper;
+    private StConfigDao configMapper;
 
     @Override
     @Transactional

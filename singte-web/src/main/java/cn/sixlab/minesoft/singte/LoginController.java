@@ -5,7 +5,7 @@ import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.mapper.StUserMapper;
+import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class LoginController extends BaseController {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    private StUserMapper userMapper;
+    private StUserDao userMapper;
 
     @Autowired
     private JwtUtils jwtUtils;

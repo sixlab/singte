@@ -2,14 +2,12 @@ package cn.sixlab.minesoft.singte.module.minesoft.controller;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.mapper.StePoemAtomMapper;
-import cn.sixlab.minesoft.singte.core.mapper.StePoemMapper;
-import cn.sixlab.minesoft.singte.core.mapper.StePoemNameMapper;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.StePoemAtomDao;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.StePoemDao;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.StePoemNameDao;
 import cn.sixlab.minesoft.singte.module.minesoft.models.StePoem;
 import cn.sixlab.minesoft.singte.module.minesoft.models.StePoemAtom;
 import cn.sixlab.minesoft.singte.module.minesoft.models.StePoemName;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +24,13 @@ import java.util.List;
 public class PoetryNameController extends BaseController {
 
     @Autowired
-    private StePoemMapper poemMapper;
+    private StePoemDao poemMapper;
 
     @Autowired
-    private StePoemAtomMapper poemAtomMapper;
+    private StePoemAtomDao poemAtomMapper;
 
     @Autowired
-    private StePoemNameMapper poemNameMapper;
+    private StePoemNameDao poemNameMapper;
 
     @GetMapping(value = "/poems")
     public String poems(ModelMap modelMap) {
@@ -80,13 +78,9 @@ public class PoetryNameController extends BaseController {
     }
 
     private String poemNames(ModelMap modelMap, Integer page) {
-        PageHelper.startPage(page, 100);
+        List<StePoemName> poemNameList = poemNameMapper.selectPoemNames(page, 100);
 
-        List<StePoemName> poemNameList = poemNameMapper.selectPoemNames();
-
-        PageInfo<StePoemName> pageInfo = new PageInfo<>(poemNameList);
-
-        modelMap.put("pageInfo", pageInfo);
+        modelMap.put("pageInfo", poemNameList);
 
         return "poetry/name/names";
     }

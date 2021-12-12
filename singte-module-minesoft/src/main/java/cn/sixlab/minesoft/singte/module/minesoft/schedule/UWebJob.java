@@ -1,8 +1,8 @@
 package cn.sixlab.minesoft.singte.module.minesoft.schedule;
 
 import cn.sixlab.minesoft.singte.core.common.utils.HttpUtils;
-import cn.sixlab.minesoft.singte.core.mapper.SeoDataMapper;
-import cn.sixlab.minesoft.singte.core.mapper.SeoItemMapper;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.SeoDataDao;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.SeoItemDao;
 import cn.sixlab.minesoft.singte.module.minesoft.models.SeoData;
 import cn.sixlab.minesoft.singte.module.minesoft.models.SeoItem;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -20,10 +20,10 @@ import java.util.regex.Pattern;
 public class UWebJob {
 
     @Autowired
-    private SeoDataMapper dataMapper;
+    private SeoDataDao dataMapper;
 
     @Autowired
-    private SeoItemMapper itemMapper;
+    private SeoItemDao itemMapper;
 
     @Scheduled(cron = "0 1 0 * * ?")
     public void job() {

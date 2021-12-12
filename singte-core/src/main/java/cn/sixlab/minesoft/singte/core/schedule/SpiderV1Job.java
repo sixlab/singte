@@ -3,7 +3,7 @@ package cn.sixlab.minesoft.singte.core.schedule;
 import cn.sixlab.minesoft.singte.core.common.spider.SpiderJob;
 import cn.sixlab.minesoft.singte.core.common.utils.CtxHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.mapper.StSpiderMapper;
+import cn.sixlab.minesoft.singte.core.dao.StSpiderDao;
 import cn.sixlab.minesoft.singte.core.models.StSpider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,7 +15,7 @@ import java.util.List;
 public class SpiderV1Job {
 
     @Autowired
-    private StSpiderMapper spiderMapper;
+    private StSpiderDao spiderMapper;
 
     @Scheduled(cron = "0 0 22 * * ?")
     public void job() {

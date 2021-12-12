@@ -1,7 +1,7 @@
 package cn.sixlab.minesoft.singte.core.controller;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
-import cn.sixlab.minesoft.singte.core.mapper.StArticleMapper;
+import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ArticleController extends BaseController {
 
     @Autowired
-    private StArticleMapper articleMapper;
+    private StArticleDao articleMapper;
 
     @GetMapping(value = "/{articleId}")
     public String article(ModelMap modelMap, @PathVariable String articleId) {

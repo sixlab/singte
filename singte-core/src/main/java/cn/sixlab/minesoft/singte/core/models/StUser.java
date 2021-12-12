@@ -1,9 +1,13 @@
 package cn.sixlab.minesoft.singte.core.models;
 
+import org.springframework.data.annotation.Id;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class StUser implements Serializable {
+
+    @Id
     private Integer id;
 
     private String username;
