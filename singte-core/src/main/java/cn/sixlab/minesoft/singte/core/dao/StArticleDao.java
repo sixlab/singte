@@ -1,11 +1,11 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
+import cn.sixlab.minesoft.singte.core.common.pager.BaseDao;
+import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StBeanUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
@@ -14,10 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class StArticleDao {
-
-    @Autowired
-    private MongoTemplate mongoTemplate;
+public class StArticleDao extends BaseDao {
 
     public void deleteByPrimaryKey(Integer id) {
         mongoTemplate.remove(id);
@@ -81,13 +78,13 @@ public class StArticleDao {
         return mongoTemplate.findOne(query, StArticle.class);
     }
 
-    public List<StArticle> selectByCategory(String category, int pageNum, int pageSize) {
+    public PageResult<StArticle> selectByCategory(String category, int pageNum, int pageSize) {
         Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
         Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
 
-        Query query = new Query(criteria).with(sort).skip((pageNum - 1) * pageSize).limit(pageSize);
+        Query query = new Query(criteria).with(sort);
 
-        return mongoTemplate.find(query, StArticle.class);
+        return pageQuery(query, StArticle.class, pageNum, pageSize);
     }
 
     public StArticle selectByAlias(String alias) {
@@ -104,22 +101,22 @@ public class StArticleDao {
 
     public void addView(Integer id) {
         StArticle article = selectByPrimaryKey(id);
-        article.setViewCount(article.getViewCount()+1);
+        article.setViewCount(article.getViewCount() + 1);
         updateByPrimaryKey(article);
     }
 
-    public List<StArticle> selectByDate(Date begin, Date end, int pageNum, int pageSize){
+    public PageResult<StArticle> selectByDate(Date begin, Date end, int pageNum, int pageSize) {
         Criteria criteria = Criteria.where("publishStatus").is(StConst.YES)
                 .and("publishTime").gte(begin)
                 .and("publishTime").lt(end);
         Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
 
-        Query query = new Query(criteria).with(sort).skip((pageNum - 1) * pageSize).limit(pageSize);
+        Query query = new Query(criteria).with(sort);
 
-        return mongoTemplate.find(query, StArticle.class);
+        return pageQuery(query, StArticle.class, pageNum, pageSize);
     }
 
-    public StArticle selectBySourceUrl(String sourceUrl){
+    public StArticle selectBySourceUrl(String sourceUrl) {
         Criteria criteria = Criteria.where("sourceUrl").is(sourceUrl);
 
         Query query = new Query(criteria).limit(1);

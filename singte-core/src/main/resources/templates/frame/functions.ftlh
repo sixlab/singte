@@ -51,19 +51,19 @@
     </ul>
     <ul class="clearfix list_page pt40 pb20">
         <#--第一页，禁用“上一页”按钮-->
-        <#if tArticlePageInfo.total == 0 || tArticlePageInfo.pageNum == 1>
+        <#if tArticlePageInfo.totalNum == 0 || tArticlePageInfo.pageNum == 1>
             <li><span class="prev-disabled">上一页</span></li>
         <#else>
             <li><a href="${url}/${tArticlePageInfo.pageNum-1}">上一页</a></li>
         </#if>
 
         <#--第一页-->
-        <#if (tArticlePageInfo.total > 0)>
+        <#if (tArticlePageInfo.totalNum > 0)>
             <li <#if tArticlePageInfo.pageNum == 1>class="thisclass"</#if>><a href="${url}">1</a></li>
         </#if>
 
         <#--如果不只有一页-->
-        <#if (tArticlePageInfo.pages > 1)>
+        <#if (tArticlePageInfo.totalPages > 1)>
         <#--如果当前页往前查3页不是第2页-->
             <#if ((tArticlePageInfo.pageNum - 3) > 2)>
                 <li><a href="#">···</a></li>
@@ -72,22 +72,22 @@
         <#--当前页的前3页和后3页-->
             <#list (tArticlePageInfo.pageNum - 3)..(tArticlePageInfo.pageNum + 3) as index>
             <#--如果位于第一页和最后一页之间-->
-                <#if (index > 1) && (index < tArticlePageInfo.pages)>
+                <#if (index > 1) && (index < tArticlePageInfo.totalPages)>
                     <li <#if tArticlePageInfo.pageNum == index>class="thisclass"</#if>><a href="${url}/${index}">${index}</a></li>
                 </#if>
             </#list>
 
         <#--如果当前页往后查3页不是倒数第2页-->
-            <#if (tArticlePageInfo.pageNum + 3) < (tArticlePageInfo.pages - 1)>
+            <#if (tArticlePageInfo.pageNum + 3) < (tArticlePageInfo.totalPages - 1)>
                 <li><a href="#">···</a></li>
             </#if>
 
         <#--最后页-->
-            <li <#if tArticlePageInfo.pageNum == tArticlePageInfo.pages>class="thisclass"</#if>><a href="${url}/${tArticlePageInfo.pages}">${tArticlePageInfo.pages}</a></li>
+            <li <#if tArticlePageInfo.pageNum == tArticlePageInfo.totalPages>class="thisclass"</#if>><a href="${url}/${tArticlePageInfo.totalPages}">${tArticlePageInfo.totalPages}</a></li>
         </#if>
 
         <#--最后页，禁用“下一页”按钮-->
-        <#if tArticlePageInfo.total == 0 || tArticlePageInfo.pageNum == tArticlePageInfo.pages>
+        <#if tArticlePageInfo.totalNum == 0 || tArticlePageInfo.pageNum == tArticlePageInfo.totalPages>
             <li><span class="prev-disabled">下一页</span></li>
         <#else>
             <li><a href="${url}/${tArticlePageInfo.pageNum+1}">下一页</a></li>

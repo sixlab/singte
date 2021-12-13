@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.service;
 
+import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
@@ -79,7 +80,7 @@ public class ArticleService {
         return false;
     }
 
-    public List<StArticle> selectByDate(String date, int pageNum, int pageSize) {
+    public PageResult<StArticle> selectByDate(String date, int pageNum, int pageSize) {
 
         Date begin = null;
         if(StringUtils.isNotEmpty(date)){
@@ -96,13 +97,13 @@ public class ArticleService {
 
         Date end = DateUtils.addDays(begin, 1);
 
-        List<StArticle> articleList = articleMapper.selectByDate(begin, end, pageNum, pageSize);
+        PageResult<StArticle> articleList = articleMapper.selectByDate(begin, end, pageNum, pageSize);
 
         return articleList;
     }
 
-    public List<StArticle> selectCategory(String category, int pageNum, int pageSize) {
-        List<StArticle> articleList = articleMapper.selectByCategory(category, pageNum, pageSize);
+    public PageResult<StArticle> selectCategory(String category, int pageNum, int pageSize) {
+        PageResult<StArticle> articleList = articleMapper.selectByCategory(category, pageNum, pageSize);
 
         return articleList;
     }
