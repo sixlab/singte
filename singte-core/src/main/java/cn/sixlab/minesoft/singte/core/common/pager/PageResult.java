@@ -15,7 +15,7 @@ public class PageResult<T> {
     private boolean hasNext;
     private boolean hasPrevious;
 
-    private List<T> content;
+    private List<T> list;
 
     public int getPageNum() {
         return pageNum;
@@ -49,12 +49,12 @@ public class PageResult<T> {
         this.totalNum = totalNum;
     }
 
-    public List<T> getContent() {
-        return content;
+    public List<T> getList() {
+        return list;
     }
 
-    public void setContent(List<T> content) {
-        this.content = content;
+    public void setList(List<T> list) {
+        this.list = list;
     }
 
     public boolean isHasContent() {

@@ -29,7 +29,7 @@ public class PageHelper {
             page.setHasNext(true);
         }
 
-        page.setContent(contentList);
+        page.setList(contentList);
 
         return page;
     }

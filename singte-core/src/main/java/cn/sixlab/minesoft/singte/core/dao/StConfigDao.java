@@ -18,13 +18,11 @@ public class StConfigDao {
         mongoTemplate.remove(id);
     }
 
-    public void insert(StConfig record){
+    public void insert(StConfig record) {
         mongoTemplate.save(record);
     }
 
-
-
-public StConfig selectByPrimaryKey(Integer id){
+    public StConfig selectByPrimaryKey(Integer id) {
         Query query = new Query(Criteria.where("id").is(id));
         return mongoTemplate.findOne(query, StConfig.class);
     }
@@ -38,19 +36,19 @@ public StConfig selectByPrimaryKey(Integer id){
         }
     }
 
-    public void updateByPrimaryKey(StConfig record){
+    public void updateByPrimaryKey(StConfig record) {
         mongoTemplate.save(record);
     }
 
-    public void init(){
+    public void init() {
 
     }
 
-    public void runSQL(String sql){
+    public void runSQL(String sql) {
 
     }
 
-    public StConfig selectByKey(String configKey){
+    public StConfig selectByKey(String configKey) {
         Query query = new Query(Criteria.where("configKey").is(configKey));
         return mongoTemplate.findOne(query, StConfig.class);
     }

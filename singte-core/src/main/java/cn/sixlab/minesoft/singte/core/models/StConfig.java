@@ -1,10 +1,14 @@
 package cn.sixlab.minesoft.singte.core.models;
 
+import org.springframework.data.annotation.Id;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class StConfig implements Serializable {
-    private Integer id;
+
+    @Id
+    private String id;
 
     private String configKey;
 
@@ -20,11 +24,11 @@ public class StConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
