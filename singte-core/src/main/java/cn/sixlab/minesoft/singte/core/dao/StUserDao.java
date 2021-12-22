@@ -1,44 +1,18 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
-import cn.sixlab.minesoft.singte.core.common.utils.StBeanUtils;
+import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.models.StUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StUserDao {
+public class StUserDao extends BaseDao<StUser> {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
-
-    public void deleteByPrimaryKey(Integer id) {
-        mongoTemplate.remove(id);
-    }
-
-    public void insert(StUser record) {
-        mongoTemplate.save(record);
-    }
-
-    public StUser selectByPrimaryKey(Integer id) {
-        Query query = new Query(Criteria.where("id").is(id));
-        return mongoTemplate.findOne(query, StUser.class);
-    }
-
-    public void updateByPrimaryKeySelective(StUser record) {
-        Query query = new Query(Criteria.where("id").is(record.getId()));
-        StUser target = mongoTemplate.findOne(query, StUser.class);
-        if (target != null) {
-            StBeanUtils.copyProperties(record, target);
-            mongoTemplate.save(target);
-        }
-    }
-
-    public void updateByPrimaryKey(StUser record) {
-        mongoTemplate.save(record);
+    @Override
+    public Class<StUser> entityClass() {
+        return StUser.class;
     }
 
     public StUser selectByUsername(String username) {

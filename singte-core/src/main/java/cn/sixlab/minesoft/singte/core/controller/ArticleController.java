@@ -23,7 +23,7 @@ public class ArticleController extends BaseController {
 
         StArticle article;
         if (StringUtils.isNumeric(articleId)) {
-            article = articleMapper.selectByPrimaryKey(Integer.valueOf(articleId));
+            article = articleMapper.selectById(articleId);
         } else {
             article = articleMapper.selectByAlias(articleId);
         }

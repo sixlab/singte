@@ -44,7 +44,7 @@ public class ConfigInit implements ApplicationRunner {
             config.setStatus("1");
             config.setCreateTime(new Date());
 
-            configMapper.insert(config);
+            configMapper.save(config);
         }
     }
 }

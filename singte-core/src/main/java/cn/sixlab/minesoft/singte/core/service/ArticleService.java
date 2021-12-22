@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,31 +33,7 @@ public class ArticleService {
     }
 
     public List<StArticle> random(int size) {
-        List<StArticle> result = new ArrayList<>();
-
-        Integer maxId = articleMapper.selectMaxId();
-        if (null != maxId) {
-            List<Integer> excludeIds = new ArrayList<>();
-
-            int retry = 0;
-            while (size > 0) {
-                StArticle article = articleMapper.selectRandom(maxId, excludeIds);
-                if (article != null) {
-                    result.add(article);
-                    excludeIds.add(article.getId());
-                    retry = 0;
-                    size--;
-                } else {
-                    retry++;
-
-                    if (retry >= 5) {
-                        break;
-                    }
-                }
-            }
-        }
-
-        return result;
+        return articleMapper.selectRandom(size);
     }
 
     public void listParam(ModelMap modelMap,  Integer pageNum, Integer pageSize, String pageType, String uriPrefix) {
@@ -69,7 +44,7 @@ public class ArticleService {
     }
 
     public boolean listCategory(ModelMap modelMap, Integer categoryId, Integer pageNum, Integer pageSize) {
-        StCategory stCategory = categoryMapper.selectByPrimaryKey(categoryId);
+        StCategory stCategory = categoryMapper.selectById(categoryId);
 
         if (null != stCategory) {
             listParam(modelMap, pageNum, pageSize, "category", "/category/" + categoryId);

@@ -46,7 +46,7 @@ public class PoetryNameController extends BaseController {
     @PostMapping(value = "/addPoem")
     public ModelResp addPoem(StePoem poem) {
         poem.setCreateTime(new Date());
-        poemMapper.insert(poem);
+        poemMapper.save(poem);
 
         String[] atoms = split(poem.getPoemContent(), "[\\.\\!\\?\\r\\n\\s。！？]");
         if (ArrayUtils.isNotEmpty(atoms)) {
@@ -58,7 +58,7 @@ public class PoetryNameController extends BaseController {
                 atom.setAtomOrder(i);
                 atom.setCreateTime(new Date());
 
-                poemAtomMapper.insert(atom);
+                poemAtomMapper.save(atom);
             }
         }
 

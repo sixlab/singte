@@ -72,7 +72,7 @@ public class LoginController extends BaseController {
             stUser.setStatus("1");
             stUser.setCreateTime(new Date());
 
-            userMapper.insert(stUser);
+            userMapper.save(stUser);
         }else{
             return ModelResp.error(StErr.EXIST_SAME, "用户已存在");
         }

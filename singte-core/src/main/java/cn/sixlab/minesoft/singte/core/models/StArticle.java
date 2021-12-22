@@ -1,10 +1,10 @@
 package cn.sixlab.minesoft.singte.core.models;
 
-import java.io.Serializable;
+import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
+
 import java.util.Date;
 
-public class StArticle implements Serializable {
-    private Integer id;
+public class StArticle extends BaseModel {
 
     private String alias;
 
@@ -20,7 +20,7 @@ public class StArticle implements Serializable {
 
     private String category;
 
-    private Integer categoryId;
+    private String categoryId;
 
     private Integer viewCount;
 
@@ -33,16 +33,6 @@ public class StArticle implements Serializable {
     private Date createTime;
 
     private String content;
-
-    private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getAlias() {
         return alias;
@@ -100,11 +90,11 @@ public class StArticle implements Serializable {
         this.category = category == null ? null : category.trim();
     }
 
-    public Integer getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 

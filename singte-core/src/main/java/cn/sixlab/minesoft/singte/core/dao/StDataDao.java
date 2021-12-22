@@ -1,10 +1,8 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
-import cn.sixlab.minesoft.singte.core.common.utils.StBeanUtils;
+import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.models.StData;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
@@ -12,37 +10,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class StDataDao {
+public class StDataDao extends BaseDao<StData> {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
-
-    public void deleteByPrimaryKey(Integer id) {
-        mongoTemplate.remove(id);
-    }
-
-    public void insert(StData record){
-        mongoTemplate.save(record);
-    }
-
-
-
-    public StData selectByPrimaryKey(Integer id){
-        Query query = new Query(Criteria.where("id").is(id));
-        return mongoTemplate.findOne(query, StData.class);
-    }
-
-    public void updateByPrimaryKeySelective(StData record) {
-        Query query = new Query(Criteria.where("id").is(record.getId()));
-        StData target = mongoTemplate.findOne(query, StData.class);
-        if (target != null) {
-            StBeanUtils.copyProperties(record, target);
-            mongoTemplate.save(target);
-        }
-    }
-
-    public void updateByPrimaryKey(StData record){
-        mongoTemplate.save(record);
+    @Override
+    public Class<StData> entityClass() {
+        return StData.class;
     }
 
     public List<StData> selectByGroup(String dataGroup){

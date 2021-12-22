@@ -1,10 +1,11 @@
 package cn.sixlab.minesoft.singte.module.minesoft.models;
 
-import java.io.Serializable;
+import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
+import org.springframework.data.annotation.Id;
+
 import java.util.Date;
 
-public class SeoItem implements Serializable {
-    private Integer id;
+public class SeoItem extends BaseModel {
 
     private String uid;
 
@@ -19,16 +20,6 @@ public class SeoItem implements Serializable {
     private Integer weight;
 
     private Date createTime;
-
-    private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUid() {
         return uid;

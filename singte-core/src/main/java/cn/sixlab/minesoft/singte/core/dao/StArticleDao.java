@@ -1,11 +1,14 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
-import cn.sixlab.minesoft.singte.core.common.pager.BaseDao;
+import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StBeanUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.SampleOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
@@ -14,22 +17,19 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class StArticleDao extends BaseDao {
+public class StArticleDao extends BaseDao<StArticle> {
 
-    public void deleteByPrimaryKey(Integer id) {
-        mongoTemplate.remove(id);
+    @Override
+    public Class<StArticle> entityClass() {
+        return StArticle.class;
     }
 
-    public void insert(StArticle record) {
-        mongoTemplate.save(record);
-    }
-
-    public StArticle selectByPrimaryKey(Integer id) {
+    public StArticle selectById(String id) {
         Query query = new Query(Criteria.where("id").is(id));
         return mongoTemplate.findOne(query, StArticle.class);
     }
 
-    public void updateByPrimaryKeySelective(StArticle record) {
+    public void updateSelective(StArticle record) {
         Query query = new Query(Criteria.where("id").is(record.getId()));
         StArticle target = mongoTemplate.findOne(query, StArticle.class);
         if (target != null) {
@@ -38,7 +38,7 @@ public class StArticleDao extends BaseDao {
         }
     }
 
-    public void updateByPrimaryKey(StArticle record) {
+    public void updateById(StArticle record) {
         mongoTemplate.save(record);
     }
 
@@ -56,26 +56,13 @@ public class StArticleDao extends BaseDao {
         return mongoTemplate.find(query, StArticle.class);
     }
 
-    public Integer selectMaxId() {
-        Query query = new Query(Criteria.where("publishStatus").is(StConst.YES))
-                .with(Sort.by(Sort.Direction.DESC, "id"))
-                .limit(1);
-        StArticle article = mongoTemplate.findOne(query, StArticle.class);
-        if (null != article) {
-            return article.getId();
-        }
-        return null;
-    }
+    public List<StArticle> selectRandom(int size) {
 
-    public StArticle selectRandom(int max, List<Integer> excludeIds) {
-        Query query = new Query(
-                Criteria.where("publishStatus").is(StConst.YES)
-                        .and("id").gte(Math.random() * max)
-                        .and("id").nin(excludeIds)
-        )
-                .with(Sort.by(Sort.Direction.DESC, "id"))
-                .limit(1);
-        return mongoTemplate.findOne(query, StArticle.class);
+        SampleOperation matchStage = Aggregation.sample(size);
+        Aggregation aggregation = Aggregation.newAggregation(matchStage);
+        AggregationResults<StArticle> output = mongoTemplate.aggregate(aggregation, StArticle.class, StArticle.class);
+
+        return output.getMappedResults();
     }
 
     public PageResult<StArticle> selectByCategory(String category, int pageNum, int pageSize) {
@@ -99,10 +86,10 @@ public class StArticleDao extends BaseDao {
         return mongoTemplate.findOne(query, StArticle.class);
     }
 
-    public void addView(Integer id) {
-        StArticle article = selectByPrimaryKey(id);
+    public void addView(String id) {
+        StArticle article = selectById(id);
         article.setViewCount(article.getViewCount() + 1);
-        updateByPrimaryKey(article);
+        updateById(article);
     }
 
     public PageResult<StArticle> selectByDate(Date begin, Date end, int pageNum, int pageSize) {

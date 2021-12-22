@@ -65,7 +65,7 @@ public abstract class SpiderJob {
                 stCategory.setCategory(category);
                 stCategory.setWeight(1);
                 stCategory.setCreateTime(new Date());
-                categoryMapper.insert(stCategory);
+                categoryMapper.save(stCategory);
             }
             article.setCategoryId(stCategory.getId());
         }
@@ -77,6 +77,6 @@ public abstract class SpiderJob {
         article.setPublishTime(new Date());
         article.setCreateTime(new Date());
 
-        articleMapper.insert(article);
+        articleMapper.save(article);
     }
 }

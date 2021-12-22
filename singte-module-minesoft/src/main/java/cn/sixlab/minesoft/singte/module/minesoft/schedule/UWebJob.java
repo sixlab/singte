@@ -43,7 +43,7 @@ public class UWebJob {
             try {
                 uWebData(item.getDataUrl(), data);
 
-                dataMapper.insert(data);
+                dataMapper.save(data);
             }catch (Exception e){
             }
         }

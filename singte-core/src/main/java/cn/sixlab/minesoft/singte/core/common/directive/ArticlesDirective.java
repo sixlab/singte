@@ -63,10 +63,4 @@ public class ArticlesDirective implements TemplateDirectiveModel {
             body.render(env.getOut());
         }
     }
-
-    private void extracted(Environment env, Map params, int size, String category) throws TemplateModelException {
-//        int num = Integer.parseInt(MapUtils.getString(params, "num", "1"));
-//        PageInfo<StArticle> pageInfo = articleService.selectCategory(category, num, size);
-//        env.setVariable("tArticlePageInfo", ObjectWrapper.DEFAULT_WRAPPER.wrap(pageInfo));
-    }
 }

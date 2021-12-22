@@ -1,10 +1,10 @@
 package cn.sixlab.minesoft.singte.module.minesoft.models;
 
-import java.io.Serializable;
+import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
+
 import java.util.Date;
 
-public class SeoData implements Serializable {
-    private Integer id;
+public class SeoData extends BaseModel {
 
     private String date;
 
@@ -19,16 +19,6 @@ public class SeoData implements Serializable {
     private Integer pv;
 
     private Date createTime;
-
-    private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getDate() {
         return date;

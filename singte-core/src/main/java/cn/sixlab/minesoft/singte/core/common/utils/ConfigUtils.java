@@ -36,12 +36,12 @@ public class ConfigUtils {
             config.setStatus("1");
             config.setCreateTime(new Date());
 
-            configMapper.insert(config);
+            configMapper.save(config);
         } else {
             StConfig update = new StConfig();
             update.setId(config.getId());
             update.setConfigVal(val);
-            configMapper.updateByPrimaryKeySelective(update);
+            configMapper.updateSelective(update);
         }
     }
 }

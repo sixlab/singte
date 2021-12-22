@@ -85,7 +85,7 @@ public class WuYiLaJob {
 
                         ipCount.put(seoData.getUser(), seoData.getIp());
 
-                        dataMapper.insert(seoData);
+                        dataMapper.save(seoData);
                     }catch (Exception e){
                     }
                 }

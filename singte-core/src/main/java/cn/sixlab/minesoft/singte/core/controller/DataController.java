@@ -36,7 +36,7 @@ public class DataController extends BaseController {
             data.setDataGroup(group);
             data.setDataKey(key);
             data.setCreateTime(new Date());
-            dataMapper.insert(data);
+            dataMapper.save(data);
         } else if ((new Date().getTime() - data.getCreateTime().getTime()) <= StConst.SECONDS_MIN_10 * 1000) {
             return ModelResp.error(5000, "已被占用，请重试！");
         }

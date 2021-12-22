@@ -40,7 +40,3 @@ spring:
     template-loader-path: file:./st_templates,classpath:/templates/
   aop:
     auto: true
-
-st:
-  db:
-    version: 1

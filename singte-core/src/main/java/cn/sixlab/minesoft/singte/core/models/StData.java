@@ -1,10 +1,11 @@
 package cn.sixlab.minesoft.singte.core.models;
 
-import java.io.Serializable;
+import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
+import org.springframework.data.annotation.Id;
+
 import java.util.Date;
 
-public class StData implements Serializable {
-    private Integer id;
+public class StData extends BaseModel {
 
     private String dataGroup;
 
@@ -13,16 +14,6 @@ public class StData implements Serializable {
     private Date createTime;
 
     private String dataContent;
-
-    private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getDataGroup() {
         return dataGroup;

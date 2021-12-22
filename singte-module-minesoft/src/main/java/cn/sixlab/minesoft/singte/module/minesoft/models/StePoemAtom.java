@@ -1,12 +1,13 @@
 package cn.sixlab.minesoft.singte.module.minesoft.models;
 
-import java.io.Serializable;
+import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
+import org.springframework.data.annotation.Id;
+
 import java.util.Date;
 
-public class StePoemAtom implements Serializable {
-    private Integer id;
+public class StePoemAtom extends BaseModel {
 
-    private Integer poemId;
+    private String poemId;
 
     private String poemName;
 
@@ -16,21 +17,11 @@ public class StePoemAtom implements Serializable {
 
     private Date createTime;
 
-    private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getPoemId() {
+    public String getPoemId() {
         return poemId;
     }
 
-    public void setPoemId(Integer poemId) {
+    public void setPoemId(String poemId) {
         this.poemId = poemId;
     }
 

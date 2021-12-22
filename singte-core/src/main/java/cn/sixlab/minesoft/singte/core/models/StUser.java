@@ -1,14 +1,11 @@
 package cn.sixlab.minesoft.singte.core.models;
 
+import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
 import org.springframework.data.annotation.Id;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class StUser implements Serializable {
-
-    @Id
-    private Integer id;
+public class StUser extends BaseModel {
 
     private String username;
 
@@ -23,16 +20,6 @@ public class StUser implements Serializable {
     private String email;
 
     private Date createTime;
-
-    private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

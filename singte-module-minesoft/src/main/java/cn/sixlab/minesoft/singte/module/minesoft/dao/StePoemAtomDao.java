@@ -1,10 +1,8 @@
 package cn.sixlab.minesoft.singte.module.minesoft.dao;
 
-import cn.sixlab.minesoft.singte.core.common.utils.StBeanUtils;
+import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.module.minesoft.models.StePoemAtom;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
@@ -12,35 +10,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class StePoemAtomDao {
+public class StePoemAtomDao extends BaseDao<StePoemAtom> {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
-
-    public void deleteByPrimaryKey(Integer id) {
-        mongoTemplate.remove(id);
-    }
-
-    public void insert(StePoemAtom record) {
-        mongoTemplate.save(record);
-    }
-
-    public StePoemAtom selectByPrimaryKey(Integer id) {
-        Query query = new Query(Criteria.where("id").is(id));
-        return mongoTemplate.findOne(query, StePoemAtom.class);
-    }
-
-    public void updateByPrimaryKeySelective(StePoemAtom record) {
-        Query query = new Query(Criteria.where("id").is(record.getId()));
-        StePoemAtom target = mongoTemplate.findOne(query, StePoemAtom.class);
-        if (target != null) {
-            StBeanUtils.copyProperties(record, target);
-            mongoTemplate.save(target);
-        }
-    }
-
-    public void updateByPrimaryKey(StePoemAtom record) {
-        mongoTemplate.save(record);
+    @Override
+    public Class<StePoemAtom> entityClass() {
+        return StePoemAtom.class;
     }
 
     public List<StePoemAtom> selectByKeywords(String[] keywordList) {
