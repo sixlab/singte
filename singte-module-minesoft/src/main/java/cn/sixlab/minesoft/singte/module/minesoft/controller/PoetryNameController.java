@@ -35,7 +35,7 @@ public class PoetryNameController extends BaseController {
     @GetMapping(value = "/poems")
     public String poems(ModelMap modelMap) {
 
-        List<StePoem> poemList = poemMapper.selectPoems(false);
+        List<StePoem> poemList = poemMapper.selectPoems();
 
         modelMap.put("poemList", poemList);
 

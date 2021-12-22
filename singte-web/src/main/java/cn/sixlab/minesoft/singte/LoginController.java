@@ -64,7 +64,7 @@ public class LoginController extends BaseController {
 
         StUser stUser = userMapper.selectByUsername(username);
 
-        if(null== stUser){
+        if(null == stUser){
             stUser = new StUser();
             stUser.setUsername(username);
             stUser.setShowName(username);

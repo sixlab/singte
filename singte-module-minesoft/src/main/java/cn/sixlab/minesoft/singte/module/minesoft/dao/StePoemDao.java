@@ -16,7 +16,7 @@ public class StePoemDao extends BaseDao<StePoem> {
         return StePoem.class;
     }
 
-    public List<StePoem> selectPoems(boolean withBLOBs) {
+    public List<StePoem> selectPoems() {
         Sort sort = Sort.by("id");
 
         Query query = new Query().with(sort);
