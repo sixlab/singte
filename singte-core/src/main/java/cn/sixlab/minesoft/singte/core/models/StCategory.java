@@ -15,8 +15,6 @@ public class StCategory extends BaseModel {
 
     private String intro;
 
-    private Date createTime;
-
     public String getCategory() {
         return category;
     }
@@ -47,13 +45,5 @@ public class StCategory extends BaseModel {
 
     public void setIntro(String intro) {
         this.intro = intro == null ? null : intro.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 }

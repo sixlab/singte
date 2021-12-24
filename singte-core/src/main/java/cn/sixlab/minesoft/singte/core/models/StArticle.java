@@ -30,8 +30,6 @@ public class StArticle extends BaseModel {
 
     private Date publishTime;
 
-    private Date createTime;
-
     private String content;
 
     public String getAlias() {
@@ -128,14 +126,6 @@ public class StArticle extends BaseModel {
 
     public void setPublishTime(Date publishTime) {
         this.publishTime = publishTime;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public String getContent() {

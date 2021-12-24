@@ -15,8 +15,6 @@ public class StePoemAtom extends BaseModel {
 
     private Integer atomOrder;
 
-    private Date createTime;
-
     public String getPoemId() {
         return poemId;
     }
@@ -47,13 +45,5 @@ public class StePoemAtom extends BaseModel {
 
     public void setAtomOrder(Integer atomOrder) {
         this.atomOrder = atomOrder;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 }

@@ -31,8 +31,6 @@ public class StSpider extends BaseModel {
 
     private String spiderStatus;
 
-    private Date createTime;
-
     private String urlParam;
 
     public String getSpiderType() {
@@ -129,14 +127,6 @@ public class StSpider extends BaseModel {
 
     public void setSpiderStatus(String spiderStatus) {
         this.spiderStatus = spiderStatus == null ? null : spiderStatus.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public String getUrlParam() {

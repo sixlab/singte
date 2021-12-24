@@ -19,8 +19,6 @@ public class StUser extends BaseModel {
 
     private String email;
 
-    private Date createTime;
-
     public String getUsername() {
         return username;
     }
@@ -67,13 +65,5 @@ public class StUser extends BaseModel {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 }

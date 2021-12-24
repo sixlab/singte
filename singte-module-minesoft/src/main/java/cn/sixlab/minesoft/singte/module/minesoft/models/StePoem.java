@@ -11,8 +11,6 @@ public class StePoem extends BaseModel {
 
     private String poemAuthor;
 
-    private Date createTime;
-
     private String poemContent;
 
     public String getPoemName() {
@@ -29,14 +27,6 @@ public class StePoem extends BaseModel {
 
     public void setPoemAuthor(String poemAuthor) {
         this.poemAuthor = poemAuthor == null ? null : poemAuthor.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public String getPoemContent() {

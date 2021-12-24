@@ -11,8 +11,6 @@ public class StData extends BaseModel {
 
     private String dataKey;
 
-    private Date createTime;
-
     private String dataContent;
 
     public String getDataGroup() {
@@ -29,14 +27,6 @@ public class StData extends BaseModel {
 
     public void setDataKey(String dataKey) {
         this.dataKey = dataKey == null ? null : dataKey.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public String getDataContent() {

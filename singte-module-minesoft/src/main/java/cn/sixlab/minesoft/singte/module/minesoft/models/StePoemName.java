@@ -18,8 +18,6 @@ public class StePoemName extends BaseModel {
 
     private String atomContent;
 
-    private Date createTime;
-
     public Integer getPoemId() {
         return poemId;
     }
@@ -66,13 +64,5 @@ public class StePoemName extends BaseModel {
 
     public void setAtomContent(String atomContent) {
         this.atomContent = atomContent == null ? null : atomContent.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 }

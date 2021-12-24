@@ -13,8 +13,6 @@ public class StConfig extends BaseModel {
 
     private String configGroup;
 
-    private Date createTime;
-
     private String intro;
 
     private String status;
@@ -41,14 +39,6 @@ public class StConfig extends BaseModel {
 
     public void setConfigGroup(String configGroup) {
         this.configGroup = configGroup == null ? null : configGroup.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public String getIntro() {
