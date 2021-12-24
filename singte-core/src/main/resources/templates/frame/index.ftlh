@@ -1,7 +1,10 @@
 <#--
-页面整体的模板，需要用户自己实现：
+页面整体的模板，需要用户自己实现 PageHeader：
 <#macro PageHeader></#macro>
 -->
+
+<#import "/spring.ftl" as spring>
+
 <#macro PageFrame title="" keywords="" description="">
 <!DOCTYPE HTML>
 <html lang="zh-CN">

@@ -13,6 +13,8 @@ server:
   forward-headers-strategy: native
 
 spring:
+  messages:
+    basename: i18n/message
   profiles:
     active: local
   application:

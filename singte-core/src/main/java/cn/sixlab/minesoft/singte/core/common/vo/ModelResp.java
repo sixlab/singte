@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.vo;
 
+import cn.sixlab.minesoft.singte.core.common.utils.MessageUtils;
 import org.apache.commons.collections4.MapUtils;
 
 import java.util.HashMap;
@@ -16,42 +17,42 @@ public class ModelResp extends LinkedHashMap<String, Object> {
         this(200, "操作成功", "");
     }
 
-    public ModelResp(Integer code) {
-        this(code, "", "");
+    public ModelResp(Integer status) {
+        this(status, "", "");
     }
 
-    public ModelResp(Integer code, String message) {
-        this(code, message, "");
+    public ModelResp(Integer status, String message) {
+        this(status, message, "");
     }
 
     /**
      * 初始化信息
      *
-     * @param code 编号，200是正确返回，其他的都是错误
+     * @param status 编号，200是正确返回，其他的都是错误
      * @param message 信息提示，给用户的提示
      * @param error 错误信息，给代码的信息
      */
-    public ModelResp(Integer code, String message, String error) {
+    public ModelResp(Integer status, String message, String error) {
         super();
-        put("status", code);
-        put("message", message);
-        put("error", error);
+        setStatus(status);
+        setMessage(message);
+        setError(error);
     }
 
     public static ModelResp resp() {
         return new ModelResp();
     }
 
-    public static ModelResp error(Integer code) {
-        return new ModelResp(code);
+    public static ModelResp error(Integer status) {
+        return new ModelResp(status);
     }
 
-    public static ModelResp error(Integer code, String message) {
-        return new ModelResp(code, message);
+    public static ModelResp error(Integer status, String message) {
+        return new ModelResp(status, message);
     }
 
-    public static ModelResp error(Integer code, String message, String error) {
-        return new ModelResp(code, message, error);
+    public static ModelResp error(Integer status, String message, String error) {
+        return new ModelResp(status, message, error);
     }
 
     public static ModelResp success() {
@@ -102,7 +103,7 @@ public class ModelResp extends LinkedHashMap<String, Object> {
     }
 
     public ModelResp setMessage(String message) {
-        put("message", message);
+        put("message", MessageUtils.get(message));
         return this;
     }
 
