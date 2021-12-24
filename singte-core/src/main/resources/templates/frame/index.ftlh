@@ -149,13 +149,8 @@
 <#--        <li><a href="#">安防</a></li>-->
 <#--        <li class="last_li"><a href="#">百科</a></li>-->
 
-<#assign menuGroup = [] />
-<#if gMenuGroups?? && (gMenuGroups?size >0)>
-    <#assign menuGroup = gMenuGroups[groupName] />
-</#if>
-
-<#if menuGroup?? && (menuGroup?size >0)>
-    <#list menuGroup as item>
+<@StMenu group=groupName>
+    <#list stMenuGroup as item>
         <#assign isLast = hasLast && !item_has_next />
         <#if hasLi>
             <li class="st-menu-li<#if isLast> last_li</#if>">
@@ -165,5 +160,6 @@
             </li>
         </#if>
     </#list>
-</#if>
+</@StMenu>
+
 </#macro>

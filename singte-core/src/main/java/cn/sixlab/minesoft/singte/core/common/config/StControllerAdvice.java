@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.config;
 
+import cn.sixlab.minesoft.singte.core.common.utils.MessageUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.WebUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.StException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,8 +19,12 @@ public class StControllerAdvice {
         ModelAndView model = WebUtils.requestModel(request, "error");
 
         model.addObject("status", 5000);
-        model.addObject("error", e.getMessage());
-        model.addObject("message", e.getMessage());
+        String message = e.getMessage();
+        model.addObject("error", message);
+        if(message.length() > 100){
+            message = MessageUtils.get(message);
+        }
+        model.addObject("message", message);
 
         return model;
     }

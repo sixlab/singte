@@ -13,7 +13,6 @@ import java.io.File;
 @Slf4j
 public class DirsInit implements ApplicationRunner {
 
-
     @Override
     public void run(ApplicationArguments args) throws Exception {
         try {

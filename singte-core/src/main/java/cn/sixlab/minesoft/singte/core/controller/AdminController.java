@@ -20,7 +20,6 @@ public class AdminController extends BaseController {
 
     @GetMapping(value = "/config")
     public String config(ModelMap modelMap) {
-        modelMap.put("configs", StConst.ST_CONFIGS);
         return "admin/config";
     }
 

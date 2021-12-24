@@ -1,8 +1,5 @@
 package cn.sixlab.minesoft.singte.core.common.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class StConst {
     public static final String YES = "1";
     public static final String No = "0";
@@ -18,8 +15,6 @@ public class StConst {
     public static final String ST_ICP       = "st_icp";
 
     public static final String JWT_HEADER       = "Bearer ";
-
-    public static final Map<String, String> ST_CONFIGS = new HashMap<>();
 
     public static final long SECONDS_1      = 1;
     public static final long SECONDS_MIN_1  = 60;

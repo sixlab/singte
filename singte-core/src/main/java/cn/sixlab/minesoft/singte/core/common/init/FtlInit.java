@@ -2,10 +2,9 @@ package cn.sixlab.minesoft.singte.core.common.init;
 
 import cn.sixlab.minesoft.singte.core.common.directive.ArticlesDirective;
 import cn.sixlab.minesoft.singte.core.common.directive.ConfigDirective;
+import cn.sixlab.minesoft.singte.core.common.directive.MenuDirective;
 import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.dao.StMenuDao;
-import cn.sixlab.minesoft.singte.core.models.StMenu;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateModelException;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +13,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Component
 @Order(10)
@@ -28,16 +23,16 @@ public class FtlInit implements ApplicationRunner {
     private ConfigUtils configUtils;
 
     @Autowired
+    private Configuration configuration;
+
+    @Autowired
+    private MenuDirective menuDirective;
+
+    @Autowired
     private ConfigDirective configDirective;
 
     @Autowired
     private ArticlesDirective articlesDirective;
-
-    @Autowired
-    private Configuration configuration;
-
-    @Autowired
-    private StMenuDao menuMapper;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -57,26 +52,14 @@ public class FtlInit implements ApplicationRunner {
             configuration.setSharedVariable("gCopyYear", configUtils.getConfig(StConst.ST_COPY_YEAR));
             configuration.setSharedVariable("gICP", configUtils.getConfig(StConst.ST_ICP));
 
-
-            configuration.setSharedVariable("gMenuGroups", menus());
-
             configuration.setSharedVariable("gHotKeywords", null);
 
+            configuration.setSharedVariable("StMenu", menuDirective);
             configuration.setSharedVariable("StConfig", configDirective);
             configuration.setSharedVariable("StArticles", articlesDirective);
         } catch (TemplateModelException e) {
             e.printStackTrace();
         }
-    }
-
-    private Map<String, List<StMenu>> menus() {
-        Map<String, List<StMenu>> result = new HashMap<>();
-
-        result.put("nav", menuMapper.selectGroupMenus("nav"));
-        result.put("sider", menuMapper.selectGroupMenus("sider"));
-        result.put("footer", menuMapper.selectGroupMenus("footer"));
-
-        return result;
     }
 
 }

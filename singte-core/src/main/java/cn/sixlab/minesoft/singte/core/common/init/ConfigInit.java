@@ -33,8 +33,6 @@ public class ConfigInit implements ApplicationRunner {
     }
 
     public void item(String key, String val, String intro) {
-        StConst.ST_CONFIGS.put(key, intro);
-
         StConfig config = configMapper.selectByKey(key);
         if (config == null) {
             config = new StConfig();

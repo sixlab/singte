@@ -8,6 +8,7 @@ import cn.sixlab.minesoft.singte.core.models.StArticle;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
 import org.springframework.data.mongodb.core.aggregation.SampleOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -57,9 +58,10 @@ public class StArticleDao extends BaseDao<StArticle> {
     }
 
     public List<StArticle> selectRandom(int size) {
-
-        SampleOperation matchStage = Aggregation.sample(size);
-        Aggregation aggregation = Aggregation.newAggregation(matchStage);
+        Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
+        MatchOperation matchOperation = Aggregation.match(criteria);
+        SampleOperation sizeOperation = Aggregation.sample(size);
+        Aggregation aggregation = Aggregation.newAggregation(matchOperation, sizeOperation);
         AggregationResults<StArticle> output = mongoTemplate.aggregate(aggregation, StArticle.class, StArticle.class);
 
         return output.getMappedResults();
