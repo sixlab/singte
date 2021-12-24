@@ -14,7 +14,7 @@ public class ModelResp extends LinkedHashMap<String, Object> {
 //    private String message = "";  // 用户信息提醒
 
     public ModelResp() {
-        this(200, "操作成功", "");
+        this(200, "common.success", "");
     }
 
     public ModelResp(Integer status) {
