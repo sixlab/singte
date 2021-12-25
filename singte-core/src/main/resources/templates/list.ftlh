@@ -8,8 +8,8 @@
 <#include 'frame/functions.ftlh'>
 
 <#macro PageHeader>
-    <meta name="author" content="${gSiteName!'singte'}">
-    <meta name="copyright" content="${gSiteName!'singte'}">
+    <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
+    <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
     <link type="text/css" rel="stylesheet" href="/static/css/list.css">
 </#macro>
 
@@ -28,7 +28,7 @@
 <#--                <li class="last_li"><a href="#">数据</a></li>-->
             </ul>
             <div class="wechat">
-                <div><img style="width: 114px;height: 114px;" src="${gWxQrcode!'/static/images/wx/mp.jpg'}"></div>
+                <div><img style="width: 114px;height: 114px;" src="<@StConfig key="st_wx_qr" default="/static/images/wx/mp.jpg"/>"></div>
                 <p>官方微信</p>
             </div>
 <#--            <div class="sina">-->

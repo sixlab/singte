@@ -8,7 +8,7 @@
 <@PageFrame>
     <div style="margin: 200px auto;width:150px;align-content: center;">
         <img src="/static/images/wx/mp.jpg" alt="singte"><br/>
-        官方微信：${gWxName!"满茵科技"}<br/>
+        官方微信：<@StConfig key="st_wx_name" default="满茵科技"/><br/>
         <div style="text-align: left;">
             当前版本：${version}
             ____________________<br/>

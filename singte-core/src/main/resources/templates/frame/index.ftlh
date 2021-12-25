@@ -18,7 +18,7 @@
     <meta name="description" content="${description!'singte'}"/>
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="bookmark" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="${gCopyYear!'/static/touch-icon-apple.png'}">
+    <link rel="apple-touch-icon" href="<@StConfig key="st_site_logo" default="/static/logo-h.png"/>">
     <script src="/static/js/jquery1.8.3.js"></script>
     <link type="text/css" rel="stylesheet" href="/static/css/normalize.css">
     <link type="text/css" rel="stylesheet" href="/static/css/base.css">
@@ -48,11 +48,11 @@
         <ul class="fr clearfix top_right">
             <li class="register"><a href="/reg">注册</a></li>
             <li class="login"><a href="/login">登陆</a></li>
-            <li class="weibo"><a href="https://weibo.com/${gWeiboId!'314566975'}">微博</a>
-                <div><img src="${gWeiboQrcode!'/static/logo.png'}" alt="微博"></div>
+            <li class="weibo"><a href="https://weibo.com/<@StConfig key="st_wbo_id" default="314566975"/>">微博</a>
+                <div><img src="<@StConfig key="st_wbo_qr" default="/static/logo.png"/>" alt="微博"></div>
             </li>
             <li class="wechat"><a href="javascript:;">微信</a>
-                <div><img src="${gWxQrcode!'/static/images/wx/mp.jpg'}" alt="微信二维码"></div>
+                <div><img src="<@StConfig key="st_wx_qr" default="/static/images/wx/mp.jpg"/>" alt="微信二维码"></div>
             </li>
         </ul>
     </div>
@@ -60,7 +60,7 @@
 <!--/top-->
 <!--head-->
 <div class="w1200 head clearfix">
-    <h1 class="fl logo mt33"><a href="/" target="_blank" style="background: url(${gLogo!'/static/logo-h.png'}) no-repeat;" title="首页">首页</a></h1>
+    <h1 class="fl logo mt33"><a href="/" target="_blank" style="background: url(<@StConfig key="st_site_logo" default="/static/logo-h.png"/>) no-repeat;" title="首页">首页</a></h1>
     <div class="search fr mt33">
         <form action="/search" method="get">
             <div class="searchBox clearfix">
@@ -73,11 +73,11 @@
             </div>
         </form>
         <ul class=" clearfix mt5">
-            <#if gHotKeywords?? && (gHotKeywords?size >0)>
-                <#list gHotKeywords as item>
+            <@StKeyword>
+                <#list stHotKeywords as item>
                     <li><a href="/search?keyword=${item}">${item}</a></li>
                 </#list>
-            </#if>
+            </@StKeyword>
         </ul>
     </div>
 </div>
@@ -93,12 +93,12 @@
             <p class="p1">
                 <@MenuItems groupName="footer" hasLi=false />
             </p>
-            <p class="mt40">©${gCopyYear!'2021'} ${gSiteName!'singte'}版权所有 ${gICP!''}</p>
+            <p class="mt40">©<@StConfig key="st_copyright_year" default="2021"/> <@StConfig key="st_site_name" default="singte"/>版权所有 <@StConfig key="st_icp" /></p>
         </div>
         <div class="clearfix fl wechat">
-            <img src="${gWxQrcode!'/static/images/wx/mp.jpg'}" class="fl ml30">
-            <div class="fl"><p class="p1">${gSiteName!'singte'}官方微信</p>
-                <p class="p3">${gWxName!'满茵科技'}</p></div>
+            <img src="<@StConfig key="st_wx_qr" default="/static/images/wx/mp.jpg"/>" class="fl ml30">
+            <div class="fl"><p class="p1"><@StConfig key="st_site_name" default="singte"/>官方微信</p>
+                <p class="p3"><@StConfig key="st_wx_name" default="满茵科技"/></p></div>
         </div>
     </div>
 </div>
@@ -106,7 +106,7 @@
 <!--gotop-->
 <div>
     <ul class="sibar">
-        <li class="li1"><a href="javascript:;" class="a1"><img src="/static/images/sibar/sibar_qr.png" class="sibar_img_qr"><i class="wxmp"><img src="${gWxQrcode!'/static/images/wx/mp.jpg'}"></i></a></li>
+        <li class="li1"><a href="javascript:;" class="a1"><img src="/static/images/sibar/sibar_qr.png" class="sibar_img_qr"><i class="wxmp"><img src="<@StConfig key="st_wx_qr" default="/static/images/wx/mp.jpg"/>"></i></a></li>
         <li class="li2"><a href="javascript:;" class="a2"><img src="/static/images/sibar/sibar_feedback.png" class="sibar_img_feedback"><i>用户反馈</i></a></li>
         <li class="li3"><a href="#" class="a3"><img src="/static/images/sibar/sibar_gotop.png" class="sibar_img_gotop"><i>返回顶部</i></a></li>
     </ul>

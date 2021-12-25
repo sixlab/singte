@@ -21,7 +21,7 @@ public class ConfigInit implements ApplicationRunner {
 
     @Override
     @Transactional
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         item(StConst.ST_WX_NAME, "满茵科技", "微信名字");
         item(StConst.ST_WX_QR, "/static/images/wx/mp.jpg", "微信公号二维码");
         item(StConst.ST_WBO_ID, "314566975", "微博ID");

@@ -2,7 +2,10 @@ package cn.sixlab.minesoft.singte.core.common.directive;
 
 import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
 import freemarker.core.Environment;
-import freemarker.template.*;
+import freemarker.template.TemplateDirectiveBody;
+import freemarker.template.TemplateDirectiveModel;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateModel;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +30,10 @@ public class ConfigDirective implements TemplateDirectiveModel {
                 config = val;
             }
         }
-
-        env.setVariable("tConfigVal", ObjectWrapper.DEFAULT_WRAPPER.wrap(config));
-
-        if (body != null) {
-            body.render(env.getOut());
+        if(StringUtils.isEmpty(key)){
+            config = MapUtils.getString(params, "default");
         }
+
+        env.getOut().append(config);
     }
 }

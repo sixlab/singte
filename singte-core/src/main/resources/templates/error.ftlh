@@ -200,7 +200,7 @@
 <div class="footer st-error-footer">
     <div class="w1200 clearfix">
         <div class="fl wechat">
-            <img src="${gWxQrcode!'/static/images/wx/mp.jpg'}" class="fl ml30">
+            <img src="<@StConfig key="st_wx_qr" default="/static/images/wx/mp.jpg"/>" class="fl ml30">
             <div class="fl"><p class="p1">满茵科技</p>
                 <p class="p2">singte官方微信</p></div>
         </div>

@@ -1,26 +1,18 @@
 [#ftl]
 [#-- @implicitly included --]
+[#-- @ftlvariable name="stHotKeywords" type="java.util.Collection<java.lang.String>" --]
 [#-- @ftlvariable name="stMenuGroup" type="java.util.Collection<cn.sixlab.minesoft.singte.core.models.StMenu>" --]
-[#-- @ftlvariable name="gWxName" type="java.lang.String" --]
-[#-- @ftlvariable name="gWxQrcode" type="java.lang.String" --]
-[#-- @ftlvariable name="gWeiboId" type="java.lang.String" --]
-[#-- @ftlvariable name="gWeiboQrcode" type="java.lang.String" --]
-
-[#-- @ftlvariable name="gSiteName" type="java.lang.String" --]
-[#-- @ftlvariable name="gLogo" type="java.lang.String" --]
-[#-- @ftlvariable name="gCopyYear" type="java.lang.String" --]
-[#-- @ftlvariable name="gICP" type="java.lang.String" --]
-
-[#-- @ftlvariable name="gHotKeywords" type="java.lang.String[]" --]
 
 [#include 'templates/frame/index.ftlh']
+
 [#macro PageHeader][/#macro]
 
 [#macro StMenu group][/#macro]
 
-[#macro StConfig key][/#macro]
+[#macro StConfig key default=""][/#macro]
+
+[#macro StKeyword][/#macro]
 
 [#macro StArticles type='category' num=1 size=10 category=''][/#macro]
 [#-- @ftlvariable name="tArticleList" type="cn.sixlab.minesoft.singte.models.StArticle[]" --]
 [#-- @ftlvariable name="tArticlePageInfo" type="com.github.pagehelper.PageInfo<cn.sixlab.minesoft.singte.models.StArticle>" --]
-
