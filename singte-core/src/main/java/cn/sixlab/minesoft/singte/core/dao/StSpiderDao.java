@@ -17,6 +17,12 @@ public class StSpiderDao extends BaseDao<StSpider> {
         return StSpider.class;
     }
 
+    /**
+     * 查询已经启用的爬虫任务
+     * 
+     * @param status
+     * @return
+     */
     public List<StSpider> selectByStatus(String status) {
         Query query = new Query(Criteria.where("status").is(status)).with(Sort.by("id"));
         return mongoTemplate.find(query, StSpider.class);

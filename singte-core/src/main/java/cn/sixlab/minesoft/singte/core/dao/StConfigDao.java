@@ -14,6 +14,12 @@ public class StConfigDao extends BaseDao<StConfig> {
         return StConfig.class;
     }
 
+    /**
+     * 查询配置
+     *
+     * @param configKey 配置 key
+     * @return 配置信息
+     */
     public StConfig selectByKey(String configKey) {
         Query query = new Query(Criteria.where("configKey").is(configKey));
         return mongoTemplate.findOne(query, StConfig.class);

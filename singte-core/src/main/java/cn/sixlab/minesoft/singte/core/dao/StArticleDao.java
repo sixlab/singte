@@ -5,6 +5,7 @@ import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StBeanUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
@@ -25,11 +26,22 @@ public class StArticleDao extends BaseDao<StArticle> {
         return StArticle.class;
     }
 
+    /**
+     * 根据 ID 查询文章
+     *
+     * @param id 文章id
+     * @return 文章
+     */
     public StArticle selectById(String id) {
         Query query = new Query(Criteria.where("id").is(id));
         return mongoTemplate.findOne(query, StArticle.class);
     }
 
+    /**
+     * 根据 ID 更新文章，忽略null
+     *
+     * @param record 新文章信息
+     */
     public void updateSelective(StArticle record) {
         Query query = new Query(Criteria.where("id").is(record.getId()));
         StArticle target = mongoTemplate.findOne(query, StArticle.class);
@@ -39,6 +51,11 @@ public class StArticleDao extends BaseDao<StArticle> {
         }
     }
 
+    /**
+     * 根据 ID 更新文章
+     *
+     * @param record 新文章信息
+     */
     public void updateById(StArticle record) {
         mongoTemplate.save(record);
     }
@@ -69,6 +86,9 @@ public class StArticleDao extends BaseDao<StArticle> {
 
     public PageResult<StArticle> selectByCategory(String category, int pageNum, int pageSize) {
         Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
+        if(StringUtils.isNotEmpty(category)){
+            criteria = criteria.and("category").is(category);
+        }
         Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
 
         Query query = new Query(criteria).with(sort);

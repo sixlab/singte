@@ -17,6 +17,11 @@ public class StMenuDao extends BaseDao<StMenu> {
         return StMenu.class;
     }
 
+    /**
+     * 查询分组下所有菜单，根据权重排序
+     * @param menuGroup 分组
+     * @return 菜单列表
+     */
     public List<StMenu> selectGroupMenus(String menuGroup) {
         Query query = new Query(Criteria.where("menuGroup").is(menuGroup)).with(Sort.by("weight"));
         return mongoTemplate.find(query, StMenu.class);

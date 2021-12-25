@@ -38,8 +38,6 @@ public class FtlInit implements ApplicationRunner {
     }
 
     public void configFtl() {
-        configuration.setSharedVariable("gHotKeywords", null);
-
         configuration.setSharedVariable("StMenu", menuDirective);
         configuration.setSharedVariable("StConfig", configDirective);
         configuration.setSharedVariable("StKeyword", keywordDirective);

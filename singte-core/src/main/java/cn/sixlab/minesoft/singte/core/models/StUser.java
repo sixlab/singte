@@ -1,7 +1,6 @@
 package cn.sixlab.minesoft.singte.core.models;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
-import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
@@ -18,6 +17,12 @@ public class StUser extends BaseModel {
     private String mobile;
 
     private String email;
+
+    private String role;
+
+    private String token;
+
+    private Date tokenValid;
 
     public String getUsername() {
         return username;
@@ -65,5 +70,29 @@ public class StUser extends BaseModel {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Date getTokenValid() {
+        return tokenValid;
+    }
+
+    public void setTokenValid(Date tokenValid) {
+        this.tokenValid = tokenValid;
     }
 }

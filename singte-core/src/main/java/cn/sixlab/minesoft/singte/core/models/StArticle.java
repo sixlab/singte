@@ -16,6 +16,8 @@ public class StArticle extends BaseModel {
 
     private String keywords;
 
+    private String keywordsId;
+
     private String summary;
 
     private String category;
@@ -70,6 +72,14 @@ public class StArticle extends BaseModel {
 
     public void setKeywords(String keywords) {
         this.keywords = keywords == null ? null : keywords.trim();
+    }
+
+    public String getKeywordsId() {
+        return keywordsId;
+    }
+
+    public void setKeywordsId(String keywordsId) {
+        this.keywordsId = keywordsId;
     }
 
     public String getSummary() {

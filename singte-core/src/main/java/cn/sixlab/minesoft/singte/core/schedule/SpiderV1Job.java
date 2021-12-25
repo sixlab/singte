@@ -17,6 +17,9 @@ public class SpiderV1Job {
     @Autowired
     private StSpiderDao spiderMapper;
 
+    /**
+     * 定时爬虫，爬取已开启的爬虫任务
+     */
     @Scheduled(cron = "0 0 22 * * ?")
     public void job() {
         List<StSpider> spiderList = spiderMapper.selectByStatus(StConst.YES);

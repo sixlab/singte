@@ -15,6 +15,12 @@ public class StCategoryDao extends BaseDao<StCategory> {
         return StCategory.class;
     }
 
+    /**
+     * 根据分类查询分类
+     *
+     * @param category 分类
+     * @return 分类信息
+     */
     public StCategory selectByCategory(String category) {
         Query query = new Query(Criteria.where("category").is(category)).with(Sort.by("id"));
         return mongoTemplate.findOne(query, StCategory.class);

@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/category")
 public class CategoryController extends BaseController {
 
     @Autowired
     private ArticleService articleService;
 
-    @GetMapping(value = "/category/{categoryId}")
+    @GetMapping(value = "/{categoryId}")
     public String category(ModelMap modelMap, @PathVariable Integer categoryId) {
         boolean exists = articleService.listCategory(modelMap, categoryId, 1, 10);
         if (exists) {
@@ -26,7 +26,7 @@ public class CategoryController extends BaseController {
         }
     }
 
-    @GetMapping(value = "/category/{categoryId}/{pageNum}")
+    @GetMapping(value = "/{categoryId}/{pageNum}")
     public String category(ModelMap modelMap, @PathVariable Integer categoryId, @PathVariable Integer pageNum) {
         boolean exists = articleService.listCategory(modelMap, categoryId, pageNum, 10);
         if (exists) {
@@ -36,7 +36,7 @@ public class CategoryController extends BaseController {
         }
     }
 
-    @GetMapping(value = "/category/{categoryId}/{pageNum}/{pageSize}")
+    @GetMapping(value = "/{categoryId}/{pageNum}/{pageSize}")
     public String category(ModelMap modelMap, @PathVariable Integer categoryId, @PathVariable Integer pageNum, @PathVariable Integer pageSize) {
         boolean exists = articleService.listCategory(modelMap, categoryId, pageNum, pageSize);
         if (exists) {

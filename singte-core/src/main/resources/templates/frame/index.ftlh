@@ -75,7 +75,7 @@
         <ul class=" clearfix mt5">
             <@StKeyword>
                 <#list stHotKeywords as item>
-                    <li><a href="/search?keyword=${item}">${item}</a></li>
+                    <li><a href="/search?keyword=${item.}">${item}</a></li>
                 </#list>
             </@StKeyword>
         </ul>
