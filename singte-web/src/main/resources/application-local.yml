@@ -14,10 +14,8 @@ logging:
   config: classpath:logback-console.xml
   level:
     ROOT: info
-    cn:
-      sixlab:
-        minesoft:
-          singte: debug
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+    cn.sixlab.minesoft.singte: debug
 
 st:
   jwt:

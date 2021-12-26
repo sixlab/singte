@@ -54,12 +54,12 @@
         <#if tArticlePageInfo.totalNum == 0 || tArticlePageInfo.pageNum == 1>
             <li><span class="prev-disabled">上一页</span></li>
         <#else>
-            <li><a href="${url}/${tArticlePageInfo.pageNum-1}">上一页</a></li>
+            <li><a href="${url}${tArticlePageInfo.pageNum-1}">上一页</a></li>
         </#if>
 
         <#--第一页-->
         <#if (tArticlePageInfo.totalNum > 0)>
-            <li <#if tArticlePageInfo.pageNum == 1>class="thisclass"</#if>><a href="${url}">1</a></li>
+            <li <#if tArticlePageInfo.pageNum == 1>class="thisclass"</#if>><a href="${url}1">1</a></li>
         </#if>
 
         <#--如果不只有一页-->
@@ -73,7 +73,7 @@
             <#list (tArticlePageInfo.pageNum - 3)..(tArticlePageInfo.pageNum + 3) as index>
             <#--如果位于第一页和最后一页之间-->
                 <#if (index > 1) && (index < tArticlePageInfo.totalPages)>
-                    <li <#if tArticlePageInfo.pageNum == index>class="thisclass"</#if>><a href="${url}/${index}">${index}</a></li>
+                    <li <#if tArticlePageInfo.pageNum == index>class="thisclass"</#if>><a href="${url}${index}">${index}</a></li>
                 </#if>
             </#list>
 
@@ -83,14 +83,14 @@
             </#if>
 
         <#--最后页-->
-            <li <#if tArticlePageInfo.pageNum == tArticlePageInfo.totalPages>class="thisclass"</#if>><a href="${url}/${tArticlePageInfo.totalPages}">${tArticlePageInfo.totalPages}</a></li>
+            <li <#if tArticlePageInfo.pageNum == tArticlePageInfo.totalPages>class="thisclass"</#if>><a href="${url}${tArticlePageInfo.totalPages}">${tArticlePageInfo.totalPages}</a></li>
         </#if>
 
         <#--最后页，禁用“下一页”按钮-->
         <#if tArticlePageInfo.totalNum == 0 || tArticlePageInfo.pageNum == tArticlePageInfo.totalPages>
             <li><span class="prev-disabled">下一页</span></li>
         <#else>
-            <li><a href="${url}/${tArticlePageInfo.pageNum+1}">下一页</a></li>
+            <li><a href="${url}${tArticlePageInfo.pageNum+1}">下一页</a></li>
         </#if>
     </ul>
 </@StArticles>

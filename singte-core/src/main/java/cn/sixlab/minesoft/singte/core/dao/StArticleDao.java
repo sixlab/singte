@@ -72,10 +72,10 @@ public class StArticleDao extends BaseDao<StArticle> {
     }
 
     public PageResult<StArticle> selectByWord(String word, int pageNum, int pageSize) {
-        // TODO 待实现搜索方法
+        // TODO 待实现更好搜索方法
         Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
         if (StringUtils.isNotEmpty(word)) {
-            criteria = criteria.and("content").regex("/" + word + "/");
+            criteria = criteria.and("content").regex(word);
         }
         Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
 

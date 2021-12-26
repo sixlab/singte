@@ -62,26 +62,31 @@ public class ArticleService {
         modelMap.put("pageUri", uriPrefix);
     }
 
+    public void listList(ModelMap modelMap, Integer pageNum, Integer pageSize) {
+        listParam(modelMap, pageNum, pageSize, "list", "/list?pageNum=");
+        modelMap.put("title", I18nUtils.get("title.list"));
+    }
+
     public void listCategory(ModelMap modelMap, String category, Integer pageNum, Integer pageSize) {
-        listParam(modelMap, pageNum, pageSize, "category", "/category/" + category);
+        listParam(modelMap, pageNum, pageSize, "category", "/category/" + category + "?pageNum=");
         modelMap.put("word", category);
         modelMap.put("title", I18nUtils.get("title.category", category));
     }
 
     public void listKeyword(ModelMap modelMap, String keyword, Integer pageNum, Integer pageSize) {
-        listParam(modelMap, pageNum, pageSize, "keyword", "/keyword/" + keyword);
+        listParam(modelMap, pageNum, pageSize, "keyword", "/keyword/" + keyword + "?pageNum=");
         modelMap.put("word", keyword);
         modelMap.put("title", I18nUtils.get("title.keyword", keyword));
     }
 
-    public void listSearch(ModelMap modelMap, String keyword, Integer pageNum, Integer pageSize) {
-        listParam(modelMap, pageNum, pageSize, "search", "/keyword/" + keyword);
-        modelMap.put("word", keyword);
-        modelMap.put("title", I18nUtils.get("title.search", keyword));
+    public void listSearch(ModelMap modelMap, String word, Integer pageNum, Integer pageSize) {
+        listParam(modelMap, pageNum, pageSize, "search", "/search?" + word + "&pageNum=");
+        modelMap.put("word", word);
+        modelMap.put("title", I18nUtils.get("title.search", word));
     }
 
     public void listDate(ModelMap modelMap, String date, Integer pageNum, Integer pageSize) {
-        listParam(modelMap, pageNum, pageSize, "date", "/date/" + date);
+        listParam(modelMap, pageNum, pageSize, "date", "/date/" + date + "?pageNum=");
         modelMap.put("date", date);
         modelMap.put("title", I18nUtils.get("title.date", date));
     }
