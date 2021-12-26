@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.SampleOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -43,5 +44,19 @@ public class StKeywordDao extends BaseDao<StKeyword> {
         AggregationResults<StKeyword> output = mongoTemplate.aggregate(aggregation, StKeyword.class, StKeyword.class);
 
         return output.getMappedResults();
+    }
+
+    public void updateFlag(String flag) {
+        Criteria criteria = Criteria.where("flag").ne(flag);
+
+        Update update = new Update().set("flag", flag);
+
+        mongoTemplate.updateMulti(new Query(criteria), update, StKeyword.class);
+    }
+
+    public void delWithoutFlag(String flag) {
+        Criteria criteria = Criteria.where("flag").ne(flag);
+
+        mongoTemplate.remove(new Query(criteria), StKeyword.class);
     }
 }

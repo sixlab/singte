@@ -6,9 +6,13 @@ public class StKeyword extends BaseModel {
 
     private String keyword;
 
+    private Integer articleCount;
+
     private Integer weight;
 
     private String intro;
+
+    private String flag;
 
     public String getKeyword() {
         return keyword;
@@ -16,6 +20,14 @@ public class StKeyword extends BaseModel {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword == null ? null : keyword.trim();
+    }
+
+    public Integer getArticleCount() {
+        return articleCount;
+    }
+
+    public void setArticleCount(Integer articleCount) {
+        this.articleCount = articleCount;
     }
 
     public Integer getWeight() {
@@ -32,5 +44,13 @@ public class StKeyword extends BaseModel {
 
     public void setIntro(String intro) {
         this.intro = intro == null ? null : intro.trim();
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 }

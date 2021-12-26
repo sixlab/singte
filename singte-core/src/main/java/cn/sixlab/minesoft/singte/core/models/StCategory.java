@@ -1,19 +1,18 @@
 package cn.sixlab.minesoft.singte.core.models;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
-import org.springframework.data.annotation.Id;
-
-import java.util.Date;
 
 public class StCategory extends BaseModel {
 
     private String category;
 
-    private String categoryAlias;
+    private Integer articleCount;
 
     private Integer weight;
 
     private String intro;
+
+    private String flag;
 
     public String getCategory() {
         return category;
@@ -23,12 +22,12 @@ public class StCategory extends BaseModel {
         this.category = category == null ? null : category.trim();
     }
 
-    public String getCategoryAlias() {
-        return categoryAlias;
+    public Integer getArticleCount() {
+        return articleCount;
     }
 
-    public void setCategoryAlias(String categoryAlias) {
-        this.categoryAlias = categoryAlias == null ? null : categoryAlias.trim();
+    public void setArticleCount(Integer articleCount) {
+        this.articleCount = articleCount;
     }
 
     public Integer getWeight() {
@@ -45,5 +44,13 @@ public class StCategory extends BaseModel {
 
     public void setIntro(String intro) {
         this.intro = intro == null ? null : intro.trim();
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 }

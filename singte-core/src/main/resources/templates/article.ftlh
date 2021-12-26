@@ -35,7 +35,7 @@
                 </div>
                 <div class="clearfix bottom">
                     <div class="fl"><span>标签:</span>
-                        <#list article.keywords?split(",") as keyword>
+                        <#list article.keywords as keyword>
                             <a href="#">${keyword}</a>
                         </#list>
                     </div>

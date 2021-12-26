@@ -22,13 +22,9 @@ public abstract class BaseDao<T extends BaseModel> {
         mongoTemplate.save(record);
     }
 
-    public T selectById(Integer id) {
+    public T selectById(String id) {
         Query query = new Query(Criteria.where("id").is(id));
         return mongoTemplate.findOne(query, entityClass());
-    }
-
-    public void updateById(T record) {
-        mongoTemplate.save(record);
     }
 
     public void updateSelective(T record) {
@@ -40,8 +36,9 @@ public abstract class BaseDao<T extends BaseModel> {
         }
     }
 
-    public void deleteById(Integer id) {
-        mongoTemplate.remove(id);
+    public void deleteById(String id) {
+        Query query = new Query(Criteria.where("id").is(id));
+        mongoTemplate.remove(query, entityClass());
     }
 
     public PageResult<T> pageQuery(Query query, Class<T> clz, int pageNum, int pageSize) {

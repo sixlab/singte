@@ -67,18 +67,16 @@ public class PageLinkSpider extends SpiderJob {
         article.setSummary(jxNodeVal(summaryNode));
         article.setCategory(jxNodeVal(categoryNode));
 
+        List<String> keywordList = new ArrayList<>();
         if(CollectionUtils.isNotEmpty(keywordNodeList)){
-            List<String> keywordList = new ArrayList<>();
             keywordNodeList.forEach(jxNode -> {
                 String val = jxNodeVal(jxNode);
                 if (StringUtils.isNotEmpty(val)) {
                     keywordList.add(val);
                 }
             });
-            if (CollectionUtils.isNotEmpty(keywordList)) {
-                article.setKeywords(StringUtils.join(keywordList, ","));
-            }
         }
+        article.setKeywords(keywordList);
         article.setSourceUrl(url);
 
         saveContent(spider, article);

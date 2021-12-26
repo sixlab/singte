@@ -5,7 +5,7 @@
 
 <#import "/spring.ftl" as spring>
 
-<#macro PageFrame title="" keywords="" description="">
+<#macro PageFrame title="" keywords=[] description="">
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 <header>
@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>${title!'singte首页'}</title>
-    <meta name="keywords" content="${keywords!'singte'}"/>
+    <meta name="keywords" content="${keywords?join(",")!'singte'}"/>
     <meta name="description" content="${description!'singte'}"/>
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="bookmark" href="/favicon.ico">
@@ -75,7 +75,7 @@
         <ul class=" clearfix mt5">
             <@StKeyword>
                 <#list stHotKeywords as item>
-                    <li><a href="/search?keyword=${item.}">${item}</a></li>
+                    <li><a href="/search?keyword=${item.keyword}">${item.keyword}</a></li>
                 </#list>
             </@StKeyword>
         </ul>

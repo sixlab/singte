@@ -39,7 +39,7 @@
                 </div>
                 <div class="clearfix bottom">
                     <div class="fl">
-                        <#list item.keywords?split(",") as keyword>
+                        <#list item.keywords as keyword>
                             <a href="#">${keyword}</a>
                         </#list>
                     </div>

@@ -3,8 +3,10 @@ package cn.sixlab.minesoft.singte.core.common.spider;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
+import cn.sixlab.minesoft.singte.core.dao.StKeywordDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
+import cn.sixlab.minesoft.singte.core.models.StKeyword;
 import cn.sixlab.minesoft.singte.core.models.StSpider;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -13,12 +15,17 @@ import org.seimicrawler.xpath.JXNode;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class SpiderJob {
 
     @Autowired
     private StArticleDao articleMapper;
+
+    @Autowired
+    private StKeywordDao keywordDao;
 
     @Autowired
     private StCategoryDao categoryMapper;
@@ -63,12 +70,35 @@ public abstract class SpiderJob {
             if (stCategory == null) {
                 stCategory = new StCategory();
                 stCategory.setCategory(category);
+                stCategory.setArticleCount(1);
                 stCategory.setWeight(1);
                 stCategory.setCreateTime(new Date());
-                categoryMapper.save(stCategory);
+            }else{
+                stCategory.setUpdateTime(new Date());
+                stCategory.setArticleCount(stCategory.getArticleCount() + 1);
             }
+            categoryMapper.save(stCategory);
             article.setCategoryId(stCategory.getId());
         }
+
+        List<String> keywords = article.getKeywords();
+        List<String> keywordIds = new ArrayList<>();
+        for (String keyword : keywords) {
+            StKeyword stKeyword = keywordDao.selectByKeyword(keyword);
+            if (stKeyword == null) {
+                stKeyword = new StKeyword();
+                stKeyword.setKeyword(keyword);
+                stKeyword.setArticleCount(1);
+                stKeyword.setCreateTime(new Date());
+            }else{
+                stKeyword.setUpdateTime(new Date());
+                stKeyword.setArticleCount(stKeyword.getArticleCount() + 1);
+            }
+            keywordDao.save(stKeyword);
+            String keywordId = stKeyword.getId();
+            keywordIds.add(keywordId);
+        }
+        article.setKeywordIds(keywordIds);
 
         article.setAuthor("spider");
         article.setViewCount(0);

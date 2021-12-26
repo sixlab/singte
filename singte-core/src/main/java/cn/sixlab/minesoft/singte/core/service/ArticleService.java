@@ -62,7 +62,7 @@ public class ArticleService {
         modelMap.put("pageUri", uriPrefix);
     }
 
-    public boolean listCategory(ModelMap modelMap, Integer categoryId, Integer pageNum, Integer pageSize) {
+    public boolean listCategory(ModelMap modelMap, String categoryId, Integer pageNum, Integer pageSize) {
         StCategory stCategory = categoryMapper.selectById(categoryId);
 
         if (null != stCategory) {

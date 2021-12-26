@@ -9,6 +9,8 @@ public class BaseModel implements Serializable {
     @Id
     private String id;
 
+    private Date updateTime;
+
     private Date createTime;
 
     public String getId() {
@@ -17,6 +19,14 @@ public class BaseModel implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public Date getCreateTime() {

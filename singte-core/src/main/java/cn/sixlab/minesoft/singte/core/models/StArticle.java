@@ -3,6 +3,7 @@ package cn.sixlab.minesoft.singte.core.models;
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
 
 import java.util.Date;
+import java.util.List;
 
 public class StArticle extends BaseModel {
 
@@ -14,9 +15,9 @@ public class StArticle extends BaseModel {
 
     private String author;
 
-    private String keywords;
+    private List<String> keywords;
 
-    private String keywordsId;
+    private List<String> keywordIds;
 
     private String summary;
 
@@ -66,20 +67,20 @@ public class StArticle extends BaseModel {
         this.author = author == null ? null : author.trim();
     }
 
-    public String getKeywords() {
+    public List<String> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords == null ? null : keywords.trim();
+    public void setKeywords(List<String> keywords) {
+        this.keywords = keywords;
     }
 
-    public String getKeywordsId() {
-        return keywordsId;
+    public List<String> getKeywordIds() {
+        return keywordIds;
     }
 
-    public void setKeywordsId(String keywordsId) {
-        this.keywordsId = keywordsId;
+    public void setKeywordIds(List<String> keywordIds) {
+        this.keywordIds = keywordIds;
     }
 
     public String getSummary() {

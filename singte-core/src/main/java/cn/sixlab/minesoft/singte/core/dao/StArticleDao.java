@@ -2,17 +2,15 @@ package cn.sixlab.minesoft.singte.core.dao;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
-import cn.sixlab.minesoft.singte.core.common.utils.StBeanUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
+import cn.sixlab.minesoft.singte.core.models.StCategory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.MatchOperation;
-import org.springframework.data.mongodb.core.aggregation.SampleOperation;
+import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -24,40 +22,6 @@ public class StArticleDao extends BaseDao<StArticle> {
     @Override
     public Class<StArticle> entityClass() {
         return StArticle.class;
-    }
-
-    /**
-     * 根据 ID 查询文章
-     *
-     * @param id 文章id
-     * @return 文章
-     */
-    public StArticle selectById(String id) {
-        Query query = new Query(Criteria.where("id").is(id));
-        return mongoTemplate.findOne(query, StArticle.class);
-    }
-
-    /**
-     * 根据 ID 更新文章，忽略null
-     *
-     * @param record 新文章信息
-     */
-    public void updateSelective(StArticle record) {
-        Query query = new Query(Criteria.where("id").is(record.getId()));
-        StArticle target = mongoTemplate.findOne(query, StArticle.class);
-        if (target != null) {
-            StBeanUtils.copyProperties(record, target);
-            mongoTemplate.save(target);
-        }
-    }
-
-    /**
-     * 根据 ID 更新文章
-     *
-     * @param record 新文章信息
-     */
-    public void updateById(StArticle record) {
-        mongoTemplate.save(record);
     }
 
     public List<StArticle> selectHot(int size) {
@@ -111,7 +75,7 @@ public class StArticleDao extends BaseDao<StArticle> {
     public void addView(String id) {
         StArticle article = selectById(id);
         article.setViewCount(article.getViewCount() + 1);
-        updateById(article);
+        save(article);
     }
 
     public PageResult<StArticle> selectByDate(Date begin, Date end, int pageNum, int pageSize) {
@@ -131,5 +95,24 @@ public class StArticleDao extends BaseDao<StArticle> {
         Query query = new Query(criteria).limit(1);
 
         return mongoTemplate.findOne(query, StArticle.class);
+    }
+
+    public List<StCategory> countCategory() {
+        MatchOperation queryOperation = Aggregation.match(Criteria.where("publishStatus").is(StConst.YES));
+        GroupOperation groupOperation = Aggregation.group("category").count().as("articleCount");
+        ProjectionOperation nameOperation = Aggregation.project("articleCount").and("category").previousOperation();
+
+        Aggregation aggregation = Aggregation.newAggregation(queryOperation, groupOperation, nameOperation);
+        AggregationResults<StCategory> output = mongoTemplate.aggregate(aggregation, StArticle.class, StCategory.class);
+
+        return output.getMappedResults();
+    }
+
+    public void updateCategory(String category, String categoryId) {
+        Criteria criteria = Criteria.where("category").is(category);
+
+        Update update = new Update().set("categoryId", categoryId);
+
+        mongoTemplate.updateMulti(new Query(criteria), update, StArticle.class);
     }
 }
