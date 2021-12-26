@@ -24,6 +24,7 @@ public class ArticlesDirective implements TemplateDirectiveModel {
         String type = MapUtils.getString(params, "type", "random");
         int size = Integer.parseInt(MapUtils.getString(params, "size", "10"));
         int num = Integer.parseInt(MapUtils.getString(params, "num", "1"));
+        String word = MapUtils.getString(params, "word", "");
 
         List<StArticle> articleList = null;
         PageResult<StArticle> pageInfo = null;
@@ -43,8 +44,13 @@ public class ArticlesDirective implements TemplateDirectiveModel {
                 break;
 
             case "category":
-                String category = MapUtils.getString(params, "category", "");
-                pageInfo = articleService.selectCategory(category, num, size);
+                pageInfo = articleService.selectCategory(word, num, size);
+                break;
+            case "keyword":
+                pageInfo = articleService.selectKeyword(word, num, size);
+                break;
+            case "search":
+                pageInfo = articleService.selectSearch(word, num, size);
                 break;
             case "index":
                 pageInfo = articleService.selectCategory("", 1, size);

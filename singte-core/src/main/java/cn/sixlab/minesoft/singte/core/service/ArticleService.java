@@ -1,10 +1,10 @@
 package cn.sixlab.minesoft.singte.core.service;
 
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
+import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
-import cn.sixlab.minesoft.singte.core.models.StCategory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,16 +62,28 @@ public class ArticleService {
         modelMap.put("pageUri", uriPrefix);
     }
 
-    public boolean listCategory(ModelMap modelMap, String categoryId, Integer pageNum, Integer pageSize) {
-        StCategory stCategory = categoryMapper.selectById(categoryId);
+    public void listCategory(ModelMap modelMap, String category, Integer pageNum, Integer pageSize) {
+        listParam(modelMap, pageNum, pageSize, "category", "/category/" + category);
+        modelMap.put("word", category);
+        modelMap.put("title", I18nUtils.get("title.category", category));
+    }
 
-        if (null != stCategory) {
-            listParam(modelMap, pageNum, pageSize, "category", "/category/" + categoryId);
-            modelMap.put("category", stCategory.getCategory());
+    public void listKeyword(ModelMap modelMap, String keyword, Integer pageNum, Integer pageSize) {
+        listParam(modelMap, pageNum, pageSize, "keyword", "/keyword/" + keyword);
+        modelMap.put("word", keyword);
+        modelMap.put("title", I18nUtils.get("title.keyword", keyword));
+    }
 
-            return true;
-        }
-        return false;
+    public void listSearch(ModelMap modelMap, String keyword, Integer pageNum, Integer pageSize) {
+        listParam(modelMap, pageNum, pageSize, "search", "/keyword/" + keyword);
+        modelMap.put("word", keyword);
+        modelMap.put("title", I18nUtils.get("title.search", keyword));
+    }
+
+    public void listDate(ModelMap modelMap, String date, Integer pageNum, Integer pageSize) {
+        listParam(modelMap, pageNum, pageSize, "date", "/date/" + date);
+        modelMap.put("date", date);
+        modelMap.put("title", I18nUtils.get("title.date", date));
     }
 
     /**
@@ -115,6 +127,18 @@ public class ArticleService {
      */
     public PageResult<StArticle> selectCategory(String category, int pageNum, int pageSize) {
         PageResult<StArticle> articleList = articleMapper.selectByCategory(category, pageNum, pageSize);
+
+        return articleList;
+    }
+
+    public PageResult<StArticle> selectKeyword(String keyword, int pageNum, int pageSize) {
+        PageResult<StArticle> articleList = articleMapper.selectByKeyword(keyword, pageNum, pageSize);
+
+        return articleList;
+    }
+
+    public PageResult<StArticle> selectSearch(String word, int pageNum, int pageSize) {
+        PageResult<StArticle> articleList = articleMapper.selectByWord(word, pageNum, pageSize);
 
         return articleList;
     }

@@ -18,22 +18,19 @@ public class DateController extends BaseController {
 
     @GetMapping(value = "/{date}")
     public String date(ModelMap modelMap, @PathVariable String date) {
-        service.listParam(modelMap, 1, 10, "date", "/date/" + date);
-        modelMap.put("date", date);
+        service.listDate(modelMap, date, 1, 10);
         return "list";
     }
 
     @GetMapping(value = "/{date}/{pageNum}")
     public String date(ModelMap modelMap, @PathVariable String date, @PathVariable Integer pageNum) {
-        service.listParam(modelMap, pageNum, 10, "date", "/date/" + date);
-        modelMap.put("date", date);
+        service.listDate(modelMap, date, pageNum, 10);
         return "list";
     }
 
     @GetMapping(value = "/{date}/{pageNum}/{pageSize}")
     public String date(ModelMap modelMap, @PathVariable String date, @PathVariable Integer pageNum, @PathVariable Integer pageSize) {
-        service.listParam(modelMap, pageNum, pageSize, "date", "/date/" + date);
-        modelMap.put("date", date);
+        service.listDate(modelMap, date, pageNum, pageSize);
         return "list";
     }
 

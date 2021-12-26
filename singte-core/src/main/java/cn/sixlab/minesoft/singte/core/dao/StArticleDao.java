@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -60,6 +59,31 @@ public class StArticleDao extends BaseDao<StArticle> {
         return pageQuery(query, StArticle.class, pageNum, pageSize);
     }
 
+    public PageResult<StArticle> selectByKeyword(String keyword, int pageNum, int pageSize) {
+        Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
+        if (StringUtils.isNotEmpty(keyword)) {
+            criteria = criteria.and("keywords").is(keyword);
+        }
+        Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, StArticle.class, pageNum, pageSize);
+    }
+
+    public PageResult<StArticle> selectByWord(String word, int pageNum, int pageSize) {
+        // TODO 待实现搜索方法
+        Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
+        if (StringUtils.isNotEmpty(word)) {
+            criteria = criteria.and("content").regex("/" + word + "/");
+        }
+        Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, StArticle.class, pageNum, pageSize);
+    }
+
     public StArticle selectByAlias(String alias) {
         Criteria criteria = Criteria
                 .where("publishStatus").is(StConst.YES)
@@ -80,8 +104,7 @@ public class StArticleDao extends BaseDao<StArticle> {
 
     public PageResult<StArticle> selectByDate(Date begin, Date end, int pageNum, int pageSize) {
         Criteria criteria = Criteria.where("publishStatus").is(StConst.YES)
-                .and("publishTime").gte(begin)
-                .and("publishTime").lt(end);
+                .and("publishTime").gte(begin).lt(end);
         Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
 
         Query query = new Query(criteria).with(sort);
@@ -108,11 +131,4 @@ public class StArticleDao extends BaseDao<StArticle> {
         return output.getMappedResults();
     }
 
-    public void updateCategory(String category, String categoryId) {
-        Criteria criteria = Criteria.where("category").is(category);
-
-        Update update = new Update().set("categoryId", categoryId);
-
-        mongoTemplate.updateMulti(new Query(criteria), update, StArticle.class);
-    }
 }

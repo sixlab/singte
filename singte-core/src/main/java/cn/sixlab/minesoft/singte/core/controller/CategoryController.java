@@ -16,34 +16,22 @@ public class CategoryController extends BaseController {
     @Autowired
     private ArticleService articleService;
 
-    @GetMapping(value = "/{categoryId}")
-    public String category(ModelMap modelMap, @PathVariable String categoryId) {
-        boolean exists = articleService.listCategory(modelMap, categoryId, 1, 10);
-        if (exists) {
-            return "list";
-        } else {
-            return "redirect:/404";
-        }
+    @GetMapping(value = "/{category}")
+    public String category(ModelMap modelMap, @PathVariable String category) {
+        articleService.listCategory(modelMap, category, 1, 10);
+        return "list";
     }
 
-    @GetMapping(value = "/{categoryId}/{pageNum}")
-    public String category(ModelMap modelMap, @PathVariable String categoryId, @PathVariable Integer pageNum) {
-        boolean exists = articleService.listCategory(modelMap, categoryId, pageNum, 10);
-        if (exists) {
-            return "list";
-        } else {
-            return "redirect:/404";
-        }
+    @GetMapping(value = "/{category}/{pageNum}")
+    public String category(ModelMap modelMap, @PathVariable String category, @PathVariable Integer pageNum) {
+        articleService.listCategory(modelMap, category, pageNum, 10);
+        return "list";
     }
 
-    @GetMapping(value = "/{categoryId}/{pageNum}/{pageSize}")
-    public String category(ModelMap modelMap, @PathVariable String categoryId, @PathVariable Integer pageNum, @PathVariable Integer pageSize) {
-        boolean exists = articleService.listCategory(modelMap, categoryId, pageNum, pageSize);
-        if (exists) {
-            return "list";
-        } else {
-            return "redirect:/404";
-        }
+    @GetMapping(value = "/{category}/{pageNum}/{pageSize}")
+    public String category(ModelMap modelMap, @PathVariable String category, @PathVariable Integer pageNum, @PathVariable Integer pageSize) {
+        articleService.listCategory(modelMap, category, pageNum, pageSize);
+        return "list";
     }
 
 }

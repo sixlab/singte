@@ -25,10 +25,10 @@
 </#macro>
 
 <#--  文章列表  -->
-<#macro ArticleList type url num=1 size=10 category="" date="">
-<@StArticles type=type num=num size=size category=category date=date>
+<#macro ArticleList type url num=1 size=10 word="" date="">
+<@StArticles type=type num=num size=size word=word date=date>
     <ul class="li_list">
-        <h4 class="mb10"><a href="#">${category}</a></h4>
+        <h4 class="mb10"><a href="#">${word!""}</a></h4>
     <#list tArticlePageInfo.list as item>
         <li class="clearfix">
             <img src="/static/images/article/${item_index%10}.jpg" class="fl">
@@ -40,7 +40,7 @@
                 <div class="clearfix bottom">
                     <div class="fl">
                         <#list item.keywords as keyword>
-                            <a href="#">${keyword}</a>
+                            <a href="/keyword/${keyword}">${keyword}</a>
                         </#list>
                     </div>
                     <span class="time fr">${item.publishTime?string("yyyy-MM-dd HH:mm:ss")}</span>

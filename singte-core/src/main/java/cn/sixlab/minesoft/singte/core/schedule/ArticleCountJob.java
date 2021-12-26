@@ -58,13 +58,11 @@ public class ArticleCountJob {
                 item.setCreateTime(new Date());
                 item.setFlag(flag);
                 categoryDao.save(item);
-                articleDao.updateCategory(item.getCategory(), item.getId());
             } else {
                 stCategory.setUpdateTime(new Date());
                 stCategory.setArticleCount(item.getArticleCount());
                 stCategory.setFlag(flag);
                 categoryDao.save(stCategory);
-                articleDao.updateCategory(item.getCategory(), stCategory.getId());
             }
         }
     }
@@ -79,7 +77,6 @@ public class ArticleCountJob {
 
             for (StArticle article : articleList) {
                 List<String> keywords = article.getKeywords();
-                List<String> keywordIds = new ArrayList<>();
                 for (String keyword : keywords) {
                     StKeyword stKeyword = keywordDao.selectByKeyword(keyword);
                     if (stKeyword == null) {
@@ -90,11 +87,9 @@ public class ArticleCountJob {
                         keywordDao.save(stKeyword);
                     }
                     String keywordId = stKeyword.getId();
-                    keywordIds.add(keywordId);
                     int count = keywordCount.getOrDefault(keywordId, 0) + 1;
                     keywordCount.put(keywordId, count);
                 }
-                article.setKeywordIds(keywordIds);
                 articleDao.save(article);
             }
 

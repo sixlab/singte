@@ -8,7 +8,7 @@ public class PageHelper {
         PageResult<T> page = new PageResult<>();
 
         page.setPageNum(pageNum);
-        page.setPageNum(pageSize);
+        page.setPageSize(pageSize);
 
         page.setTotalNum(totalNum);
         page.setTotalPages(totalPages);

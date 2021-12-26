@@ -78,11 +78,9 @@ public abstract class SpiderJob {
                 stCategory.setArticleCount(stCategory.getArticleCount() + 1);
             }
             categoryMapper.save(stCategory);
-            article.setCategoryId(stCategory.getId());
         }
 
         List<String> keywords = article.getKeywords();
-        List<String> keywordIds = new ArrayList<>();
         for (String keyword : keywords) {
             StKeyword stKeyword = keywordDao.selectByKeyword(keyword);
             if (stKeyword == null) {
@@ -95,10 +93,7 @@ public abstract class SpiderJob {
                 stKeyword.setArticleCount(stKeyword.getArticleCount() + 1);
             }
             keywordDao.save(stKeyword);
-            String keywordId = stKeyword.getId();
-            keywordIds.add(keywordId);
         }
-        article.setKeywordIds(keywordIds);
 
         article.setAuthor("spider");
         article.setViewCount(0);

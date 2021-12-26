@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="title" type="java.lang.String" -->
 <#-- @ftlvariable name="date" type="java.lang.String" -->
 <#-- @ftlvariable name="category" type="java.lang.String" -->
 <#-- @ftlvariable name="pageType" type="java.lang.String" -->
@@ -13,7 +14,7 @@
     <link type="text/css" rel="stylesheet" href="/static/css/list.css">
 </#macro>
 
-<@PageFrame>
+<@PageFrame title=title>
     <div class="column_market w1200 pt20 clearfix">
         <div class="column_left fl">
 <#--            <div class="news_center_ico">-->
@@ -38,7 +39,7 @@
         </div>
         <!--center-->
         <div class="fl column_center">
-            <@ArticleList num=pageNum size=pageSize url=pageUri type=pageType category=category date=date />
+            <@ArticleList num=pageNum size=pageSize url=pageUri type=pageType word=word date=date />
         </div>
         <!--/center-->
         <!--right-->

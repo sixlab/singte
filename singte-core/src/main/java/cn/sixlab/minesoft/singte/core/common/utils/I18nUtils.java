@@ -6,13 +6,13 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageUtils {
+public class I18nUtils {
 
     private static MessageSource messageSource;
 
     @Autowired
-    public MessageUtils(MessageSource messageSource) {
-        MessageUtils.messageSource = messageSource;
+    public I18nUtils(MessageSource messageSource) {
+        I18nUtils.messageSource = messageSource;
     }
 
     /**

@@ -1,6 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.vo;
 
-import cn.sixlab.minesoft.singte.core.common.utils.MessageUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 
 public class StException extends RuntimeException {
     private Integer status;
@@ -33,6 +33,6 @@ public class StException extends RuntimeException {
     }
 
     public void setMessage(String message) {
-        this.message = MessageUtils.get(message);
+        this.message = I18nUtils.get(message);
     }
 }

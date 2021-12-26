@@ -8,56 +8,58 @@
     <link type="text/css" rel="stylesheet" href="/static/css/list.css">
 </#macro>
 
-<@PageFrame title=article.title keywords=article.keywords description=article.summary>
-    <div class="column_market w1200 pt20 clearfix">
-        <!--left-->
-        <div class="detail_left fl">
-            <ul class="clearfix title">
-                <li><a href="/">首页 > </a></li>
-                <li><a href="/category/${article.categoryId}">${article.category} ></a></li>
-                <li><a href="###">正文</a></li>
-            </ul>
-            <div class="artical">
-                <h1><a href="javascript:;">${article.title}</a></h1>
-                <div class="clearfix">
-                    <ul class="fl origin">
-                        <li><a href="/author/${article.author}">编辑：${article.author}</a></li>
-                        　
-                        <li><a href="javascript:;">${article.publishTime?string("yyyy-MM-dd HH:mm:ss")}</a></li>
-                    </ul>
-                    <div class="fr view"><img src="/static/images/viewed.png">${article.viewCount}</div>
-                </div>
-                <div class="abstract">
-                    ${article.summary}
-                </div>
-                <div>
-                    ${article.content}
-                </div>
-                <div class="clearfix bottom pt40">
-                    <div class="fl"><span>标签:</span>
-                        <#list article.keywords as keyword>
-                            <a href="#">${keyword}</a>
-                        </#list>
+<#if article??>
+    <@PageFrame title=article.title keywords=article.keywords description=article.summary>
+        <div class="column_market w1200 pt20 clearfix">
+            <!--left-->
+            <div class="detail_left fl">
+                <ul class="clearfix title">
+                    <li><a href="/">首页 > </a></li>
+                    <li><a href="/category/${article.category}">${article.category} ></a></li>
+                    <li><a href="###">正文</a></li>
+                </ul>
+                <div class="artical">
+                    <h1><a href="javascript:;">${article.title}</a></h1>
+                    <div class="clearfix">
+                        <ul class="fl origin">
+                            <li><a href="/author/${article.author}">编辑：${article.author}</a></li>
+                            　
+                            <li><a href="javascript:;">${article.publishTime?string("yyyy-MM-dd HH:mm:ss")}</a></li>
+                        </ul>
+                        <div class="fr view"><img src="/static/images/viewed.png">${article.viewCount}</div>
+                    </div>
+                    <div class="abstract">
+                        ${article.summary}
+                    </div>
+                    <div>
+                        ${article.content}
+                    </div>
+                    <div class="clearfix bottom pt40">
+                        <div class="fl"><span>标签:</span>
+                            <#list article.keywords as keyword>
+                                <a href="/keyword/${keyword}">${keyword}</a>
+                            </#list>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--/left-->
+            <!--/left-->
 
-        <!--right-->
-        <div class="right fr">
-            <!--热文榜-->
-            <div class="mb10">
-                <@ArticleBox type="hot"/>
+            <!--right-->
+            <div class="right fr">
+                <!--热文榜-->
+                <div class="mb10">
+                    <@ArticleBox type="hot"/>
+                </div>
+                <div class="mb10">
+                    <@ArticleBox type="last"/>
+                </div>
+                <div class="mb10">
+                    <@ArticleBox type="random"/>
+                </div>
+                <!--/热文榜-->
             </div>
-            <div class="mb10">
-                <@ArticleBox type="last"/>
-            </div>
-            <div class="mb10">
-                <@ArticleBox type="random"/>
-            </div>
-            <!--/热文榜-->
+            <!--/right-->
         </div>
-        <!--/right-->
-    </div>
-</@PageFrame>
+    </@PageFrame>
+</#if>

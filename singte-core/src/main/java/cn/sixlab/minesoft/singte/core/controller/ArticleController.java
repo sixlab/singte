@@ -3,7 +3,6 @@ package cn.sixlab.minesoft.singte.core.controller;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,11 +20,9 @@ public class ArticleController extends BaseController {
     @GetMapping(value = "/{articleId}")
     public String article(ModelMap modelMap, @PathVariable String articleId) {
 
-        StArticle article;
-        if (StringUtils.isNumeric(articleId)) {
+        StArticle article = articleMapper.selectByAlias(articleId);
+        if (article == null) {
             article = articleMapper.selectById(articleId);
-        } else {
-            article = articleMapper.selectByAlias(articleId);
         }
 
         if (null == article) {

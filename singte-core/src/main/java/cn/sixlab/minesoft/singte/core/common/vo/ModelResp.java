@@ -1,6 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.vo;
 
-import cn.sixlab.minesoft.singte.core.common.utils.MessageUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import org.apache.commons.collections4.MapUtils;
 
 import java.util.HashMap;
@@ -103,7 +103,7 @@ public class ModelResp extends LinkedHashMap<String, Object> {
     }
 
     public ModelResp setMessage(String message) {
-        put("message", MessageUtils.get(message));
+        put("message", I18nUtils.get(message));
         return this;
     }
 

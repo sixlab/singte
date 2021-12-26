@@ -14,7 +14,7 @@
         <div class="detail_left fl">
             <ul class="clearfix title">
                 <li><a href="/">首页 > </a></li>
-                <li><a href="/category/${article.categoryId}">${article.category} ></a></li>
+                <li><a href="/category/${article.category}">${article.category} ></a></li>
                 <li><a href="###">正文</a></li>
             </ul>
             <div class="artical">
@@ -31,12 +31,12 @@
                     ${article.summary}
                 </div>
                 <div>
-                    <p>${article.content}</p>
+                    <p>${article.content?no_esc}</p>
                 </div>
                 <div class="clearfix bottom">
                     <div class="fl"><span>标签:</span>
                         <#list article.keywords as keyword>
-                            <a href="#">${keyword}</a>
+                            <a href="/keyword/${keyword}">${keyword}</a>
                         </#list>
                     </div>
                 </div>

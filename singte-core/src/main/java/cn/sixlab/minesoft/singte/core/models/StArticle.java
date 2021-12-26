@@ -17,13 +17,9 @@ public class StArticle extends BaseModel {
 
     private List<String> keywords;
 
-    private List<String> keywordIds;
-
     private String summary;
 
     private String category;
-
-    private String categoryId;
 
     private Integer viewCount;
 
@@ -75,14 +71,6 @@ public class StArticle extends BaseModel {
         this.keywords = keywords;
     }
 
-    public List<String> getKeywordIds() {
-        return keywordIds;
-    }
-
-    public void setKeywordIds(List<String> keywordIds) {
-        this.keywordIds = keywordIds;
-    }
-
     public String getSummary() {
         return summary;
     }
@@ -97,14 +85,6 @@ public class StArticle extends BaseModel {
 
     public void setCategory(String category) {
         this.category = category == null ? null : category.trim();
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
     }
 
     public Integer getViewCount() {
