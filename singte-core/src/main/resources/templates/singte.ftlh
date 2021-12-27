@@ -1,6 +1,6 @@
 <#-- @ftlvariable name="version" type="java.lang.String" -->
 
-<#macro PageHeader>
+<#macro PageHead>
     <meta name="author" content="singte">
     <meta name="copyright" content="singte">
 </#macro>

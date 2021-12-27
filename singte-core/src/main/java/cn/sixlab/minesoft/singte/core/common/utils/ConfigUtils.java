@@ -22,11 +22,11 @@ public class ConfigUtils {
         return null;
     }
 
-    public void setConfig(String key, String val) {
-        setConfig(key, val, "");
+    public StConfig setConfig(String key, String val) {
+        return setConfig(key, val, "");
     }
 
-    public void setConfig(String key, String val, String intro) {
+    public StConfig setConfig(String key, String val, String intro) {
         StConfig config = configMapper.selectByKey(key);
         if (null == config) {
             config = new StConfig();
@@ -38,10 +38,12 @@ public class ConfigUtils {
 
             configMapper.save(config);
         } else {
-            StConfig update = new StConfig();
-            update.setId(config.getId());
-            update.setConfigVal(val);
-            configMapper.updateSelective(update);
+            config.setConfigVal(val);
+            config.setIntro(intro);
+            config.setUpdateTime(new Date());
+            configMapper.save(config);
         }
+
+        return config;
     }
 }

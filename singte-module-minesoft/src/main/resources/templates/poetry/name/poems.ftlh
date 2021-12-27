@@ -1,12 +1,12 @@
 
 <#include '../../frame/functions.ftlh'>
 
-<#macro PageHeader>
+<#macro PageHead>
     <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
     <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
 </#macro>
 
-<@PageFrame title="诗歌合集" keywords="" description="">
+<@PageFrame title="诗歌合集" keywords=[] description="">
     <div class="poem-form">
         <form action="/poetry/name/addPoem" method="post">
             <div class="form-row">

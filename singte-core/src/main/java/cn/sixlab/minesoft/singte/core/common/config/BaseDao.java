@@ -18,8 +18,9 @@ public abstract class BaseDao<T extends BaseModel> {
 
     public abstract Class<T> entityClass();
 
-    public void save(T record) {
+    public T save(T record) {
         mongoTemplate.save(record);
+        return record;
     }
 
     public T selectById(String id) {

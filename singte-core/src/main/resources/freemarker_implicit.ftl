@@ -3,7 +3,7 @@
 
 [#include 'templates/frame/index.ftlh']
 
-[#macro PageHeader][/#macro]
+[#macro PageHead][/#macro]
 
 [#macro StMenu group][/#macro]
 [#-- @ftlvariable name="stMenuGroup" type="java.util.Collection<cn.sixlab.minesoft.singte.core.models.StMenu>" --]

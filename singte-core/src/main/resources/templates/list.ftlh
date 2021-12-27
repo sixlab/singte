@@ -8,7 +8,7 @@
 
 <#include 'frame/functions.ftlh'>
 
-<#macro PageHeader>
+<#macro PageHead>
     <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
     <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
     <link type="text/css" rel="stylesheet" href="/static/css/list.css">

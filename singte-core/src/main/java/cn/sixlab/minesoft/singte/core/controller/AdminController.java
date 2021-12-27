@@ -2,7 +2,6 @@ package cn.sixlab.minesoft.singte.core.controller;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.init.FtlInit;
-import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +19,7 @@ public class AdminController extends BaseController {
 
     @GetMapping(value = "/config")
     public String config(ModelMap modelMap) {
+        modelMap.put("test", "new StConfig()");
         return "admin/config";
     }
 
