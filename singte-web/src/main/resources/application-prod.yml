@@ -17,6 +17,5 @@ logging:
     cn.sixlab.minesoft.singte: debug
 
 st:
-  jwt:
-    secret: "待替换 random"
-    expire: 3600
+  login:
+    expire: 60

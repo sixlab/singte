@@ -3,7 +3,9 @@ package cn.sixlab.minesoft.singte.core.service;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +23,9 @@ public class StUserDetailsService implements UserDetailsService {
 
     @Autowired
     private StUserDao userMapper;
+
+    @Value("${st.login.expire}")
+    private Integer expire;
 
     /**
      * 根据用户名查询用户信息
@@ -39,6 +45,19 @@ public class StUserDetailsService implements UserDetailsService {
             return new User(username, stUser.getPassword(), enable, true, true, !enable, authorityList);
         } else {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
+        }
+    }
+
+    public StUser loadUserByToken(String token){
+        return userMapper.selectByToken(token);
+    }
+
+    public void updateToken(String username, String token) {
+        StUser stUser = userMapper.selectByUsername(username);
+        if (stUser != null) {
+            stUser.setToken(token);
+            stUser.setTokenValid(DateUtils.addMinutes(new Date(), expire));
+            userMapper.save(stUser);
         }
     }
 }

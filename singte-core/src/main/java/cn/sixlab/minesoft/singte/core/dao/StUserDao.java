@@ -25,4 +25,10 @@ public class StUserDao extends BaseDao<StUser> {
 
         return mongoTemplate.findOne(query, StUser.class);
     }
+
+    public StUser selectByToken(String token) {
+        Query query = new Query(Criteria.where("token").is(token));
+
+        return mongoTemplate.findOne(query, StUser.class);
+    }
 }

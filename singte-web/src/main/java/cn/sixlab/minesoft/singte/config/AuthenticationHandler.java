@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.config;
 
+import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -17,11 +18,11 @@ public class AuthenticationHandler implements AuthenticationEntryPoint, AccessDe
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "JWT认证失败");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, I18nUtils.get("login.unauthorized"));
     }
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
-        response.sendError(HttpServletResponse.SC_FORBIDDEN, "权限不足");
+        response.sendError(HttpServletResponse.SC_FORBIDDEN, I18nUtils.get("login.forbidden"));
     }
 }

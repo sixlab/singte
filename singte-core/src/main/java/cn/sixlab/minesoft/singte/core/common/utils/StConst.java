@@ -14,8 +14,6 @@ public class StConst {
     public static final String ST_SITE_LOGO = "st_site_logo";
     public static final String ST_ICP       = "st_icp";
 
-    public static final String JWT_HEADER       = "Bearer ";
-
     public static final long SECONDS_1      = 1;
     public static final long SECONDS_MIN_1  = 60;
     public static final long SECONDS_MIN_2  = SECONDS_MIN_1 * 2;

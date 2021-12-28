@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "st.login.expire",
+      "type": "java.lang.String",
+      "description": "登录 Token 的有效期."
+    }
+  ]
+}

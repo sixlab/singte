@@ -1,6 +1,7 @@
 package cn.sixlab.minesoft.singte.core.common.vo;
 
 import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import org.apache.commons.collections4.MapUtils;
 
 import java.util.HashMap;
@@ -139,5 +140,10 @@ public class ModelResp extends LinkedHashMap<String, Object> {
         }
 
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return JsonUtils.toJson(this);
     }
 }

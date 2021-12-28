@@ -1,9 +1,8 @@
 package cn.sixlab.minesoft.singte;
 
-import cn.sixlab.minesoft.singte.config.JwtUtils;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
-import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
+import cn.sixlab.minesoft.singte.core.common.utils.TokenUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
@@ -32,13 +31,7 @@ public class LoginController extends BaseController {
     private StUserDetailsService userDetailsService;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
     private StUserDao userMapper;
-
-    @Autowired
-    private JwtUtils jwtUtils;
 
     @ResponseBody
     @RequestMapping(value = "/login")
@@ -52,7 +45,8 @@ public class LoginController extends BaseController {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        final String token = StConst.JWT_HEADER +  jwtUtils.generateToken(userDetails);
+        final String token = TokenUtils.generateToken(userDetails);
+        userDetailsService.updateToken(username, token);
 
         return ModelResp.success().add("token", token);
     }
@@ -68,7 +62,7 @@ public class LoginController extends BaseController {
             stUser = new StUser();
             stUser.setUsername(username);
             stUser.setShowName(username);
-            stUser.setPassword(passwordEncoder.encode(password));
+            stUser.setPassword(new BCryptPasswordEncoder().encode(password));
             stUser.setStatus("1");
             stUser.setCreateTime(new Date());
 
