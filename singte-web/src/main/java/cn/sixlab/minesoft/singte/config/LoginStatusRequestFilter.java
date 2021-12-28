@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.Date;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class LoginStatusRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private StUserDetailsService userDetailsService;
@@ -50,6 +50,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 } else {
                     if (SecurityContextHolder.getContext().getAuthentication() == null) {
                         UserDetails userDetails = userDetailsService.loadUserByUsername(stUser.getUsername());
+
+                        userDetailsService.updateTokenValid(stUser.getUsername(), token);
 
                         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                         usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

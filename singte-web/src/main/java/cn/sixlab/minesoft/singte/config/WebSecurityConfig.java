@@ -1,8 +1,6 @@
 package cn.sixlab.minesoft.singte.config;
 
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
-import cn.sixlab.minesoft.singte.config.AuthenticationHandler;
-import cn.sixlab.minesoft.singte.config.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private JwtRequestFilter      jwtRequestFilter;
+    private LoginStatusRequestFilter jwtRequestFilter;
     @Autowired
     private AuthenticationHandler authenticationHandler;
 

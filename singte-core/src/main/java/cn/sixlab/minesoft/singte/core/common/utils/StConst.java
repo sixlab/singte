@@ -29,4 +29,7 @@ public class StConst {
 
     public final static String ST_PUBLISH_WILL = "0";
     public final static String ST_PUBLISH_DID = "1";
+
+    public static final String ROLE_USER = "USER";
+    public static final String ROLE_ADMIN = "ADMIN";
 }

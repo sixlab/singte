@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.service;
 
+import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
@@ -58,6 +59,14 @@ public class StUserDetailsService implements UserDetailsService {
             stUser.setToken(token);
             stUser.setTokenValid(DateUtils.addMinutes(new Date(), expire));
             userMapper.save(stUser);
+        }
+    }
+
+    public void updateTokenValid(String username, String token) {
+        Object flag = StCacheHolder.CACHE_5m.get("token_reload_" + username);
+        if (null == flag) {
+            StCacheHolder.CACHE_5m.put("token_reload_" + username, StConst.YES);
+            updateToken(username, token);
         }
     }
 }

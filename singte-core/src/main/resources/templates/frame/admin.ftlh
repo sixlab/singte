@@ -16,15 +16,13 @@
     <title>${title!'singte首页'}</title>
     <meta name="keywords" content="${keywords?join(",")!'singte'}"/>
     <meta name="description" content="${description!'singte'}"/>
+    <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
+    <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
 
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="bookmark" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.ico">
 
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="/static/libs/html5shiv.js"></script>
-    <script type="text/javascript" src="/static/libs/respond.min.js"></script>
-    <![endif]-->
     <link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/H-ui.admin.css"/>
     <link rel="stylesheet" type="text/css" href="/static/libs/Hui-iconfont/1.0.8/iconfont.css"/>
