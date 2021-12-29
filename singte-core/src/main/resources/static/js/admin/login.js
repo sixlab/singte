@@ -21,7 +21,12 @@ $(function () {
                 captchaCode: $("#captchaCode").val(),
             },
             success: function (data) {
-                console.log(data);
+                if(200 === data.status){
+                    location.href = "/auth/admin/index";
+                }else{
+                    layer.msg(data.message, {icon: 5, time: 2000});
+                    loadCaptcha();
+                }
             },
             error: function (err) {
                 console.log(err);

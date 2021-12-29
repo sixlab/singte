@@ -1,7 +1,9 @@
 package cn.sixlab.minesoft.singte.core.service;
 
+import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import cn.sixlab.minesoft.singte.core.common.utils.WebUtils;
 import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
 import org.apache.commons.lang3.time.DateUtils;
@@ -45,11 +47,11 @@ public class StUserDetailsService implements UserDetailsService {
 
             return new User(username, stUser.getPassword(), enable, true, true, !enable, authorityList);
         } else {
-            throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
+            throw new UsernameNotFoundException(I18nUtils.get("login.user.none"));
         }
     }
 
-    public StUser loadUserByToken(String token){
+    public StUser loadUserByToken(String token) {
         return userMapper.selectByToken(token);
     }
 
@@ -60,6 +62,8 @@ public class StUserDetailsService implements UserDetailsService {
             stUser.setTokenValid(DateUtils.addMinutes(new Date(), expire));
             userMapper.save(stUser);
         }
+
+        WebUtils.addCookie("Authorization", token, (int) (StConst.SECONDS_MIN_30 * 1000));
     }
 
     public void updateTokenValid(String username, String token) {

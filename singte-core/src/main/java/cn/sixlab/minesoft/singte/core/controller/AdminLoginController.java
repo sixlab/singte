@@ -1,10 +1,7 @@
 package cn.sixlab.minesoft.singte.core.controller;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
-import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
-import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.common.utils.StErr;
-import cn.sixlab.minesoft.singte.core.common.utils.TokenUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.*;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +20,7 @@ import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController extends BaseController {
+public class AdminLoginController extends BaseController {
 
     @Autowired
     private StUserDetailsService userDetailsService;
@@ -64,7 +61,7 @@ public class AdminController extends BaseController {
             final String token = TokenUtils.generateToken(userDetails);
             userDetailsService.updateToken(username, token);
 
-            return ModelResp.success().add("token", token);
+            return ModelResp.success().add("Authorization", token);
         } else {
             return ModelResp.error(StErr.LOGIN_CAPTCHA, "login.captcha.diff");
         }

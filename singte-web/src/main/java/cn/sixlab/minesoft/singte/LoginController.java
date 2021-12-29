@@ -48,7 +48,7 @@ public class LoginController extends BaseController {
         final String token = TokenUtils.generateToken(userDetails);
         userDetailsService.updateToken(username, token);
 
-        return ModelResp.success().add("token", token);
+        return ModelResp.success().add("Authorization", token);
     }
 
     @ResponseBody

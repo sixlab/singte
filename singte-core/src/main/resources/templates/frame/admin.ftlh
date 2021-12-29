@@ -1,8 +1,3 @@
-<#--
-页面整体的模板，需要用户自己实现 PageHead：
-<#macro PageHead></#macro>
--->
-
 <#macro AdminFrame title="" keywords=[] description="">
 <!DOCTYPE HTML>
 <html lang="zh-CN">
@@ -14,10 +9,8 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
     <title>${title!'singte首页'}</title>
-    <meta name="keywords" content="${keywords?join(",")!'singte'}"/>
-    <meta name="description" content="${description!'singte'}"/>
-    <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
-    <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
+    <meta name="keywords" content="<@StConfig key="st_site_name" default="singte"/>"/>
+    <meta name="description" content="<@StConfig key="st_site_name" default="singte"/>"/>
 
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="bookmark" href="/favicon.ico">
@@ -30,16 +23,25 @@
     <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/skin/default/skin.css" id="skin"/>
     <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/style.css"/>
 
-    <!--/meta 作为公共模版分离出去-->
-    <@AdminHead />
+    <script type="text/javascript" src="/static/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/libs/layer/2.4/layer.js"></script>
+
+    <script type="text/javascript" src="/static/libs/jquery.validation/1.14.0/jquery.validate.js"></script>
+    <script type="text/javascript" src="/static/libs/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type="text/javascript" src="/static/libs/jquery.validation/1.14.0/messages_zh.js"></script>
+    <script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>
+    <script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.page.js"></script>
 </head>
 <body>
 <@AdminHeader />
 <@AdminMenu groupName="nav" hasLast=true />
 <section class="Hui-article-box">
-    <nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a> <span class="c-999 en">&gt;</span><span
-                class="c-666">空白页</span></nav>
-    <div class="Hui-article">
+
+<#--    <nav class="breadcrumb"><i class="Hui-iconfont"></i>-->
+<#--        <a href="/auth/admin/index" class="maincolor">首页</a>-->
+<#--        <span class="c-999 en">&gt;</span><span class="c-666">空白页</span></nav>-->
+
+    <div class="Hui-article" style="top: 0;">
         <article class="cl pd-20">
             <#nested>
         </article>
@@ -60,23 +62,23 @@
                     class="logo navbar-slogan f-l mr-10 hidden-xs">v3.0</span> <a aria-hidden="false"
                                                                                   class="nav-toggle Hui-iconfont visible-xs"
                                                                                   href="javascript:;">&#xe667;</a>
-            <nav class="nav navbar-nav">
-                <ul class="cl">
-                    <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i
-                                    class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
-                        <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i
-                                            class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-                            <li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i
-                                            class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-                            <li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i
-                                            class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-                            <li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i
-                                            class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+<#--            <nav class="nav navbar-nav">-->
+<#--                <ul class="cl">-->
+<#--                    <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i-->
+<#--                                    class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>-->
+<#--                        <ul class="dropDown-menu menu radius box-shadow">-->
+<#--                            <li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i-->
+<#--                                            class="Hui-iconfont">&#xe616;</i> 资讯</a></li>-->
+<#--                            <li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i-->
+<#--                                            class="Hui-iconfont">&#xe613;</i> 图片</a></li>-->
+<#--                            <li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i-->
+<#--                                            class="Hui-iconfont">&#xe620;</i> 产品</a></li>-->
+<#--                            <li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i-->
+<#--                                            class="Hui-iconfont">&#xe60d;</i> 用户</a></li>-->
+<#--                        </ul>-->
+<#--                    </li>-->
+<#--                </ul>-->
+<#--            </nav>-->
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
                     <li>超级管理员</li>
@@ -112,17 +114,17 @@
 
 <#--  页面脚部  -->
 <#macro AdminFooter>
-<!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="/static/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="/static/libs/layer/2.4/layer.js"></script>
+<#--<!--_footer 作为公共模版分离出去&ndash;&gt;-->
+<#--<script type="text/javascript" src="/static/libs/jquery/1.9.1/jquery.min.js"></script>-->
+<#--<script type="text/javascript" src="/static/libs/layer/2.4/layer.js"></script>-->
 
-<script type="text/javascript" src="/static/libs/jquery.validation/1.14.0/jquery.validate.js"></script>
-<script type="text/javascript" src="/static/libs/jquery.validation/1.14.0/validate-methods.js"></script>
-<script type="text/javascript" src="/static/libs/jquery.validation/1.14.0/messages_zh.js"></script>
-<script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.page.js"></script>
+<#--<script type="text/javascript" src="/static/libs/jquery.validation/1.14.0/jquery.validate.js"></script>-->
+<#--<script type="text/javascript" src="/static/libs/jquery.validation/1.14.0/validate-methods.js"></script>-->
+<#--<script type="text/javascript" src="/static/libs/jquery.validation/1.14.0/messages_zh.js"></script>-->
+<#--<script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>-->
+<#--<script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.page.js"></script>-->
 
-<!--/_footer /作为公共模版分离出去-->
+<#--<!--/_footer /作为公共模版分离出去&ndash;&gt;-->
 </#macro>
 
 <#--  页面菜单  -->
@@ -131,99 +133,44 @@
 <aside class="Hui-aside">
 
     <div class="menu_dropdown bk_2">
-        <dl id="menu-article">
-            <dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
-            <dd>
-                <ul>
-                    <li><a href="article-list.html" title="资讯管理">资讯管理</a></li>
-                </ul>
-            </dd>
-        </dl>
+
+        <@StMenu group="stAdmin">
+            <#list stMenuGroupList as groupItem>
+                <@StMenu group=groupItem.menuLink>
+                    <#if stHasMenu>
+                        <dl id="${groupName}">
+                            <dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                            </dt>
+                            <dd>
+                                <ul>
+                    </#if>
+                    <#list stMenuGroup as item>
+                                    <li><a href="/auth/admin/${item.menuLink}" title="${item.menuName}">${item.menuName}</a></li>
+                    </#list>
+                    <#if stHasMenu>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </#if>
+                </@StMenu>
+            </#list>
+        </@StMenu>
         <dl id="menu-picture">
-            <dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
+            <dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a href="picture-list.html" title="图片管理">图片管理</a></li>
+                    <li><a href="/auth/admin/menus" title="图片管理">图片管理</a></li>
                 </ul>
             </dd>
         </dl>
-        <dl id="menu-product">
-            <dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
-            <dd>
-                <ul>
-                    <li><a href="product-brand.html" title="品牌管理">品牌管理</a></li>
-                    <li><a href="product-category.html" title="分类管理">分类管理</a></li>
-                    <li><a href="product-list.html" title="产品管理">产品管理</a></li>
-                </ul>
-            </dd>
-        </dl>
-        <dl id="menu-comments">
-            <dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
-            <dd>
-                <ul>
-                    <li><a href="http://h-ui.duoshuo.com/admin/" title="评论列表">评论列表</a></li>
-                    <li><a href="feedback-list.html" title="意见反馈">意见反馈</a></li>
-                </ul>
-            </dd>
-        </dl>
-        <dl id="menu-member">
-            <dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
-            <dd>
-                <ul>
-                    <li><a href="member-list.html" title="会员列表">会员列表</a></li>
-                    <li><a href="member-del.html" title="删除的会员">删除的会员</a></li>
-                    <li><a href="member-level.html" title="等级管理">等级管理</a></li>
-                    <li><a href="member-scoreoperation.html" title="积分管理">积分管理</a></li>
-                    <li><a href="member-record-browse.html" title="浏览记录">浏览记录</a></li>
-                    <li><a href="member-record-download.html" title="下载记录">下载记录</a></li>
-                    <li><a href="member-record-share.html" title="分享记录">分享记录</a></li>
-                </ul>
-            </dd>
-        </dl>
-        <dl id="menu-admin">
-            <dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
-            <dd>
-                <ul>
-                    <li><a href="admin-role.html" title="角色管理">角色管理</a></li>
-                    <li><a href="admin-permission.html" title="权限管理">权限管理</a></li>
-                    <li><a href="admin-list.html" title="管理员列表">管理员列表</a></li>
-                </ul>
-            </dd>
-        </dl>
-        <dl id="menu-tongji">
-            <dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
-            <dd>
-                <ul>
-                    <li><a href="charts-1.html" title="折线图">折线图</a></li>
-                    <li><a href="charts-2.html" title="时间轴折线图">时间轴折线图</a></li>
-                    <li><a href="charts-3.html" title="区域图">区域图</a></li>
-                    <li><a href="charts-4.html" title="柱状图">柱状图</a></li>
-                    <li><a href="charts-5.html" title="饼状图">饼状图</a></li>
-                    <li><a href="charts-6.html" title="3D柱状图">3D柱状图</a></li>
-                    <li><a href="charts-7.html" title="3D饼状图">3D饼状图</a></li>
-                </ul>
-            </dd>
-        </dl>
-        <dl id="menu-system">
-            <dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
-            <dd>
-                <ul>
-                    <li><a href="system-base.html" title="系统设置">系统设置</a></li>
-                    <li><a href="system-category.html" title="栏目管理">栏目管理</a></li>
-                    <li><a href="system-data.html" title="数据字典">数据字典</a></li>
-                    <li><a href="system-shielding.html" title="屏蔽词">屏蔽词</a></li>
-                    <li><a href="system-log.html" title="系统日志">系统日志</a></li>
-                </ul>
-            </dd>
-        </dl>
+<#--        <dl id="menu-article">-->
+<#--        <dl id="menu-picture">-->
+<#--        <dl id="menu-product">-->
+<#--        <dl id="menu-comments">-->
+<#--        <dl id="menu-member">-->
+<#--        <dl id="menu-admin">-->
+<#--        <dl id="menu-tongji">-->
+<#--        <dl id="menu-system">-->
     </div>
 </aside>
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>

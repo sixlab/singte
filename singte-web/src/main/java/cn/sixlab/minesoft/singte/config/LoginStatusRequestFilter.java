@@ -30,10 +30,7 @@ public class LoginStatusRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        String token = request.getParameter("token");
-        if (StringUtils.isEmpty(token)) {
-            token = request.getHeader("Authorization");
-        }
+        String token = WebUtils.getToken(request);
 
         if (StringUtils.isNotEmpty(token)) {
             StUser stUser = userDetailsService.loadUserByToken(token);

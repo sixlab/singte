@@ -253,4 +253,19 @@ public class WebUtils {
 
         return model;
     }
+
+    public static String getToken(HttpServletRequest request) {
+        String token = getCookie("Authorization");
+        if (StringUtils.isEmpty(token)) {
+            token = request.getParameter("Authorization");
+        }
+        if (StringUtils.isEmpty(token)) {
+            token = request.getHeader("Authorization");
+        }
+        return token;
+    }
+
+    public static String getToken() {
+        return getToken(WebUtils.getRequest());
+    }
 }

@@ -1,9 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.init;
 
-import cn.sixlab.minesoft.singte.core.common.directive.ArticlesDirective;
-import cn.sixlab.minesoft.singte.core.common.directive.ConfigDirective;
-import cn.sixlab.minesoft.singte.core.common.directive.KeywordDirective;
-import cn.sixlab.minesoft.singte.core.common.directive.MenuDirective;
+import cn.sixlab.minesoft.singte.core.common.directive.*;
 import freemarker.template.Configuration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,9 @@ public class FtlInit implements ApplicationRunner {
     private ConfigDirective configDirective;
 
     @Autowired
+    private StaticDirective staticDirective;
+
+    @Autowired
     private KeywordDirective keywordDirective;
 
     @Autowired
@@ -42,6 +42,7 @@ public class FtlInit implements ApplicationRunner {
         configuration.setSharedVariable("StConfig", configDirective);
         configuration.setSharedVariable("StKeyword", keywordDirective);
         configuration.setSharedVariable("StArticles", articlesDirective);
+        configuration.setSharedVariable("StStatic", staticDirective);
     }
 
 }

@@ -17,24 +17,24 @@ import java.util.Map;
 public class MenuDirective implements TemplateDirectiveModel {
 
     @Autowired
-    private ConfigUtils configUtils;
-
-    @Autowired
     private StMenuDao menuMapper;
 
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
         String group = MapUtils.getString(params, "group");
-        List<StMenu> menuList = menuMapper.selectGroupMenus(group);
+        if ("stAdmin".equals(group)) {
+            List<StMenu> menuList = menuMapper.selectGroupMenus(group);
 
-//        env.setVariable("nav", menuList);
-//        env.setVariable("sider", menuMapper.selectGroupMenus("sider"));
-//        env.setVariable("footer", menuMapper.selectGroupMenus("footer"));
+            env.setVariable("stMenuGroupList", ObjectWrapper.DEFAULT_WRAPPER.wrap(menuList));
+        } else {
+            List<StMenu> menuList = menuMapper.selectGroupMenus(group);
 
-        env.setVariable("stMenuGroup", ObjectWrapper.DEFAULT_WRAPPER.wrap(menuList));
+            env.setVariable("stMenuGroup", ObjectWrapper.DEFAULT_WRAPPER.wrap(menuList));
+            env.setVariable("stHasMenu", ObjectWrapper.DEFAULT_WRAPPER.wrap(menuList.size() > 0));
 
-        if (body != null) {
-            body.render(env.getOut());
+            if (body != null) {
+                body.render(env.getOut());
+            }
         }
     }
 }

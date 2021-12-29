@@ -76,7 +76,9 @@
 <div class="footer">Copyright <@StConfig key="st_site_name" default="singte"/></div>
 
 <script type="text/javascript" src="/static/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/libs/layer/2.4/layer.js"></script>
+
 <script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="/static/js/admin/login.js"></script>
+<@StStatic type="js" src="admin/login.js" />
 </body>
 </html>

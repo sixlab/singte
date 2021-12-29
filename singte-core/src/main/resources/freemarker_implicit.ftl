@@ -16,3 +16,5 @@
 [#macro StArticles type='category' num=1 size=10 category=''][/#macro]
 [#-- @ftlvariable name="tArticleList" type="cn.sixlab.minesoft.singte.core.models.StArticle[]" --]
 [#-- @ftlvariable name="tArticlePageInfo" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.StArticle>" --]
+
+[#macro StStatic src type='js'][/#macro]
