@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.config;
 
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -69,7 +70,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // dont authenticate this particular request
         httpSecurity.authorizeRequests()
-                .antMatchers("/auth/**").authenticated()
+                .antMatchers("/**/login/**").permitAll()
+                .antMatchers("/user/**").hasAuthority(StConst.ROLE_USER)
+                .antMatchers("/admin/**").hasAuthority(StConst.ROLE_ADMIN)
                 .anyRequest().permitAll();
 
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

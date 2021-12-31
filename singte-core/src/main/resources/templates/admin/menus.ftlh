@@ -1,4 +1,4 @@
-<#include '../../frame/functions.ftlh'>
+<#include '../frame/functions.ftlh'>
 
 <#assign title><@spring.message code="admin.title.menus"/></#assign>
 <@AdminFrame title="${title}">

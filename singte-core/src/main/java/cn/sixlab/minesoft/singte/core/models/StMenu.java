@@ -1,9 +1,6 @@
 package cn.sixlab.minesoft.singte.core.models;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
-import org.springframework.data.annotation.Id;
-
-import java.util.Date;
 
 public class StMenu extends BaseModel {
 
@@ -12,6 +9,8 @@ public class StMenu extends BaseModel {
     private String menuLink;
 
     private String menuGroup;
+
+    private String status;
 
     private Integer weight;
 
@@ -39,6 +38,14 @@ public class StMenu extends BaseModel {
 
     public void setMenuGroup(String menuGroup) {
         this.menuGroup = menuGroup == null ? null : menuGroup.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public Integer getWeight() {
