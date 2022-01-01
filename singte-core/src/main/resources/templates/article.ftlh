@@ -2,13 +2,11 @@
 <#-- @ftlvariable name="article" type="cn.sixlab.minesoft.singte.core.models.StArticle" -->
 <#include 'frame/functions.ftlh'>
 
-<#macro PageHead>
-    <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
-    <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
-    <link type="text/css" rel="stylesheet" href="/static/css/article.css">
-</#macro>
+<#assign css>
+    <@StStatic type="css" src="article.css" />
+</#assign>
 
-<@PageFrame title=article.title keywords=article.keywords description=article.summary>
+<@PageFrame title=article.title keywords=article.keywords description=article.summary css=css>
     <div class="column_market w1200 pt20 clearfix">
         <!--left-->
         <div class="detail_left fl">

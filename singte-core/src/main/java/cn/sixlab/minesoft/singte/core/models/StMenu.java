@@ -8,6 +8,10 @@ public class StMenu extends BaseModel {
 
     private String menuLink;
 
+    private String menuIcon;
+
+    private Boolean folderMenu;
+
     private String menuGroup;
 
     private String status;
@@ -30,6 +34,22 @@ public class StMenu extends BaseModel {
 
     public void setMenuLink(String menuLink) {
         this.menuLink = menuLink == null ? null : menuLink.trim();
+    }
+
+    public String getMenuIcon() {
+        return menuIcon;
+    }
+
+    public void setMenuIcon(String menuIcon) {
+        this.menuIcon = menuIcon;
+    }
+
+    public Boolean getFolderMenu() {
+        return folderMenu;
+    }
+
+    public void setFolderMenu(Boolean folderMenu) {
+        this.folderMenu = folderMenu;
     }
 
     public String getMenuGroup() {

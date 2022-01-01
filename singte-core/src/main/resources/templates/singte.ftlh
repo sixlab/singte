@@ -1,10 +1,5 @@
 <#-- @ftlvariable name="version" type="java.lang.String" -->
 
-<#macro PageHead>
-    <meta name="author" content="singte">
-    <meta name="copyright" content="singte">
-</#macro>
-
 <@PageFrame>
     <div style="margin: 200px auto;width:150px;align-content: center;">
         <img src="/static/images/wx/mp.jpg" alt="singte"><br/>

@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="bookmark" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/static/touch-icon-apple.png">
-    <script src="/static/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/plugins/jquery/jquery.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/static/css/normalize.css">
     <meta name="author" content="singte">
     <meta name="copyright" content="singte">

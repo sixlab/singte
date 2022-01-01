@@ -1,10 +1,5 @@
 <#include '../../frame/functions.ftlh'>
 
-<#macro PageHead>
-    <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
-    <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
-</#macro>
-
 <@PageFrame title="含有关键词的诗句" keywords=[] description="">
     <div class="data-table">
         <#list poemAtomList as atomItem>

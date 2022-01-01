@@ -8,13 +8,11 @@
 
 <#include 'frame/functions.ftlh'>
 
-<#macro PageHead>
-    <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
-    <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
-    <link type="text/css" rel="stylesheet" href="/static/css/list.css">
-</#macro>
+<#assign css>
+    <@StStatic type="css" src="list.css" />
+</#assign>
 
-<@PageFrame title=title>
+<@PageFrame title=title css=css>
     <div class="column_market w1200 pt20 clearfix">
         <div class="column_left fl">
 <#--            <div class="news_center_ico">-->

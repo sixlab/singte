@@ -1,8 +1,4 @@
-<#--
-页面整体的模板，需要用户自己实现 PageHead：
-<#macro PageHead></#macro>
--->
-<#macro PageFrame title="" keywords=[] description="">
+<#macro PageFrame title="" keywords=[] description="" css="" js="" >
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
@@ -13,13 +9,15 @@
     <title>${title!'singte首页'}</title>
     <meta name="keywords" content="${keywords?join(",")!'singte'}"/>
     <meta name="description" content="${description!'singte'}"/>
+    <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
+    <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="bookmark" href="/favicon.ico">
     <link rel="apple-touch-icon" href="<@StConfig key="st_site_logo" default="/static/logo-h.png"/>">
-    <script src="/static/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/plugins/jquery/jquery.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/static/css/normalize.css">
     <link type="text/css" rel="stylesheet" href="/static/css/base.css">
-    <@PageHead />
+    ${css}
 </head>
 <body>
 <@BodyHeader />
@@ -32,6 +30,7 @@
 <!--/Cnav-->
 <#nested>
 <@BodyFooter />
+${js}
 </body>
 </html>
 </#macro>
