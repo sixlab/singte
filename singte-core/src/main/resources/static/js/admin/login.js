@@ -24,7 +24,12 @@ $(function () {
                 if(200 === data.status){
                     location.href = "/auth/admin/index";
                 }else{
-                    layer.msg(data.message, {icon: 5, time: 2000});
+                    Swal.fire({
+                        icon:"error",
+                        text: data.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                     loadCaptcha();
                 }
             },

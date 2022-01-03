@@ -1,84 +1,121 @@
-<#include '../frame/functions.ftlh'>
-
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-
     <#assign title><@spring.message "common.login"/></#assign>
-
     <title>${title}</title>
-    <meta name="keywords" content="${title}"/>
-    <meta name="description" content="${title}"/>
-    <meta name="author" content="<@StConfig key="st_site_name" default="singte"/>">
-    <meta name="copyright" content="<@StConfig key="st_site_name" default="singte"/>">
 
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="bookmark" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.ico">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
-    <link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/H-ui.login.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/libs/Hui-iconfont/1.0.8/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/style.css"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="/static/fonts/sourcesanspro.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="/static/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/adminlte/css/adminlte.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="/static/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 </head>
-<body>
-<div class="header"></div>
-<div class="loginWraper">
-    <div id="loginform" class="loginBox">
-        <form class="form form-horizontal" method="post">
-            <div class="row cl">
-                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
-                <div class="formControls col-xs-8">
-                    <input id="username" name="username" type="text" placeholder="账户" class="input-text size-L">
+<body class="hold-transition login-page">
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a href="/" class="h1"><b>Singte</b></a>
+        </div>
+        <div class="card-body">
+<#--            <p class="login-box-msg">Sign in to start your session</p>-->
+
+            <form method="post">
+                <div class="input-group mb-3">
+                    <input type="text" id="username" class="form-control" placeholder="账户">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
-                <div class="formControls col-xs-8">
-                    <input id="password" name="password" type="password" placeholder="密码" class="input-text size-L">
+                <div class="input-group mb-3">
+                    <input type="password" id="password" class="form-control" placeholder="密码">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row cl">
-                <div class="formControls col-xs-8 col-xs-offset-3">
+                <div class="row">
                     <input id="captchaKey" type="hidden" name="captchaKey" value=""/>
-                    <input id="captchaCode" class="input-text size-L" type="text" placeholder="验证码"
-                           onblur="if(this.value===''){this.value='验证码'}"
-                           onclick="if(this.value==='验证码'){this.value='';}"
-                           value="验证码" style="width:150px;">
-                    <img class="reloadImg" id="captchaImg" src="" style="width: 100px;height: 41px;">
-                    <a class="reloadImg" href="javascript:;">看不清，换一张</a>
+                    <div class="col-5">
+                        <div>
+                            <input type="text" id="captchaCode" class="form-control" placeholder="验证码">
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <img class="reloadImg" id="captchaImg" src="" style="width: 100px;height: 41px;">
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-3" style="line-height: 41px;">
+                        <a class="reloadImg" href="javascript:;">换一张</a>
+                    </div>
+                    <!-- /.col -->
                 </div>
-            </div>
-<#--            <div class="row cl">-->
-<#--                <div class="formControls col-xs-8 col-xs-offset-3">-->
-<#--                    <label for="online">-->
-<#--                        <input type="checkbox" name="online" id="online" value="">-->
-<#--                        使我保持登录状态</label>-->
+<#--                <div class="row">-->
+<#--                    <div class="col-8">-->
+<#--                        <div class="icheck-primary">-->
+<#--                            <input type="checkbox" id="remember">-->
+<#--                            <label for="remember">-->
+<#--                                Remember Me-->
+<#--                            </label>-->
+<#--                        </div>-->
+<#--                    </div>-->
+<#--                    <!-- /.col &ndash;&gt;-->
+<#--                    <div class="col-4">-->
+<#--                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>-->
+<#--                    </div>-->
+<#--                    <!-- /.col &ndash;&gt;-->
 <#--                </div>-->
-<#--            </div>-->
-            <div class="row cl">
-                <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input name="" type="button" class="btn btn-success radius size-L"
-                           id="loginBtn"
-                           value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
-                    <input name="" type="reset" class="btn btn-default radius size-L"
-                           value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
-                </div>
+            </form>
+
+            <div class="social-auth-links text-center mt-2 mb-3">
+                <a href="#" class="btn btn-block btn-primary" id="loginBtn">
+<#--                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook-->
+                    <@spring.message "common.login"/>
+                </a>
+<#--                <a href="#" class="btn btn-block btn-danger">-->
+<#--                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+-->
+<#--                </a>-->
             </div>
-        </form>
+            <!-- /.social-auth-links -->
+
+<#--            <p class="mb-1">-->
+<#--                <a href="forgot-password.html">I forgot my password</a>-->
+<#--            </p>-->
+<#--            <p class="mb-0">-->
+<#--                <a href="register.html" class="text-center">Register a new membership</a>-->
+<#--            </p>-->
+        </div>
+        <!-- /.card-body -->
     </div>
+    <!-- /.card -->
 </div>
-<div class="footer">Copyright <@StConfig key="st_site_name" default="singte"/></div>
+<!-- /.login-box -->
 
-<script type="text/javascript" src="/static/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="/static/libs/layer/2.4/layer.js"></script>
-
-<script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>
-<@StStatic type="js" src="admin/login.js" />
+<!-- jQuery -->
+<script src="/static/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/adminlte/js/adminlte.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="/static/plugins/sweetalert2/sweetalert2.min.js"></script>
+<@StStatic src="admin/login.js" />
 </body>
 </html>
