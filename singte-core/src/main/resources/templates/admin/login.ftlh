@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <#assign title><@spring.message "common.login"/></#assign>
-    <title>${title}</title>
+    <title><@spring.message "page.title.login"/></title>
 
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="bookmark" href="/favicon.ico">

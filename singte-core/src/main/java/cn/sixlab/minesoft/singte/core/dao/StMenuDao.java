@@ -42,7 +42,7 @@ public class StMenuDao extends BaseDao<StMenu> {
 
         if (StringUtils.isNotEmpty(keyword)) {
             Criteria keywordCriteria = new Criteria().orOperator(
-                    Criteria.where("menuName").regex(keyword),
+                    Criteria.where("menuCode").regex(keyword),
                     Criteria.where("menuLink").regex(keyword),
                     Criteria.where("menuGroup").regex(keyword),
                     Criteria.where("intro").regex(keyword)

@@ -4,7 +4,7 @@ import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
 
 public class StMenu extends BaseModel {
 
-    private String menuName;
+    private String menuCode;
 
     private String menuLink;
 
@@ -20,12 +20,12 @@ public class StMenu extends BaseModel {
 
     private String intro;
 
-    public String getMenuName() {
-        return menuName;
+    public String getMenuCode() {
+        return menuCode;
     }
 
-    public void setMenuName(String menuName) {
-        this.menuName = menuName == null ? null : menuName.trim();
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode == null ? null : menuCode.trim();
     }
 
     public String getMenuLink() {

@@ -7,10 +7,7 @@ import cn.sixlab.minesoft.singte.core.dao.StMenuDao;
 import cn.sixlab.minesoft.singte.core.models.StMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -25,7 +22,7 @@ public class AdminMenuController extends BaseController {
     }
 
     @ResponseBody
-    @GetMapping(value = "/selectMenus")
+    @PostMapping(value = "/selectMenus")
     public ModelResp selectMenus(String keyword, String status, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
 
         PageResult<StMenu> menuPageResult = menuDao.selectMenus(keyword, status, pageNum, pageSize);

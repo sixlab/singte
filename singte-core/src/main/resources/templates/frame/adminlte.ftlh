@@ -1,4 +1,4 @@
-
+<#include 'functions.ftlh'>
 <#macro AdminFrame title="" keywords=[] description="" css="" js="" >
 <!DOCTYPE HTML>
 <html lang="zh-CN">
@@ -33,26 +33,26 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Starter Page</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+<#--        <div class="content-header">-->
+<#--            <div class="container-fluid">-->
+<#--                <div class="row mb-2">-->
+<#--                    <div class="col-sm-6">-->
+<#--                        <h1 class="m-0">Starter Page</h1>-->
+<#--                    </div><!-- /.col &ndash;&gt;-->
+<#--                    <div class="col-sm-6">-->
+<#--                        <ol class="breadcrumb float-sm-right">-->
+<#--                            <li class="breadcrumb-item"><a href="#">Home</a></li>-->
+<#--                            <li class="breadcrumb-item active">Starter Page</li>-->
+<#--                        </ol>-->
+<#--                    </div><!-- /.col &ndash;&gt;-->
+<#--                </div><!-- /.row &ndash;&gt;-->
+<#--            </div><!-- /.container-fluid &ndash;&gt;-->
+<#--        </div>-->
         <!-- /.content-header -->
 
         <!-- Main content -->
         <div class="content">
-            <div class="container-fluid">
+            <div class="container-fluid" style="padding:1rem;">
                 <#nested>
             </div><!-- /.container-fluid -->
         </div>
@@ -298,7 +298,7 @@ ${js}
                                             <a href="#${groupItem.menuLink}" class="nav-link">
                                                 <i class="nav-icon fas ${groupItem.menuIcon}"></i>
                                                 <p>
-                                                    ${groupItem.menuName}
+                                                    <@StI18n groupItem.menuCode/>
                                                     <#if groupItem.folderMenu>
                                                         <i class="right fas fa-angle-left"></i>
                                                     </#if>
@@ -309,7 +309,7 @@ ${js}
                                                 <li class="nav-item">
                                                     <a href="${item.menuLink}" class="nav-link <#if requestUri==item.menuLink>active</#if>">
                                                         <i class="far fa-circle ${item.menuIcon}"></i>
-                                                        <p>${item.menuName}</p>
+                                                        <p><@StI18n item.menuCode/></p>
                                                     </a>
                                                 </li>
                                             </#list>
@@ -322,7 +322,7 @@ ${js}
                                     <a href="${groupItem.menuLink}" class="nav-link <#if requestUri==groupItem.menuLink>active</#if>">
                                         <i class="nav-icon fas ${groupItem.menuIcon}"></i>
                                         <p>
-                                            ${groupItem.menuName}
+                                            <@StI18n groupItem.menuCode/>
                                         </p>
                                     </a>
                                 </li>

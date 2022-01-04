@@ -7,25 +7,25 @@ $(function () {
     }
 
     loadCaptcha();
-    $(".reloadImg").click(loadCaptcha);
+    $(document).on("click", ".reloadImg", loadCaptcha);
 
-    $("#loginBtn").click(function () {
+    $(document).on("click", "#loginBtn", function () {
         $.ajax({
             url: "/admin/login",
             type: "post",
             dataType: "json",
             data: {
-                username:$("#username").val(),
-                password:$("#password").val(),
+                username: $("#username").val(),
+                password: $("#password").val(),
                 captchaKey: $("#captchaKey").val(),
                 captchaCode: $("#captchaCode").val(),
             },
             success: function (data) {
-                if(200 === data.status){
-                    location.href = "/auth/admin/index";
-                }else{
+                if (200 === data.status) {
+                    location.href = "/admin/index";
+                } else {
                     Swal.fire({
-                        icon:"error",
+                        icon: "error",
                         text: data.message,
                         showConfirmButton: false,
                         timer: 2000
