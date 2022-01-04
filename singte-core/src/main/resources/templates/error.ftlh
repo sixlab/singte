@@ -29,7 +29,7 @@
     var hypot = _Math.hypot;
     var max = 200;
     var canvas = document.createElement("canvas");
-    var $ = canvas.getContext('2d');
+    var $2d = canvas.getContext('2d');
     var body = document.body;
     var particles = [];
     body.style.backgroundColor = "black";
@@ -60,10 +60,10 @@
             return this;
         },
         draw: function draw() {
-            $.strokeStyle = "hsla(" + this.hue + ", 100%, 50%, " + this.alpha + ")";
-            $.beginPath();
-            $.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-            $.stroke();
+            $2d.strokeStyle = "hsla(" + this.hue + ", 100%, 50%, " + this.alpha + ")";
+            $2d.beginPath();
+            $2d.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+            $2d.stroke();
             this.update();
         },
         update: function update() {
@@ -98,8 +98,8 @@
     };
 
     function animate() {
-        $.fillStyle = "rgba(0,0,0, .2)";
-        $.fillRect(0, 0, width, height);
+        $2d.fillStyle = "rgba(0,0,0, .2)";
+        $2d.fillRect(0, 0, width, height);
         particles.forEach(function (p) {
             p.draw();
         });
