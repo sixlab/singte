@@ -101,72 +101,51 @@
 </#macro>
 
 <#--  文章列表  -->
-<#macro AdminPager pageInfo>
+<#macro AdminPager adminPageInfo url="">
     <div class="card-footer clearfix">
-        <input type="hidden" id="pageNum" value="${pageInfo.pageNum}">
-        <input type="hidden" id="pageSize" value="${pageInfo.pageSize}">
-
         <ul class="pagination pagination-sm m-0 float-right">
-            <#if pageInfo.totalNum == 0 || pageInfo.pageNum == 1>
-                <li class="page-item"><a class="page-link" href="#">&laquo;&laquo;</a></li>
+            <#--第一页，禁用“上一页”按钮-->
+            <#if adminPageInfo.totalNum == 0 || adminPageInfo.pageNum == 1>
+                <li class="page-item disabled"><a class="page-link" href="#">&laquo;&laquo;</a></li>
             <#else>
-                <li class="page-item"><a class="page-link" href="#">&laquo;&laquo;</a></li>
+                <li class="page-item st-pager"><a class="page-link" data-page="${adminPageInfo.pageNum-1}" href="#">&laquo;&laquo;</a></li>
             </#if>
 
+            <#--第一页-->
+            <#if (adminPageInfo.totalNum > 0)>
+                <li class="page-item st-pager <#if adminPageInfo.pageNum == 1>active</#if>" data-page="1"><a class="page-link" href="#">1</a></li>
+            </#if>
 
+            <#--如果不只有一页-->
+            <#if (adminPageInfo.totalPages > 1)>
+            <#--如果当前页往前查3页不是第2页-->
+                <#if ((adminPageInfo.pageNum - 3) > 2)>
+                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                </#if>
 
+            <#--当前页的前3页和后3页-->
+                <#list (adminPageInfo.pageNum - 3)..(adminPageInfo.pageNum + 3) as index>
+                <#--如果位于第一页和最后一页之间-->
+                    <#if (index > 1) && (index < adminPageInfo.totalPages)>
+                        <li class="page-item st-pager <#if adminPageInfo.pageNum == index>active</#if>" data-page="${index}"><a class="page-link" href="#">${index}</a></li>
+                    </#if>
+                </#list>
 
+            <#--如果当前页往后查3页不是倒数第2页-->
+                <#if (adminPageInfo.pageNum + 3) < (adminPageInfo.totalPages - 1)>
+                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                </#if>
 
-            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            <#--最后页-->
+                <li class="page-item st-pager <#if adminPageInfo.pageNum == adminPageInfo.totalPages>active</#if>" data-page="${adminPageInfo.totalPages}"><a class="page-link" href="#">${adminPageInfo.totalPages}</a></li>
+            </#if>
+
+            <#--最后页，禁用“下一页”按钮-->
+            <#if adminPageInfo.totalNum == 0 || adminPageInfo.pageNum == adminPageInfo.totalPages>
+                <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+            <#else>
+                <li class="page-item st-pager" data-page="${adminPageInfo.pageNum+1}"><a class="page-link" href="#">&raquo;</a></li>
+            </#if>
         </ul>
     </div>
-
-    <ul class="clearfix list_page pt40 pb20">
-        <#--第一页，禁用“上一页”按钮-->
-        <#if pageInfo.totalNum == 0 || pageInfo.pageNum == 1>
-            <li><span class="prev-disabled">上一页</span></li>
-        <#else>
-            <li><a href="${url}${pageInfo.pageNum-1}">上一页</a></li>
-        </#if>
-
-        <#--第一页-->
-        <#if (pageInfo.totalNum > 0)>
-            <li <#if pageInfo.pageNum == 1>class="thisclass"</#if>><a href="${url}1">1</a></li>
-        </#if>
-
-        <#--如果不只有一页-->
-        <#if (pageInfo.totalPages > 1)>
-        <#--如果当前页往前查3页不是第2页-->
-            <#if ((pageInfo.pageNum - 3) > 2)>
-                <li><a href="#">···</a></li>
-            </#if>
-
-        <#--当前页的前3页和后3页-->
-            <#list (pageInfo.pageNum - 3)..(pageInfo.pageNum + 3) as index>
-            <#--如果位于第一页和最后一页之间-->
-                <#if (index > 1) && (index < pageInfo.totalPages)>
-                    <li <#if pageInfo.pageNum == index>class="thisclass"</#if>><a href="${url}${index}">${index}</a></li>
-                </#if>
-            </#list>
-
-        <#--如果当前页往后查3页不是倒数第2页-->
-            <#if (pageInfo.pageNum + 3) < (pageInfo.totalPages - 1)>
-                <li><a href="#">···</a></li>
-            </#if>
-
-        <#--最后页-->
-            <li <#if pageInfo.pageNum == pageInfo.totalPages>class="thisclass"</#if>><a href="${url}${pageInfo.totalPages}">${pageInfo.totalPages}</a></li>
-        </#if>
-
-        <#--最后页，禁用“下一页”按钮-->
-        <#if pageInfo.totalNum == 0 || pageInfo.pageNum == pageInfo.totalPages>
-            <li><span class="prev-disabled">下一页</span></li>
-        <#else>
-            <li><a href="${url}${pageInfo.pageNum+1}">下一页</a></li>
-        </#if>
-    </ul>
 </#macro>
