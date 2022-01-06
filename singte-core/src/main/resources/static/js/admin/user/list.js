@@ -10,6 +10,7 @@ $(function () {
             dataType: 'json',
             success: function (res) {
                 console.log(res)
+                $(".cancelBtn").trigger("click");
                 formQuery();
             },
             error(err) {
