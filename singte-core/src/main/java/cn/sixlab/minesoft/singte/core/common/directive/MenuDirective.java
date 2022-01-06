@@ -26,7 +26,7 @@ public class MenuDirective implements TemplateDirectiveModel {
         String requestURI = WebUtils.getRequest().getRequestURI();
         List<StMenu> menuList = menuMapper.selectGroupMenus(group);
 
-        if ("st-level1".equals(group)) {
+        if ("menu.st-level1".equals(group)) {
             env.setVariable("requestUri", ObjectWrapper.DEFAULT_WRAPPER.wrap(requestURI));
             env.setVariable("stMenuGroupList", ObjectWrapper.DEFAULT_WRAPPER.wrap(menuList));
         } else {

@@ -20,11 +20,13 @@
     <link rel="stylesheet" href="/static/fonts/sourcesanspro.css">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/static/adminlte/css/adminlte.min.css">
     ${css}
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     <@AdminHeader />
 
@@ -186,7 +188,7 @@ ${js}
                     <span class="badge badge-warning navbar-badge">15</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-header">15 Notifications</span>
+                    <span class="ropdown-item dropdown-header">15 Notifications</span>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
                         <i class="fas fa-envelope mr-2"></i> 4 new messages
@@ -249,7 +251,7 @@ ${js}
 <#--  页面菜单  -->
 <#macro AdminMenu groupName hasLi=true hasLast=false>
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
             <img src="/static/adminlte/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -289,13 +291,13 @@ ${js}
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
 
-                    <@StMenu group="st-level1">
+                    <@StMenu group="menu.st-level1">
                         <#list stMenuGroupList as groupItem>
                             <#if groupItem.folderMenu>
-                                <@StMenu group=groupItem.menuLink>
+                                <@StMenu group=groupItem.menuCode>
                                     <#if stHasMenu>
                                         <li class="nav-item <#if stFolderOpen>menu-open</#if>">
-                                            <a href="#${groupItem.menuLink}" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 <i class="nav-icon fas ${groupItem.menuIcon}"></i>
                                                 <p>
                                                     <@StI18n groupItem.menuCode/>
@@ -308,7 +310,7 @@ ${js}
                                             <#list stMenuGroup as item>
                                                 <li class="nav-item">
                                                     <a href="${item.menuLink}" class="nav-link <#if requestUri==item.menuLink>active</#if>">
-                                                        <i class="far fa-circle ${item.menuIcon}"></i>
+                                                        <i class="nav-icon ${item.menuIcon}"></i>
                                                         <p><@StI18n item.menuCode/></p>
                                                     </a>
                                                 </li>
@@ -334,6 +336,12 @@ ${js}
             <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
+
+        <div class="sidebar-custom">
+            <a href="/admin/index" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+            <a href="/admin/index" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+        </div>
+        <!-- /.sidebar-custom -->
     </aside>
 </#macro>
 
