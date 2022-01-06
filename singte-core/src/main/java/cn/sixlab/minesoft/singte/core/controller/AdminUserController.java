@@ -1,11 +1,12 @@
 package cn.sixlab.minesoft.singte.core.controller;
 
+import cn.hutool.crypto.digest.BCrypt;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.dao.StMenuDao;
-import cn.sixlab.minesoft.singte.core.models.StMenu;
+import cn.sixlab.minesoft.singte.core.dao.StUserDao;
+import cn.sixlab.minesoft.singte.core.models.StUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,15 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/admin/menu")
-public class AdminMenuController extends BaseController {
+@RequestMapping("/admin/user")
+public class AdminUserController extends BaseController {
 
     @Autowired
-    private StMenuDao menuDao;
+    private StUserDao userDao;
 
     @GetMapping(value = "/list")
     public String list() {
-        return "admin/menu/list";
+        return "admin/user/list";
     }
 
     @PostMapping(value = "/listData")
@@ -30,22 +31,20 @@ public class AdminMenuController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        PageResult<StMenu> menuPageResult = menuDao.selectMenus(keyword, status, pageNum, pageSize);
+        PageResult<StUser> pageResult = userDao.selectUsers(keyword, status, pageNum, pageSize);
 
-        modelMap.put("result", menuPageResult);
+        modelMap.put("result", pageResult);
 
-        return "admin/menu/listData";
+        return "admin/user/listData";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitMenu")
-    public ModelResp submitMenu(StMenu stMenu) {
-        if (null == stMenu.getFolderMenu()) {
-            stMenu.setFolderMenu(false);
-        }
-        stMenu.setStatus(StConst.YES);
-        stMenu.setCreateTime(new Date());
-        menuDao.save(stMenu);
+    @RequestMapping(value = "/submitUser")
+    public ModelResp submitUser(StUser stUser) {
+        stUser.setPassword(BCrypt.hashpw(stUser.getPassword()));
+        stUser.setStatus(StConst.YES);
+        stUser.setCreateTime(new Date());
+        userDao.save(stUser);
         return ModelResp.success();
     }
 

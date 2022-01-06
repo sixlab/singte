@@ -1,15 +1,16 @@
 $(function () {
 
-    $("#queryForm").stDataTable("#queryData");
+    let formQuery = $("#queryForm").stDataTable("#queryData");
 
-    $(document).on("click", ".saveMenuBtn", function () {
+    $(document).on("click", ".saveDataBtn", function () {
         $.ajax({
-            url: '/admin/submitMenu',
-            data: $("#menuForm").serialize(),
+            url: '/admin/user/submitUser',
+            data: $("#modalDataForm").serialize(),
             type: 'post',
             dataType: 'json',
             success: function (res) {
                 console.log(res)
+                formQuery();
             },
             error(err) {
                 console.log(err)

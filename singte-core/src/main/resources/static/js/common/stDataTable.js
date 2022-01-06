@@ -12,7 +12,7 @@ $.fn.stDataTable = function (options) {
 
     this.on("keydown", function (e) {
         if (e.keyCode === 13) {
-            query();
+            formQuery();
             return false;
         }
     })
@@ -20,17 +20,17 @@ $.fn.stDataTable = function (options) {
     $(document).on("click", container + " .st-pager", function () {
         let pageIndex = $(this).data("page");
         pageNum.val(pageIndex);
-        query();
+        formQuery();
         return false;
     })
 
     $(searchBtn).on("click", function () {
-        query();
+        formQuery();
     })
 
-    function query() {
+    function formQuery() {
         $.ajax({
-            url: '/admin/menusData',
+            url: _this.attr("action"),
             data: _this.serialize(),
             type: 'post',
             success: function (res) {
@@ -42,7 +42,7 @@ $.fn.stDataTable = function (options) {
         })
     }
 
-    query();
+    formQuery();
 
-    return query;
+    return formQuery;
 }

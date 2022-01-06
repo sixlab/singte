@@ -1,16 +1,16 @@
-<#include '../frame/functions.ftlh'>
+<#include '../../frame/functions.ftlh'>
 
 <#assign title><@spring.message code="page.title.menus"/></#assign>
 <#assign js>
     <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
     <@StStatic src="common/stDataTable.js" />
-    <@StStatic src="admin/menus.js" />
+    <@StStatic src="admin/menu/list.js" />
 </#assign>
 <@AdminFrame title="${title}" js=js>
     <div class="row">
         <div class="col-12">
-            <form id="queryForm">
+            <form id="queryForm" action="/admin/menu/listData">
                 <input type="hidden" name="pageNum" class="pageNum" value="1">
                 <input type="hidden" name="pageSize" class="pageSize" value="10">
                 <div class="card">
@@ -57,7 +57,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" id="menuForm">
+                    <form class="form-horizontal" id="modalDataForm">
                         <div class="form-group row">
                             <div class="offset-sm-2 col-sm-10">
                                 <div class="form-check">
@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="inputMenuCode" class="col-sm-2 col-form-label">菜单编号</label>
+                            <label for="menuCode" class="col-sm-2 col-form-label">菜单编号</label>
                             <div class="col-sm-10">
                                 <input type="text" name="menuCode" id="menuCode" class="form-control required" placeholder="菜单编号">
                             </div>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary saveMenuBtn">保存</button>
+                    <button type="button" class="btn btn-primary saveDataBtn">保存</button>
                 </div>
             </div>
             <!-- /.modal-content -->

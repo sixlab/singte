@@ -1,4 +1,4 @@
-<#include '../frame/functions.ftlh'>
+<#include '../../frame/functions.ftlh'>
 
 <!-- /.card-header -->
 <div class="card-body">

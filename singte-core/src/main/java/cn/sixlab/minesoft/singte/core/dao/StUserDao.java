@@ -1,7 +1,10 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
+import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.StUser;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
@@ -30,5 +33,28 @@ public class StUserDao extends BaseDao<StUser> {
         Query query = new Query(Criteria.where("token").is(token));
 
         return mongoTemplate.findOne(query, StUser.class);
+    }
+
+    public PageResult<StUser> selectUsers(String keyword, String status, Integer pageNum, Integer pageSize) {
+        Criteria criteria = new Criteria();
+        if (StringUtils.isNotEmpty(status)) {
+            criteria = criteria.and("status").is(status);
+        }
+
+        if (StringUtils.isNotEmpty(keyword)) {
+            Criteria keywordCriteria = new Criteria().orOperator(
+                    Criteria.where("username").regex(keyword),
+                    Criteria.where("showName").regex(keyword),
+                    Criteria.where("mobile").regex(keyword),
+                    Criteria.where("email").regex(keyword)
+            );
+
+            criteria = criteria.andOperator(keywordCriteria);
+        }
+        Sort sort = Sort.by("createTime").descending();
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, StUser.class, pageNum, pageSize);
     }
 }
