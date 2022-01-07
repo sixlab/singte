@@ -1,6 +1,6 @@
 <#include '../../frame/functions.ftlh'>
 
-<#assign title><@spring.message code="page.title.users"/></#assign>
+<#assign title><@StI18n "page.title.users"/></#assign>
 <#assign js>
     <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>

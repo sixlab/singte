@@ -1,6 +1,7 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
+import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.StKeyword;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -58,5 +59,17 @@ public class StKeywordDao extends BaseDao<StKeyword> {
         Criteria criteria = Criteria.where("flag").ne(flag);
 
         mongoTemplate.remove(new Query(criteria), StKeyword.class);
+    }
+
+    public PageResult<StKeyword> selectKeywords(String keyword, Integer pageNum, Integer pageSize) {
+        Criteria criteria = new Criteria().orOperator(
+                Criteria.where("keyword").regex(keyword),
+                Criteria.where("intro").regex(keyword)
+        );
+        Sort sort = Sort.by("weight");
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, StKeyword.class, pageNum, pageSize);
     }
 }

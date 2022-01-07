@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title><@spring.message "page.title.login"/></title>
+    <title><@StI18n "page.title.login"/></title>
 
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="bookmark" href="/favicon.ico">
@@ -86,7 +86,7 @@
             <div class="social-auth-links text-center mt-2 mb-3">
                 <a href="#" class="btn btn-block btn-primary" id="loginBtn">
 <#--                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook-->
-                    <@spring.message "common.login"/>
+                    <@StI18n "common.login"/>
                 </a>
 <#--                <a href="#" class="btn btn-block btn-danger">-->
 <#--                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+-->

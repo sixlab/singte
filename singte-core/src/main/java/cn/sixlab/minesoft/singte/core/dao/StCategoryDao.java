@@ -1,6 +1,7 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
+import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -39,5 +40,17 @@ public class StCategoryDao extends BaseDao<StCategory> {
         Criteria criteria = Criteria.where("flag").ne(flag);
 
         mongoTemplate.remove(new Query(criteria), StCategory.class);
+    }
+
+    public PageResult<StCategory> selectCategories(String keyword, Integer pageNum, Integer pageSize) {
+        Criteria criteria = new Criteria().orOperator(
+                Criteria.where("category").regex(keyword),
+                Criteria.where("intro").regex(keyword)
+        );
+        Sort sort = Sort.by("weight");
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, StCategory.class, pageNum, pageSize);
     }
 }

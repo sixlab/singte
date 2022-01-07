@@ -151,7 +151,7 @@ ${js}
         <#if hasLi>
             <li class="st-menu-li<#if isLast> last_li</#if>">
         </#if>
-        <a <#if !hasLi && isLast>class="last_li" </#if>href="${item.menuLink}"><@spring.message item.menuCode/></a>
+        <a <#if !hasLi && isLast>class="last_li" </#if>href="${item.menuLink}"><@StI18n item.menuCode/></a>
         <#if hasLi>
             </li>
         </#if>

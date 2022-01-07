@@ -1,16 +1,16 @@
 <#include '../../frame/functions.ftlh'>
 
-<#assign title><@StI18n "page.title.menus"/></#assign>
+<#assign title><@StI18n "page.title.articles"/></#assign>
 <#assign js>
     <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
     <@StStatic src="common/stDataTable.js" />
-    <@StStatic src="admin/menu/list.js" />
+    <@StStatic src="admin/article/list.js" />
 </#assign>
 <@AdminFrame title="${title}" js=js>
     <div class="row">
         <div class="col-12">
-            <form id="queryForm" action="/admin/menu/listData">
+            <form id="queryForm" action="/admin/article/listData">
                 <input type="hidden" name="pageNum" class="pageNum" value="1">
                 <input type="hidden" name="pageSize" class="pageSize" value="10">
                 <div class="card">
@@ -19,7 +19,7 @@
                             <div class="col-4">
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#modal-default">
-                                    新增菜单
+                                    新增文章
                                 </button>
                             </div>
                             <div class="col-5">
@@ -59,48 +59,51 @@
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
                         <div class="form-group row">
-                            <div class="offset-sm-2 col-sm-10">
-                                <div class="form-check">
-                                    <input type="checkbox" name="folderMenu" id="folderMenu" class="form-check-input" value="1">
-                                    <label class="form-check-label" for="folderMenu">是菜单文件夹</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="menuCode" class="col-sm-2 col-form-label">菜单编号</label>
+                            <label for="title" class="col-sm-2 col-form-label">文章标题</label>
                             <div class="col-sm-10">
-                                <input type="text" name="menuCode" id="menuCode" class="form-control required" placeholder="菜单编号">
+                                <input type="text" name="title" id="title" class="form-control required" placeholder="文章标题">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="menuGroup" class="col-sm-2 col-form-label">菜单分组</label>
+                            <label for="author" class="col-sm-2 col-form-label">作者</label>
                             <div class="col-sm-10">
-                                <input type="text" name="menuGroup" id="menuGroup" class="form-control required" placeholder="菜单分组">
+                                <input type="text" name="author" id="author" class="form-control required" placeholder="作者">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="menuIcon" class="col-sm-2 col-form-label">菜单图标</label>
+                            <label for="alias" class="col-sm-2 col-form-label">文章别名</label>
                             <div class="col-sm-10">
-                                <input type="text" name="menuIcon" id="menuIcon" class="form-control" placeholder="菜单图标">
+                                <input type="text" name="alias" id="alias" class="form-control required" placeholder="文章别名">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="menuLink" class="col-sm-2 col-form-label">菜单链接</label>
+                            <label for="sourceUrl" class="col-sm-2 col-form-label">来源网址</label>
                             <div class="col-sm-10">
-                                <input type="text" name="menuLink" id="menuLink" class="form-control" placeholder="菜单链接">
+                                <input type="text" name="sourceUrl" id="sourceUrl" class="form-control" placeholder="来源网址">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="weight" class="col-sm-2 col-form-label">菜单顺序</label>
+                            <label for="category" class="col-sm-2 col-form-label">分类</label>
                             <div class="col-sm-10">
-                                <input type="text" name="weight" id="weight" class="form-control" placeholder="菜单顺序">
+                                <input type="text" name="category" id="category" class="form-control" placeholder="分类">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="intro" class="col-sm-2 col-form-label">菜单描述</label>
+                            <label for="keywords" class="col-sm-2 col-form-label">关键词</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="intro" id="intro" rows="3" placeholder="菜单描述"></textarea>
+                                <input type="text" name="keywords" id="keywords" class="form-control" placeholder="关键词">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="summary" class="col-sm-2 col-form-label">摘要</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="summary" id="summary" rows="3" placeholder="摘要"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="content" class="col-sm-2 col-form-label">内容</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="content" id="content" rows="3" placeholder="内容"></textarea>
                             </div>
                         </div>
                     </form>

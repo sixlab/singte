@@ -131,4 +131,29 @@ public class StArticleDao extends BaseDao<StArticle> {
         return output.getMappedResults();
     }
 
+    public PageResult<StArticle> selectArticles(String keyword, String status, Integer pageNum, Integer pageSize) {
+        Criteria criteria = new Criteria();
+        if (StringUtils.isNotEmpty(status)) {
+            criteria = criteria.and("publishStatus").is(status);
+        }
+
+        if (StringUtils.isNotEmpty(keyword)) {
+            Criteria keywordCriteria = new Criteria().orOperator(
+                    Criteria.where("alias").regex(keyword),
+                    Criteria.where("sourceUrl").regex(keyword),
+                    Criteria.where("title").regex(keyword),
+                    Criteria.where("summary").regex(keyword),
+                    Criteria.where("category").regex(keyword),
+                    Criteria.where("content").regex(keyword),
+                    Criteria.where("author").regex(keyword)
+            );
+
+            criteria = criteria.andOperator(keywordCriteria);
+        }
+        Sort sort = Sort.by("publishTime").descending();
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, StArticle.class, pageNum, pageSize);
+    }
 }
