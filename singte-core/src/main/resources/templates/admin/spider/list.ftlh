@@ -1,16 +1,16 @@
 <#include '../../frame/functions.ftlh'>
 
-<#assign title><@StI18n "page.title.articles"/></#assign>
+<#assign title><@StI18n "page.title.spiders"/></#assign>
 <#assign js>
     <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
     <@StStatic src="common/stDataTable.js" />
-    <@StStatic src="admin/article/list.js" />
+    <@StStatic src="admin/spider/list.js" />
 </#assign>
 <@AdminFrame title="${title}" js=js>
     <div class="row">
         <div class="col-12">
-            <form id="queryForm" action="/admin/article/listData">
+            <form id="queryForm" action="/admin/spider/listData">
                 <input type="hidden" name="pageNum" class="pageNum" value="1">
                 <input type="hidden" name="pageSize" class="pageSize" value="10">
                 <div class="card">
@@ -19,7 +19,7 @@
                             <div class="col-4">
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#modal-default">
-                                    新增文章
+                                    新增爬虫
                                 </button>
                             </div>
                             <div class="col-5">
@@ -51,7 +51,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">文章信息</h4>
+                    <h4 class="modal-title">爬虫信息</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -59,51 +59,75 @@
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
                         <div class="form-group row">
-                            <label for="title" class="col-sm-2 col-form-label">文章标题</label>
+                            <label for="spiderType" class="col-sm-2 col-form-label">爬虫类型</label>
                             <div class="col-sm-10">
-                                <input type="text" name="title" id="title" class="form-control required" placeholder="文章标题">
+                                <input type="text" name="spiderType" id="spiderType" class="form-control required" placeholder="爬虫类型 PageLinkSpider">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="author" class="col-sm-2 col-form-label">作者</label>
+                            <label for="spiderName" class="col-sm-2 col-form-label">爬虫名称</label>
                             <div class="col-sm-10">
-                                <input type="text" name="author" id="author" class="form-control required" placeholder="作者">
+                                <input type="text" name="spiderName" id="spiderName" class="form-control required" placeholder="爬虫名称">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="alias" class="col-sm-2 col-form-label">文章别名</label>
+                            <label for="pagerRule" class="col-sm-2 col-form-label">页面规则</label>
                             <div class="col-sm-10">
-                                <input type="text" name="alias" id="alias" class="form-control required" placeholder="文章别名">
+                                <input type="text" name="pagerRule" id="pagerRule" class="form-control" placeholder="页面 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="sourceUrl" class="col-sm-2 col-form-label">来源网址</label>
+                            <label for="linkRule" class="col-sm-2 col-form-label">链接规则</label>
                             <div class="col-sm-10">
-                                <input type="text" name="sourceUrl" id="sourceUrl" class="form-control" placeholder="来源网址">
+                                <input type="text" name="linkRule" id="linkRule" class="form-control" placeholder="链接 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="category" class="col-sm-2 col-form-label">分类</label>
+                            <label for="titleRule" class="col-sm-2 col-form-label">标题规则</label>
                             <div class="col-sm-10">
-                                <input type="text" name="category" id="category" class="form-control" placeholder="分类">
+                                <input type="text" name="titleRule" id="titleRule" class="form-control" placeholder="标题 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="keywords" class="col-sm-2 col-form-label">关键词</label>
+                            <label for="contentRule" class="col-sm-2 col-form-label">正文规则</label>
                             <div class="col-sm-10">
-                                <input type="text" name="keywords" id="keywords" class="form-control" placeholder="关键词">
+                                <input type="text" name="contentRule" id="contentRule" class="form-control" placeholder="正文 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="summary" class="col-sm-2 col-form-label">摘要</label>
+                            <label for="summaryRule" class="col-sm-2 col-form-label">摘要规则</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="summary" id="summary" rows="3" placeholder="摘要"></textarea>
+                                <input type="text" name="summaryRule" id="summaryRule" class="form-control" placeholder="摘要 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="content" class="col-sm-2 col-form-label">内容</label>
+                            <label for="categoryRule" class="col-sm-2 col-form-label">分类规则</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="content" id="content" rows="3" placeholder="内容"></textarea>
+                                <input type="text" name="categoryRule" id="categoryRule" class="form-control" placeholder="分类 xPath 规则">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="keywordRule" class="col-sm-2 col-form-label">关键词规则</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="keywordRule" id="keywordRule" class="form-control" placeholder="关键词 xPath 规则">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="waitTimes" class="col-sm-2 col-form-label">任务间隔</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="waitTimes" id="waitTimes" class="form-control" placeholder="任务间隔，毫秒">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="startUrl" class="col-sm-2 col-form-label">开始链接</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="startUrl" id="startUrl" class="form-control required" placeholder="开始链接">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="urlParam" class="col-sm-2 col-form-label">链接参数</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="urlParam" id="urlParam" rows="3" placeholder="链接参数"></textarea>
                             </div>
                         </div>
                     </form>
