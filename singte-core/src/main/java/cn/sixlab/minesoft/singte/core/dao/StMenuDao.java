@@ -56,4 +56,9 @@ public class StMenuDao extends BaseDao<StMenu> {
 
         return pageQuery(query, StMenu.class, pageNum, pageSize);
     }
+
+    public StMenu selectByMenuCode(String menuCode) {
+        Query query = new Query(Criteria.where("menuCode").is(menuCode));
+        return mongoTemplate.findOne(query, entityClass());
+    }
 }
