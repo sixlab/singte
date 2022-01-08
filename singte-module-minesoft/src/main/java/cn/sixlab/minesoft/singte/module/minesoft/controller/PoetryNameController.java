@@ -24,46 +24,10 @@ import java.util.List;
 public class PoetryNameController extends BaseController {
 
     @Autowired
-    private StePoemDao poemMapper;
-
-    @Autowired
     private StePoemAtomDao poemAtomMapper;
 
     @Autowired
     private StePoemNameDao poemNameMapper;
-
-    @GetMapping(value = "/poems")
-    public String poems(ModelMap modelMap) {
-
-        List<StePoem> poemList = poemMapper.selectPoems();
-
-        modelMap.put("poemList", poemList);
-
-        return "poetry/name/poems";
-    }
-
-    @ResponseBody
-    @PostMapping(value = "/addPoem")
-    public ModelResp addPoem(StePoem poem) {
-        poem.setCreateTime(new Date());
-        poemMapper.save(poem);
-
-        String[] atoms = split(poem.getPoemContent(), "[\\.\\!\\?\\r\\n\\s。！？]");
-        if (ArrayUtils.isNotEmpty(atoms)) {
-            for (int i = 0; i < atoms.length; i++) {
-                StePoemAtom atom = new StePoemAtom();
-                atom.setPoemId(poem.getId());
-                atom.setPoemName(poem.getPoemName());
-                atom.setAtomContent(atoms[i]);
-                atom.setAtomOrder(i);
-                atom.setCreateTime(new Date());
-
-                poemAtomMapper.save(atom);
-            }
-        }
-
-        return ModelResp.success();
-    }
 
     @GetMapping(value = "/names")
     public String names(ModelMap modelMap) {
@@ -96,17 +60,4 @@ public class PoetryNameController extends BaseController {
         return "poetry/name/keywords";
     }
 
-    public String[] split(String str, String regex) {
-        String[] splits = str.split(regex);
-        List<String> result = new ArrayList<>();
-        for (String split : splits) {
-            if (StringUtils.isNotEmpty(split)) {
-                result.add(split);
-            }
-        }
-        System.out.println("\n\n");
-        System.out.println(result);
-        System.out.println("\n\n");
-        return result.toArray(new String[]{});
-    }
 }

@@ -1,13 +1,16 @@
 package cn.sixlab.minesoft.singte.module.minesoft.models;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
-import org.springframework.data.annotation.Id;
-
-import java.util.Date;
 
 public class StePoem extends BaseModel {
 
     private String poemName;
+
+    private String poemType;
+
+    private String poemCategory;
+
+    private String poemSection;
 
     private String poemAuthor;
 
@@ -19,6 +22,30 @@ public class StePoem extends BaseModel {
 
     public void setPoemName(String poemName) {
         this.poemName = poemName == null ? null : poemName.trim();
+    }
+
+    public String getPoemType() {
+        return poemType;
+    }
+
+    public void setPoemType(String poemType) {
+        this.poemType = poemType;
+    }
+
+    public String getPoemCategory() {
+        return poemCategory;
+    }
+
+    public void setPoemCategory(String poemCategory) {
+        this.poemCategory = poemCategory;
+    }
+
+    public String getPoemSection() {
+        return poemSection;
+    }
+
+    public void setPoemSection(String poemSection) {
+        this.poemSection = poemSection;
     }
 
     public String getPoemAuthor() {
