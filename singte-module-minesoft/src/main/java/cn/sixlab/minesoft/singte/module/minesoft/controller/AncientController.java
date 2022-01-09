@@ -3,6 +3,7 @@ package cn.sixlab.minesoft.singte.module.minesoft.controller;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientCategoryDao;
 import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientDao;
 import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncient;
 import cn.sixlab.minesoft.singte.module.minesoft.service.AncientService;
@@ -28,7 +29,18 @@ public class AncientController extends BaseController {
     private SteAncientDao steAncientDao;
 
     @Autowired
+    private SteAncientCategoryDao categoryDao;
+
+    @Autowired
     private AncientService ancientService;
+
+    @GetMapping(value = {"", "/", "/index", "/home"})
+    public String index(ModelMap modelMap) {
+
+        modelMap.put("ancientCategory", categoryDao.listCategory());
+
+        return "ancient";
+    }
 
     @GetMapping(value = "/item/{ancientId}")
     public String item(ModelMap modelMap, @PathVariable String ancientId) {

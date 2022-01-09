@@ -6,15 +6,15 @@ import java.util.List;
 
 public class SteAncient extends BaseModel {
 
-    private String ancientName; // 文章名称
+    private String ancientName; // 文章名称 静夜思
 
-    private String ancientType; // 文章类型
+    private String ancientType; // 文章类型 诗/词。。。
 
-    private String ancientAuthor; // 文章作者
+    private String ancientAuthor; // 文章作者 李白
 
-    private String ancientCategory; // 文章类别
+    private String ancientCategory; // 文章类别 唐诗
 
-    private String ancientSection; // 文章所属文集
+    private String ancientSection; // 文章所属文集 李白文集
 
     private List<String> ancientLines; // 文章内容
 
