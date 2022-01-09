@@ -27,7 +27,7 @@ public class StePoemDao extends BaseDao<StePoem> {
                     Criteria.where("poemCategory").regex(keyword),
                     Criteria.where("poemSection").regex(keyword),
                     Criteria.where("poemAuthor").regex(keyword),
-                    Criteria.where("poemContent").regex(keyword)
+                    Criteria.where("poemLines").regex(keyword)
             );
         }
         Sort sort = Sort.by("id");

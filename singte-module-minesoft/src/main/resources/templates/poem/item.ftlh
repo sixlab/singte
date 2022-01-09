@@ -28,7 +28,11 @@
 <#--                    ${stePoem.summary}-->
 <#--                </div>-->
                 <div>
-                    <p>${stePoem.poemContent?no_esc}</p>
+                    <p style="text-indent: 0;padding-top: 30px;">
+                        <#list stePoem.poemLines as lines>
+                            ${lines}<br/>
+                        </#list>
+                    </p>
                 </div>
 <#--                <div class="clearfix bottom">-->
 <#--                    <div class="fl"><span>标签:</span>-->

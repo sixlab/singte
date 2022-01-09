@@ -2,6 +2,8 @@ package cn.sixlab.minesoft.singte.module.minesoft.models;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
 
+import java.util.List;
+
 public class StePoem extends BaseModel {
 
     private String poemName;
@@ -14,7 +16,7 @@ public class StePoem extends BaseModel {
 
     private String poemAuthor;
 
-    private String poemContent;
+    private List<String> poemLines;
 
     public String getPoemName() {
         return poemName;
@@ -56,11 +58,11 @@ public class StePoem extends BaseModel {
         this.poemAuthor = poemAuthor == null ? null : poemAuthor.trim();
     }
 
-    public String getPoemContent() {
-        return poemContent;
+    public List<String> getPoemLines() {
+        return poemLines;
     }
 
-    public void setPoemContent(String poemContent) {
-        this.poemContent = poemContent == null ? null : poemContent.trim();
+    public void setPoemLines(List<String> poemLines) {
+        this.poemLines = poemLines;
     }
 }

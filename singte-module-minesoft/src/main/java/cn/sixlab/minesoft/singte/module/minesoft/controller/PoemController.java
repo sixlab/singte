@@ -7,7 +7,6 @@ import cn.sixlab.minesoft.singte.module.minesoft.dao.StePoemDao;
 import cn.sixlab.minesoft.singte.module.minesoft.models.StePoem;
 import cn.sixlab.minesoft.singte.module.minesoft.service.PoemService;
 import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -77,7 +76,7 @@ public class PoemController extends BaseController {
                         stePoem.setPoemCategory("楚辞");
                         stePoem.setPoemSection(section);
                         stePoem.setPoemAuthor(author);
-                        stePoem.setPoemContent(StringUtils.join(contentList, ""));
+                        stePoem.setPoemLines(contentList);
 
                         poemService.addPoem(stePoem);
                     }

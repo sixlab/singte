@@ -1,34 +1,20 @@
 $.fn.stDataTable = function (options) {
     let _this = this;
+    let pageNum = this.find(".pageNum");
+    let pageSize = this.find(".pageSize");
+    let searchBtn = this.find(".searchBtn");
 
     let container = options;
     if (typeof options === 'object') {
         container = options.container;
     }
 
-    let pageNum = this.find(".pageNum");
-    let pageSize = this.find(".pageSize");
-    let searchBtn = this.find(".searchBtn");
-
-    this.on("keydown", function (e) {
-        if (e.keyCode === 13) {
-            formQuery();
-            return false;
+    let StDataTable = {};
+    StDataTable.formQuery = function (firstPage) {
+        if (!!firstPage) {
+            pageNum.val(1);
         }
-    })
 
-    $(document).on("click", container + " .st-pager", function () {
-        let pageIndex = $(this).data("page");
-        pageNum.val(pageIndex);
-        formQuery();
-        return false;
-    })
-
-    $(searchBtn).on("click", function () {
-        formQuery();
-    })
-
-    function formQuery() {
         $.ajax({
             url: _this.attr("action"),
             data: _this.serialize(),
@@ -42,7 +28,27 @@ $.fn.stDataTable = function (options) {
         })
     }
 
-    formQuery();
+    this.on("keydown", function (e) {
+        if (e.keyCode === 13) {
+            pageNum.val("1");
+            StDataTable.formQuery();
+            return false;
+        }
+    })
 
-    return formQuery;
+    $(document).on("click", container + " .st-pager", function () {
+        let pageIndex = $(this).data("page");
+        pageNum.val(pageIndex);
+        StDataTable.formQuery();
+        return false;
+    })
+
+    $(searchBtn).on("click", function () {
+        pageNum.val("1");
+        StDataTable.formQuery();
+    })
+
+    StDataTable.formQuery();
+
+    return StDataTable;
 }

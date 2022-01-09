@@ -26,7 +26,11 @@
                 <td>${item.poemSection}</td>
                 <td>${item.poemAuthor}</td>
                 <td>
-                    <div class="text-hide">${item.poemContent}</div>
+                    <div class="text-hide">
+                        <#list item.poemLines as lines>
+                            ${lines}<br/>
+                        </#list>
+                    </div>
                     <a href="/poem/item/${item.id}" target="_blank">查看</a>
                 </td>
             </tr>

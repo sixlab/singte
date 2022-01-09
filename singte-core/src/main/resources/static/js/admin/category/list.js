@@ -1,6 +1,6 @@
 $(function () {
 
-    let formQuery = $("#queryForm").stDataTable("#queryData");
+    let stDataTable = $("#queryForm").stDataTable("#queryData");
 
     $(document).on("click", ".saveDataBtn", function () {
         $.ajax({
@@ -11,7 +11,7 @@ $(function () {
             success: function (res) {
                 console.log(res)
                 $(".cancelBtn").trigger("click");
-                formQuery();
+                stDataTable.formQuery(true);
             },
             error(err) {
                 console.log(err)

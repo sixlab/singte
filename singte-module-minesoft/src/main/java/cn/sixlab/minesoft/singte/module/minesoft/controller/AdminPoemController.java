@@ -6,10 +6,13 @@ import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.module.minesoft.dao.StePoemDao;
 import cn.sixlab.minesoft.singte.module.minesoft.models.StePoem;
 import cn.sixlab.minesoft.singte.module.minesoft.service.PoemService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/admin/poem")
@@ -40,7 +43,9 @@ public class AdminPoemController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/submitPoem")
-    public ModelResp submitPoem(StePoem stePoem) {
+    public ModelResp submitPoem(StePoem stePoem, String poemContent) {
+        String[] lines = StringUtils.split(poemContent, "\r\n");
+        stePoem.setPoemLines(Arrays.asList(lines));
         poemService.addPoem(stePoem);
         return ModelResp.success();
     }

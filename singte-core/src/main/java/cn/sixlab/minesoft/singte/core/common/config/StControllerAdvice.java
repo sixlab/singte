@@ -21,7 +21,7 @@ public class StControllerAdvice {
         model.addObject("status", 5000);
         String message = e.getMessage();
         model.addObject("error", message);
-        if(message.length() > 100){
+        if(null!=message && message.length() > 100){
             message = I18nUtils.get(message);
         }
         model.addObject("message", message);
