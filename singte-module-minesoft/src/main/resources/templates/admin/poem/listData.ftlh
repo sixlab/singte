@@ -19,19 +19,19 @@
         <#list result.list as item>
             <tr>
                 <td>${item_index + 1}.</td>
-                <td>${item.poemName}</td>
-                <td>${item.poemType}</td>
-                <td>${item.poemCategory}</td>
+                <td>${item.ancientName}</td>
+                <td>${item.ancientType}</td>
+                <td>${item.ancientCategory}</td>
 
-                <td>${item.poemSection}</td>
-                <td>${item.poemAuthor}</td>
+                <td>${item.ancientSection}</td>
+                <td>${item.ancientAuthor}</td>
                 <td>
                     <div class="text-hide">
-                        <#list item.poemLines as lines>
+                        <#list item.ancientLines as lines>
                             ${lines}<br/>
                         </#list>
                     </div>
-                    <a href="/poem/item/${item.id}" target="_blank">查看</a>
+                    <a href="/ancient/item/${item.id}" target="_blank">查看</a>
                 </td>
             </tr>
         </#list>

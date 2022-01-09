@@ -3,9 +3,9 @@ package cn.sixlab.minesoft.singte.module.minesoft.controller;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.module.minesoft.dao.StePoemDao;
-import cn.sixlab.minesoft.singte.module.minesoft.models.StePoem;
-import cn.sixlab.minesoft.singte.module.minesoft.service.PoemService;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientDao;
+import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncient;
+import cn.sixlab.minesoft.singte.module.minesoft.service.AncientService;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,30 +21,30 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 @Controller
-@RequestMapping("/poem")
-public class PoemController extends BaseController {
+@RequestMapping("/ancient")
+public class AncientController extends BaseController {
 
     @Autowired
-    private StePoemDao stePoemDao;
+    private SteAncientDao steAncientDao;
 
     @Autowired
-    private PoemService poemService;
+    private AncientService ancientService;
 
-    @GetMapping(value = "/item/{poemId}")
-    public String item(ModelMap modelMap, @PathVariable String poemId) {
-        StePoem stePoem = stePoemDao.selectById(poemId);
+    @GetMapping(value = "/item/{ancientId}")
+    public String item(ModelMap modelMap, @PathVariable String ancientId) {
+        SteAncient steAncient = steAncientDao.selectById(ancientId);
 
-        if (null == stePoem) {
+        if (null == steAncient) {
             return "redirect:/404";
         } else {
-            modelMap.put("stePoem", stePoem);
-            return "poem/item";
+            modelMap.put("steAncient", steAncient);
+            return "ancient/item";
         }
     }
 
     @ResponseBody
-    @PostMapping(value = "/importPoem")
-    public ModelResp importPoem(String path) throws IOException {
+    @PostMapping(value = "/importAncient")
+    public ModelResp importAncient(String path) throws IOException {
         path = "D:\\workspace\\projects\\chinese-poetry-master\\chuci";
         System.out.println("-----------------------------------");
         Path filePath = Paths.get(path);
@@ -70,15 +70,15 @@ public class PoemController extends BaseController {
                         String section = MapUtils.getString(map, "section");
                         List<String> contentList = (List<String>) map.get("content");
 
-                        StePoem stePoem = new StePoem();
-                        stePoem.setPoemName(title);
-                        stePoem.setPoemType("楚辞");
-                        stePoem.setPoemCategory("楚辞");
-                        stePoem.setPoemSection(section);
-                        stePoem.setPoemAuthor(author);
-                        stePoem.setPoemLines(contentList);
+                        SteAncient steAncient = new SteAncient();
+                        steAncient.setAncientName(title);
+                        steAncient.setAncientType("楚辞");
+                        steAncient.setAncientCategory("楚辞");
+                        steAncient.setAncientSection(section);
+                        steAncient.setAncientAuthor(author);
+                        steAncient.setAncientLines(contentList);
 
-                        poemService.addPoem(stePoem);
+                        ancientService.addAncient(steAncient);
                     }
                 }
             } catch (IOException e) {

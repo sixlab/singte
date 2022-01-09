@@ -3,9 +3,9 @@ package cn.sixlab.minesoft.singte.module.minesoft.controller;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.module.minesoft.dao.StePoemDao;
-import cn.sixlab.minesoft.singte.module.minesoft.models.StePoem;
-import cn.sixlab.minesoft.singte.module.minesoft.service.PoemService;
+import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientDao;
+import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncient;
+import cn.sixlab.minesoft.singte.module.minesoft.service.AncientService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,18 +15,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 
 @Controller
-@RequestMapping("/admin/poem")
-public class AdminPoemController extends BaseController {
+@RequestMapping("/admin/ancient")
+public class AdminAncientController extends BaseController {
 
     @Autowired
-    private StePoemDao poemDao;
+    private SteAncientDao ancientDao;
 
     @Autowired
-    private PoemService poemService;
+    private AncientService ancientService;
 
     @GetMapping(value = "/list")
     public String list() {
-        return "admin/poem/list";
+        return "admin/ancient/list";
     }
 
     @PostMapping(value = "/listData")
@@ -34,19 +34,19 @@ public class AdminPoemController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        PageResult<StePoem> pageResult = poemDao.selectPoems(keyword, pageNum, pageSize);
+        PageResult<SteAncient> pageResult = ancientDao.selectAncients(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
-        return "admin/poem/listData";
+        return "admin/ancient/listData";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitPoem")
-    public ModelResp submitPoem(StePoem stePoem, String poemContent) {
-        String[] lines = StringUtils.split(poemContent, "\r\n");
-        stePoem.setPoemLines(Arrays.asList(lines));
-        poemService.addPoem(stePoem);
+    @RequestMapping(value = "/submitAncient")
+    public ModelResp submitAncient(SteAncient steAncient, String ancientContent) {
+        String[] lines = StringUtils.split(ancientContent, "\r\n");
+        steAncient.setAncientLines(Arrays.asList(lines));
+        ancientService.addAncient(steAncient);
         return ModelResp.success();
     }
 

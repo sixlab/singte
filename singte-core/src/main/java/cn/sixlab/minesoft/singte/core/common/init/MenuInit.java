@@ -23,7 +23,7 @@ public class MenuInit implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         checkMenu(true, "menu.article.manage", "menu.st-level1", "fas fa-th", "", 200, "文章管理");
         checkMenu(true, "menu.spider.manage", "menu.st-level1", "fas fa-th", "", 500, "爬虫管理");
-        checkMenu(true, "menu.poem.manage", "menu.st-level1", "fas fa-th", "", 600, "诗词管理");
+        checkMenu(true, "menu.ancient.manage", "menu.st-level1", "fas fa-th", "", 600, "古文管理");
         checkMenu(true, "menu.system.manage", "menu.st-level1", "fas fa-th", "", 800, "系统管理");
 
         checkMenu(false, "menu.index", "menu.st-level1", "fas fa-tachometer-alt", "/admin/index", 100, "首页");
@@ -34,7 +34,7 @@ public class MenuInit implements ApplicationRunner {
 
         checkMenu(false, "menu.spider.list", "menu.spider.manage", "far fa-circle", "/admin/spider/list", 500100, "爬虫列表");
 
-        checkMenu(false, "menu.poem.list", "menu.poem.manage", "far fa-circle", "/admin/poem/list", 600100, "诗歌列表");
+        checkMenu(false, "menu.ancient.list", "menu.ancient.manage", "far fa-circle", "/admin/ancient/list", 600100, "古文列表");
 
         checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800100, "800100");
         checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800200, "800200");
