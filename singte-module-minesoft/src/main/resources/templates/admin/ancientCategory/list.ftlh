@@ -1,16 +1,16 @@
 <#include '../../frame/functions.ftlh'>
 
-<#assign title><@StI18n "page.title.ancients"/></#assign>
+<#assign title><@StI18n "page.title.ancientCategory"/></#assign>
 <#assign js>
     <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
     <@StStatic src="common/stDataTable.js" />
-    <@StStatic src="admin/ancient/list.js" />
+    <@StStatic src="admin/ancientCategory/list.js" />
 </#assign>
 <@AdminFrame title="${title}" js=js>
     <div class="row">
         <div class="col-12">
-            <form id="queryForm" action="/admin/ancient/listData">
+            <form id="queryForm" action="/admin/ancientCategory/listData">
                 <input type="hidden" name="pageNum" class="pageNum" value="1">
                 <input type="hidden" name="pageSize" class="pageSize" value="10">
                 <div class="card">
@@ -19,7 +19,7 @@
                             <div class="col-4">
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#modal-default">
-                                    新增古文
+                                    新增古文分类
                                 </button>
                             </div>
                             <div class="col-5">
@@ -51,7 +51,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">古文信息</h4>
+                    <h4 class="modal-title">古文分类信息</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -59,39 +59,24 @@
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
                         <div class="form-group row">
-                            <label for="ancientName" class="col-sm-2 col-form-label">标题</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="ancientName" id="ancientName" class="form-control required" placeholder="标题">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="ancientType" class="col-sm-2 col-form-label">类型</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="ancientType" id="ancientType" class="form-control required" placeholder="类型">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label for="ancientCategory" class="col-sm-2 col-form-label">分类</label>
                             <div class="col-sm-10">
-                                <input type="text" name="ancientCategory" id="ancientCategory" class="form-control required" placeholder="分类">
+                                <input type="text" name="ancientCategory" id="ancientCategory"
+                                       class="form-control required" placeholder="分类">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="ancientSection" class="col-sm-2 col-form-label">章节</label>
+                            <label for="categoryOrder" class="col-sm-2 col-form-label">顺序</label>
                             <div class="col-sm-10">
-                                <input type="text" name="ancientSection" id="ancientSection" class="form-control" placeholder="章节">
+                                <input type="text" name="categoryOrder" id="categoryOrder" class="form-control"
+                                       placeholder="顺序">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="ancientAuthor" class="col-sm-2 col-form-label">作者</label>
+                            <label for="categoryIntro" class="col-sm-2 col-form-label">介绍</label>
                             <div class="col-sm-10">
-                                <input type="text" name="ancientAuthor" id="ancientAuthor" class="form-control" placeholder="作者">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="ancientContent" class="col-sm-2 col-form-label">内容</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="ancientContent" id="ancientContent" rows="3" placeholder="内容"></textarea>
+                                <textarea class="form-control" name="categoryIntro" id="categoryIntro" rows="3"
+                                          placeholder="介绍"></textarea>
                             </div>
                         </div>
                     </form>

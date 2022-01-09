@@ -36,6 +36,7 @@ public class MenuInit implements ApplicationRunner {
         checkMenu(false, "menu.spider.list", "menu.spider.manage", "far fa-circle", "/admin/spider/list", 500100, "爬虫列表");
 
         checkMenu(false, "menu.ancient.list", "menu.ancient.manage", "far fa-circle", "/admin/ancient/list", 600100, "古文列表");
+        checkMenu(false, "menu.ancient.category", "menu.ancient.manage", "far fa-circle", "/admin/ancientCategory/list", 600200, "古文分类");
 
         checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800100, "800100");
         checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800200, "800200");
