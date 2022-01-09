@@ -29,6 +29,7 @@ public class MenuInit implements ApplicationRunner {
         checkMenu(false, "menu.index", "menu.st-level1", "fas fa-tachometer-alt", "/admin/index", 100, "首页");
 
         checkMenu(false, "menu.article.list", "menu.article.manage", "far fa-circle", "/admin/article/list", 200100, "文章列表");
+        checkMenu(false, "menu.page.list", "menu.article.manage", "far fa-circle", "/admin/page/list", 200130, "页面列表");
         checkMenu(false, "menu.article.category", "menu.article.manage", "far fa-circle", "/admin/category/list", 200200, "分类列表");
         checkMenu(false, "menu.article.keyword", "menu.article.manage", "far fa-circle", "/admin/keyword/list", 200300, "关键词列表");
 
@@ -39,6 +40,22 @@ public class MenuInit implements ApplicationRunner {
         checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800100, "800100");
         checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800200, "800200");
         checkMenu(false, "menu.user.list", "menu.system.manage", "far fa-circle", "/admin/user/list", 800300, "800300");
+
+
+        checkMenu(false, "nav.index", "nav", "far fa-circle", "/", 10, "首页");
+        checkMenu(false, "nav.ancient", "nav", "far fa-circle", "/ancient", 20, "古文");
+        checkMenu(false, "nav.tools", "nav", "far fa-circle", "/tools", 30, "工具");
+        checkMenu(false, "nav.about", "nav", "far fa-circle", "/about", 99, "关于");
+
+
+        checkMenu(false, "sider.ancient", "sider", "far fa-circle", "/ancient", 20, "古文");
+        checkMenu(false, "sider.tools", "sider", "far fa-circle", "/tools", 30, "工具");
+
+        checkMenu(false, "footer.ancient", "footer", "far fa-circle", "/ancient", 20, "古文");
+        checkMenu(false, "footer.tools", "footer", "far fa-circle", "/tools", 30, "工具");
+        checkMenu(false, "sixlab", "footer", "far fa-circle", "http://sixlab.cn", 90, "sixalb");
+        checkMenu(false, "minesoft", "footer", "far fa-circle", "http://minesoft.tech", 95, "minesoft");
+        checkMenu(false, "footer.about", "footer", "far fa-circle", "/about", 99, "关于");
     }
 
     private void checkMenu(boolean folderMenu, String menuCode, String menuGroup, String menuIcon, String menuLink, int weight, String intro) {

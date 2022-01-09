@@ -7,6 +7,8 @@ import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
+import cn.sixlab.minesoft.singte.core.dao.StPageDao;
+import cn.sixlab.minesoft.singte.core.models.StPage;
 import cn.sixlab.minesoft.singte.core.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,6 +29,9 @@ public class IndexController extends BaseController {
     private ArticleService service;
 
     @Autowired
+    private StPageDao pageDao;
+
+    @Autowired
     private ConfigUtils configUtils;
 
     @GetMapping(value = {"", "/", "/index", "/home"})
@@ -34,6 +39,20 @@ public class IndexController extends BaseController {
         service.listList(modelMap, 1, 10);
         modelMap.put("title", configUtils.getConfig("st_site_name"));
         return "list";
+    }
+
+    @GetMapping(value = "/about")
+    public String article(ModelMap modelMap) {
+        StPage page = pageDao.selectByAlias("about");
+
+        if (null == page) {
+            return "redirect:/404";
+        } else {
+            pageDao.addView(page.getId());
+
+            modelMap.put("page", page);
+            return "page";
+        }
     }
 
     @GetMapping(value = "/captcha")
