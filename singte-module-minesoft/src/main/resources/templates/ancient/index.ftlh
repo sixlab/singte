@@ -1,4 +1,4 @@
-<#include 'frame/functions.ftlh'>
+<#include '../frame/functions.ftlh'>
 
 <#assign title><@StI18n "page.title.ancients.list"/></#assign>
 <#assign css>

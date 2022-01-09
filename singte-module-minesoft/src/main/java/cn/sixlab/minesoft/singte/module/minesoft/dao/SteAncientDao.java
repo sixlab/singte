@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class SteAncientDao extends BaseDao<SteAncient> {
 
@@ -34,7 +36,16 @@ public class SteAncientDao extends BaseDao<SteAncient> {
 
         Query query = new Query(criteria).with(sort);
 
-        return pageQuery(query, SteAncient.class, pageNum, pageSize);
+        return pageQuery(query, entityClass(), pageNum, pageSize);
     }
 
+    public List<SteAncient> selectByCategory(String category) {
+        Criteria criteria = Criteria.where("ancientCategory").is(category);
+
+        Sort sort = Sort.by("ancientName");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.find(query, entityClass());
+    }
 }

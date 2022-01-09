@@ -1,0 +1,72 @@
+<#include '../frame/functions.ftlh'>
+
+<#assign css>
+    <@StStatic type="css" src="list.css" />
+</#assign>
+
+<@PageFrame title=title css=css>
+    <div class="column_market w1200 pt20 clearfix">
+        <div class="column_left fl">
+<#--            <div class="news_center_ico">-->
+<#--                <img src="images/column_ico1.png">-->
+<#--                <p class="pb40">五金建材电商<br/>网络新闻中心</p>-->
+<#--            </div>-->
+            <h3 class="bold">推荐</h3>
+            <ul class="hd">
+                <@MenuItems groupName="sider" hasLast=true />
+                <#--                <li><a href="#">前景</a></li>-->
+<#--                <li class="thisclass"><a href="#">动态</a></li>-->
+<#--                <li class="last_li"><a href="#">数据</a></li>-->
+            </ul>
+            <div class="wechat">
+                <div><img style="width: 114px;height: 114px;" src="<@StConfig key="st_wx_qr" default="/static/images/wx/mp.jpg"/>"></div>
+                <p>官方微信</p>
+            </div>
+<#--            <div class="sina">-->
+<#--                <div><img src="img/column_img1.png"></div>-->
+<#--                <p>官方微博</p>-->
+<#--            </div>-->
+        </div>
+        <!--center-->
+        <div class="fl column_center">
+            <ul class="li_list">
+                <h4 class="mb10"><a href="#"></a></h4>
+
+                <#list ancientList as item>
+                    <li class="clearfix">
+                        <img src="/static/images/article/0.jpg" class="fl" alt="">
+                        <div class="right fr">
+                            <div class="top">
+                                <p class="p1"><a href="/ancient/item/${item.id}">${item.ancientName}</a></p>
+                                <p class="p2"><a href="/ancient/item/${item.id}">${item.ancientAuthor}</a></p>
+                            </div>
+<#--                            <div class="clearfix bottom">-->
+<#--                                <div class="fl">-->
+<#--                                    <a href="/keyword/张三">张三</a>-->
+<#--                                    <a href="/keyword/李四">李四</a>-->
+<#--                                </div>-->
+<#--                                <span class="time fr">2022-01-08 09:01:34</span>-->
+<#--                            </div>-->
+                        </div>
+                    </li>
+                </#list>
+            </ul>
+        </div>
+        <!--/center-->
+        <!--right-->
+        <div class="right fr">
+            <!--热文榜-->
+            <div class="mb10">
+                <@ArticleBox type="hot"/>
+            </div>
+            <div class="mb10">
+                <@ArticleBox type="last"/>
+            </div>
+            <div class="mb10">
+                <@ArticleBox type="random"/>
+            </div>
+            <!--/热文榜-->
+        </div>
+        <!--/right-->
+    </div>
+</@PageFrame>

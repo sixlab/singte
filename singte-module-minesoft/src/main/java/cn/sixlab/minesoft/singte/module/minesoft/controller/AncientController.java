@@ -6,6 +6,7 @@ import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientCategoryDao;
 import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientDao;
 import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncient;
+import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncientCategory;
 import cn.sixlab.minesoft.singte.module.minesoft.service.AncientService;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,18 @@ public class AncientController extends BaseController {
 
         modelMap.put("ancientCategory", categoryDao.listCategory());
 
-        return "ancient";
+        return "ancient/index";
+    }
+
+    @GetMapping(value = "/{categoryId}")
+    public String ancientCategory(ModelMap modelMap, @PathVariable String categoryId, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
+        SteAncientCategory ancientCategory = categoryDao.selectById(categoryId);
+
+        String category = ancientCategory.getAncientCategory();
+        modelMap.put("title", category);
+        modelMap.put("ancientList", steAncientDao.selectByCategory(category));
+
+        return "ancient/ancientCategory";
     }
 
     @GetMapping(value = "/item/{ancientId}")
