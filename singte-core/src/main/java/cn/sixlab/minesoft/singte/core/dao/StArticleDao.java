@@ -25,7 +25,7 @@ public class StArticleDao extends BaseDao<StArticle> {
 
     public List<StArticle> selectHot(int size) {
         Query query = new Query(Criteria.where("status").is(StConst.YES))
-                .with(Sort.by(Sort.Direction.DESC, "viewCount"))
+                .with(Sort.by(Sort.Direction.DESC, "thumbCount"))
                 .limit(size);
         return mongoTemplate.find(query, StArticle.class);
     }
@@ -45,6 +45,13 @@ public class StArticleDao extends BaseDao<StArticle> {
         AggregationResults<StArticle> output = mongoTemplate.aggregate(aggregation, StArticle.class, StArticle.class);
 
         return output.getMappedResults();
+    }
+
+    public List<StArticle> selectView(int size) {
+        Query query = new Query(Criteria.where("status").is(StConst.YES))
+                .with(Sort.by(Sort.Direction.DESC, "viewCount"))
+                .limit(size);
+        return mongoTemplate.find(query, StArticle.class);
     }
 
     public PageResult<StArticle> selectByCategory(String category, int pageNum, int pageSize) {

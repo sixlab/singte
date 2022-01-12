@@ -60,6 +60,10 @@ public class ArticleService {
         return articleMapper.selectRandom(size);
     }
 
+    public List<StArticle> topView(int size) {
+        return null;
+    }
+
     public void listParam(ModelMap modelMap, Integer pageNum, Integer pageSize, String pageType, String uriPrefix) {
         modelMap.put("pageNum", pageNum);
         modelMap.put("pageSize", pageSize);

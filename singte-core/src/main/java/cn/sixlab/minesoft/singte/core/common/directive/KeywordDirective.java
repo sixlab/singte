@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.directive;
 
+import cn.hutool.core.map.MapUtil;
 import cn.sixlab.minesoft.singte.core.dao.StKeywordDao;
 import cn.sixlab.minesoft.singte.core.models.StKeyword;
 import freemarker.core.Environment;
@@ -19,7 +20,8 @@ public class KeywordDirective implements TemplateDirectiveModel {
 
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
-        List<StKeyword> keywordList = keywordDao.selectRandom(5);
+        int num = MapUtil.getInt(params, "num", 5);
+        List<StKeyword> keywordList = keywordDao.selectRandom(num);
 
         env.setVariable("stHotKeywords", ObjectWrapper.DEFAULT_WRAPPER.wrap(keywordList));
 

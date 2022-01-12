@@ -81,33 +81,28 @@
         <div class="hot-search">
             <p>热门搜索排行</p>
             <ul class="search-paihang">
-                <li><a href="/"><i>1</i>帝国</a></li>
-                <li><a href="/"><i>2</i>模板</a></li>
-                <li><a href="/"><i>3</i>博客</a></li>
-                <li><a href="/"><i>4</i>后台</a></li>
-                <li><a href="/"><i>5</i>html</a></li>
-                <li><a href="/"><i>6</i>绅士</a></li>
-                <li><a href="/"><i>7</i>cms</a></li>
-                <li><a href="/"><i>8</i>支持</a></li>
-                <li><a href="/"><i>9</i>早安</a></li>
-                <li><a href="/"><i>10</i>个人</a></li>
+                <@StKeyword num=10>
+                    <#list stHotKeywords as item>
+                        <li><a href="/keyword/${item.keyword}"><i>${item_index+1}</i>${item.keyword}</a></li>
+                    </#list>
+                </@StKeyword>
             </ul>
         </div>
-        <div class="new-search">
-            <p>最新搜索排行</p>
-            <ul class="search-paihang">
-                <li><a href=""><i>1</i>函数</a></li>
-                <li><a href="/"><i>2</i>博客程序</a></li>
-                <li><a href="/"><i>3</i>解析</a></li>
-                <li><a href="/"><i>4</i>红色</a></li>
-                <li><a href="/"><i>5</i>告别2018</a></li>
-                <li><a href="/"><i>6</i>插件</a></li>
-                <li><a href="/"><i>7</i>网页布局</a></li>
-                <li><a href="/"><i>8</i>云服务器</a></li>
-                <li><a href="/"><i>9</i>with love for you</a></li>
-                <li><a href="/"><i>10</i>评论插件</a></li>
-            </ul>
-        </div>
+<#--        <div class="new-search">-->
+<#--            <p>最新搜索排行</p>-->
+<#--            <ul class="search-paihang">-->
+<#--                <li><a href=""><i>1</i>函数</a></li>-->
+<#--                <li><a href="/"><i>2</i>博客程序</a></li>-->
+<#--                <li><a href="/"><i>3</i>解析</a></li>-->
+<#--                <li><a href="/"><i>4</i>红色</a></li>-->
+<#--                <li><a href="/"><i>5</i>告别2018</a></li>-->
+<#--                <li><a href="/"><i>6</i>插件</a></li>-->
+<#--                <li><a href="/"><i>7</i>网页布局</a></li>-->
+<#--                <li><a href="/"><i>8</i>云服务器</a></li>-->
+<#--                <li><a href="/"><i>9</i>with love for you</a></li>-->
+<#--                <li><a href="/"><i>10</i>评论插件</a></li>-->
+<#--            </ul>-->
+<#--        </div>-->
     </div>
 </header>
 <div class="clear blank"></div>
@@ -115,69 +110,144 @@
     <#nested />
     <#if aside>
     <aside class="side-section right-box">
-        <#list asideList as asideItem>
-            <@StAside type=asideItem.asideCode />
-        </#list>
-        <div class="whitebg tuijian">
-          <h2 class="side-title">站长推荐</h2>
-          <section class="topnews imgscale"><a href="/xd/23.html"><img src="images/pic03.jpg"><span>作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</span></a></section>
-          <ul>
-            <li><a href="/" title="双十一，阿里云特惠活动，快来领券啦" target="_blank"><i><img src="images/pic05.jpg"></i>
-              <p>双十一，阿里云特惠活动，快来领券啦</p>
-              </a></li>
-            <li><a href="/" title="第二届 优秀个人博客模板比赛参选活动" target="_blank"><i><img src="images/pic06.jpg"></i>
-              <p>第二届 优秀个人博客模板比赛参选活动</p>
-              </a></li>
-            <li><a href="/" title="为什么说10月24日是程序员的节日？" target="_blank"><i><img src="images/pic07.jpg"></i>
-              <p>为什么说10月24日是程序员的节日？</p>
-              </a></li>
-            <li><a href="/" title="十条设计原则教你学会如何设计网页布局!" target="_blank"><i><img src="images/pic03.jpg"></i>
-              <p>十条设计原则教你学会如何设计网页布局!</p>
-              </a></li>
-            <li><a href="/" title="【个人博客空间申请】金牛云服，免费领空间啦" target="_blank"><i><img src="images/pic04.jpg"></i>
-              <p>【个人博客空间申请】金牛云服，免费领空间啦</p>
-              </a></li>
-          </ul>
-        </div>
-        <div class="blank clear" ></div>
-        <div class="whitebg paihang">
-          <h2 class="side-title">点击排行</h2>
-          <section class="topnews imgscale"><a href="/"><img src="images/pic06.jpg"><span>作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</span></a></section>
-          <ul>
-            <li><i></i><a href="/" title="个人博客，属于我的小世界！" target="_blank">个人博客，属于我的小世界！</a></li>
-            <li><i></i><a href="/" title="安静地做一个爱设计的女子" target="_blank">安静地做一个爱设计的女子</a></li>
-            <li><i></i><a href="/" title="制作个人博客，我是这么收费的？" target="_blank">制作个人博客，我是这么收费的？</a></li>
-            <li><i></i><a href="/" title="个人博客，我为什么要用帝国cms？" target="_blank">个人博客，我为什么要用帝国cms？</a></li>
-            <li><i></i><a href="/" title="网易博客关闭，何不从此开始潇洒行走江湖！" target="_blank">网易博客关闭，何不从此开始潇洒行走江湖！</a></li>
-            <li><i></i><a href="/" title="【告别2018】耕耘才有所得，付出才有收获" target="_blank">【告别2018】耕耘才有所得，付出才有收获</a></li>
-            <li><i></i><a href="/" title="张建华 一个90后年轻站长！我们是对手亦是朋友！" target="_blank">张建华 一个90后年轻站长！我们是对手亦是朋友！</a></li>
-            <li><i></i><a href="/" title="个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。" target="_blank">个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。</a></li>
-          </ul>
-        </div>
-        <div class="blank clear" ></div>
-        <div class="whitebg cloud">
-          <h2 class="side-title">标签云</h2>
-          <ul>
-            <a href="/" target="_blank">打开</a> <a href="/" target="_blank">链接</a> <a href="/" target="_blank">程序安装</a> <a href="/" target="_blank">站内搜索</a> <a href="/" target="_blank">静态模板</a> <a href="/" target="_blank">查询</a> <a href="/" target="_blank">赛跑</a> <a href="/" target="_blank">google</a> <a href="/" target="_blank">css3背景</a> <a href="/" target="_blank">搭配</a> <a href="/" target="_blank">固定</a> <a href="/" target="_blank">asp</a> <a href="/" target="_blank">background-size</a> <a href="/" target="_blank">IP</a> <a href="/" target="_blank">花</a> <a href="/" target="_blank">繁花</a> <a href="/" target="_blank">倒计时</a> <a href="/" target="_blank">配色</a> <a href="/" target="_blank">个人建站空间</a> <a href="/" target="_blank">职业生涯</a>
-          </ul>
-        </div>
-        <div class="ad ad-small">小图广告（320*140）</div>
-        <div class="whitebg suiji">
-      <h2 class="side-title">猜你喜欢</h2>
-      <ul>
-        <li><a target="_blank" href="/">安静地做一个爱设计的女子</a></li>
-        <li><a target="_blank" href="/">网易博客关闭，何不从此开始潇洒行走江湖！</a></li>
-        <li><a target="_blank" href="/">【排名技术建站】杨青助你快速实现主站为核心的搜索排名霸屏</a></li>
-        <li><a target="_blank" href="/">个人博客，我为什么要用帝国cms？</a></li>
-        <li><a target="_blank" href="/">个人博客，属于我的小世界！</a></li>
-        <li><a target="_blank" href="/">蓝色企业网站模板超实用，完美符合SEO优化，适合企业公司建站的模板</a></li>
-        <li><a target="_blank" href="/">制作个人博客，我是这么收费的？</a></li>
-        <li><a target="_blank" href="/">【告别2018】耕耘才有所得，付出才有收获</a></li>
-        <li><a target="_blank" href="/">帝国cms结合项如何实现多条件查询</a></li>
-        <li><a target="_blank" href="/">华仔seo 一个专业网站优化的站长展示技能的平台</a></li>
-        <li><a target="_blank" href="/">帝国CMS灵动标签调用昨天、今天、某天及以前以后等特定时间发布的文章</a></li>
-      </ul>
-    </div>
+        <@StAside>
+            <#list stWidgetList as asideItem>
+                <#switch asideItem.widgetCode>
+                    <#case "widget-hot">
+                    <div class="whitebg tuijian">
+                        <h2 class="side-title">${asideItem.widgetName}</h2>
+                        <@StArticles type="hot" size=6>
+                            <#list stArticleList as item>
+                                <#if item_index==1>
+                                    <ul>
+                                </#if>
+
+                                <#if item_index==0>
+                                    <section class="topnews imgscale">
+                                        <a href="/article/${item.alias}">
+                                            <img src="/static/images/article/0.jpg" alt="${item.title}">
+                                            <span>${item.title}</span>
+                                        </a>
+                                    </section>
+                                <#else>
+                                    <li>
+                                        <a href="/article/${item.alias}" title="${item.title}" target="_blank">
+                                            <i><img src="/static/images/article/${item_index%10}.jpg"
+                                                    alt="${item.title}"></i>
+                                            <p>${item.title}</p>
+                                        </a>
+                                    </li>
+                                </#if>
+
+                                <#if !item_has_next>
+                                    </ul>
+                                </#if>
+                            </#list>
+                        </@StArticles>
+                    </div>
+                    <#break>
+
+                    <#case "widget-new">
+                    <div class="whitebg tuijian">
+                        <h2 class="side-title">${asideItem.widgetName}</h2>
+                        <@StArticles type="last" size=6>
+                            <#list stArticleList as item>
+                                <#if item_index==1>
+                                    <ul>
+                                </#if>
+
+                                <#if item_index==0>
+                                    <section class="topnews imgscale">
+                                        <a href="/article/${item.alias}">
+                                            <img src="/static/images/article/0.jpg" alt="${item.title}">
+                                            <span>${item.title}</span>
+                                        </a>
+                                    </section>
+                                <#else>
+                                    <li>
+                                        <a href="/article/${item.alias}" title="${item.title}" target="_blank">
+                                            <i><img src="/static/images/article/${item_index%10}.jpg"
+                                                    alt="${item.title}"></i>
+                                            <p>${item.title}</p>
+                                        </a>
+                                    </li>
+                                </#if>
+
+                                <#if !item_has_next>
+                                    </ul>
+                                </#if>
+                            </#list>
+                        </@StArticles>
+                    </div>
+                    <#break>
+
+                    <#case "widget-random">
+                    <div class="whitebg suiji">
+                        <h2 class="side-title">${asideItem.widgetName}</h2>
+                        <@StArticles type="random" size=10>
+                            <ul>
+                            <#list stArticleList as item>
+                                <li><a href="/article/${item.alias}" title="${item.title}" target="_blank">${item.title}</a></li>
+                            </#list>
+                            </ul>
+                        </@StArticles>
+                    </div>
+                    <#break>
+
+                    <#case "widget-view">
+                    <div class="whitebg paihang">
+                        <h2 class="side-title">${asideItem.widgetName}</h2>
+                        <@StArticles type="view" size=11>
+                            <#list stArticleList as item>
+                                <#if item_index==1>
+                                    <ul>
+                                </#if>
+
+                                <#if item_index==0>
+                                    <section class="topnews imgscale">
+                                        <a href="/article/${item.alias}">
+                                            <img src="/static/images/article/0.jpg" alt="${item.title}">
+                                            <span>${item.title}</span>
+                                        </a>
+                                    </section>
+                                <#else>
+                                    <li>
+                                        <i></i>
+                                        <a href="/article/${item.alias}" title="${item.title}"
+                                           target="_blank">${item.title}</a>
+                                    </li>
+                                </#if>
+
+                                <#if !item_has_next>
+                                    </ul>
+                                </#if>
+                            </#list>
+                        </@StArticles>
+                    </div>
+                    <#break>
+
+                    <#case "widget-tags">
+                    <div class="whitebg cloud">
+                        <h2 class="side-title">${asideItem.widgetName}</h2>
+                        <ul>
+                            <@StKeyword num=30>
+                                <#list stHotKeywords as item>
+                                    <a href="/keyword/${item.keyword}" target="_blank">${item.keyword}</a>
+                                </#list>
+                            </@StKeyword>
+                        </ul>
+                    </div>
+                    <#break>
+
+                    <#case "widget-adv">
+                    <div class="advimg advimg-aside advimg-small">小图广告（320*140）</div>
+                    <#break>
+                </#switch>
+                <#if asideItem_has_next>
+                    <div class="blank clear"></div>
+                </#if>
+            </#list>
+        </@StAside>
     </aside>
     </#if>
 </article>

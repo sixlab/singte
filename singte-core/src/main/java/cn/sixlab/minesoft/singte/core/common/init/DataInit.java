@@ -53,9 +53,10 @@ public class DataInit implements ApplicationRunner {
         checkWidget("widget-new", "最新文章", "最新文章");
         checkWidget("widget-random", "随机文章", "随机文章");
 
-        checkWidget("widget-view-rank", "查看排行", "查看排行");
-        checkWidget("widget-thumb-rank", "点赞排行", "点赞排行");
+        checkWidget("widget-view", "点击排行", "点击排行");
         checkWidget("widget-tags", "标签云", "标签云");
+
+        checkWidget("widget-adv", "侧边广告", "侧边广告");
     }
 
     private void initAdmin() {

@@ -11,15 +11,16 @@
 
 [#macro StAside][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.AsideDirective"  --]
+[#-- @ftlvariable name="stWidgetList" type="cn.sixlab.minesoft.singte.core.models.StWidget[]" --]
 
-[#macro StKeyword][/#macro]
+[#macro StKeyword num=5][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.KeywordDirective"  --]
 [#-- @ftlvariable name="stHotKeywords" type="cn.sixlab.minesoft.singte.core.models.StKeyword[]" --]
 
 [#macro StArticles type='category' num=1 size=10 category=''][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.ArticlesDirective"  --]
-[#-- @ftlvariable name="tArticleList" type="cn.sixlab.minesoft.singte.core.models.StArticle[]" --]
-[#-- @ftlvariable name="tArticlePageInfo" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.StArticle>" --]
+[#-- @ftlvariable name="stArticleList" type="cn.sixlab.minesoft.singte.core.models.StArticle[]" --]
+[#-- @ftlvariable name="stArticlePageInfo" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.StArticle>" --]
 
 [#macro StMenu group][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.MenuDirective"  --]
