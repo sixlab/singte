@@ -108,13 +108,13 @@ public class DataInit implements ApplicationRunner {
 
         checkMenu(false, "nav.index", "nav", "far fa-circle", "/", 10, "首页");
         checkMenu(false, "nav.articles", "nav", "far fa-circle", "/article/list", 15, "文章");
-        checkMenu(false, "nav.ancient", "nav", "far fa-circle", "/ancients", 20, "古文");
-        checkMenu(false, "nav.tools", "nav", "far fa-circle", "/tools", 30, "工具");
+        checkMenu(false, "nav.ancient", "nav", "far fa-circle", "/ancient/list", 20, "古文");
+        checkMenu(false, "nav.tools", "nav", "far fa-circle", "/tool/list", 30, "工具");
         checkMenu(false, "nav.about", "nav", "far fa-circle", "/about", 99, "关于");
 
         checkMenu(false, "footer.index", "footer", "icon-shouye", "/", 10, "首页");
-        checkMenu(false, "footer.ancient", "footer", "icon-navicon-wzgl", "/ancient", 20, "古文");
-        checkMenu(false, "footer.tools", "footer", "icon-fenlei", "/tools", 30, "工具");
+        checkMenu(false, "footer.ancient", "footer", "icon-navicon-wzgl", "/ancient/list", 20, "古文");
+        checkMenu(false, "footer.tools", "footer", "icon-fenlei", "/tool/list", 30, "工具");
         checkMenu(false, "footer.about", "footer", "icon-My", "/about", 99, "关于");
     }
 

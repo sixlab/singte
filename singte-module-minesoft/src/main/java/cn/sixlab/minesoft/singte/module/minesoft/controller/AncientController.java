@@ -35,23 +35,23 @@ public class AncientController extends BaseController {
     @Autowired
     private AncientService ancientService;
 
-    @GetMapping(value = {"", "/", "/index", "/home"})
+    @GetMapping(value = "/list")
     public String index(ModelMap modelMap) {
 
         modelMap.put("ancientCategory", categoryDao.listCategory());
 
-        return "ancient/index";
+        return "ancient/list";
     }
 
-    @GetMapping(value = "/{categoryId}")
-    public String ancientCategory(ModelMap modelMap, @PathVariable String categoryId, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
+    @GetMapping(value = "/category/{categoryId}")
+    public String category(ModelMap modelMap, @PathVariable String categoryId, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
         SteAncientCategory ancientCategory = categoryDao.selectById(categoryId);
 
         String category = ancientCategory.getAncientCategory();
         modelMap.put("title", category);
         modelMap.put("ancientList", steAncientDao.selectByCategory(category));
 
-        return "ancient/ancientCategory";
+        return "ancient/category";
     }
 
     @GetMapping(value = "/item/{ancientId}")
