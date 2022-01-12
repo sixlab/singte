@@ -1,7 +1,10 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
+import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.StConfig;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
@@ -22,6 +25,29 @@ public class StConfigDao extends BaseDao<StConfig> {
      */
     public StConfig selectByKey(String configKey) {
         Query query = new Query(Criteria.where("configKey").is(configKey));
-        return mongoTemplate.findOne(query, StConfig.class);
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
+    public PageResult<StConfig> selectConfigs(String keyword, String status, Integer pageNum, Integer pageSize) {
+        Criteria criteria = new Criteria();
+        if (StringUtils.isNotEmpty(status)) {
+            criteria = criteria.and("status").is(status);
+        }
+
+        if (StringUtils.isNotEmpty(keyword)) {
+            Criteria keywordCriteria = new Criteria().orOperator(
+                    Criteria.where("configKey").regex(keyword),
+                    Criteria.where("configVal").regex(keyword),
+                    Criteria.where("configGroup").regex(keyword),
+                    Criteria.where("intro").regex(keyword)
+            );
+
+            criteria = criteria.andOperator(keywordCriteria);
+        }
+        Sort sort = Sort.by("createTime").descending();
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, entityClass(), pageNum, pageSize);
     }
 }

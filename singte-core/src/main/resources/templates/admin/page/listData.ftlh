@@ -25,7 +25,7 @@
                 <td>${item.alias}</td>
 
                 <td>${item.viewCount}</td>
-                <td>${item.publishStatus}</td>
+                <td>${item.status}</td>
                 <td>${(item.publishTime?string("yyyy-MM-dd HH:mm:ss"))!''}</td>
                 <td>
 

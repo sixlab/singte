@@ -27,13 +27,13 @@ public class StSpiderDao extends BaseDao<StSpider> {
      */
     public List<StSpider> selectByStatus(String status) {
         Query query = new Query(Criteria.where("status").is(status)).with(Sort.by("id"));
-        return mongoTemplate.find(query, StSpider.class);
+        return mongoTemplate.find(query, entityClass());
     }
 
     public PageResult<StSpider> selectSpiders(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StringUtils.isNotEmpty(status)) {
-            criteria = criteria.and("spiderStatus").is(status);
+            criteria = criteria.and("status").is(status);
         }
 
         if (StringUtils.isNotEmpty(keyword)) {
@@ -56,6 +56,6 @@ public class StSpiderDao extends BaseDao<StSpider> {
 
         Query query = new Query(criteria).with(sort);
 
-        return pageQuery(query, StSpider.class, pageNum, pageSize);
+        return pageQuery(query, entityClass(), pageNum, pageSize);
     }
 }

@@ -28,7 +28,7 @@ public class AdminPageController extends BaseController {
     @PostMapping(value = "/listData")
     public String listData(ModelMap modelMap, String keyword, String status,
                             @RequestParam(defaultValue = "1") Integer pageNum,
-                            @RequestParam(defaultValue = "10") Integer pageSize) {
+                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
         PageResult<StPage> pageResult = pageDao.selectPages(keyword, status, pageNum, pageSize);
 
@@ -41,7 +41,7 @@ public class AdminPageController extends BaseController {
     @RequestMapping(value = "/submitPage")
     public ModelResp submitPage(StPage stPage) {
         stPage.setViewCount(0);
-        stPage.setPublishStatus(StConst.ST_PUBLISH_DID);
+        stPage.setStatus(StConst.ST_PUBLISH_DID);
         stPage.setPublishTime(new Date());
         stPage.setCreateTime(new Date());
         pageDao.save(stPage);

@@ -9,6 +9,7 @@
             <th>组件名称</th>
             <th>组件编号</th>
             <th>组件简介</th>
+            <th>顺序</th>
             <th>状态</th>
             <th>操作</th>
         </tr>
@@ -20,15 +21,18 @@
                 <td>${item.widgetName}</td>
                 <td>${item.widgetCode}</td>
                 <td>${item.widgetIntro}</td>
-                <td>${item.widgetStatus}</td>
+                <td>${item.weight}</td>
+                <td>${item.status}</td>
                 <td>
-                    <button type="button" class="btn btn-primary"
-                            <#if "1"==item.widgetStatus>
-                            data-targetStatus="0"
-                            <#else>
-                            data-targetStatus="1"
-                            </#if>
-                            data-recordId="${item.id}">修改状态</button>
+                    <#if "1"==item.status>
+                        <button type="button" class="btn btn-danger changeStatusBtn" data-target-status="0"
+                                data-record-id="${item.id}">禁用
+                        </button>
+                    <#else>
+                        <button type="button" class="btn btn-success changeStatusBtn" data-target-status="1"
+                                data-record-id="${item.id}">启用
+                        </button>
+                    </#if>
                 </td>
             </tr>
         </#list>

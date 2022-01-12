@@ -98,7 +98,7 @@ public abstract class SpiderJob {
         article.setAuthor("spider");
         article.setViewCount(0);
         article.setThumbCount(0);
-        article.setPublishStatus(StConst.ST_PUBLISH_DID);
+        article.setStatus(StConst.ST_PUBLISH_DID);
         article.setPublishTime(new Date());
         article.setCreateTime(new Date());
 

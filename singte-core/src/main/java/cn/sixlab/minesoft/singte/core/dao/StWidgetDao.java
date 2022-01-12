@@ -27,7 +27,7 @@ public class StWidgetDao extends BaseDao<StWidget> {
      * @return
      */
     public List<StWidget> selectByStatus(String status) {
-        Query query = new Query(Criteria.where("status").is(status)).with(Sort.by("id"));
+        Query query = new Query(Criteria.where("status").is(status)).with(Sort.by("weight"));
         return mongoTemplate.find(query, entityClass());
     }
 
@@ -35,7 +35,7 @@ public class StWidgetDao extends BaseDao<StWidget> {
         Criteria criteria = Criteria.where("status").is(StConst.YES)
                 .and("widgetCode").is(widgetCode);
 
-        Query query = new Query(criteria).with(Sort.by("id"));
+        Query query = new Query(criteria).with(Sort.by("weight"));
 
         return mongoTemplate.findOne(query, entityClass());
     }
@@ -43,7 +43,7 @@ public class StWidgetDao extends BaseDao<StWidget> {
     public StWidget selectByCode(String widgetCode) {
         Criteria criteria = Criteria.where("widgetCode").is(widgetCode);
 
-        Query query = new Query(criteria).with(Sort.by("id"));
+        Query query = new Query(criteria).with(Sort.by("weight"));
 
         return mongoTemplate.findOne(query, entityClass());
     }
@@ -51,7 +51,7 @@ public class StWidgetDao extends BaseDao<StWidget> {
     public PageResult<StWidget> selectWidgets(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StringUtils.isNotEmpty(status)) {
-            criteria = criteria.and("widgetStatus").is(status);
+            criteria = criteria.and("status").is(status);
         }
 
         if (StringUtils.isNotEmpty(keyword)) {
@@ -64,7 +64,7 @@ public class StWidgetDao extends BaseDao<StWidget> {
 
             criteria = criteria.andOperator(keywordCriteria);
         }
-        Sort sort = Sort.by("createTime").descending();
+        Sort sort = Sort.by("weight");
 
         Query query = new Query(criteria).with(sort);
 

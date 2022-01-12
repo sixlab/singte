@@ -77,7 +77,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     @GetMapping(value = "/initTest")
     public String initTest() {
-        for (int i = 100; i < 200; i++) {
+        for (int i = 1; i < 100; i++) {
             StArticle stArticle = new StArticle();
             stArticle.setAlias("wz" + i);
             stArticle.setSourceUrl("http://sixlab.cn/" + i);
@@ -95,7 +95,7 @@ public class ArticleController extends BaseController {
             stArticle.setCategory("分类" + i % 6);
             stArticle.setViewCount(RandomUtil.randomInt(1000, 2000));
             stArticle.setThumbCount(RandomUtil.randomInt(1000));
-            stArticle.setPublishStatus("1");
+            stArticle.setStatus("1");
             stArticle.setPublishTime(new Date());
             stArticle.setContent("<p>指数介绍<br>\n" +
                     "恒生中国企业指数，简称国企指数或H股（因香港英文——HongKong首字母，而称得名H股）。<br>\n" +

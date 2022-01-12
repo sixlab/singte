@@ -12,8 +12,6 @@ public class StUser extends BaseModel {
 
     private String password;
 
-    private String status;
-
     private String mobile;
 
     private String email;
@@ -46,14 +44,6 @@ public class StUser extends BaseModel {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
     }
 
     public String getMobile() {

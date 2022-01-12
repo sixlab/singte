@@ -2,17 +2,15 @@ $(function () {
 
     let stDataTable = $("#queryForm").stDataTable("#queryData");
 
-    $(document).on("click", ".changeStatusBtn", function () {
+    $(document).on("click", ".saveDataBtn", function () {
         $.ajax({
-            url: '/admin/widget/submitStatus',
-            data: {
-                id: $(this).data("recordId"),
-                status: $(this).data("targetStatus")
-            },
+            url: '/admin/config/submitConfig',
+            data: $("#modalDataForm").serialize(),
             type: 'post',
             dataType: 'json',
             success: function (res) {
                 console.log(res)
+                $(".cancelBtn").trigger("click");
                 stDataTable.formQuery(true);
             },
             error(err) {

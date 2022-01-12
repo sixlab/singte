@@ -28,7 +28,7 @@ public class AdminArticleController extends BaseController {
     @PostMapping(value = "/listData")
     public String listData(ModelMap modelMap, String keyword, String status,
                             @RequestParam(defaultValue = "1") Integer pageNum,
-                            @RequestParam(defaultValue = "10") Integer pageSize) {
+                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
         PageResult<StArticle> pageResult = articleDao.selectArticles(keyword, status, pageNum, pageSize);
 
@@ -42,7 +42,7 @@ public class AdminArticleController extends BaseController {
     public ModelResp submitArticle(StArticle stArticle) {
         stArticle.setViewCount(0);
         stArticle.setThumbCount(0);
-        stArticle.setPublishStatus(StConst.ST_PUBLISH_DID);
+        stArticle.setStatus(StConst.ST_PUBLISH_DID);
         stArticle.setPublishTime(new Date());
         stArticle.setCreateTime(new Date());
         articleDao.save(stArticle);

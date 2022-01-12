@@ -3,16 +3,14 @@
 
 [#include 'templates/frame/index.ftlh']
 
-[#macro StMenu group][/#macro]
-[#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.MenuDirective"  --]
-[#-- @ftlvariable name="requestUri" type="java.lang.String" --]
-[#-- @ftlvariable name="stFolderOpen" type="java.lang.Boolean" --]
-[#-- @ftlvariable name="stMenuGroup" type="java.util.Collection<cn.sixlab.minesoft.singte.core.models.StMenu>" --]
-[#-- @ftlvariable name="stHasMenu" type="java.lang.Boolean" --]
-[#-- @ftlvariable name="stMenuGroupList" type="cn.sixlab.minesoft.singte.core.models.StMenu[]" --]
-
 [#macro StConfig key default=""][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.ConfigDirective"  --]
+
+[#macro StStatic src type='js' prefix="/staic/type"][/#macro]
+[#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.StaticDirective"  --]
+
+[#macro StAside][/#macro]
+[#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.AsideDirective"  --]
 
 [#macro StKeyword][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.KeywordDirective"  --]
@@ -23,5 +21,10 @@
 [#-- @ftlvariable name="tArticleList" type="cn.sixlab.minesoft.singte.core.models.StArticle[]" --]
 [#-- @ftlvariable name="tArticlePageInfo" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.StArticle>" --]
 
-[#macro StStatic src type='js' prefix="/staic/type"][/#macro]
-[#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.StaticDirective"  --]
+[#macro StMenu group][/#macro]
+[#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.MenuDirective"  --]
+[#-- @ftlvariable name="requestUri" type="java.lang.String" --]
+[#-- @ftlvariable name="stFolderOpen" type="java.lang.Boolean" --]
+[#-- @ftlvariable name="stMenuGroup" type="java.util.Collection<cn.sixlab.minesoft.singte.core.models.StMenu>" --]
+[#-- @ftlvariable name="stHasMenu" type="java.lang.Boolean" --]
+[#-- @ftlvariable name="stMenuGroupList" type="cn.sixlab.minesoft.singte.core.models.StMenu[]" --]

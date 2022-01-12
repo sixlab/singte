@@ -15,8 +15,6 @@ public class StConfig extends BaseModel {
 
     private String intro;
 
-    private String status;
-
     public String getConfigKey() {
         return configKey;
     }
@@ -47,13 +45,5 @@ public class StConfig extends BaseModel {
 
     public void setIntro(String intro) {
         this.intro = intro == null ? null : intro.trim();
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
     }
 }

@@ -14,8 +14,6 @@ public class StPage extends BaseModel {
 
     private Integer viewCount;
 
-    private String publishStatus;
-
     private Date publishTime;
 
     private String content;
@@ -50,14 +48,6 @@ public class StPage extends BaseModel {
 
     public void setViewCount(Integer viewCount) {
         this.viewCount = viewCount;
-    }
-
-    public String getPublishStatus() {
-        return publishStatus;
-    }
-
-    public void setPublishStatus(String publishStatus) {
-        this.publishStatus = publishStatus == null ? null : publishStatus.trim();
     }
 
     public Date getPublishTime() {

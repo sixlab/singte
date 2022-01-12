@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.init;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.StConfigDao;
@@ -101,12 +102,12 @@ public class DataInit implements ApplicationRunner {
 
         checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800100, "800100");
         checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800200, "800200");
-        checkMenu(false, "menu.widget.list", "menu.system.manage", "far fa-circle", "/admin/widget/list", 800200, "800250");
+        checkMenu(false, "menu.widget.list", "menu.system.manage", "far fa-circle", "/admin/widget/list", 800250, "800250");
         checkMenu(false, "menu.user.list", "menu.system.manage", "far fa-circle", "/admin/user/list", 800300, "800300");
 
         checkMenu(false, "nav.index", "nav", "far fa-circle", "/", 10, "首页");
-        checkMenu(false, "nav.articles", "nav", "far fa-circle", "/article", 15, "文章");
-        checkMenu(false, "nav.ancient", "nav", "far fa-circle", "/ancient", 20, "古文");
+        checkMenu(false, "nav.articles", "nav", "far fa-circle", "/articles", 15, "文章");
+        checkMenu(false, "nav.ancient", "nav", "far fa-circle", "/ancients", 20, "古文");
         checkMenu(false, "nav.tools", "nav", "far fa-circle", "/tools", 30, "工具");
         checkMenu(false, "nav.about", "nav", "far fa-circle", "/about", 99, "关于");
 
@@ -178,7 +179,8 @@ public class DataInit implements ApplicationRunner {
             widget.setWidgetCode(widgetCode);
             widget.setWidgetName(widgetName);
             widget.setWidgetIntro(intro);
-            widget.setWidgetStatus("1");
+            widget.setStatus("1");
+            widget.setWeight(RandomUtil.randomInt(100));
             widget.setCreateTime(new Date());
 
             widgetDao.save(widget);

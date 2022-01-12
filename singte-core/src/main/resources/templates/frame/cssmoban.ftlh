@@ -115,9 +115,9 @@
     <#nested />
     <#if aside>
     <aside class="side-section right-box">
-<#--        <#list asideList as asideItem>-->
-<#--            <@StAside type=asideItem.asideCode />-->
-<#--        </#list>-->
+        <#list asideList as asideItem>
+            <@StAside type=asideItem.asideCode />
+        </#list>
         <div class="whitebg tuijian">
           <h2 class="side-title">站长推荐</h2>
           <section class="topnews imgscale"><a href="/xd/23.html"><img src="images/pic03.jpg"><span>作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</span></a></section>

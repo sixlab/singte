@@ -24,21 +24,21 @@ public class StArticleDao extends BaseDao<StArticle> {
     }
 
     public List<StArticle> selectHot(int size) {
-        Query query = new Query(Criteria.where("publishStatus").is(StConst.YES))
+        Query query = new Query(Criteria.where("status").is(StConst.YES))
                 .with(Sort.by(Sort.Direction.DESC, "viewCount"))
                 .limit(size);
         return mongoTemplate.find(query, StArticle.class);
     }
 
     public List<StArticle> selectLast(int size) {
-        Query query = new Query(Criteria.where("publishStatus").is(StConst.YES))
+        Query query = new Query(Criteria.where("status").is(StConst.YES))
                 .with(Sort.by(Sort.Direction.DESC, "publishTime"))
                 .limit(size);
         return mongoTemplate.find(query, StArticle.class);
     }
 
     public List<StArticle> selectRandom(int size) {
-        Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
+        Criteria criteria = Criteria.where("status").is(StConst.YES);
         MatchOperation matchOperation = Aggregation.match(criteria);
         SampleOperation sizeOperation = Aggregation.sample(size);
         Aggregation aggregation = Aggregation.newAggregation(matchOperation, sizeOperation);
@@ -48,7 +48,7 @@ public class StArticleDao extends BaseDao<StArticle> {
     }
 
     public PageResult<StArticle> selectByCategory(String category, int pageNum, int pageSize) {
-        Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
+        Criteria criteria = Criteria.where("status").is(StConst.YES);
         if(StringUtils.isNotEmpty(category)){
             criteria = criteria.and("category").is(category);
         }
@@ -60,7 +60,7 @@ public class StArticleDao extends BaseDao<StArticle> {
     }
 
     public PageResult<StArticle> selectByKeyword(String keyword, int pageNum, int pageSize) {
-        Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
+        Criteria criteria = Criteria.where("status").is(StConst.YES);
         if (StringUtils.isNotEmpty(keyword)) {
             criteria = criteria.and("keywords").is(keyword);
         }
@@ -73,7 +73,7 @@ public class StArticleDao extends BaseDao<StArticle> {
 
     public PageResult<StArticle> selectByWord(String word, int pageNum, int pageSize) {
         // TODO 待实现更好搜索方法
-        Criteria criteria = Criteria.where("publishStatus").is(StConst.YES);
+        Criteria criteria = Criteria.where("status").is(StConst.YES);
         if (StringUtils.isNotEmpty(word)) {
             criteria = criteria.and("content").regex(word);
         }
@@ -86,7 +86,7 @@ public class StArticleDao extends BaseDao<StArticle> {
 
     public StArticle selectByAlias(String alias) {
         Criteria criteria = Criteria
-                .where("publishStatus").is(StConst.YES)
+                .where("status").is(StConst.YES)
                 .and("alias").is(alias);
 
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
@@ -103,7 +103,7 @@ public class StArticleDao extends BaseDao<StArticle> {
     }
 
     public PageResult<StArticle> selectByDate(Date begin, Date end, int pageNum, int pageSize) {
-        Criteria criteria = Criteria.where("publishStatus").is(StConst.YES)
+        Criteria criteria = Criteria.where("status").is(StConst.YES)
                 .and("publishTime").gte(begin).lt(end);
         Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
 
@@ -121,7 +121,7 @@ public class StArticleDao extends BaseDao<StArticle> {
     }
 
     public List<StCategory> countCategory() {
-        MatchOperation queryOperation = Aggregation.match(Criteria.where("publishStatus").is(StConst.YES));
+        MatchOperation queryOperation = Aggregation.match(Criteria.where("status").is(StConst.YES));
         GroupOperation groupOperation = Aggregation.group("category").count().as("articleCount");
         ProjectionOperation nameOperation = Aggregation.project("articleCount").and("category").previousOperation();
 
@@ -134,7 +134,7 @@ public class StArticleDao extends BaseDao<StArticle> {
     public PageResult<StArticle> selectArticles(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StringUtils.isNotEmpty(status)) {
-            criteria = criteria.and("publishStatus").is(status);
+            criteria = criteria.and("status").is(status);
         }
 
         if (StringUtils.isNotEmpty(keyword)) {

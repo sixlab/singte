@@ -28,7 +28,7 @@ public class AdminSpiderController extends BaseController {
     @PostMapping(value = "/listData")
     public String listData(ModelMap modelMap, String keyword, String status,
                             @RequestParam(defaultValue = "1") Integer pageNum,
-                            @RequestParam(defaultValue = "10") Integer pageSize) {
+                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
         PageResult<StSpider> pageResult = spiderDao.selectSpiders(keyword, status, pageNum, pageSize);
 
@@ -40,7 +40,7 @@ public class AdminSpiderController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/submitSpider")
     public ModelResp submitSpider(StSpider stSpider) {
-        stSpider.setSpiderStatus(StConst.YES);
+        stSpider.setStatus(StConst.YES);
         stSpider.setCreateTime(new Date());
         spiderDao.save(stSpider);
         return ModelResp.success();

@@ -1,9 +1,6 @@
 package cn.sixlab.minesoft.singte.core.models;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
-import org.springframework.data.annotation.Id;
-
-import java.util.Date;
 
 public class StSpider extends BaseModel {
 
@@ -28,8 +25,6 @@ public class StSpider extends BaseModel {
     private String keywordRule;
 
     private Integer waitTimes;
-
-    private String spiderStatus;
 
     private String urlParam;
 
@@ -119,14 +114,6 @@ public class StSpider extends BaseModel {
 
     public void setWaitTimes(Integer waitTimes) {
         this.waitTimes = waitTimes;
-    }
-
-    public String getSpiderStatus() {
-        return spiderStatus;
-    }
-
-    public void setSpiderStatus(String spiderStatus) {
-        this.spiderStatus = spiderStatus == null ? null : spiderStatus.trim();
     }
 
     public String getUrlParam() {

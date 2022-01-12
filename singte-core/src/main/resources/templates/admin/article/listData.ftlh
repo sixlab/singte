@@ -29,7 +29,7 @@
                 <td>${item.category}</td>
 
                 <td>${item.viewCount}/${item.thumbCount}</td>
-                <td>${item.publishStatus}</td>
+                <td>${item.status}</td>
                 <td>${(item.publishTime?string("yyyy-MM-dd HH:mm:ss"))!''}</td>
                 <td>
 

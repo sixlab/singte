@@ -6,9 +6,10 @@
         <thead>
         <tr>
             <th style="width: 10px">#</th>
-            <th>爬虫名称</th>
-            <th>爬虫类型</th>
-            <th>时间</th>
+            <th>分组</th>
+            <th>key</th>
+            <th>值</th>
+            <th>简介</th>
             <th>状态</th>
             <th>操作</th>
         </tr>
@@ -17,9 +18,10 @@
         <#list result.list as item>
             <tr>
                 <td>${item_index + 1}.</td>
-                <td>${item.spiderName}</td>
-                <td>${item.spiderType}</td>
-                <td>${(item.createTime?string("yyyy-MM-dd HH:mm:ss"))!''}</td>
+                <td>${item.configGroup!'-'}</td>
+                <td>${item.configKey}</td>
+                <td>${item.configVal}</td>
+                <td>${item.intro}</td>
                 <td>${item.status}</td>
                 <td>
 

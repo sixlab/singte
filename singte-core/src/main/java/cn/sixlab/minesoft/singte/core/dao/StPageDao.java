@@ -20,7 +20,7 @@ public class StPageDao extends BaseDao<StPage> {
 
     public StPage selectByAlias(String alias) {
         Criteria criteria = Criteria
-                .where("publishStatus").is(StConst.YES)
+                .where("status").is(StConst.YES)
                 .and("alias").is(alias);
 
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
@@ -39,7 +39,7 @@ public class StPageDao extends BaseDao<StPage> {
     public PageResult<StPage> selectPages(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StringUtils.isNotEmpty(status)) {
-            criteria = criteria.and("publishStatus").is(status);
+            criteria = criteria.and("status").is(status);
         }
 
         if (StringUtils.isNotEmpty(keyword)) {

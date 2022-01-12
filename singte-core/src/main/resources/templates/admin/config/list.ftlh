@@ -1,16 +1,16 @@
 <#include '../../frame/functions.ftlh'>
 
-<#assign title><@StI18n "page.title.page"/></#assign>
+<#assign title><@StI18n "page.title.configs"/></#assign>
 <#assign js>
     <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
     <@StStatic src="common/stDataTable.js" />
-    <@StStatic src="admin/page/list.js" />
+    <@StStatic src="admin/config/list.js" />
 </#assign>
 <@AdminFrame title="${title}" js=js>
     <div class="row">
         <div class="col-12">
-            <form id="queryForm" action="/admin/page/listData">
+            <form id="queryForm" action="/admin/config/listData">
                 <input type="hidden" name="pageNum" class="pageNum" value="1">
                 <input type="hidden" name="pageSize" class="pageSize" value="10">
                 <div class="card">
@@ -19,7 +19,7 @@
                             <div class="col-4">
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#modal-default">
-                                    新增页面
+                                    新增配置
                                 </button>
                             </div>
                             <div class="col-5">
@@ -51,7 +51,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">页面信息</h4>
+                    <h4 class="modal-title">配置信息</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -59,27 +59,27 @@
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
                         <div class="form-group row">
-                            <label for="title" class="col-sm-2 col-form-label">页面标题</label>
+                            <label for="configGroup" class="col-sm-2 col-form-label">分组</label>
                             <div class="col-sm-10">
-                                <input type="text" name="title" id="title" class="form-control required" placeholder="页面标题">
+                                <input type="text" name="configGroup" id="configGroup" class="form-control required" placeholder="分组">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="author" class="col-sm-2 col-form-label">作者</label>
+                            <label for="configKey" class="col-sm-2 col-form-label">Key</label>
                             <div class="col-sm-10">
-                                <input type="text" name="author" id="author" class="form-control required" placeholder="作者">
+                                <input type="text" name="configKey" id="configKey" class="form-control required" placeholder="Key">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="alias" class="col-sm-2 col-form-label">页面别名</label>
+                            <label for="configVal" class="col-sm-2 col-form-label">值</label>
                             <div class="col-sm-10">
-                                <input type="text" name="alias" id="alias" class="form-control required" placeholder="页面别名">
+                                <textarea class="form-control" name="configVal" id="configVal" rows="3" placeholder="值"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="content" class="col-sm-2 col-form-label">内容</label>
+                            <label for="intro" class="col-sm-2 col-form-label">简介</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="content" id="content" rows="3" placeholder="内容"></textarea>
+                                <textarea class="form-control" name="intro" id="intro" rows="3" placeholder="简介"></textarea>
                             </div>
                         </div>
                     </form>

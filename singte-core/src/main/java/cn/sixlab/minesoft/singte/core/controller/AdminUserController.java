@@ -29,7 +29,7 @@ public class AdminUserController extends BaseController {
     @PostMapping(value = "/listData")
     public String listData(ModelMap modelMap, String keyword, String status,
                             @RequestParam(defaultValue = "1") Integer pageNum,
-                            @RequestParam(defaultValue = "10") Integer pageSize) {
+                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
         PageResult<StUser> pageResult = userDao.selectUsers(keyword, status, pageNum, pageSize);
 

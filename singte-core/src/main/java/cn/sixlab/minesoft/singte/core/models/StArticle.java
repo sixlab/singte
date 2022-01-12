@@ -25,8 +25,6 @@ public class StArticle extends BaseModel {
 
     private Integer thumbCount;
 
-    private String publishStatus;
-
     private Date publishTime;
 
     private String content;
@@ -101,14 +99,6 @@ public class StArticle extends BaseModel {
 
     public void setThumbCount(Integer thumbCount) {
         this.thumbCount = thumbCount;
-    }
-
-    public String getPublishStatus() {
-        return publishStatus;
-    }
-
-    public void setPublishStatus(String publishStatus) {
-        this.publishStatus = publishStatus == null ? null : publishStatus.trim();
     }
 
     public Date getPublishTime() {

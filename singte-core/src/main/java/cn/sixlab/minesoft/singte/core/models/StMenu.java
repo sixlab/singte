@@ -14,8 +14,6 @@ public class StMenu extends BaseModel {
 
     private String menuGroup;
 
-    private String status;
-
     private Integer weight;
 
     private String intro;
@@ -58,14 +56,6 @@ public class StMenu extends BaseModel {
 
     public void setMenuGroup(String menuGroup) {
         this.menuGroup = menuGroup == null ? null : menuGroup.trim();
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
     }
 
     public Integer getWeight() {

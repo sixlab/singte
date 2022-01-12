@@ -8,9 +8,9 @@ public class StWidget extends BaseModel {
 
     private String widgetCode;
 
-    private String widgetStatus;
-
     private String widgetIntro;
+
+    private Integer weight;
 
     private String widgetParam;
 
@@ -30,20 +30,20 @@ public class StWidget extends BaseModel {
         this.widgetCode = widgetCode;
     }
 
-    public String getWidgetStatus() {
-        return widgetStatus;
-    }
-
-    public void setWidgetStatus(String widgetStatus) {
-        this.widgetStatus = widgetStatus;
-    }
-
     public String getWidgetIntro() {
         return widgetIntro;
     }
 
     public void setWidgetIntro(String widgetIntro) {
         this.widgetIntro = widgetIntro;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 
     public String getWidgetParam() {

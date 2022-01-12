@@ -25,7 +25,7 @@ public class AdminWidgetController extends BaseController {
     @PostMapping(value = "/listData")
     public String listData(ModelMap modelMap, String keyword, String status,
                             @RequestParam(defaultValue = "1") Integer pageNum,
-                            @RequestParam(defaultValue = "10") Integer pageSize) {
+                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
         PageResult<StWidget> pageResult = widgetDao.selectWidgets(keyword, status, pageNum, pageSize);
 
@@ -36,9 +36,9 @@ public class AdminWidgetController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String widgetStatus) {
+    public ModelResp submitStatus(String id, String status) {
         StWidget widget = widgetDao.selectById(id);
-        widget.setWidgetStatus(widgetStatus);
+        widget.setStatus(status);
         widgetDao.save(widget);
         return ModelResp.success();
     }
