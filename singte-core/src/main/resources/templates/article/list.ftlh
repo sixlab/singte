@@ -1,5 +1,5 @@
 <#-- @ftlvariable name="result" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.StArticle>" -->
-<#include 'frame/functions.ftlh'>
+<#include '../frame/functions.ftlh'>
 
 <#assign static>
     <script src="/static/cssmoban/js/hc-sticky.js"></script>

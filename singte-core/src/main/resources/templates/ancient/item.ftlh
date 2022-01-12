@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="steAncient" type="cn.sixlab.minesoft.singte.module.minesoft.models.SteAncient" -->
+<#-- @ftlvariable name="steAncient" type="cn.sixlab.minesoft.singte.core.models.SteAncient" -->
 <#include '../frame/functions.ftlh'>
 
 <#assign css>

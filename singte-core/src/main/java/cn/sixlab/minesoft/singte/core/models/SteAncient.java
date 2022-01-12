@@ -1,4 +1,4 @@
-package cn.sixlab.minesoft.singte.module.minesoft.models;
+package cn.sixlab.minesoft.singte.core.models;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
 

@@ -1,13 +1,13 @@
-package cn.sixlab.minesoft.singte.module.minesoft.controller;
+package cn.sixlab.minesoft.singte.core.controller;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientCategoryDao;
-import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientDao;
-import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncient;
-import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncientCategory;
-import cn.sixlab.minesoft.singte.module.minesoft.service.AncientService;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientCategoryDao;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientDao;
+import cn.sixlab.minesoft.singte.core.models.SteAncient;
+import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
+import cn.sixlab.minesoft.singte.core.service.AncientService;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

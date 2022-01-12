@@ -29,12 +29,6 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.sixlab.minesoft</groupId>
-            <artifactId>singte-module-minesoft</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>

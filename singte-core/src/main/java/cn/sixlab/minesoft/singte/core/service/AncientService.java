@@ -1,7 +1,7 @@
-package cn.sixlab.minesoft.singte.module.minesoft.service;
+package cn.sixlab.minesoft.singte.core.service;
 
-import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientDao;
-import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncient;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientDao;
+import cn.sixlab.minesoft.singte.core.models.SteAncient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

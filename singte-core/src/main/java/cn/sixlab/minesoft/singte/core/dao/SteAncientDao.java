@@ -1,8 +1,8 @@
-package cn.sixlab.minesoft.singte.module.minesoft.dao;
+package cn.sixlab.minesoft.singte.core.dao;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
-import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncient;
+import cn.sixlab.minesoft.singte.core.models.SteAncient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;

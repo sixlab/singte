@@ -1,10 +1,10 @@
-package cn.sixlab.minesoft.singte.module.minesoft.controller;
+package cn.sixlab.minesoft.singte.core.controller;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.module.minesoft.dao.SteAncientCategoryDao;
-import cn.sixlab.minesoft.singte.module.minesoft.models.SteAncientCategory;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientCategoryDao;
+import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

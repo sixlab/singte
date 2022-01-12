@@ -13,7 +13,6 @@
     <modules>
         <module>singte-web</module>
         <module>singte-core</module>
-        <module>singte-module-minesoft</module>
     </modules>
 
 </project>

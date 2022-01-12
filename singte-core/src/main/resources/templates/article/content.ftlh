@@ -1,5 +1,5 @@
 <#-- @ftlvariable name="article" type="cn.sixlab.minesoft.singte.core.models.StArticle" -->
-<#include 'frame/functions.ftlh'>
+<#include '../frame/functions.ftlh'>
 <#assign static>
     <script src="/static/cssmoban/js/hc-sticky.js"></script>
     <script src="/static/cssmoban/js/aside-sticky.js"></script>

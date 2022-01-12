@@ -30,7 +30,7 @@ public class ArticleController extends BaseController {
 
         modelMap.put("result", result);
 
-        return "articles";
+        return "article/list";
     }
 
     @GetMapping(value = "/content/{articleId}")
@@ -47,7 +47,7 @@ public class ArticleController extends BaseController {
             articleDao.addView(article.getId());
 
             modelMap.put("article", article);
-            return "article";
+            return "article/content";
         }
     }
 
