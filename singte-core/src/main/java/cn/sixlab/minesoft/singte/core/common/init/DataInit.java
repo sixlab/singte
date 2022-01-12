@@ -107,7 +107,7 @@ public class DataInit implements ApplicationRunner {
         checkMenu(false, "menu.user.list", "menu.system.manage", "far fa-circle", "/admin/user/list", 800300, "800300");
 
         checkMenu(false, "nav.index", "nav", "far fa-circle", "/", 10, "首页");
-        checkMenu(false, "nav.articles", "nav", "far fa-circle", "/articles", 15, "文章");
+        checkMenu(false, "nav.articles", "nav", "far fa-circle", "/article/list", 15, "文章");
         checkMenu(false, "nav.ancient", "nav", "far fa-circle", "/ancients", 20, "古文");
         checkMenu(false, "nav.tools", "nav", "far fa-circle", "/tools", 30, "工具");
         checkMenu(false, "nav.about", "nav", "far fa-circle", "/about", 99, "关于");

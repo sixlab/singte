@@ -19,7 +19,7 @@
                 <ul>
                     <@StArticles type=type size=size>
                         <#list tArticleList as item>
-                    <li><span<#if (item_index<4)> class="on"</#if>>${item_index+1}</span><a href="/article/${item.id}" class="h">${item.title}</a></li>
+                    <li><span<#if (item_index<4)> class="on"</#if>>${item_index+1}</span><a href="/article/content/${item.id}" class="h">${item.title}</a></li>
                         </#list>
                     </@StArticles>
                 </ul>
@@ -39,8 +39,8 @@
             <img src="/static/images/article/${item_index%10}.jpg" class="fl" alt="">
             <div class="right fr">
                 <div class="top">
-                    <p class="p1"><a href="/article/${item.alias}">${item.title}</a></p>
-                    <p class="p2"><a href="/article/${item.alias}">${item.summary}</a></p>
+                    <p class="p1"><a href="/article/content/${item.alias}">${item.title}</a></p>
+                    <p class="p2"><a href="/article/content/${item.alias}">${item.summary}</a></p>
                 </div>
                 <div class="clearfix bottom">
                     <div class="fl">

@@ -399,7 +399,7 @@ span.po-view { background: url(../images/icon/view.png) no-repeat left center }
 .share img { width: 100px; float: left; margin: 0 20px; }
 .share a { color: #1487f4 }
 .share a:hover { text-decoration: underline }
-.diggit { display: block; width: 160px; margin: 20px auto; background: #ff5501; color: #fff; box-shadow: 1px 2px 6px 0px rgba(0,0,0,.2); border-radius: 3px; line-height: 40px; text-align: center; }
+.diggit { display: block; width: 160px; margin: 20px auto; background: #ff5501; color: #fff; box-shadow: 1px 2px 6px 0px rgba(0,0,0,.2); border-radius: 3px; line-height: 40px; text-align: center;cursor: pointer; }
 .diggit a { color: #fff }
 /*info-pre-next*/
 .info-pre-next { overflow: hidden; margin: 20px 0; }

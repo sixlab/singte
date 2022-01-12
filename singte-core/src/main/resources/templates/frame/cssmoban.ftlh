@@ -124,14 +124,14 @@
 
                                 <#if item_index==0>
                                     <section class="topnews imgscale">
-                                        <a href="/article/${item.alias}">
+                                        <a href="/article/content/${item.alias}">
                                             <img src="/static/images/article/0.jpg" alt="${item.title}">
                                             <span>${item.title}</span>
                                         </a>
                                     </section>
                                 <#else>
                                     <li>
-                                        <a href="/article/${item.alias}" title="${item.title}" target="_blank">
+                                        <a href="/article/content/${item.alias}" title="${item.title}" target="_blank">
                                             <i><img src="/static/images/article/${item_index%10}.jpg"
                                                     alt="${item.title}"></i>
                                             <p>${item.title}</p>
@@ -158,14 +158,14 @@
 
                                 <#if item_index==0>
                                     <section class="topnews imgscale">
-                                        <a href="/article/${item.alias}">
+                                        <a href="/article/content/${item.alias}">
                                             <img src="/static/images/article/0.jpg" alt="${item.title}">
                                             <span>${item.title}</span>
                                         </a>
                                     </section>
                                 <#else>
                                     <li>
-                                        <a href="/article/${item.alias}" title="${item.title}" target="_blank">
+                                        <a href="/article/content/${item.alias}" title="${item.title}" target="_blank">
                                             <i><img src="/static/images/article/${item_index%10}.jpg"
                                                     alt="${item.title}"></i>
                                             <p>${item.title}</p>
@@ -187,7 +187,7 @@
                         <@StArticles type="random" size=10>
                             <ul>
                             <#list stArticleList as item>
-                                <li><a href="/article/${item.alias}" title="${item.title}" target="_blank">${item.title}</a></li>
+                                <li><a href="/article/content/${item.alias}" title="${item.title}" target="_blank">${item.title}</a></li>
                             </#list>
                             </ul>
                         </@StArticles>
@@ -205,7 +205,7 @@
 
                                 <#if item_index==0>
                                     <section class="topnews imgscale">
-                                        <a href="/article/${item.alias}">
+                                        <a href="/article/content/${item.alias}">
                                             <img src="/static/images/article/0.jpg" alt="${item.title}">
                                             <span>${item.title}</span>
                                         </a>
@@ -213,7 +213,7 @@
                                 <#else>
                                     <li>
                                         <i></i>
-                                        <a href="/article/${item.alias}" title="${item.title}"
+                                        <a href="/article/content/${item.alias}" title="${item.title}"
                                            target="_blank">${item.title}</a>
                                     </li>
                                 </#if>

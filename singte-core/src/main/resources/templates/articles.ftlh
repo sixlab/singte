@@ -20,8 +20,8 @@
                 <ul>
                     <#list result.list as item>
                         <li>
-                            <h2><a href="/article/${item.alias}">${item.title}</a></h2>
-                            <i><a href="/article/${item.alias}"><img src="/static/images/article/${item_index%10}.jpg" alt="${item.title}"></a></i>
+                            <h2><a href="/article/content/${item.alias}">${item.title}</a></h2>
+                            <i><a href="/article/content/${item.alias}"><img src="/static/images/article/${item_index%10}.jpg" alt="${item.title}"></a></i>
                             <p>
                                 ${item.publishTime?string("yyyy-MM-dd HH:mm:ss")}<br/>
                                 ${item.summary}

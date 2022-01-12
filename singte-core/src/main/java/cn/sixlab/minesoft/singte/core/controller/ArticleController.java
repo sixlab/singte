@@ -3,6 +3,7 @@ package cn.sixlab.minesoft.singte.core.controller;
 import cn.hutool.core.util.RandomUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
+import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import cn.sixlab.minesoft.singte.core.service.ArticleService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/article")
 public class ArticleController extends BaseController {
 
     @Autowired
@@ -23,8 +24,8 @@ public class ArticleController extends BaseController {
     @Autowired
     private ArticleService service;
 
-    @GetMapping(value = "/articles")
-    public String articles(ModelMap modelMap, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
+    @GetMapping(value = "/list")
+    public String list(ModelMap modelMap, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
         PageResult<StArticle> result = service.list(pageNum, pageSize);
 
         modelMap.put("result", result);
@@ -32,8 +33,8 @@ public class ArticleController extends BaseController {
         return "articles";
     }
 
-    @GetMapping(value = "/article/{articleId}")
-    public String article(ModelMap modelMap, @PathVariable String articleId) {
+    @GetMapping(value = "/content/{articleId}")
+    public String content(ModelMap modelMap, @PathVariable String articleId) {
 
         StArticle article = articleDao.selectByAlias(articleId);
         if (article == null) {
@@ -72,6 +73,15 @@ public class ArticleController extends BaseController {
     public String date(ModelMap modelMap, @PathVariable String date, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
         service.listDate(modelMap, date, pageNum, pageSize);
         return "list";
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/thumb")
+    public ModelResp thumb(String articleId) {
+        StArticle article = articleDao.selectById(articleId);
+        article.setThumbCount(article.getThumbCount()+1);
+        articleDao.save(article);
+        return ModelResp.success(article.getThumbCount());
     }
 
     @ResponseBody
