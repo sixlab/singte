@@ -3,6 +3,7 @@ package cn.sixlab.minesoft.singte.core.common.config;
 import cn.sixlab.minesoft.singte.core.common.pager.PageHelper;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StBeanUtils;
+import cn.sixlab.minesoft.singte.core.models.StWidget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -62,5 +63,4 @@ public abstract class BaseDao<T extends BaseModel> {
 
         return PageHelper.pager(content, pageNum, pageSize, totalNum, totalPages);
     }
-
 }

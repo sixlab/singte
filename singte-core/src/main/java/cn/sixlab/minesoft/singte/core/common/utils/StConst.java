@@ -11,6 +11,8 @@ public class StConst {
     public static final String No = "0";
 
     public final static String ST_VERSION   = "st_version";
+    public final static String ST_INIT   = "st_init";
+
     public final static String ST_WX_NAME   = "st_wx_name";
     public final static String ST_WX_QR     = "st_wx_qr";
     public final static String ST_WX_SHOP_QR     = "st_wx_shop_qr";
