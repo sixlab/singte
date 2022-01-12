@@ -22,12 +22,24 @@ public class ConfigInit implements ApplicationRunner {
     @Override
     @Transactional
     public void run(ApplicationArguments args) {
-        item(StConst.ST_WX_NAME, "满茵科技", "微信名字");
+        item(StConst.ST_WX_NAME, "满茵科技", "微信公众号");
         item(StConst.ST_WX_QR, "/static/images/wx/mp.jpg", "微信公号二维码");
-        item(StConst.ST_WBO_ID, "314566975", "微博ID");
-        item(StConst.ST_WBO_QR, "/static/logo.png", "微博二维码");
+        item(StConst.ST_WX_SHOP_QR, "/static/images/wx/shop.jpg", "微信小店");
+
+        item(StConst.ST_GITHUB_NAME, "minesoft", "Github 名字");
+        item(StConst.ST_GITHUB_LINK, "https://github.com/minesoft", "Github 链接");
+        item(StConst.ST_GITHUB_QR, "/static/images/github.jpg", "Github 链接二维码");
+
+        item(StConst.ST_GITEE_NAME, "满茵科技", "码云名字");
+        item(StConst.ST_GITEE_LINK, "https://gitee.com/minesoft", "码云链接");
+        item(StConst.ST_GITEE_QR, "/static/images/gitee.jpg", "码云链接二维码");
+
         item(StConst.ST_SITE_NAME, "singte", "站点名字");
-        item(StConst.ST_SITE_LOGO, "/static/logo-h.png", "站点logo");
+        item(StConst.ST_SITE_SUBTITLE, "基于MongoDB的完整单站程序", "站点副标题");
+
+        item(StConst.ST_SITE_LOGO, "/static/logo-h.png", "站点logo-横版");
+        item(StConst.ST_SITE_LOGO_BLOCK, "/static/logo.png", "站点logo-方版");
+
         item(StConst.ST_COPY_YEAR, "2021", "版权年份");
         item(StConst.ST_ICP, "", "ICP备案号");
     }

@@ -42,21 +42,16 @@ public class MenuInit implements ApplicationRunner {
         checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800200, "800200");
         checkMenu(false, "menu.user.list", "menu.system.manage", "far fa-circle", "/admin/user/list", 800300, "800300");
 
-
         checkMenu(false, "nav.index", "nav", "far fa-circle", "/", 10, "首页");
+        checkMenu(false, "nav.articles", "nav", "far fa-circle", "/article", 15, "文章");
         checkMenu(false, "nav.ancient", "nav", "far fa-circle", "/ancient", 20, "古文");
         checkMenu(false, "nav.tools", "nav", "far fa-circle", "/tools", 30, "工具");
         checkMenu(false, "nav.about", "nav", "far fa-circle", "/about", 99, "关于");
 
-
-        checkMenu(false, "sider.ancient", "sider", "far fa-circle", "/ancient", 20, "古文");
-        checkMenu(false, "sider.tools", "sider", "far fa-circle", "/tools", 30, "工具");
-
-        checkMenu(false, "footer.ancient", "footer", "far fa-circle", "/ancient", 20, "古文");
-        checkMenu(false, "footer.tools", "footer", "far fa-circle", "/tools", 30, "工具");
-        checkMenu(false, "sixlab", "footer", "far fa-circle", "http://sixlab.cn", 90, "sixalb");
-        checkMenu(false, "minesoft", "footer", "far fa-circle", "http://minesoft.tech", 95, "minesoft");
-        checkMenu(false, "footer.about", "footer", "far fa-circle", "/about", 99, "关于");
+        checkMenu(false, "footer.index", "footer", "icon-shouye", "/", 10, "首页");
+        checkMenu(false, "footer.ancient", "footer", "icon-navicon-wzgl", "/ancient", 20, "古文");
+        checkMenu(false, "footer.tools", "footer", "icon-fenlei", "/tools", 30, "工具");
+        checkMenu(false, "footer.about", "footer", "icon-My", "/about", 99, "关于");
     }
 
     private void checkMenu(boolean folderMenu, String menuCode, String menuGroup, String menuIcon, String menuLink, int weight, String intro) {

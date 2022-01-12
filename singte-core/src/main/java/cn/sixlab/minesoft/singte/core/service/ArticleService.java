@@ -2,6 +2,7 @@ package cn.sixlab.minesoft.singte.core.service;
 
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
@@ -24,6 +25,10 @@ public class ArticleService {
 
     @Autowired
     private StCategoryDao categoryMapper;
+
+    public PageResult<StArticle> list(Integer pageNum, Integer pageSize) {
+        return articleMapper.selectArticles(null, StConst.YES, pageNum, pageSize);
+    }
 
     /**
      * 查询最热门的文章

@@ -1,4 +1,3 @@
-<#-- @ftlvariable name="notFound" type="java.lang.Boolean" -->
 <#-- @ftlvariable name="article" type="cn.sixlab.minesoft.singte.core.models.StArticle" -->
 <#include 'frame/functions.ftlh'>
 

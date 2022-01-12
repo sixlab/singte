@@ -13,11 +13,23 @@ public class StConst {
     public final static String ST_VERSION   = "st_version";
     public final static String ST_WX_NAME   = "st_wx_name";
     public final static String ST_WX_QR     = "st_wx_qr";
-    public static final String ST_WBO_ID    = "st_wbo_id";
-    public static final String ST_WBO_QR    = "st_wbo_qr";
-    public static final String ST_COPY_YEAR = "st_copyright_year";
+    public final static String ST_WX_SHOP_QR     = "st_wx_shop_qr";
+
+    public final static String ST_GITHUB_NAME     = "st_github_name";
+    public final static String ST_GITHUB_LINK     = "st_github_link";
+    public final static String ST_GITHUB_QR     = "st_github_qr";
+
+    public final static String ST_GITEE_NAME     = "st_gitee_name";
+    public final static String ST_GITEE_LINK     = "st_gitee_link";
+    public final static String ST_GITEE_QR     = "st_gitee_qr";
+
     public static final String ST_SITE_NAME = "st_site_name";
+    public static final String ST_SITE_SUBTITLE = "st_site_subtitle";
+
     public static final String ST_SITE_LOGO = "st_site_logo";
+    public static final String ST_SITE_LOGO_BLOCK = "st_site_logo_block";
+
+    public static final String ST_COPY_YEAR = "st_copyright_year";
     public static final String ST_ICP       = "st_icp";
 
     public static final long SECONDS_1      = 1;

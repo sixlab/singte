@@ -30,7 +30,7 @@ public class ConfigDirective implements TemplateDirectiveModel {
                 config = val;
             }
         }
-        if(StringUtils.isEmpty(key)){
+        if(StringUtils.isEmpty(config)){
             config = MapUtils.getString(params, "default");
         }
 

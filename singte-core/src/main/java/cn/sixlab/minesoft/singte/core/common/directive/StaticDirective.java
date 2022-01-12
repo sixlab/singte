@@ -21,9 +21,11 @@ public class StaticDirective implements TemplateDirectiveModel {
         String src = MapUtils.getString(params, "src");
 
         if ("css".equals(type)) {
-            env.getOut().append("<link rel='stylesheet' type='text/css' href='/static/css/" + src + "?_t=" + StConst.DEPLOY_DATE + "'/>");
+            String prefix = MapUtils.getString(params, "prefix","/static/css/");
+            env.getOut().append("<link rel='stylesheet' type='text/css' href='" + prefix + src + "?_t=" + StConst.DEPLOY_DATE + "'/>");
         } else {
-            env.getOut().append("<script type='text/javascript' src='/static/js/" + src + "?_t=" + StConst.DEPLOY_DATE + "'></script>");
+            String prefix = MapUtils.getString(params, "prefix","/static/js/");
+            env.getOut().append("<script type='text/javascript' src='" + prefix + src + "?_t=" + StConst.DEPLOY_DATE + "'></script>");
         }
     }
 }

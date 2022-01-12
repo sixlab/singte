@@ -1,6 +1,7 @@
 
 <#-- 国际化 -->
 <#macro StI18n code>${springMacroRequestContext.getMessage(code,code)?no_esc}</#macro>
+<#macro StI18nArgs code args=[]>${springMacroRequestContext.getMessage(code,args, code)?no_esc}</#macro>
 
 <#--  热文榜  -->
 <#macro ArticleBox type='' size=10>

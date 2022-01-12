@@ -38,7 +38,7 @@ public class IndexController extends BaseController {
     public String index(ModelMap modelMap) {
         service.listList(modelMap, 1, 10);
         modelMap.put("title", configUtils.getConfig("st_site_name"));
-        return "list";
+        return "index";
     }
 
     @GetMapping(value = "/about")

@@ -23,5 +23,5 @@
 [#-- @ftlvariable name="tArticleList" type="cn.sixlab.minesoft.singte.core.models.StArticle[]" --]
 [#-- @ftlvariable name="tArticlePageInfo" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.StArticle>" --]
 
-[#macro StStatic src type='js'][/#macro]
+[#macro StStatic src type='js' prefix="/staic/type"][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.StaticDirective"  --]
