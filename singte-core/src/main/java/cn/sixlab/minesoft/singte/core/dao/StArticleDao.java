@@ -129,8 +129,8 @@ public class StArticleDao extends BaseDao<StArticle> {
 
     public List<StCategory> countCategory() {
         MatchOperation queryOperation = Aggregation.match(Criteria.where("status").is(StConst.YES));
-        GroupOperation groupOperation = Aggregation.group("category").count().as("articleCount");
-        ProjectionOperation nameOperation = Aggregation.project("articleCount").and("category").previousOperation();
+        GroupOperation groupOperation = Aggregation.group("category").count().as("count");
+        ProjectionOperation nameOperation = Aggregation.project("count").and("category").previousOperation();
 
         Aggregation aggregation = Aggregation.newAggregation(queryOperation, groupOperation, nameOperation);
         AggregationResults<StCategory> output = mongoTemplate.aggregate(aggregation, StArticle.class, StCategory.class);

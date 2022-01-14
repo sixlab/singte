@@ -1,13 +1,13 @@
 <#-- @ftlvariable name="result" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.StArticle>" -->
 <#include '../frame/functions.ftlh'>
 
+<#assign title>
+    <@StI18nArgs code="title.list" args=[result.pageNum] />
+</#assign>
+
 <#assign static>
     <script src="/static/cssmoban/js/hc-sticky.js"></script>
     <script src="/static/cssmoban/js/aside-sticky.js"></script>
-</#assign>
-
-<#assign title>
-    <@StI18nArgs code="title.list" args=[result.pageNum] />
 </#assign>
 
 <@PageFrame title=title static=static aside=true>

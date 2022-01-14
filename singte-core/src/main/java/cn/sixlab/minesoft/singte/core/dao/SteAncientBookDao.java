@@ -2,7 +2,7 @@ package cn.sixlab.minesoft.singte.core.dao;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
-import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
+import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -12,15 +12,15 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class SteAncientCategoryDao extends BaseDao<SteAncientCategory> {
+public class SteAncientBookDao extends BaseDao<SteAncientBook> {
 
     @Override
-    public Class<SteAncientCategory> entityClass() {
-        return SteAncientCategory.class;
+    public Class<SteAncientBook> entityClass() {
+        return SteAncientBook.class;
     }
 
-    public List<SteAncientCategory> listSetCategory(String ancientSet){
-        Criteria criteria = Criteria.where("ancientSet").is(ancientSet);
+    public List<SteAncientBook> listCategoryBook(String category) {
+        Criteria criteria = Criteria.where("ancientCategory").is(category);
 
         Sort sort = Sort.by("weight");
 
@@ -29,13 +29,15 @@ public class SteAncientCategoryDao extends BaseDao<SteAncientCategory> {
         return mongoTemplate.find(query, entityClass());
     }
 
-    public PageResult<SteAncientCategory> selectAncientCategory(String keyword, Integer pageNum, Integer pageSize) {
+    public PageResult<SteAncientBook> selectBooks(String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
 
         if (StringUtils.isNotEmpty(keyword)) {
             criteria = criteria.orOperator(
                     Criteria.where("ancientSet").regex(keyword),
                     Criteria.where("ancientCategory").regex(keyword),
+                    Criteria.where("bookName").regex(keyword),
+                    Criteria.where("author").regex(keyword),
                     Criteria.where("intro").regex(keyword)
             );
         }
@@ -45,5 +47,4 @@ public class SteAncientCategoryDao extends BaseDao<SteAncientCategory> {
 
         return pageQuery(query, entityClass(), pageNum, pageSize);
     }
-
 }

@@ -7,9 +7,11 @@
         <tr>
             <th style="width: 10px">#</th>
             <th>分类</th>
+            <th>部属</th>
+
+            <th>数量</th>
 
             <th>顺序</th>
-            <th>简介</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -18,10 +20,15 @@
             <tr>
                 <td>${item_index + 1}.</td>
                 <td>${item.ancientCategory}</td>
+                <td>${item.ancientSet}</td>
 
-                <td>${item.categoryOrder}</td>
-                <td>${item.categoryIntro}</td>
+                <td>${item.count}</td>
+
+                <td>${item.weight}</td>
                 <td>
+                    <div class="text-hide">
+                        ${item.intro}
+                    </div>
 
                 </td>
             </tr>

@@ -43,7 +43,7 @@ public class AdminCategoryController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/submitCategory")
     public ModelResp submitCategory(StCategory stCategory) {
-        stCategory.setArticleCount(0);
+        stCategory.setCount(0);
         stCategory.setCreateTime(new Date());
         categoryDao.save(stCategory);
         return ModelResp.success();

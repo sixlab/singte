@@ -6,7 +6,7 @@ public class StCategory extends BaseModel {
 
     private String category;
 
-    private Integer articleCount;
+    private Integer count;
 
     private Integer weight;
 
@@ -22,12 +22,12 @@ public class StCategory extends BaseModel {
         this.category = category == null ? null : category.trim();
     }
 
-    public Integer getArticleCount() {
-        return articleCount;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setArticleCount(Integer articleCount) {
-        this.articleCount = articleCount;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public Integer getWeight() {

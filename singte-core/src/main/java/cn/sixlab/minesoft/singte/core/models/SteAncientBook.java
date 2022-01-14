@@ -2,13 +2,15 @@ package cn.sixlab.minesoft.singte.core.models;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
 
-public class SteAncientCategory extends BaseModel {
+public class SteAncientBook extends BaseModel {
 
     private String ancientSet;
 
     private String ancientCategory;
 
-    private Integer count;
+    private String bookName;
+
+    private String author;
 
     private Integer weight;
 
@@ -30,12 +32,20 @@ public class SteAncientCategory extends BaseModel {
         this.ancientCategory = ancientCategory;
     }
 
-    public Integer getCount() {
-        return count;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public Integer getWeight() {

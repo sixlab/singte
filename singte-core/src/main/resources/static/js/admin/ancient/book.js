@@ -4,7 +4,7 @@ $(function () {
 
     $(document).on("click", ".saveDataBtn", function () {
         $.ajax({
-            url: '/admin/ancient/submitAncient',
+            url: '/admin/ancient/book/submitBook',
             data: $("#modalDataForm").serialize(),
             type: 'post',
             dataType: 'json',

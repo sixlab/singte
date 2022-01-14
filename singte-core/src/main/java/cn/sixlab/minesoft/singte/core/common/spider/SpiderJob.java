@@ -70,12 +70,12 @@ public abstract class SpiderJob {
             if (stCategory == null) {
                 stCategory = new StCategory();
                 stCategory.setCategory(category);
-                stCategory.setArticleCount(1);
+                stCategory.setCount(1);
                 stCategory.setWeight(1);
                 stCategory.setCreateTime(new Date());
             }else{
                 stCategory.setUpdateTime(new Date());
-                stCategory.setArticleCount(stCategory.getArticleCount() + 1);
+                stCategory.setCount(stCategory.getCount() + 1);
             }
             categoryMapper.save(stCategory);
         }
@@ -86,11 +86,11 @@ public abstract class SpiderJob {
             if (stKeyword == null) {
                 stKeyword = new StKeyword();
                 stKeyword.setKeyword(keyword);
-                stKeyword.setArticleCount(1);
+                stKeyword.setCount(1);
                 stKeyword.setCreateTime(new Date());
             }else{
                 stKeyword.setUpdateTime(new Date());
-                stKeyword.setArticleCount(stKeyword.getArticleCount() + 1);
+                stKeyword.setCount(stKeyword.getCount() + 1);
             }
             keywordDao.save(stKeyword);
         }

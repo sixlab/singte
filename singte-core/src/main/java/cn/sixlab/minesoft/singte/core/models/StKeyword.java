@@ -6,7 +6,7 @@ public class StKeyword extends BaseModel {
 
     private String keyword;
 
-    private Integer articleCount;
+    private Integer count;
 
     private Integer weight;
 
@@ -22,12 +22,12 @@ public class StKeyword extends BaseModel {
         this.keyword = keyword == null ? null : keyword.trim();
     }
 
-    public Integer getArticleCount() {
-        return articleCount;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setArticleCount(Integer articleCount) {
-        this.articleCount = articleCount;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public Integer getWeight() {

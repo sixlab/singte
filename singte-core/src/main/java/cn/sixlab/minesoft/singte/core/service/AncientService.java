@@ -1,7 +1,7 @@
 package cn.sixlab.minesoft.singte.core.service;
 
-import cn.sixlab.minesoft.singte.core.dao.SteAncientDao;
-import cn.sixlab.minesoft.singte.core.models.SteAncient;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientBookDao;
+import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,9 @@ import java.util.Date;
 public class AncientService {
 
     @Autowired
-    private SteAncientDao ancientDao;
+    private SteAncientBookDao ancientDao;
 
-    public void addAncient(SteAncient ancient) {
+    public void addAncient(SteAncientBook ancient) {
         ancient.setCreateTime(new Date());
         ancientDao.save(ancient);
     }

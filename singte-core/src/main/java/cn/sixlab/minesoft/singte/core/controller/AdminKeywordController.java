@@ -43,7 +43,7 @@ public class AdminKeywordController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/submitKeyword")
     public ModelResp submitKeyword(StKeyword stKeyword) {
-        stKeyword.setArticleCount(0);
+        stKeyword.setCount(0);
         stKeyword.setCreateTime(new Date());
         keywordDao.save(stKeyword);
         return ModelResp.success();

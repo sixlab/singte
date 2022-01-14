@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @Controller
-@RequestMapping("/admin/ancientCategory")
+@RequestMapping("/admin/ancient/category")
 public class AdminAncientCategoryController extends BaseController {
 
     @Autowired
@@ -19,7 +21,7 @@ public class AdminAncientCategoryController extends BaseController {
 
     @GetMapping(value = "/list")
     public String list() {
-        return "admin/ancientCategory/list";
+        return "admin/ancient/categoryList";
     }
 
     @PostMapping(value = "/listData")
@@ -27,16 +29,18 @@ public class AdminAncientCategoryController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        PageResult<SteAncientCategory> pageResult = ancientCategoryDao.selectAncients(keyword, pageNum, pageSize);
+        PageResult<SteAncientCategory> pageResult = ancientCategoryDao.selectAncientCategory(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
-        return "admin/ancientCategory/listData";
+        return "admin/ancient/categoryListData";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitAncientCategory")
-    public ModelResp submitAncient(SteAncientCategory steAncientCategory) {
+    @RequestMapping(value = "/submitCategory")
+    public ModelResp submitCategory(SteAncientCategory steAncientCategory) {
+        steAncientCategory.setCount(0);
+        steAncientCategory.setCreateTime(new Date());
         ancientCategoryDao.save(steAncientCategory);
         return ModelResp.success();
     }

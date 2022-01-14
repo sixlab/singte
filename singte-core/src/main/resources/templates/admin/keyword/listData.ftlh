@@ -19,7 +19,7 @@
             <tr>
                 <td>${item_index + 1}.</td>
                 <td>${item.keyword}</td>
-                <td>${item.articleCount?string(",###")}</td>
+                <td>${item.count?string(",###")}</td>
                 <td>${item.flag!''}</td>
                 <td>${item.weight!''}</td>
                 <td>${item.intro!''}</td>

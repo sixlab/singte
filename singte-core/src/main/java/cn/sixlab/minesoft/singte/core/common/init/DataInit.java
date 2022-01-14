@@ -98,8 +98,10 @@ public class DataInit implements ApplicationRunner {
 
         checkMenu(false, "menu.spider.list", "menu.spider.manage", "far fa-circle", "/admin/spider/list", 500100, "爬虫列表");
 
-        checkMenu(false, "menu.ancient.list", "menu.ancient.manage", "far fa-circle", "/admin/ancient/list", 600100, "古文列表");
-        checkMenu(false, "menu.ancient.category", "menu.ancient.manage", "far fa-circle", "/admin/ancientCategory/list", 600200, "古文分类");
+        checkMenu(false, "menu.ancient.book", "menu.ancient.manage", "far fa-circle", "/admin/ancient/book/list", 600100, "古文列表");
+        checkMenu(false, "menu.ancient.section", "menu.ancient.manage", "far fa-circle", "/admin/ancient/section/list", 600200, "章节列表");
+        checkMenu(false, "menu.ancient.set", "menu.ancient.manage", "far fa-circle", "/admin/ancient/set/list", 600300, "古文部属");
+        checkMenu(false, "menu.ancient.category", "menu.ancient.manage", "far fa-circle", "/admin/ancient/category/list", 600400, "古文分类");
 
         checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800100, "800100");
         checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800200, "800200");
@@ -108,12 +110,12 @@ public class DataInit implements ApplicationRunner {
 
         checkMenu(false, "nav.index", "nav", "far fa-circle", "/", 10, "首页");
         checkMenu(false, "nav.articles", "nav", "far fa-circle", "/article/list", 15, "文章");
-        checkMenu(false, "nav.ancient", "nav", "far fa-circle", "/ancient/list", 20, "古文");
+        checkMenu(false, "nav.ancient", "nav", "far fa-circle", "/ancient/set", 20, "古文");
         checkMenu(false, "nav.tools", "nav", "far fa-circle", "/tool/list", 30, "工具");
         checkMenu(false, "nav.about", "nav", "far fa-circle", "/about", 99, "关于");
 
         checkMenu(false, "footer.index", "footer", "icon-shouye", "/", 10, "首页");
-        checkMenu(false, "footer.ancient", "footer", "icon-navicon-wzgl", "/ancient/list", 20, "古文");
+        checkMenu(false, "footer.ancient", "footer", "icon-navicon-wzgl", "/ancient/set", 20, "古文");
         checkMenu(false, "footer.tools", "footer", "icon-fenlei", "/tool/list", 30, "工具");
         checkMenu(false, "footer.about", "footer", "icon-My", "/about", 99, "关于");
     }

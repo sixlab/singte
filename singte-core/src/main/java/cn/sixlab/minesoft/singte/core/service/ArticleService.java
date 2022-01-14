@@ -44,7 +44,7 @@ public class ArticleService {
                 categoryDao.save(item);
             } else {
                 stCategory.setUpdateTime(new Date());
-                stCategory.setArticleCount(item.getArticleCount());
+                stCategory.setCount(item.getCount());
                 stCategory.setFlag(flag);
                 categoryDao.save(stCategory);
             }
@@ -74,7 +74,7 @@ public class ArticleService {
                     if (stKeyword == null) {
                         stKeyword = new StKeyword();
                         stKeyword.setKeyword(keyword);
-                        stKeyword.setArticleCount(0);
+                        stKeyword.setCount(0);
                         stKeyword.setCreateTime(new Date());
                         keywordDao.save(stKeyword);
                     }
@@ -94,7 +94,7 @@ public class ArticleService {
 
         keywordCount.forEach((key, val) -> {
             StKeyword stKeyword = keywordDao.selectById(key);
-            stKeyword.setArticleCount(val);
+            stKeyword.setCount(val);
             stKeyword.setUpdateTime(new Date());
             stKeyword.setFlag(flag);
             keywordDao.save(stKeyword);
