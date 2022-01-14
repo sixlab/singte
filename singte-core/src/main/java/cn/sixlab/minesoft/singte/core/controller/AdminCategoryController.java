@@ -5,6 +5,7 @@ import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
+import cn.sixlab.minesoft.singte.core.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,9 @@ public class AdminCategoryController extends BaseController {
 
     @Autowired
     private StCategoryDao categoryDao;
+
+    @Autowired
+    private ArticleService articleService;
 
     @GetMapping(value = "/list")
     public String list() {
@@ -43,6 +47,13 @@ public class AdminCategoryController extends BaseController {
         stCategory.setCreateTime(new Date());
         categoryDao.save(stCategory);
         return ModelResp.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/resetCategory")
+    public ModelResp resetCategory() {
+        int categorySize = articleService.countCategory();
+        return ModelResp.success(categorySize);
     }
 
 }

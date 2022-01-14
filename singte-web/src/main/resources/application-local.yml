@@ -8,7 +8,7 @@ spring:
       template_exception_handler: html_debug
   data:
     mongodb:
-      uri: mongodb://singte:123456@localhost:27017/singte
+      uri: mongodb://singte:123456@127.0.0.1:27017/singte
 
 logging:
   config: classpath:logback-console.xml

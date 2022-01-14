@@ -1,13 +1,19 @@
 <#include '../../frame/functions.ftlh'>
 
 <#assign title><@StI18n "page.title.categories"/></#assign>
+<#assign css>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="/static/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+</#assign>
 <#assign js>
+    <!-- SweetAlert2 -->
+    <script src="/static/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
     <@StStatic src="common/stDataTable.js" />
     <@StStatic src="admin/category/list.js" />
 </#assign>
-<@AdminFrame title="${title}" js=js>
+<@AdminFrame title="${title}" css=css js=js>
     <div class="row">
         <div class="col-12">
             <form id="queryForm" action="/admin/category/listData">
@@ -17,6 +23,9 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
+                                <button type="button" class="btn btn-primary" id="resetCategory">
+                                    重置分类
+                                </button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#modal-default">
                                     新增分类

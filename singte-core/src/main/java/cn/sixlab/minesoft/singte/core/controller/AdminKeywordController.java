@@ -5,6 +5,7 @@ import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StKeywordDao;
 import cn.sixlab.minesoft.singte.core.models.StKeyword;
+import cn.sixlab.minesoft.singte.core.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,9 @@ public class AdminKeywordController extends BaseController {
 
     @Autowired
     private StKeywordDao keywordDao;
+
+    @Autowired
+    private ArticleService articleService;
 
     @GetMapping(value = "/list")
     public String list() {
@@ -45,4 +49,10 @@ public class AdminKeywordController extends BaseController {
         return ModelResp.success();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/resetKeyword")
+    public ModelResp resetKeyword() {
+        int keywordSize = articleService.countKeyword();
+        return ModelResp.success(keywordSize);
+    }
 }
