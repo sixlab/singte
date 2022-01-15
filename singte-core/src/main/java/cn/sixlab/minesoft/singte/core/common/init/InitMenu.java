@@ -15,12 +15,13 @@ public class InitMenu implements BaseInitComponent {
 
     @Override
     public void init() {
+        checkMenu(false, "menu.index", "menu.st-level1", "fas fa-tachometer-alt", "/admin/index", 100, "首页");
+
         checkMenu(true, "menu.article.manage", "menu.st-level1", "fas fa-th", "", 200, "文章管理");
         checkMenu(true, "menu.spider.manage", "menu.st-level1", "fas fa-th", "", 500, "爬虫管理");
         checkMenu(true, "menu.ancient.manage", "menu.st-level1", "fas fa-th", "", 600, "古文管理");
+        checkMenu(true, "menu.tool.manage", "menu.st-level1", "fas fa-th", "", 700, "工具管理");
         checkMenu(true, "menu.system.manage", "menu.st-level1", "fas fa-th", "", 800, "系统管理");
-
-        checkMenu(false, "menu.index", "menu.st-level1", "fas fa-tachometer-alt", "/admin/index", 100, "首页");
 
         checkMenu(false, "menu.article.list", "menu.article.manage", "far fa-circle", "/admin/article/list", 200100, "文章列表");
         checkMenu(false, "menu.page.list", "menu.article.manage", "far fa-circle", "/admin/page/list", 200130, "页面列表");
@@ -33,6 +34,9 @@ public class InitMenu implements BaseInitComponent {
         checkMenu(false, "menu.ancient.section", "menu.ancient.manage", "far fa-circle", "/admin/ancient/section/list", 600200, "章节列表");
         checkMenu(false, "menu.ancient.set", "menu.ancient.manage", "far fa-circle", "/admin/ancient/set/list", 600300, "古文部属");
         checkMenu(false, "menu.ancient.category", "menu.ancient.manage", "far fa-circle", "/admin/ancient/category/list", 600400, "古文分类");
+
+        checkMenu(false, "menu.tool.item", "menu.tool.manage", "far fa-circle", "/admin/tool/list", 700100, "700100");
+        checkMenu(false, "menu.tool.category", "menu.tool.manage", "far fa-circle", "/admin/tool/category/list", 700200, "700200");
 
         checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800100, "800100");
         checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800200, "800200");

@@ -87,40 +87,4 @@ public class ArticleController extends BaseController {
         articleDao.save(article);
         return ModelResp.success(article.getThumbCount());
     }
-
-    @ResponseBody
-    @GetMapping(value = "/initTest")
-    public String initTest() {
-        for (int i = 1; i < 100; i++) {
-            SteAncientBook ancientBook = new SteAncientBook();
-            ancientBook.setAncientSet("经部");
-            ancientBook.setAncientCategory("易类");
-            ancientBook.setBookName("测试文章"+i);
-            ancientBook.setAuthor("派大星");
-            ancientBook.setWeight(i+2);
-            ancientBook.setIntro("简介" + i);
-            ancientBook.setCreateTime(new Date());
-
-            CtxHolder.getBean(SteAncientBookDao.class).save(ancientBook);
-
-            SteAncientSection ancientSection = new SteAncientSection();
-
-            ancientSection.setAncientSet("经部");
-            ancientSection.setAncientCategory("易类");
-            ancientSection.setBookName("测试文章1");
-            ancientSection.setSectionName("卷"+i);
-            ancientSection.setAuthor("派大星");
-            ancientSection.setContentHtml("<div>1</div><div>2</div><div>3</div>");
-            ancientSection.setContentText("1 2 3");
-            ancientSection.setWeight(i+4);
-            ancientSection.setViewCount(0);
-            ancientSection.setThumbCount(0);
-            ancientSection.setIntro("简介" + i);
-            ancientSection.setCreateTime(new Date());
-
-            CtxHolder.getBean(SteAncientSectionDao.class).save(ancientSection);
-        }
-
-        return "success";
-    }
 }

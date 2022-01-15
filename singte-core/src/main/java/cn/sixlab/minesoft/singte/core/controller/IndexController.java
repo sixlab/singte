@@ -3,12 +3,19 @@ package cn.sixlab.minesoft.singte.core.controller;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.GifCaptcha;
 import cn.hutool.captcha.generator.RandomGenerator;
+import cn.hutool.core.util.RandomUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.CtxHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StPageDao;
+import cn.sixlab.minesoft.singte.core.dao.SteToolCategoryDao;
+import cn.sixlab.minesoft.singte.core.dao.SteToolItemDao;
 import cn.sixlab.minesoft.singte.core.models.StPage;
+import cn.sixlab.minesoft.singte.core.models.SteToolCategory;
+import cn.sixlab.minesoft.singte.core.models.SteToolItem;
 import cn.sixlab.minesoft.singte.core.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/")
@@ -84,4 +92,34 @@ public class IndexController extends BaseController {
         }
     }
 
+    @ResponseBody
+    @GetMapping(value = "/initTest")
+    public String initTest() {
+        for (int i = 0; i < 20; i++) {
+            SteToolCategory toolCategory = new SteToolCategory();
+            toolCategory.setCategory("测试分类" + i);
+            toolCategory.setCount(0);
+            toolCategory.setStatus(StConst.YES);
+            toolCategory.setWeight(i + 2);
+            toolCategory.setIntro("简介" + i);
+            toolCategory.setCreateTime(new Date());
+
+            CtxHolder.getBean(SteToolCategoryDao.class).save(toolCategory);
+
+            SteToolItem toolItem = new SteToolItem();
+
+            toolItem.setCategory("测试分类0");
+            toolItem.setToolName("卷" + i);
+            toolItem.setWeight(i + 4);
+            toolCategory.setStatus(StConst.YES);
+            toolItem.setViewCount(RandomUtil.randomInt());
+            toolItem.setThumbCount(RandomUtil.randomInt());
+            toolItem.setIntro("简介" + i);
+            toolItem.setCreateTime(new Date());
+
+            CtxHolder.getBean(SteToolItemDao.class).save(toolItem);
+        }
+
+        return "success";
+    }
 }

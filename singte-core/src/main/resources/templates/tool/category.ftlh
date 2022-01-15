@@ -9,7 +9,7 @@
     <div class="pics box whitebg">
         <div class="news-title">
                 <span class="hnav">
-                    <a href="/ancient/set">古文</a>
+                    <a href="/tool/list">工具</a>
                 </span>
             <h2>${title}</h2>
         </div>
@@ -19,10 +19,10 @@
                     <ul>
                         <#list result as item>
                             <li>
-                                <a href="/ancient/book/${item.id}">
+                                <a href="/tool/item/${item.id}">
                                     <i><img src="/static/images/article/${item_index%10}.jpg"></i>
-                                    <h2 class="nobg">${item.ancientCategory}</h2>
-                                    <p><b class="datetime">${item.ancientSet}</b><span class="viewd nobg">${item.count} 本书</span></p>
+                                    <h2 class="nobg">${item.toolName}</h2>
+                                    <p><b class="datetime">${item.category}</b><span class="viewd">${item.viewCount}</span></p>
                                 </a>
                             </li>
                         </#list>

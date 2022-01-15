@@ -14,7 +14,7 @@
                     <a href="/ancient/category/${ancientSet.id}">${ancientSet.ancientSet}</a>
                     <a href="/ancient/book/${ancientCategory.id}">${ancientCategory.ancientCategory}</a>
                 </span>
-                <h2 class="ancient">${title}</h2>
+                <h2 class="long-text">${title}</h2>
             </div>
             <div class="wztitle-list">
                 <ul>

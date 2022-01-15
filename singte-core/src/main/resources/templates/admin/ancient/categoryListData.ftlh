@@ -12,6 +12,7 @@
             <th>数量</th>
 
             <th>顺序</th>
+            <th>状态</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -25,6 +26,7 @@
                 <td>${item.count}</td>
 
                 <td>${item.weight}</td>
+                <td>${item.status}</td>
                 <td>
                     <div class="text-hide">
                         ${item.intro}

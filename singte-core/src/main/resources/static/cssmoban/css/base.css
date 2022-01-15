@@ -184,7 +184,7 @@ aside .advimg-small { width: 100% }
 /*news-title*/
 .news-title { border-bottom: #e4e3e3 1px solid; margin: 20px; padding-bottom: 10px; }
 .news-title h2 { color: #1487f4; font-size: 16px; font-weight: normal; position: relative; width: 84px; text-align: center; }
-.news-title h2.ancient { width: unset; text-align: left; }
+.news-title h2.long-text { width: fit-content; text-align: left; }
 .news-title h2 a { color: #1487f4; }
 .news-title h2:after { content: ""; background: #1487f4; background: linear-gradient(to right, #0062ff 0%, #00a0ec 100%); width: 100%; height: 2px; position: absolute; bottom: -11px; left: 0; }
 /*tags*/

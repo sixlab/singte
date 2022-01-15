@@ -19,7 +19,7 @@
                         <#list result as item>
                             <li>
                                 <a href="/ancient/category/${item.id}">
-                                    <i><img src="/static/images/article/${item_index%6 +1}.jpg"></i>
+                                    <i><img src="/static/images/article/${item_index%10}.jpg"></i>
                                     <h2 class="nobg">${item.ancientSet}</h2>
                                     <p><b class="datetime"></b><span class="viewd nobg">${item.count} 本书</span></p>
                                 </a>
@@ -27,6 +27,7 @@
                         </#list>
                     </ul>
                 </div>
+            </section>
         </div>
     </div>
 </@PageFrame>

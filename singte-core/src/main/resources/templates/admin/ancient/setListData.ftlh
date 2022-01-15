@@ -7,8 +7,11 @@
         <tr>
             <th style="width: 10px">#</th>
             <th>部属</th>
+
             <th>数量</th>
+
             <th>顺序</th>
+            <th>状态</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -17,9 +20,11 @@
             <tr>
                 <td>${item_index + 1}.</td>
                 <td>${item.ancientSet}</td>
-                <td>${item.count}</td>
-                <td>${item.weight}</td>
 
+                <td>${item.count}</td>
+
+                <td>${item.weight}</td>
+                <td>${item.status}</td>
                 <td>
                     <div class="text-hide">
                         ${item.intro}
