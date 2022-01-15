@@ -1,4 +1,3 @@
-<#-- @ftlvariable name="result" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.SteAncientSet>" -->
 <#include '../frame/functions.ftlh'>
 
 <#assign title><@StI18n "page.title.ancient.set.front"/></#assign>

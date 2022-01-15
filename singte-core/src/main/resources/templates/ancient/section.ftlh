@@ -1,4 +1,3 @@
-<#-- @ftlvariable name="result" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.SteAncientBook>" -->
 <#include '../frame/functions.ftlh'>
 
 <#assign static>
@@ -12,14 +11,14 @@
             <div class="news-title">
                 <span class="hnav">
                     <a href="/ancient/set">古文</a>
-                    <a href="/ancient/category/${grandFather}">${grandFather}</a>
-                    <a href="/ancient/book/${father}">${father}</a>
+                    <a href="/ancient/category/${ancientSet.id}">${ancientSet.ancientSet}</a>
+                    <a href="/ancient/book/${ancientCategory.id}">${ancientCategory.ancientCategory}</a>
                 </span>
-                <h2>${title}</h2>
+                <h2 class="ancient">${title}</h2>
             </div>
             <div class="wztitle-list">
                 <ul>
-                    <#list result as item>
+                    <#list result.list as item>
                         <li>
                             <span>${item.author}</span>
                             <a href="/ancient/content/${item.id}" target="_blank">${item.sectionName}</a>
@@ -27,9 +26,7 @@
                     </#list>
                 </ul>
             </div>
-            <div class="pagelist"><a title="Total record">&nbsp;<b>51</b> </a>&nbsp;&nbsp;&nbsp;<b>1</b>&nbsp;<a
-                        href="/">2</a>&nbsp;<a href="/">3</a>&nbsp;<a href="/">4</a>&nbsp;<a href="/">5</a>&nbsp;<a
-                        href="/">下一页</a>&nbsp;<a href="/">尾页</a></div>
+            <@PagePager url="${springMacroRequestContext.requestUri}?pageNum=" result=result/>
         </div>
     </div>
 </@PageFrame>

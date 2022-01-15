@@ -27,6 +27,16 @@ public class SteAncientSetDao extends BaseDao<SteAncientSet> {
         return mongoTemplate.find(query, entityClass());
     }
 
+    public SteAncientSet selectByName(String ancientSet) {
+        Criteria criteria = Criteria.where("ancientSet").is(ancientSet);
+
+        Sort sort = Sort.by("id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
     public PageResult<SteAncientSet> selectAncientSets(String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
 
@@ -42,5 +52,4 @@ public class SteAncientSetDao extends BaseDao<SteAncientSet> {
 
         return pageQuery(query, entityClass(), pageNum, pageSize);
     }
-
 }

@@ -23,7 +23,9 @@
             <div class="newstext-box">
                 <h1 class="news-title-h1">${article.title}</h1>
                 <div class="keywords">
-                    <a href="/">时间</a><a href="/">旅行者</a><a href="/">故事</a>
+                    <#list article.keywords as keyword>
+                        <a href="/keyword/${keyword}">${keyword}</a>
+                    </#list>
                 </div>
                 <div class="picview-other">
                     <span class="po-from">${article.author}</span>

@@ -1,4 +1,3 @@
-<#-- @ftlvariable name="result" type="cn.sixlab.minesoft.singte.core.common.pager.PageResult<cn.sixlab.minesoft.singte.core.models.SteAncientCategory>" -->
 <#include '../frame/functions.ftlh'>
 
 <#assign static>
@@ -8,9 +7,12 @@
 
 <@PageFrame title=title static=static>
     <div class="pics box whitebg">
-        <ul id="tab">
-            <li class="tab-current"><@StI18nArgs code="title.ancient.set" args=[title]/></li>
-        </ul>
+        <div class="news-title">
+                <span class="hnav">
+                    <a href="/ancient/set">古文</a>
+                </span>
+            <h2>${title}</h2>
+        </div>
         <div class="plr20">
             <section>
                 <div class="videos-list">

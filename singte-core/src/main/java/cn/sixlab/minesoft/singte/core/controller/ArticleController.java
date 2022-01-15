@@ -1,18 +1,22 @@
 package cn.sixlab.minesoft.singte.core.controller;
 
-import cn.hutool.core.util.RandomUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
+import cn.sixlab.minesoft.singte.core.common.utils.CtxHolder;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientBookDao;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
+import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
+import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import cn.sixlab.minesoft.singte.core.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/article")
@@ -88,44 +92,35 @@ public class ArticleController extends BaseController {
     @GetMapping(value = "/initTest")
     public String initTest() {
         for (int i = 1; i < 100; i++) {
-            StArticle stArticle = new StArticle();
-            stArticle.setAlias("wz" + i);
-            stArticle.setSourceUrl("http://sixlab.cn/" + i);
-            stArticle.setTitle("第 " + i + " 次修改代码，来一篇文章试一下");
-            stArticle.setAuthor("张三" + i % 5);
-            Set<String> set = new HashSet<>();
-            set.add("词" + i % 3);
-            set.add("词" + i % 5);
-            set.add("词" + i % 7);
-            set.add("关键" + i % 4);
-            set.add("关键" + i % 10);
+            SteAncientBook ancientBook = new SteAncientBook();
+            ancientBook.setAncientSet("经部");
+            ancientBook.setAncientCategory("易类");
+            ancientBook.setBookName("测试文章"+i);
+            ancientBook.setAuthor("派大星");
+            ancientBook.setWeight(i+2);
+            ancientBook.setIntro("简介" + i);
+            ancientBook.setCreateTime(new Date());
 
-            stArticle.setKeywords(new ArrayList<>(set));
-            stArticle.setSummary("投资最好的时间是当下。只有站在现在看历史，才知道哪里是高点，哪里是低点。低买高卖是无数人追求的操作方式，难在我们无法判断当下的位置。可能现在是高点，一段时间后还有更高点；可能现在是低点，一段时间后有更低点。只有克服内心的喜悦和恐惧，大胆的在当下进行投资才能取得很好的收益。");
-            stArticle.setCategory("分类" + i % 6);
-            stArticle.setViewCount(RandomUtil.randomInt(1000, 2000));
-            stArticle.setThumbCount(RandomUtil.randomInt(1000));
-            stArticle.setStatus("1");
-            stArticle.setPublishTime(new Date());
-            stArticle.setContent("<p>指数介绍<br>\n" +
-                    "恒生中国企业指数，简称国企指数或H股（因香港英文——HongKong首字母，而称得名H股）。<br>\n" +
-                    "代码HSCEI(The Hang Seng China Enterprises Index) 。<br>\n" +
-                    "指注册地在内地、上市地在香港的中资企业股票。<br>\n" +
-                    "H股为了反应内地企业在港交所的表现，选取市值最大、流通性最好的50家内地企业而组成。</p>\n" +
-                    "<p>指数优缺点<br>\n" +
-                    "H股的优点<br>\n" +
-                    "港股比较成熟，企业的定价较为公平合理。<br>\n" +
-                    "港交所以外资为主，资金比较持久和稳定。<br>\n" +
-                    "H股的缺点<br>\n" +
-                    "港交所国际化程度高，一有大的事件就会跟着波动。比如欧美跌港股跟跌，A股跌港股还跟跌。然而H股公司主营业务在内地，基本面没有变化，经常被误杀。</p>\n" +
-                    "<p>指数筛选<br>\n" +
-                    "基本信息对比</p>");
-            stArticle.setUpdateTime(new Date());
-            stArticle.setCreateTime(new Date());
+            CtxHolder.getBean(SteAncientBookDao.class).save(ancientBook);
 
-            articleDao.save(stArticle);
+            SteAncientSection ancientSection = new SteAncientSection();
+
+            ancientSection.setAncientSet("经部");
+            ancientSection.setAncientCategory("易类");
+            ancientSection.setBookName("测试文章1");
+            ancientSection.setSectionName("卷"+i);
+            ancientSection.setAuthor("派大星");
+            ancientSection.setContentHtml("<div>1</div><div>2</div><div>3</div>");
+            ancientSection.setContentText("1 2 3");
+            ancientSection.setWeight(i+4);
+            ancientSection.setViewCount(0);
+            ancientSection.setThumbCount(0);
+            ancientSection.setIntro("简介" + i);
+            ancientSection.setCreateTime(new Date());
+
+            CtxHolder.getBean(SteAncientSectionDao.class).save(ancientSection);
         }
 
-        return "";
+        return "success";
     }
 }

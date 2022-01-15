@@ -35,7 +35,7 @@
                     </#list>
                 </ul>
             </div>
-            <@PagePager url="/articles?pageNum=" result=result/>
+            <@PagePager url="${springMacroRequestContext.requestUri}?pageNum=" result=result/>
         </div>
     </div>
 </@PageFrame>

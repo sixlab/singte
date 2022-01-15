@@ -29,6 +29,17 @@ public class SteAncientCategoryDao extends BaseDao<SteAncientCategory> {
         return mongoTemplate.find(query, entityClass());
     }
 
+    public SteAncientCategory selectBySetAndName(String ancientSet, String ancientCategory) {
+        Criteria criteria = Criteria.where("ancientSet").is(ancientSet)
+                .and("ancientCategory").is(ancientCategory);
+
+        Sort sort = Sort.by("id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
     public PageResult<SteAncientCategory> selectAncientCategory(String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
 
@@ -45,5 +56,4 @@ public class SteAncientCategoryDao extends BaseDao<SteAncientCategory> {
 
         return pageQuery(query, entityClass(), pageNum, pageSize);
     }
-
 }

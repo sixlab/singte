@@ -49,26 +49,34 @@ public class AncientController extends BaseController {
     }
 
     @GetMapping(value = "/book/{categoryId}")
-    public String listBook(ModelMap modelMap, @PathVariable String categoryId) {
+    public String listBook(ModelMap modelMap, @PathVariable String categoryId, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "30") Integer pageSize) {
         SteAncientCategory ancientCategory = ancientCategoryDao.selectById(categoryId);
+        String ancientSet = ancientCategory.getAncientSet();
+
+        SteAncientSet steAncientSet = ancientSetDao.selectByName(ancientSet);
+
+        modelMap.put("ancientSet", steAncientSet);
 
         String category = ancientCategory.getAncientCategory();
-        modelMap.put("father", ancientCategory.getAncientSet());
         modelMap.put("title", category);
-        modelMap.put("result", ancientBookDao.listCategoryBook(category));
+        modelMap.put("result", ancientBookDao.selectBooks(ancientCategory, null, pageNum, pageSize));
 
         return "ancient/book";
     }
 
     @GetMapping(value = "/section/{bookId}")
-    public String listSection(ModelMap modelMap, @PathVariable String bookId) {
+    public String listSection(ModelMap modelMap, @PathVariable String bookId, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "30") Integer pageSize) {
         SteAncientBook ancientBook = ancientBookDao.selectById(bookId);
 
+        SteAncientSet ancientSet = ancientSetDao.selectByName(ancientBook.getAncientSet());
+        SteAncientCategory ancientCategory = ancientCategoryDao.selectBySetAndName(ancientBook.getAncientSet(), ancientBook.getAncientCategory());
+
+        modelMap.put("ancientSet", ancientSet);
+        modelMap.put("ancientCategory", ancientCategory);
+
         String bookName = ancientBook.getBookName();
-        modelMap.put("grandFather", ancientBook.getAncientSet());
-        modelMap.put("father", ancientBook.getAncientCategory());
         modelMap.put("title", bookName);
-        modelMap.put("result", ancientSectionDao.listBookSections(bookName));
+        modelMap.put("result", ancientSectionDao.selectSections(ancientBook, null, pageNum, pageSize));
 
         return "ancient/section";
     }
@@ -76,6 +84,14 @@ public class AncientController extends BaseController {
     @GetMapping(value = "/content/{sectionId}")
     public String content(ModelMap modelMap, @PathVariable String sectionId) {
         SteAncientSection ancientSection = ancientSectionDao.selectById(sectionId);
+
+        SteAncientSet ancientSet = ancientSetDao.selectByName(ancientSection.getAncientSet());
+        SteAncientCategory ancientCategory = ancientCategoryDao.selectBySetAndName(ancientSection.getAncientSet(), ancientSection.getAncientCategory());
+        SteAncientBook ancientBook = ancientBookDao.selectByParents(ancientSection.getAncientSet(), ancientSection.getAncientCategory(), ancientSection.getBookName());
+
+        modelMap.put("setId", ancientSet.getId());
+        modelMap.put("categoryId", ancientCategory.getId());
+        modelMap.put("bookId", ancientBook.getId());
 
         modelMap.put("title", ancientSection.getSectionName());
         modelMap.put("ancientSection", ancientSection);

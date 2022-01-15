@@ -1,4 +1,3 @@
-<#-- @ftlvariable name="ancientSection" type="cn.sixlab.minesoft.singte.core.models.SteAncientSection" -->
 <#include '../frame/functions.ftlh'>
 <#assign static>
     <script src="/static/cssmoban/js/hc-sticky.js"></script>
@@ -15,11 +14,11 @@
                     您现在的位置是：
                     <a href="/ancient/set">古文</a>
                     >
-                    <a href="/category/${ancientSection.id}">${ancientSection.ancientSet}</a>
+                    <a href="/ancient/category/${setId}">${ancientSection.ancientSet}</a>
                     >
-                    <a href="/book/${ancientSection.id}">${ancientSection.ancientCategory}</a>
+                    <a href="/ancient/book/${categoryId}">${ancientSection.ancientCategory}</a>
                     >
-                    <a href="/section/${ancientSection.id}">${ancientSection.bookName}</a>
+                    <a href="/ancient/section/${bookId}">${ancientSection.bookName}</a>
                 </span>
                 <h2>正文</h2>
             </div>
