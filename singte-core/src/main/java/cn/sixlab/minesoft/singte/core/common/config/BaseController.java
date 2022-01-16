@@ -1,8 +1,8 @@
 package cn.sixlab.minesoft.singte.core.common.config;
 
+import cn.hutool.core.util.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
@@ -17,7 +17,7 @@ public class BaseController {
         binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String value) {
-                if (StringUtils.hasLength(value)) {
+                if (StrUtil.isNotEmpty(value)) {
                     setValue(new Date(Long.parseLong(value)));
                 }
             }

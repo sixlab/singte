@@ -3,10 +3,10 @@ package cn.sixlab.minesoft.singte.core.controller;
 import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
+import cn.sixlab.minesoft.singte.core.common.utils.StUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,7 +41,7 @@ public class AdminAncientSectionController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/submitSection")
     public ModelResp submitSection(SteAncientSection ancientSection) {
-        String[] lines = StringUtils.split(ancientSection.getContentText(), "\r\n");
+        String[] lines = StUtils.split(ancientSection.getContentText(), "\r\n");
         ancientSection.setContentHtml(StrUtil.join("<br />", lines));
         ancientSection.setContentText(StrUtil.join("", lines));
         ancientSection.setViewCount(0);
@@ -49,5 +49,4 @@ public class AdminAncientSectionController extends BaseController {
         ancientSectionDao.save(ancientSection);
         return ModelResp.success();
     }
-
 }

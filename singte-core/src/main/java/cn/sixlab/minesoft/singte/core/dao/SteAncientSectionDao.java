@@ -1,10 +1,10 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -33,18 +33,18 @@ public class SteAncientSectionDao extends BaseDao<SteAncientSection> {
     public PageResult<SteAncientSection> selectSections(SteAncientBook ancientBook, String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (null != ancientBook) {
-            if (StringUtils.isNotEmpty(ancientBook.getAncientSet())) {
+            if (StrUtil.isNotEmpty(ancientBook.getAncientSet())) {
                 criteria = criteria.and("ancientSet").is(ancientBook.getAncientSet());
             }
-            if (StringUtils.isNotEmpty(ancientBook.getAncientCategory())) {
+            if (StrUtil.isNotEmpty(ancientBook.getAncientCategory())) {
                 criteria = criteria.and("ancientCategory").is(ancientBook.getAncientCategory());
             }
-            if (StringUtils.isNotEmpty(ancientBook.getBookName())) {
+            if (StrUtil.isNotEmpty(ancientBook.getBookName())) {
                 criteria = criteria.and("bookName").is(ancientBook.getBookName());
             }
         }
 
-        if (StringUtils.isNotEmpty(keyword)) {
+        if (StrUtil.isNotEmpty(keyword)) {
             Criteria keywordCriteria = new Criteria().orOperator(
                     Criteria.where("ancientSet").regex(keyword),
                     Criteria.where("ancientCategory").regex(keyword),

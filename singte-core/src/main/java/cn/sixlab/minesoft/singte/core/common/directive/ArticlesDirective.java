@@ -1,10 +1,10 @@
 package cn.sixlab.minesoft.singte.core.common.directive;
 
+import cn.hutool.core.map.MapUtil;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import freemarker.core.Environment;
 import freemarker.template.*;
-import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +20,8 @@ public class ArticlesDirective implements TemplateDirectiveModel {
 
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
-        String type = MapUtils.getString(params, "type", "random");
-        int size = Integer.parseInt(MapUtils.getString(params, "size", "10"));
+        String type = MapUtil.getStr(params, "type", "random");
+        int size = Integer.parseInt(MapUtil.getStr(params, "size", "10"));
 
         List<StArticle> articleList = null;
         switch (type) {

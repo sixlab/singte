@@ -1,12 +1,12 @@
 package cn.sixlab.minesoft.singte.core.service;
 
+import cn.hutool.core.date.DateUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.utils.WebUtils;
 import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -59,7 +59,7 @@ public class StUserDetailsService implements UserDetailsService {
         StUser stUser = userMapper.selectByUsername(username);
         if (stUser != null) {
             stUser.setToken(token);
-            stUser.setTokenValid(DateUtils.addMinutes(new Date(), expire));
+            stUser.setTokenValid(DateUtil.offsetMinute(new Date(), expire));
             userMapper.save(stUser);
         }
 

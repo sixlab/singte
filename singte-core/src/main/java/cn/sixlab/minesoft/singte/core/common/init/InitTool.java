@@ -2,6 +2,7 @@ package cn.sixlab.minesoft.singte.core.common.init;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import cn.sixlab.minesoft.singte.core.dao.SteToolCategoryDao;
 import cn.sixlab.minesoft.singte.core.dao.SteToolItemDao;
 import cn.sixlab.minesoft.singte.core.models.SteToolItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,17 @@ public class InitTool implements BaseInitComponent {
     @Autowired
     private SteToolItemDao toolItemDao;
 
+    @Autowired
+    private SteToolCategoryDao toolCategoryDao;
+
     @Override
     public void init() {
         checkToolItem("tool-ancient-name", "古意取名", "工具");
+
+        countToolCategory();
     }
 
-    public void checkToolItem(String toolCode, String toolName, String category) {
+    private void checkToolItem(String toolCode, String toolName, String category) {
         SteToolItem toolItem = toolItemDao.selectByCode(toolCode);
 
         if (null == toolItem) {
@@ -37,5 +43,10 @@ public class InitTool implements BaseInitComponent {
 
             toolItemDao.save(toolItem);
         }
+    }
+
+    private void countToolCategory() {
+        // TODO toolCategoryDao
+
     }
 }

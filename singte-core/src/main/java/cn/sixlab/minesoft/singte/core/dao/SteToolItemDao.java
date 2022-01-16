@@ -1,9 +1,9 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.SteToolItem;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -22,7 +22,7 @@ public class SteToolItemDao extends BaseDao<SteToolItem> {
     public List<SteToolItem> listByCategory(String category){
         Criteria criteria = new Criteria();
 
-        if (StringUtils.isNotEmpty(category)) {
+        if (StrUtil.isNotEmpty(category)) {
             criteria = Criteria.where("category").is(category);
         }
         Sort sort = Sort.by("weight");
@@ -35,7 +35,7 @@ public class SteToolItemDao extends BaseDao<SteToolItem> {
     public SteToolItem selectByCode(String toolCode){
         Criteria criteria = new Criteria();
 
-        if (StringUtils.isNotEmpty(toolCode)) {
+        if (StrUtil.isNotEmpty(toolCode)) {
             criteria = Criteria.where("toolCode").is(toolCode);
         }
         Sort sort = Sort.by("weight");
@@ -48,7 +48,7 @@ public class SteToolItemDao extends BaseDao<SteToolItem> {
     public PageResult<SteToolItem> selectTools(String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
 
-        if (StringUtils.isNotEmpty(keyword)) {
+        if (StrUtil.isNotEmpty(keyword)) {
             criteria = criteria.orOperator(
                     Criteria.where("toolName").regex(keyword),
                     Criteria.where("toolCode").regex(keyword),

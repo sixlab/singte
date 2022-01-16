@@ -1,9 +1,9 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.StSpider;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -32,11 +32,11 @@ public class StSpiderDao extends BaseDao<StSpider> {
 
     public PageResult<StSpider> selectSpiders(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
-        if (StringUtils.isNotEmpty(status)) {
+        if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);
         }
 
-        if (StringUtils.isNotEmpty(keyword)) {
+        if (StrUtil.isNotEmpty(keyword)) {
             Criteria keywordCriteria = new Criteria().orOperator(
                     Criteria.where("spiderName").regex(keyword),
                     Criteria.where("startUrl").regex(keyword),

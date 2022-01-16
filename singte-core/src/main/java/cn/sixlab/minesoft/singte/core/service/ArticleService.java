@@ -1,5 +1,9 @@
 package cn.sixlab.minesoft.singte.core.service;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
@@ -9,14 +13,14 @@ import cn.sixlab.minesoft.singte.core.dao.StKeywordDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
 import cn.sixlab.minesoft.singte.core.models.StKeyword;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
-import java.text.ParseException;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticleService {
@@ -190,20 +194,16 @@ public class ArticleService {
     public PageResult<StArticle> selectByDate(String date, int pageNum, int pageSize) {
 
         Date begin = null;
-        if (StringUtils.isNotEmpty(date)) {
-            try {
-                begin = DateUtils.parseDate(date, "yyyyMMdd");
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+        if (StrUtil.isNotEmpty(date)) {
+            begin = DateUtil.parse(date, DatePattern.PURE_DATE_FORMAT);
         }
 
         if (null == begin) {
             begin = new Date();
         }
 
-        begin = DateUtils.truncate(begin, Calendar.DAY_OF_MONTH);
-        Date end = DateUtils.addDays(begin, 1);
+        begin = DateUtil.truncate(begin, DateField.DAY_OF_MONTH);
+        Date end = DateUtil.offsetDay(begin, 1);
 
         PageResult<StArticle> articleList = articleDao.selectByDate(begin, end, pageNum, pageSize);
 

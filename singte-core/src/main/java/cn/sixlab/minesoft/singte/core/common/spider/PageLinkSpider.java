@@ -1,11 +1,11 @@
 package cn.sixlab.minesoft.singte.core.common.spider;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.StSpiderParam;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import cn.sixlab.minesoft.singte.core.models.StSpider;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.seimicrawler.xpath.JXDocument;
 import org.seimicrawler.xpath.JXNode;
@@ -57,7 +57,7 @@ public class PageLinkSpider extends SpiderJob {
         if (contentNode != null) {
             html = contentNode.asElement().outerHtml();
         }
-        if (StringUtils.isNotEmpty(html)) {
+        if (StrUtil.isNotEmpty(html)) {
             article.setContent(html);
         }else{
             return;
@@ -68,10 +68,10 @@ public class PageLinkSpider extends SpiderJob {
         article.setCategory(jxNodeVal(categoryNode));
 
         List<String> keywordList = new ArrayList<>();
-        if(CollectionUtils.isNotEmpty(keywordNodeList)){
+        if(CollUtil.isNotEmpty(keywordNodeList)){
             keywordNodeList.forEach(jxNode -> {
                 String val = jxNodeVal(jxNode);
-                if (StringUtils.isNotEmpty(val)) {
+                if (StrUtil.isNotEmpty(val)) {
                     keywordList.add(val);
                 }
             });

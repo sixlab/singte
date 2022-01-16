@@ -130,9 +130,9 @@ public class AncientController extends BaseController {
 //                    List list = JsonUtils.readJson(pathItem.toFile(), List.class);
 //                    for (Object obj : list) {
 //                        Map map = (Map) obj;
-//                        String title = MapUtils.getString(map, "title");
-//                        String author = MapUtils.getString(map, "author");
-//                        String section = MapUtils.getString(map, "section");
+//                        String title = MapUtil.getStr(map, "title");
+//                        String author = MapUtil.getStr(map, "author");
+//                        String section = MapUtil.getStr(map, "section");
 //                        List<String> contentList = (List<String>) map.get("content");
 //
 //                        SteAncient steAncient = new SteAncient();

@@ -1,8 +1,8 @@
 package cn.sixlab.minesoft.singte.core.common.vo;
 
+import cn.hutool.core.map.MapUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
-import org.apache.commons.collections4.MapUtils;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -82,7 +82,7 @@ public class ModelResp extends LinkedHashMap<String, Object> {
     }
 
     public Integer getStatus() {
-        return MapUtils.getInteger(this, "status");
+        return MapUtil.getInt(this, "status");
     }
 
     public ModelResp setStatus(Integer status) {
@@ -91,7 +91,7 @@ public class ModelResp extends LinkedHashMap<String, Object> {
     }
 
     public String getError() {
-        return MapUtils.getString(this, "error");
+        return MapUtil.getStr(this, "error");
     }
 
     public ModelResp setError(String error) {
@@ -100,7 +100,7 @@ public class ModelResp extends LinkedHashMap<String, Object> {
     }
 
     public String getMessage() {
-        return MapUtils.getString(this, "message");
+        return MapUtil.getStr(this, "message");
     }
 
     public ModelResp setMessage(String message) {

@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.spider;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
@@ -8,14 +9,12 @@ import cn.sixlab.minesoft.singte.core.models.StArticle;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
 import cn.sixlab.minesoft.singte.core.models.StKeyword;
 import cn.sixlab.minesoft.singte.core.models.StSpider;
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.seimicrawler.xpath.JXNode;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,7 +64,7 @@ public abstract class SpiderJob {
     public void saveContent(StSpider spider, StArticle article) {
         String category = article.getCategory();
 
-        if(StringUtils.isNotEmpty(category)){
+        if(StrUtil.isNotEmpty(category)){
             StCategory stCategory = categoryMapper.selectByCategory(category);
             if (stCategory == null) {
                 stCategory = new StCategory();

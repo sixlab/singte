@@ -1,10 +1,10 @@
 package cn.sixlab.minesoft.singte.core.common.utils;
 
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.StrUtil;
 import okhttp3.*;
-import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.IOException;
@@ -81,18 +81,18 @@ public class HttpUtils {
         logger.info("参数：" + makeGetParam(data));
 
         FormBody.Builder builder = new FormBody.Builder();
-        if (MapUtils.isNotEmpty(data)) {
+        if (MapUtil.isNotEmpty(data)) {
             for (String key : data.keySet()) {
-                if (StringUtils.hasLength(data.get(key))) {
+                if (StrUtil.isNotEmpty(data.get(key))) {
                     builder.add(key, data.get(key));
                 }
             }
         }
 
         Headers.Builder headersBuilder = new Headers.Builder();
-        if (MapUtils.isNotEmpty(header)) {
+        if (MapUtil.isNotEmpty(header)) {
             for (String key : header.keySet()) {
-                if (StringUtils.hasLength(header.get(key))) {
+                if (StrUtil.isNotEmpty(header.get(key))) {
                     headersBuilder.add(key, header.get(key));
                 }
             }
@@ -139,13 +139,13 @@ public class HttpUtils {
         logger.info("参数：" + makeGetParam(data));
 
         Headers.Builder headersBuilder = new Headers.Builder();
-        if (MapUtils.isNotEmpty(header)) {
+        if (MapUtil.isNotEmpty(header)) {
             for (String key : header.keySet()) {
                 headersBuilder.add(key, header.get(key));
             }
         }
 
-        if (MapUtils.isNotEmpty(data)) {
+        if (MapUtil.isNotEmpty(data)) {
             url = makeGetUrl(url, data);
         }
 
@@ -190,7 +190,7 @@ public class HttpUtils {
         logger.info("参数：" + json);
 
         Headers.Builder builder = new Headers.Builder();
-        if (MapUtils.isNotEmpty(header)) {
+        if (MapUtil.isNotEmpty(header)) {
             for (String key : header.keySet()) {
                 builder.add(key, header.get(key));
             }
@@ -232,7 +232,7 @@ public class HttpUtils {
      */
     public static String makeGetParam(Map<String, String> data, boolean urlEncode) {
         StringBuilder sb = new StringBuilder();
-        if (MapUtils.isNotEmpty(data)) {
+        if (MapUtil.isNotEmpty(data)) {
             Iterator<String> iterator = data.keySet().iterator();
             while (iterator.hasNext()) {
                 String key = iterator.next();
@@ -301,7 +301,7 @@ public class HttpUtils {
                     if (kv.length == 2) {
                         String key = kv[0];
                         String val = kv[1];
-                        if (StringUtils.hasLength(key) && StringUtils.hasLength(val)) {
+                        if (StrUtil.isNotEmpty(key) && StrUtil.isNotEmpty(val)) {
                             map.put(key, val);
                         }
                     }

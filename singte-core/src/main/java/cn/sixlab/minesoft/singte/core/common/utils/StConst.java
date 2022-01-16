@@ -1,11 +1,11 @@
 package cn.sixlab.minesoft.singte.core.common.utils;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
+import cn.hutool.core.date.DateUtil;
 
 import java.util.Date;
 
 public class StConst {
-    public static final String DEPLOY_DATE = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
+    public static final String DEPLOY_DATE = DateUtil.format(new Date(), "yyyyMMddHHmmss");
 
     public static final String YES = "1";
     public static final String No = "0";

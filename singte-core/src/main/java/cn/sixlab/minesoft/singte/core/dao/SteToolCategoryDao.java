@@ -1,9 +1,9 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.SteToolCategory;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -40,7 +40,7 @@ public class SteToolCategoryDao extends BaseDao<SteToolCategory> {
     public PageResult<SteToolCategory> selectCategories(String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
 
-        if (StringUtils.isNotEmpty(keyword)) {
+        if (StrUtil.isNotEmpty(keyword)) {
             criteria = criteria.orOperator(
                     Criteria.where("category").regex(keyword),
                     Criteria.where("intro").regex(keyword)

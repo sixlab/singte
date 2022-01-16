@@ -1,11 +1,11 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -56,7 +56,7 @@ public class StArticleDao extends BaseDao<StArticle> {
 
     public PageResult<StArticle> selectByCategory(String category, int pageNum, int pageSize) {
         Criteria criteria = Criteria.where("status").is(StConst.YES);
-        if(StringUtils.isNotEmpty(category)){
+        if(StrUtil.isNotEmpty(category)){
             criteria = criteria.and("category").is(category);
         }
         Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
@@ -68,7 +68,7 @@ public class StArticleDao extends BaseDao<StArticle> {
 
     public PageResult<StArticle> selectByKeyword(String keyword, int pageNum, int pageSize) {
         Criteria criteria = Criteria.where("status").is(StConst.YES);
-        if (StringUtils.isNotEmpty(keyword)) {
+        if (StrUtil.isNotEmpty(keyword)) {
             criteria = criteria.and("keywords").is(keyword);
         }
         Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
@@ -81,7 +81,7 @@ public class StArticleDao extends BaseDao<StArticle> {
     public PageResult<StArticle> selectByWord(String word, int pageNum, int pageSize) {
         // TODO 待实现更好搜索方法
         Criteria criteria = Criteria.where("status").is(StConst.YES);
-        if (StringUtils.isNotEmpty(word)) {
+        if (StrUtil.isNotEmpty(word)) {
             criteria = criteria.and("content").regex(word);
         }
         Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
@@ -140,11 +140,11 @@ public class StArticleDao extends BaseDao<StArticle> {
 
     public PageResult<StArticle> selectArticles(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
-        if (StringUtils.isNotEmpty(status)) {
+        if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);
         }
 
-        if (StringUtils.isNotEmpty(keyword)) {
+        if (StrUtil.isNotEmpty(keyword)) {
             Criteria keywordCriteria = new Criteria().orOperator(
                     Criteria.where("alias").regex(keyword),
                     Criteria.where("sourceUrl").regex(keyword),

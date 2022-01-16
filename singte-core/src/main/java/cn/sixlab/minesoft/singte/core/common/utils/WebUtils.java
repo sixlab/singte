@@ -1,6 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.utils;
 
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -191,13 +191,13 @@ public class WebUtils {
 
     public static String getDomain(HttpServletRequest request, boolean excludePort) {
         String domain = request.getHeader("HOST");
-        if (StringUtils.isNotEmpty(domain) && excludePort) {
+        if (StrUtil.isNotEmpty(domain) && excludePort) {
             int endIdx = domain.indexOf(":");
             if (endIdx >= 0) {
                 domain = domain.substring(0, endIdx);
             }
         }
-        if (StringUtils.isNotEmpty(domain)) {
+        if (StrUtil.isNotEmpty(domain)) {
             return domain;
         }
         String requestURL = request.getRequestURL().toString();
@@ -210,7 +210,7 @@ public class WebUtils {
             beginIndex += "://".length();
         }
         domain = requestURL.substring(beginIndex, endIndex);
-        if (StringUtils.isEmpty(domain)) {
+        if (StrUtil.isEmpty(domain)) {
             domain = "";
         }
         return domain;
@@ -256,10 +256,10 @@ public class WebUtils {
 
     public static String getToken(HttpServletRequest request) {
         String token = getCookie("Authorization");
-        if (StringUtils.isEmpty(token)) {
+        if (StrUtil.isEmpty(token)) {
             token = request.getParameter("Authorization");
         }
-        if (StringUtils.isEmpty(token)) {
+        if (StrUtil.isEmpty(token)) {
             token = request.getHeader("Authorization");
         }
         return token;
