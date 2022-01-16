@@ -65,6 +65,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="toolCode" class="col-sm-2 col-form-label">工具编号</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="toolCode" id="toolCode" class="form-control required" placeholder="工具编号">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="category" class="col-sm-2 col-form-label">分类</label>
                             <div class="col-sm-10">
                                 <input type="text" name="category" id="category" class="form-control required" placeholder="分类">

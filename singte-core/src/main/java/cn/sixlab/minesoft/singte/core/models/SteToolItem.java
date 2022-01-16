@@ -8,6 +8,8 @@ public class SteToolItem extends BaseModel {
 
     private String toolName;
 
+    private String toolCode;
+
     private Integer viewCount;
 
     private Integer thumbCount;
@@ -30,6 +32,14 @@ public class SteToolItem extends BaseModel {
 
     public void setToolName(String toolName) {
         this.toolName = toolName;
+    }
+
+    public String getToolCode() {
+        return toolCode;
+    }
+
+    public void setToolCode(String toolCode) {
+        this.toolCode = toolCode;
     }
 
     public Integer getViewCount() {

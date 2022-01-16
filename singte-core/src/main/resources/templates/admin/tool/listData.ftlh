@@ -7,6 +7,7 @@
         <tr>
             <th style="width: 10px">#</th>
             <th>工具名称</th>
+            <th>工具编号</th>
             <th>分类</th>
 
             <th>看/赞</th>
@@ -21,6 +22,7 @@
             <tr>
                 <td>${item_index + 1}.</td>
                 <td>${item.toolName}</td>
+                <td>${item.toolCode}</td>
                 <td>${item.category}</td>
 
                 <td>${item.viewCount} / ${item.thumbCount}</td>

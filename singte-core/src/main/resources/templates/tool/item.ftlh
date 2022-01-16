@@ -18,7 +18,7 @@
                     >
                     <a href="###">正文</a>
                 </span>
-                <h2 class="long-text">${toolItem.toolName}1111 111 111111 1111 1111 11111</h2>
+                <h2 class="long-text">${toolItem.toolName}</h2>
             </div>
             <div class="newstext-box">
 <#--                <h1 class="news-title-h1">${toolItem.toolName}</h1>-->
@@ -36,7 +36,7 @@
                     ${toolItem.intro}
                 </div>
                 <div class="newstext">
-                    真正的工具实现
+                    ${toolItem.toolCode}实现
                 </div>
                 <div class="diggit">
                     <a href="###"> 很赞哦！ </a>(<b id="diggnum">${toolItem.thumbCount!'0'}</b>)
