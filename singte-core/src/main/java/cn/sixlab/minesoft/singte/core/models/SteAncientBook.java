@@ -12,6 +12,8 @@ public class SteAncientBook extends BaseModel {
 
     private String author;
 
+    private Integer count;
+
     private Integer weight;
 
     private String intro;
@@ -46,6 +48,14 @@ public class SteAncientBook extends BaseModel {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public Integer getWeight() {

@@ -12,6 +12,7 @@
             <th>部属</th>
             <th>分类</th>
 
+            <th>章节数量</th>
             <th>顺序</th>
             <th>状态</th>
             <th>操作</th>
@@ -27,6 +28,7 @@
                 <td>${item.ancientSet}</td>
                 <td>${item.ancientCategory}</td>
 
+                <td>${item.count}</td>
                 <td>${item.weight}</td>
                 <td>${item.status}</td>
                 <td>

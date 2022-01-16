@@ -20,13 +20,29 @@ public class SteToolItemDao extends BaseDao<SteToolItem> {
     }
 
     public List<SteToolItem> listByCategory(String category){
-        Criteria criteria = Criteria.where("category").is(category);
+        Criteria criteria = new Criteria();
 
+        if (StringUtils.isNotEmpty(category)) {
+            criteria = Criteria.where("category").is(category);
+        }
         Sort sort = Sort.by("weight");
 
         Query query = new Query(criteria).with(sort);
 
         return mongoTemplate.find(query, entityClass());
+    }
+
+    public SteToolItem selectByCode(String toolCode){
+        Criteria criteria = new Criteria();
+
+        if (StringUtils.isNotEmpty(toolCode)) {
+            criteria = Criteria.where("toolCode").is(toolCode);
+        }
+        Sort sort = Sort.by("weight");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
     }
 
     public PageResult<SteToolItem> selectTools(String keyword, Integer pageNum, Integer pageSize) {
@@ -35,6 +51,7 @@ public class SteToolItemDao extends BaseDao<SteToolItem> {
         if (StringUtils.isNotEmpty(keyword)) {
             criteria = criteria.orOperator(
                     Criteria.where("toolName").regex(keyword),
+                    Criteria.where("toolCode").regex(keyword),
                     Criteria.where("category").regex(keyword),
                     Criteria.where("intro").regex(keyword)
             );

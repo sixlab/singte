@@ -43,8 +43,6 @@ public class SteToolCategoryDao extends BaseDao<SteToolCategory> {
         if (StringUtils.isNotEmpty(keyword)) {
             criteria = criteria.orOperator(
                     Criteria.where("category").regex(keyword),
-                    Criteria.where("toolName").regex(keyword),
-                    Criteria.where("toolCode").regex(keyword),
                     Criteria.where("intro").regex(keyword)
             );
         }

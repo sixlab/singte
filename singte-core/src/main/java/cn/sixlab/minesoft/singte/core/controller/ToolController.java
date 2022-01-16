@@ -1,6 +1,7 @@
 package cn.sixlab.minesoft.singte.core.controller;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
+import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.*;
 import cn.sixlab.minesoft.singte.core.models.*;
@@ -22,9 +23,13 @@ public class ToolController extends BaseController {
     @GetMapping(value = "/list")
     public String listSet(ModelMap modelMap) {
 
-        modelMap.put("result", toolCategoryDao.list());
+//        modelMap.put("result", toolCategoryDao.list());
 
-        return "tool/list";
+        modelMap.put("title", I18nUtils.get("page.title.tool.category.front"));
+        modelMap.put("result", toolItemDao.listByCategory(null));
+
+//        return "tool/list";
+        return "tool/category";
     }
 
     @GetMapping(value = "/category/{categoryId}")
