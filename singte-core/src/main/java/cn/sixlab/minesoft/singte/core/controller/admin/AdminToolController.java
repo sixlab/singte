@@ -1,10 +1,10 @@
-package cn.sixlab.minesoft.singte.core.controller;
+package cn.sixlab.minesoft.singte.core.controller.admin;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.dao.SteToolCategoryDao;
-import cn.sixlab.minesoft.singte.core.models.SteToolCategory;
+import cn.sixlab.minesoft.singte.core.dao.SteToolItemDao;
+import cn.sixlab.minesoft.singte.core.models.SteToolItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/admin/tool/category")
-public class AdminToolCategoryController extends BaseController {
+@RequestMapping("/admin/tool")
+public class AdminToolController extends BaseController {
 
     @Autowired
-    private SteToolCategoryDao toolCategoryDao;
+    private SteToolItemDao toolItemDao;
 
     @GetMapping(value = "/list")
     public String list() {
-        return "admin/tool/categoryList";
+        return "admin/tool/list";
     }
 
     @PostMapping(value = "/listData")
@@ -29,19 +29,20 @@ public class AdminToolCategoryController extends BaseController {
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        PageResult<SteToolCategory> pageResult = toolCategoryDao.selectCategories(keyword, pageNum, pageSize);
+        PageResult<SteToolItem> pageResult = toolItemDao.selectTools(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
-        return "admin/tool/categoryListData";
+        return "admin/tool/listData";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitCategory")
-    public ModelResp submitCategory(SteToolCategory steToolCategory) {
-        steToolCategory.setCount(0);
-        steToolCategory.setCreateTime(new Date());
-        toolCategoryDao.save(steToolCategory);
+    @RequestMapping(value = "/submitTool")
+    public ModelResp submitSet(SteToolItem steToolItem) {
+        steToolItem.setViewCount(0);
+        steToolItem.setThumbCount(0);
+        steToolItem.setCreateTime(new Date());
+        toolItemDao.save(steToolItem);
         return ModelResp.success();
     }
 

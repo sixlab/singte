@@ -1,4 +1,4 @@
-package cn.sixlab.minesoft.singte.core.controller;
+package cn.sixlab.minesoft.singte.core.controller.admin;
 
 import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;

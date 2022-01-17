@@ -1,11 +1,11 @@
-package cn.sixlab.minesoft.singte.core.controller;
+package cn.sixlab.minesoft.singte.core.controller.admin;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.dao.StMenuDao;
-import cn.sixlab.minesoft.singte.core.models.StMenu;
+import cn.sixlab.minesoft.singte.core.dao.StSpiderDao;
+import cn.sixlab.minesoft.singte.core.models.StSpider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/admin/menu")
-public class AdminMenuController extends BaseController {
+@RequestMapping("/admin/spider")
+public class AdminSpiderController extends BaseController {
 
     @Autowired
-    private StMenuDao menuDao;
+    private StSpiderDao spiderDao;
 
     @GetMapping(value = "/list")
     public String list() {
-        return "admin/menu/list";
+        return "admin/spider/list";
     }
 
     @PostMapping(value = "/listData")
@@ -30,22 +30,19 @@ public class AdminMenuController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StMenu> menuPageResult = menuDao.selectMenus(keyword, status, pageNum, pageSize);
+        PageResult<StSpider> pageResult = spiderDao.selectSpiders(keyword, status, pageNum, pageSize);
 
-        modelMap.put("result", menuPageResult);
+        modelMap.put("result", pageResult);
 
-        return "admin/menu/listData";
+        return "admin/spider/listData";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitMenu")
-    public ModelResp submitMenu(StMenu stMenu) {
-        if (null == stMenu.getFolderMenu()) {
-            stMenu.setFolderMenu(false);
-        }
-        stMenu.setStatus(StConst.YES);
-        stMenu.setCreateTime(new Date());
-        menuDao.save(stMenu);
+    @RequestMapping(value = "/submitSpider")
+    public ModelResp submitSpider(StSpider stSpider) {
+        stSpider.setStatus(StConst.YES);
+        stSpider.setCreateTime(new Date());
+        spiderDao.save(stSpider);
         return ModelResp.success();
     }
 

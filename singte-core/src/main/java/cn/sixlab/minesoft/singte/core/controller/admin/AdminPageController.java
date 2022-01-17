@@ -1,11 +1,11 @@
-package cn.sixlab.minesoft.singte.core.controller;
+package cn.sixlab.minesoft.singte.core.controller.admin;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.dao.StSpiderDao;
-import cn.sixlab.minesoft.singte.core.models.StSpider;
+import cn.sixlab.minesoft.singte.core.dao.StPageDao;
+import cn.sixlab.minesoft.singte.core.models.StPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/admin/spider")
-public class AdminSpiderController extends BaseController {
+@RequestMapping("/admin/page")
+public class AdminPageController extends BaseController {
 
     @Autowired
-    private StSpiderDao spiderDao;
+    private StPageDao pageDao;
 
     @GetMapping(value = "/list")
     public String list() {
-        return "admin/spider/list";
+        return "admin/page/list";
     }
 
     @PostMapping(value = "/listData")
@@ -30,19 +30,21 @@ public class AdminSpiderController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StSpider> pageResult = spiderDao.selectSpiders(keyword, status, pageNum, pageSize);
+        PageResult<StPage> pageResult = pageDao.selectPages(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
-        return "admin/spider/listData";
+        return "admin/page/listData";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitSpider")
-    public ModelResp submitSpider(StSpider stSpider) {
-        stSpider.setStatus(StConst.YES);
-        stSpider.setCreateTime(new Date());
-        spiderDao.save(stSpider);
+    @RequestMapping(value = "/submitPage")
+    public ModelResp submitPage(StPage stPage) {
+        stPage.setViewCount(0);
+        stPage.setStatus(StConst.ST_PUBLISH_DID);
+        stPage.setPublishTime(new Date());
+        stPage.setCreateTime(new Date());
+        pageDao.save(stPage);
         return ModelResp.success();
     }
 

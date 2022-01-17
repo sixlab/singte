@@ -6,7 +6,10 @@ import cn.sixlab.minesoft.singte.core.dao.SteAncientBookDao;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientCategoryDao;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientSetDao;
-import cn.sixlab.minesoft.singte.core.models.*;
+import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
+import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
+import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
+import cn.sixlab.minesoft.singte.core.models.SteAncientSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -107,47 +110,4 @@ public class AncientController extends BaseController {
         ancientSectionDao.save(ancientSection);
         return ModelResp.success(ancientSection.getThumbCount());
     }
-
-//    @ResponseBody
-//    @PostMapping(value = "/importAncient")
-//    public ModelResp importAncient(String path) throws IOException {
-//        path = "D:\\workspace\\projects\\chinese-poetry-master\\chuci";
-//        System.out.println("-----------------------------------");
-//        Path filePath = Paths.get(path);
-//
-//        readFolder(filePath);
-//
-//        return ModelResp.success();
-//    }
-//
-//    public void readFolder(Path folderPath) throws IOException {
-//        Stream<Path> pathStream = Files.list(folderPath);
-//        pathStream.forEach(pathItem -> {
-//            try {
-//                if (pathItem.toFile().isDirectory()) {
-//                    readFolder(pathItem);
-//                } else if (pathItem.toString().endsWith(".json")){
-//                    List list = JsonUtils.readJson(pathItem.toFile(), List.class);
-//                    for (Object obj : list) {
-//                        Map map = (Map) obj;
-//                        String title = MapUtil.getStr(map, "title");
-//                        String author = MapUtil.getStr(map, "author");
-//                        String section = MapUtil.getStr(map, "section");
-//                        List<String> contentList = (List<String>) map.get("content");
-//
-//                        SteAncient steAncient = new SteAncient();
-//                        steAncient.setAncientName(title);
-//                        steAncient.setAncientCategory("楚辞");
-//                        steAncient.setAncientAuthor(author);
-//                        steAncient.setContentHtml(StrUtil.join("<br />", contentList));
-//                        steAncient.setContentText(StrUtil.join("", contentList));
-//
-//                        steAncientDao.addAncient(steAncient);
-//                    }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//    }
 }

@@ -1,10 +1,10 @@
-package cn.sixlab.minesoft.singte.core.controller;
+package cn.sixlab.minesoft.singte.core.controller.admin;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.dao.SteAncientBookDao;
-import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientSetDao;
+import cn.sixlab.minesoft.singte.core.models.SteAncientSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/admin/ancient/book")
-public class AdminAncientBookController extends BaseController {
+@RequestMapping("/admin/ancient/set")
+public class AdminAncientSetController extends BaseController {
 
     @Autowired
-    private SteAncientBookDao ancientBookDao;
+    private SteAncientSetDao ancientSetDao;
 
     @GetMapping(value = "/list")
     public String list() {
-        return "admin/ancient/bookList";
+        return "admin/ancient/setList";
     }
 
     @PostMapping(value = "/listData")
@@ -29,18 +29,19 @@ public class AdminAncientBookController extends BaseController {
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        PageResult<SteAncientBook> pageResult = ancientBookDao.selectBooks(null, keyword, pageNum, pageSize);
+        PageResult<SteAncientSet> pageResult = ancientSetDao.selectAncientSets(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
-        return "admin/ancient/bookListData";
+        return "admin/ancient/setListData";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitBook")
-    public ModelResp submitBook(SteAncientBook steAncientBook) {
-        steAncientBook.setCreateTime(new Date());
-        ancientBookDao.save(steAncientBook);
+    @RequestMapping(value = "/submitSet")
+    public ModelResp submitSet(SteAncientSet steAncientSet) {
+        steAncientSet.setCount(0);
+        steAncientSet.setCreateTime(new Date());
+        ancientSetDao.save(steAncientSet);
         return ModelResp.success();
     }
 
