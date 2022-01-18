@@ -1,8 +1,10 @@
 package cn.sixlab.minesoft.singte.core.controller.admin;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
+import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.HttpUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
@@ -15,6 +17,9 @@ import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
 import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSet;
+import cn.sixlab.minesoft.singte.core.service.AncientService;
+import javafx.util.Callback;
+import org.nlpcn.commons.lang.jianfan.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,27 +47,148 @@ public class AdminUtilsController extends BaseController {
     @Autowired
     private SteAncientSectionDao ancientSectionDao;
 
+    @Autowired
+    private AncientService ancientService;
+
+    @ResponseBody
+    @PostMapping(value = "/simplifyBook")
+    public ModelResp simplifyBook() {
+
+        int pageNum = 0;
+        int pageSize = 10;
+        boolean hasNex = true;
+
+        while (hasNex) {
+            pageNum++;
+            PageResult<SteAncientBook> pageResult = ancientBookDao.selectBooks(null, null, pageNum, pageSize);
+
+            for (SteAncientBook book : pageResult.getList()) {
+                book.setAuthor(Converter.SIMPLIFIED.convert(book.getAuthor()));
+                book.setBookName(Converter.SIMPLIFIED.convert(book.getBookName()));
+
+                ancientBookDao.save(book);
+            }
+
+            hasNex = pageResult.isHasNext();
+        }
+
+
+        return ModelResp.success();
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/reloadBook")
+    public ModelResp reloadBook() {
+
+        ancientService.iterSections(new Callback<SteAncientSection, Void>() {
+            @Override
+            public Void call(SteAncientSection param) {
+                SteAncientBook book = ancientBookDao.selectByParents(param.getAncientSet(), param.getAncientCategory(), param.getBookName());
+
+                if (null == book) {
+                    book = new SteAncientBook();
+                    book.setAncientSet(param.getAncientSet());
+                    book.setAncientCategory(param.getAncientCategory());
+                    book.setBookName(param.getBookName());
+                    book.setAuthor(param.getAuthor());
+                    book.setCount(0);
+                    book.setWeight(0);
+                    book.setIntro("");
+                    book.setStatus(StConst.YES);
+                    book.setCreateTime(new Date());
+                    ancientBookDao.save(book);
+                }
+
+                return null;
+            }
+        });
+
+        ancientService.iterBooks(new Callback<SteAncientBook, Void>() {
+            @Override
+            public Void call(SteAncientBook param) {
+                List<SteAncientSection> sectionList = ancientSectionDao.listBookSections(param.getBookName());
+
+                if (CollUtil.isEmpty(sectionList)) {
+                    param.setCount(0);
+                    param.setStatus(StConst.No);
+                    ancientBookDao.save(param);
+                } else {
+                    param.setCount(sectionList.size());
+                    param.setStatus(StConst.YES);
+                    ancientBookDao.save(param);
+                }
+
+                return null;
+            }
+        });
+
+        return ModelResp.success();
+    }
+
     @ResponseBody
     @PostMapping(value = "/countAncient")
     public ModelResp countAncient() {
+        ancientService.iterSets(new Callback<SteAncientSet, Void>() {
+            @Override
+            public Void call(SteAncientSet param) {
+                String set = param.getAncientSet();
+                int count = ancientBookDao.countSet(set);
+                param.setCount(count);
+                param.setStatus(StConst.YES);
+                ancientSetDao.save(param);
 
-        List<SteAncientSet> ancientSetList = ancientSetDao.list();
-        for (SteAncientSet ancientSet : ancientSetList) {
-
-            String set = ancientSet.getAncientSet();
-            int count = ancientBookDao.countSet(set);
-            ancientSet.setCount(count);
-            ancientSet.setStatus(StConst.YES);
-            ancientSetDao.save(ancientSet);
-
-            List<SteAncientCategory> ancientCategoryList = ancientCategoryDao.listSetCategory(set);
-
-            for (SteAncientCategory ancientCategory : ancientCategoryList) {
-                int cCount = ancientBookDao.countCategory(ancientCategory.getAncientCategory());
-                ancientCategory.setCount(cCount);
-                ancientCategory.setStatus(StConst.YES);
-                ancientCategoryDao.save(ancientCategory);
+                return null;
             }
+        });
+
+        ancientService.iterCategories(new Callback<SteAncientCategory, Void>() {
+            @Override
+            public Void call(SteAncientCategory param) {
+                int count = ancientBookDao.countCategory(param.getAncientCategory());
+                param.setCount(count);
+                param.setStatus(StConst.YES);
+                ancientCategoryDao.save(param);
+                return null;
+            }
+        });
+
+        return ModelResp.success();
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/jsonImport")
+    public ModelResp jsonImport(String path, String type, SteAncientSection param) {
+        String parentPath = "https://raw.githubusercontent.com/chinese-poetry/chinese-poetry/master/";
+
+        String resp = HttpUtils.sendGet(parentPath + path, null);
+
+        // TODO
+
+        return ModelResp.success();
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/simplifySection")
+    public ModelResp simplifySection() {
+        int pageNum = 0;
+        int pageSize = 10;
+        boolean hasNex = true;
+
+        while (hasNex){
+            pageNum++;
+            PageResult<SteAncientSection> pageResult = ancientSectionDao.selectSections(null, null, pageNum, pageSize);
+
+            for (SteAncientSection section : pageResult.getList()) {
+                section.setAuthor(Converter.SIMPLIFIED.convert(section.getAuthor()));
+                section.setBookName(Converter.SIMPLIFIED.convert(section.getBookName()));
+                section.setSectionName(Converter.SIMPLIFIED.convert(section.getSectionName()));
+                section.setContentHtml(Converter.SIMPLIFIED.convert(section.getContentHtml()));
+                section.setContentText(Converter.SIMPLIFIED.convert(section.getContentText()));
+
+                ancientSectionDao.save(section);
+            }
+
+            hasNex = pageResult.isHasNext();
         }
 
         return ModelResp.success();

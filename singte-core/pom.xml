@@ -91,6 +91,12 @@
             <artifactId>hutool-all</artifactId>
             <version>5.7.19</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.nlpcn</groupId>
+            <artifactId>nlp-lang</artifactId>
+            <version>1.7.6</version>
+        </dependency>
     </dependencies>
 
     <build>
