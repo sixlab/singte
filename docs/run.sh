@@ -15,5 +15,5 @@ echo 'finish kill'
 
 cd ../
 rm singte-web.jar
-mv ./singte/singte-web/target/singte-web.jar ../
+mv ./singte/singte-web/target/singte-web.jar ./
 nohup java -jar singte-web.jar --spring.profiles.active=prod 2>&1 &
