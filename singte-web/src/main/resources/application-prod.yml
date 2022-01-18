@@ -8,7 +8,7 @@ spring:
       template_exception_handler: rethrow
   data:
     mongodb:
-      uri: mongodb://singte:123456@localhost:27017/singte
+      uri: mongodb://localhost:27017/singte
 
 logging:
   level:

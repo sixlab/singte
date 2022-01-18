@@ -1,0 +1,52 @@
+
+### 曹操
+POST {{server}}/admin/utils/importAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+path=caocaoshiji/caocao.json&type=caocao&ancientSet=经部&ancientCategory=诗类&bookName=曹操诗集&author=曹操
+
+### 楚辞
+POST {{server}}/admin/utils/importAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+path=chuci/chuci.json&type=chuci&ancientSet=集部&ancientCategory=楚辞类&bookName=楚辞&author=屈原
+
+### ci
+POST {{server}}/admin/utils/importAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+path=ci/ci.song.0.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.1000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.2000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.3000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.4000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.5000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.6000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.7000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.8000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.9000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.10000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.11000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.12000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.13000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.14000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.15000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.16000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.17000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.18000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.19000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.20000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.21000.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/ci.song.2019y.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=群体
+path=ci/宋词三百首.json&type=ci&ancientSet=集部&ancientCategory=词曲类&bookName=宋词三百首&author=群体
+
+
+### 论语
+POST {{server}}/admin/utils/importAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+path=mengxue/dizigui.json&type=dizigui&ancientSet=经部&ancientCategory=蒙学类&bookName=弟子规&author=李毓秀

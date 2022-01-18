@@ -19,7 +19,7 @@ public class InitAncient implements BaseInitComponent {
     private SteAncientCategoryDao categoryDao;
 
     /**
-     * 经部：易类 书类 诗类 礼类 春秋类 孝经类 五经总义类 四书类 乐类 小学类
+     * 经部：易类 书类 诗类 礼类 春秋类 孝经类 五经总义类 四书类 乐类 小学类/蒙学类
      * 史部：正史类 编年类 纪事本末类 杂史类 别史类 诏令奏议类 传记类 史钞类 展开
      * 子部：儒家类 兵家类 法家类 农家类 医家类 天文算法类 术数类 艺术类 谱录类 展开
      * 集部：楚辞类 别集类 总集类 诗文评类 词曲类
@@ -40,7 +40,7 @@ public class InitAncient implements BaseInitComponent {
         checkCategory("经部", "五经总义类", 7);
         checkCategory("经部", "四书类", 8);
         checkCategory("经部", "乐类", 9);
-        checkCategory("经部", "小学类", 10);
+        checkCategory("经部", "蒙学类", 10);
 
         checkCategory("史部", "正史类", 1);
         checkCategory("史部", "编年类", 2);

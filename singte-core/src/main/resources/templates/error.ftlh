@@ -13,7 +13,7 @@
 <main>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 align-self-center">
+            <div id="err-svg" class="col-md-6 align-self-center">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                      viewBox="0 0 800 600" style="visibility: visible;">
                     <g>
@@ -296,11 +296,12 @@
                 <h1>${status!'5002'}</h1>
                 <h2>UH OH! Error！</h2>
                 <p>${error!'页面处理异常'}</p>
-                <button class="btn green" onclick="location.href='/'">返回首页</button>
+                <button class="btn green" id="backHome">返回首页</button>
             </div>
         </div>
     </div>
 </main>
+<script src="/static/plugins/jquery/jquery.min.js"></script>
 <script src="/static/plugins/gsap/gsap.min.js"></script>
 <script src="/static/js/error.js"></script>
 </body>

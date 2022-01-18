@@ -71,4 +71,20 @@ public class SteAncientBookDao extends BaseDao<SteAncientBook> {
 
         return pageQuery(query, entityClass(), pageNum, pageSize);
     }
+
+    public int countSet(String ancientSet) {
+        Criteria criteria = Criteria.where("ancientSet").is(ancientSet);
+
+        Query query = new Query(criteria);
+
+        return (int) mongoTemplate.count(query, entityClass());
+    }
+
+    public int countCategory(String ancientCategory) {
+        Criteria criteria = Criteria.where("ancientCategory").is(ancientCategory);
+
+        Query query = new Query(criteria);
+
+        return (int) mongoTemplate.count(query, entityClass());
+    }
 }

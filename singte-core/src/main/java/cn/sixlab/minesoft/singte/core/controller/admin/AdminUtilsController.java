@@ -3,15 +3,18 @@ package cn.sixlab.minesoft.singte.core.controller.admin;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
-import cn.sixlab.minesoft.singte.core.common.utils.CtxHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.HttpUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientBookDao;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientCategoryDao;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
+import cn.sixlab.minesoft.singte.core.dao.SteAncientSetDao;
 import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
+import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
+import cn.sixlab.minesoft.singte.core.models.SteAncientSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +31,40 @@ import java.util.Map;
 public class AdminUtilsController extends BaseController {
 
     @Autowired
+    private SteAncientSetDao ancientSetDao;
+
+    @Autowired
+    private SteAncientCategoryDao ancientCategoryDao;
+
+    @Autowired
     private SteAncientBookDao ancientBookDao;
+
+    @Autowired
+    private SteAncientSectionDao ancientSectionDao;
+
+    @ResponseBody
+    @PostMapping(value = "/countAncient")
+    public ModelResp countAncient() {
+
+        List<SteAncientSet> ancientSetList = ancientSetDao.list();
+        for (SteAncientSet ancientSet : ancientSetList) {
+
+            String set = ancientSet.getAncientSet();
+            int count = ancientBookDao.countSet(set);
+            ancientSet.setCount(count);
+            ancientSetDao.save(ancientSet);
+
+            List<SteAncientCategory> ancientCategoryList = ancientCategoryDao.listSetCategory(set);
+
+            for (SteAncientCategory ancientCategory : ancientCategoryList) {
+                int cCount = ancientBookDao.countCategory(ancientCategory.getAncientCategory());
+                ancientCategory.setCount(cCount);
+                ancientCategoryDao.save(ancientCategory);
+            }
+        }
+
+        return ModelResp.success();
+    }
 
     @ResponseBody
     @PostMapping(value = "/importAncient")
@@ -51,8 +87,9 @@ public class AdminUtilsController extends BaseController {
         book.setAncientCategory(param.getAncientCategory());
         book.setBookName(param.getBookName());
         book.setAuthor(param.getAuthor());
-        book.setWeight(param.getWeight());
-        book.setIntro(param.getIntro());
+
+        book.setWeight(0);
+        book.setIntro("");
         book.setStatus(StConst.YES);
         book.setCreateTime(new Date());
 
@@ -81,7 +118,7 @@ public class AdminUtilsController extends BaseController {
                 param.setContentHtml(StrUtil.join("<br />", sanzijinNewContent));
                 param.setContentText(StrUtil.join("", sanzijinNewContent));
 
-                CtxHolder.getBean(SteAncientSectionDao.class).save(param);
+                ancientSectionDao.save(param);
                 break;
             case "qianziwen":
                 // mengxue/qianziwen.json
@@ -110,7 +147,7 @@ public class AdminUtilsController extends BaseController {
                 param.setContentHtml(StrUtil.replace(qianziwen, "。", "。<br />"));
                 param.setContentText(qianziwen);
 
-                CtxHolder.getBean(SteAncientSectionDao.class).save(param);
+                ancientSectionDao.save(param);
                 break;
             case "tangshisanbaishou":
                 // mengxue/tangshisanbaishou.json
@@ -126,6 +163,11 @@ public class AdminUtilsController extends BaseController {
                 book.setBookName(MapUtil.getStr(guwenguanzhiMap, "title"));
                 param.setBookName(MapUtil.getStr(guwenguanzhiMap, "title"));
 
+                if(guwenguanzhiMap.containsKey("author")){
+                    book.setAuthor(MapUtil.getStr(guwenguanzhiMap, "author"));
+                    param.setAuthor(MapUtil.getStr(guwenguanzhiMap, "author"));
+                }
+
                 if(guwenguanzhiMap.containsKey("abstract")){
                     List<String> abstr = (List<String>) guwenguanzhiMap.get("abstract");
                     book.setIntro(StrUtil.join("", abstr));
@@ -137,23 +179,25 @@ public class AdminUtilsController extends BaseController {
 
                     for (Map content2 : guwenguanzhi2Content) {
                         String chapter = MapUtil.getStr(map, "chapter");
-                        String source = MapUtil.getStr(map, "source");
-                        String gwgzAuthor = MapUtil.getStr(map, "author");
 
                         param.setId(null);
                         param.setWeight(sectionCount++);
 
                         param.setSectionName(gwgzTitle + " - " +chapter);
-                        if(StrUtil.isNotEmpty(source)){
-                            gwgzAuthor = gwgzAuthor + " - " + source;
+                        if(map.containsKey("author")){
+                            String gwgzAuthor = MapUtil.getStr(map, "author");
+                            String source = MapUtil.getStr(map, "source");
+                            if (StrUtil.isNotEmpty(source)) {
+                                gwgzAuthor = gwgzAuthor + " - " + source;
+                            }
+                            param.setAuthor(gwgzAuthor);
                         }
-                        param.setAuthor(gwgzAuthor);
 
                         List<String> contentList = (List<String>) content2.get("paragraphs");
                         param.setContentHtml(StrUtil.join("<br />", contentList));
                         param.setContentText(StrUtil.join("", contentList));
 
-                        CtxHolder.getBean(SteAncientSectionDao.class).save(param);
+                        ancientSectionDao.save(param);
                     }
                 }
                 break;
@@ -184,7 +228,7 @@ public class AdminUtilsController extends BaseController {
                     param.setContentHtml(contentHtml);
                     param.setContentText(StrUtil.replace(contentHtml, "<br />", ""));
 
-                    CtxHolder.getBean(SteAncientSectionDao.class).save(param);
+                    ancientSectionDao.save(param);
                 }
                 break;
             case "ci":
@@ -205,7 +249,7 @@ public class AdminUtilsController extends BaseController {
                     param.setContentHtml(StrUtil.join("<br />", contentList));
                     param.setContentText(StrUtil.join("", contentList));
 
-                    CtxHolder.getBean(SteAncientSectionDao.class).save(param);
+                    ancientSectionDao.save(param);
                 }
                 break;
             case "caocao":
@@ -228,7 +272,7 @@ public class AdminUtilsController extends BaseController {
                     param.setContentHtml(StrUtil.join("<br />", contentList));
                     param.setContentText(StrUtil.join("", contentList));
 
-                    CtxHolder.getBean(SteAncientSectionDao.class).save(param);
+                    ancientSectionDao.save(param);
                 }
                 break;
             case "chuci":
@@ -250,13 +294,13 @@ public class AdminUtilsController extends BaseController {
                     param.setContentHtml(StrUtil.join("。<br />", contentList));
                     param.setContentText(StrUtil.join("。", contentList));
 
-                    CtxHolder.getBean(SteAncientSectionDao.class).save(param);
+                    ancientSectionDao.save(param);
                 }
                 break;
         }
 
         book.setCount(sectionCount-1);
-        CtxHolder.getBean(SteAncientBookDao.class).save(book);
+        ancientBookDao.save(book);
     }
 
 }
