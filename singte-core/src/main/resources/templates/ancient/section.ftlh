@@ -21,7 +21,7 @@
                     <#list result.list as item>
                         <li>
                             <span>${item.author}</span>
-                            <a href="/ancient/content/${item.id}" target="_blank">${item.sectionName}</a>
+                            <a href="/ancient/content/${item.id}">${item.sectionName}</a>
                         </li>
                     </#list>
                 </ul>

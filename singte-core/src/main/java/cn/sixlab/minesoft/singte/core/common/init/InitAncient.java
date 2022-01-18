@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.init;
 
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientCategoryDao;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientSetDao;
 import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
@@ -77,6 +78,7 @@ public class InitAncient implements BaseInitComponent {
             steAncientSet.setCount(0);
             steAncientSet.setWeight(weight);
             steAncientSet.setIntro("");
+            steAncientSet.setStatus(StConst.YES);
             steAncientSet.setCreateTime(new Date());
 
             ancientSetDao.save(steAncientSet);
@@ -93,6 +95,7 @@ public class InitAncient implements BaseInitComponent {
             steAncientCategory.setCount(0);
             steAncientCategory.setWeight(weight);
             steAncientCategory.setIntro("");
+            steAncientCategory.setStatus(StConst.YES);
             steAncientCategory.setCreateTime(new Date());
 
             categoryDao.save(steAncientCategory);

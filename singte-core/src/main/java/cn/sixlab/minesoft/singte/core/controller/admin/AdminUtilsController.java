@@ -52,6 +52,7 @@ public class AdminUtilsController extends BaseController {
             String set = ancientSet.getAncientSet();
             int count = ancientBookDao.countSet(set);
             ancientSet.setCount(count);
+            ancientSet.setStatus(StConst.YES);
             ancientSetDao.save(ancientSet);
 
             List<SteAncientCategory> ancientCategoryList = ancientCategoryDao.listSetCategory(set);
@@ -59,6 +60,7 @@ public class AdminUtilsController extends BaseController {
             for (SteAncientCategory ancientCategory : ancientCategoryList) {
                 int cCount = ancientBookDao.countCategory(ancientCategory.getAncientCategory());
                 ancientCategory.setCount(cCount);
+                ancientCategory.setStatus(StConst.YES);
                 ancientCategoryDao.save(ancientCategory);
             }
         }
