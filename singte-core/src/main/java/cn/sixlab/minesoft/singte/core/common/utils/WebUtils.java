@@ -255,12 +255,12 @@ public class WebUtils {
     }
 
     public static String getToken(HttpServletRequest request) {
-        String token = getCookie("Authorization");
-        if (StrUtil.isEmpty(token)) {
-            token = request.getParameter("Authorization");
-        }
+        String token = request.getParameter("Authorization");
         if (StrUtil.isEmpty(token)) {
             token = request.getHeader("Authorization");
+        }
+        if (StrUtil.isEmpty(token)) {
+            token = getCookie("Authorization");
         }
         return token;
     }
