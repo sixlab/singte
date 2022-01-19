@@ -227,17 +227,6 @@ public class AdminUtilsController extends BaseController {
     }
 
     private void parseAncient(String type, String resp, SteAncientSection param) {
-        SteAncientBook book = new SteAncientBook();
-        book.setAncientSet(param.getAncientSet());
-        book.setAncientCategory(param.getAncientCategory());
-        book.setBookName(param.getBookName());
-        book.setAuthor(param.getAuthor());
-
-        book.setWeight(0);
-        book.setIntro("");
-        book.setStatus(StConst.YES);
-        book.setCreateTime(new Date());
-
         param.setViewCount(0);
         param.setThumbCount(0);
         param.setIntro("");
@@ -305,18 +294,16 @@ public class AdminUtilsController extends BaseController {
                 Map guwenguanzhiMap = JsonUtils.toBean(resp, Map.class);
                 List<Map> guwenguanzhiContent = (List<Map>) guwenguanzhiMap.get("content");
 
-                book.setBookName(MapUtil.getStr(guwenguanzhiMap, "title"));
                 param.setBookName(MapUtil.getStr(guwenguanzhiMap, "title"));
 
                 if(guwenguanzhiMap.containsKey("author")){
-                    book.setAuthor(MapUtil.getStr(guwenguanzhiMap, "author"));
                     param.setAuthor(MapUtil.getStr(guwenguanzhiMap, "author"));
                 }
 
-                if(guwenguanzhiMap.containsKey("abstract")){
-                    List<String> abstr = (List<String>) guwenguanzhiMap.get("abstract");
-                    book.setIntro(StrUtil.join("", abstr));
-                }
+//                if(guwenguanzhiMap.containsKey("abstract")){
+//                    List<String> abstr = (List<String>) guwenguanzhiMap.get("abstract");
+//                    book.setIntro(StrUtil.join("", abstr));
+//                }
 
                 for (Map map : guwenguanzhiContent) {
                     String gwgzTitle = MapUtil.getStr(map, "title");
@@ -351,11 +338,8 @@ public class AdminUtilsController extends BaseController {
                 Map diziguiMap = JsonUtils.toBean(resp, Map.class);
                 List<Map> diziguiContent = (List<Map>) diziguiMap.get("content");
 
-
-                book.setBookName(MapUtil.getStr(diziguiMap, "title"));
                 param.setBookName(MapUtil.getStr(diziguiMap, "title"));
 
-                book.setAuthor(MapUtil.getStr(diziguiMap, "author"));
                 param.setAuthor(MapUtil.getStr(diziguiMap, "title"));
 
                 for (Map map : diziguiContent) {
@@ -444,17 +428,11 @@ public class AdminUtilsController extends BaseController {
                 break;
             default:
                 PoetryImportApi poetryApi = SpringUtil.getBean("import" + type, PoetryImportApi.class);
-                sectionCount = poetryApi.parseAncient(type, resp, book, param) + 1;
+                if(null == poetryApi){
+                    poetryApi = SpringUtil.getBean("importlistmap", PoetryImportApi.class);
+                }
+                poetryApi.parseAncient(type, resp, param);
                 break;
-        }
-
-        book.setCount(sectionCount - 1);
-        SteAncientBook oldBook = ancientBookDao.selectByParents(book.getAncientSet(), book.getAncientCategory(), book.getBookName());
-        if (null == oldBook) {
-            ancientBookDao.save(book);
-        } else {
-            oldBook.setCount(sectionCount - 1);
-            ancientBookDao.save(oldBook);
         }
     }
 
