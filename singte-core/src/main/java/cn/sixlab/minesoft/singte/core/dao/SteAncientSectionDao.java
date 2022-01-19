@@ -30,6 +30,16 @@ public class SteAncientSectionDao extends BaseDao<SteAncientSection> {
         return mongoTemplate.find(query, entityClass());
     }
 
+    public List<String> listBookAuthor(String bookName) {
+        Criteria criteria = Criteria.where("bookName").is(bookName);
+
+        Sort sort = Sort.by("weight");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findDistinct(query, "author", entityClass(), String.class);
+    }
+
     public PageResult<SteAncientSection> selectSections(SteAncientBook ancientBook, String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (null != ancientBook) {

@@ -18,11 +18,13 @@ import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
 import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSet;
+import cn.sixlab.minesoft.singte.core.poetry.PoetryImportApi;
 import cn.sixlab.minesoft.singte.core.service.AncientService;
 import javafx.util.Callback;
 import org.nlpcn.commons.lang.jianfan.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,7 +54,14 @@ public class AdminUtilsController extends BaseController {
     private AncientService ancientService;
 
     @ResponseBody
-    @PostMapping(value = "/simplifyBook")
+    @GetMapping(value = "/test")
+    public ModelResp test() {
+
+        return ModelResp.success(ancientSectionDao.listBookAuthor("测试文章1"));
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/simplifyBook")
     public ModelResp simplifyBook() {
 
         int pageNum = 0;
@@ -73,12 +82,11 @@ public class AdminUtilsController extends BaseController {
             hasNex = pageResult.isHasNext();
         }
 
-
         return ModelResp.success();
     }
 
     @ResponseBody
-    @PostMapping(value = "/reloadBook")
+    @GetMapping(value = "/reloadBook")
     public ModelResp reloadBook() {
 
         ancientService.iterSections(new Callback<SteAncientSection, Void>() {
@@ -114,6 +122,14 @@ public class AdminUtilsController extends BaseController {
                     param.setStatus(StConst.No);
                     ancientBookDao.save(param);
                 } else {
+                    List<String> authorList = ancientSectionDao.listBookAuthor(param.getBookName());
+                    if (CollUtil.isEmpty(authorList)) {
+                        param.setAuthor("-");
+                    } else if (authorList.size() == 1) {
+                        param.setAuthor(authorList.get(0));
+                    } else {
+                        param.setAuthor("合著");
+                    }
                     param.setCount(sectionList.size());
                     param.setStatus(StConst.YES);
                     ancientBookDao.save(param);
@@ -426,10 +442,20 @@ public class AdminUtilsController extends BaseController {
                     ancientSectionDao.save(param);
                 }
                 break;
+            default:
+                PoetryImportApi poetryApi = SpringUtil.getBean("import" + type, PoetryImportApi.class);
+                sectionCount = poetryApi.parseAncient(type, resp, book, param) + 1;
+                break;
         }
 
-        book.setCount(sectionCount-1);
-        ancientBookDao.save(book);
+        book.setCount(sectionCount - 1);
+        SteAncientBook oldBook = ancientBookDao.selectByParents(book.getAncientSet(), book.getAncientCategory(), book.getBookName());
+        if (null == oldBook) {
+            ancientBookDao.save(book);
+        } else {
+            oldBook.setCount(sectionCount - 1);
+            ancientBookDao.save(oldBook);
+        }
     }
 
 }
