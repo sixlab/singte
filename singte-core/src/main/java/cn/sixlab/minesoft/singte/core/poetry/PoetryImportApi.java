@@ -1,6 +1,6 @@
 package cn.sixlab.minesoft.singte.core.poetry;
 
-import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
@@ -33,8 +33,7 @@ public abstract class PoetryImportApi {
             section.setAncientCategory(model.getAncientCategory());
             section.setBookName(model.getBookName());
             section.setAuthor(model.getAuthor());
-            // String resp = HttpUtil.get(parentPath + model.getPath());
-            String resp = HttpRequest.get(parentPath + model.getPath()).setHttpProxy("127.0.0.1", 10809).execute().body();
+            String resp = HttpUtil.get(parentPath + model.getPath());
 
             parseJson(resp, section);
         }
