@@ -4,9 +4,9 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.GifCaptcha;
 import cn.hutool.captcha.generator.RandomGenerator;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
-import cn.sixlab.minesoft.singte.core.common.utils.CtxHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
@@ -104,7 +104,7 @@ public class IndexController extends BaseController {
             toolCategory.setIntro("简介" + i);
             toolCategory.setCreateTime(new Date());
 
-            CtxHolder.getBean(SteToolCategoryDao.class).save(toolCategory);
+            SpringUtil.getBean(SteToolCategoryDao.class).save(toolCategory);
 
             SteToolItem toolItem = new SteToolItem();
 
@@ -117,7 +117,7 @@ public class IndexController extends BaseController {
             toolItem.setIntro("简介" + i);
             toolItem.setCreateTime(new Date());
 
-            CtxHolder.getBean(SteToolItemDao.class).save(toolItem);
+            SpringUtil.getBean(SteToolItemDao.class).save(toolItem);
         }
 
         return "success";

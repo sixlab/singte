@@ -2,21 +2,14 @@ package cn.sixlab.minesoft.singte.core.controller;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
-import cn.sixlab.minesoft.singte.core.common.utils.CtxHolder;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
-import cn.sixlab.minesoft.singte.core.dao.SteAncientBookDao;
-import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
-import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
-import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import cn.sixlab.minesoft.singte.core.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 
 @Controller
 @RequestMapping("/article")

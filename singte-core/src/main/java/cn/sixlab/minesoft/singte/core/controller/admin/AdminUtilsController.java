@@ -3,9 +3,10 @@ package cn.sixlab.minesoft.singte.core.controller.admin;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.http.HttpUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
-import cn.sixlab.minesoft.singte.core.common.utils.HttpUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
@@ -160,7 +161,7 @@ public class AdminUtilsController extends BaseController {
     public ModelResp jsonImport(String path, String type, SteAncientSection param) {
         String parentPath = "https://raw.githubusercontent.com/chinese-poetry/chinese-poetry/master/";
 
-        String resp = HttpUtils.sendGet(parentPath + path, null);
+        String resp = HttpUtil.get(parentPath + path);
 
         // TODO
 
@@ -199,7 +200,7 @@ public class AdminUtilsController extends BaseController {
     public ModelResp importAncient(String path, String type, SteAncientSection param) throws IOException {
         String parentPath = "https://raw.githubusercontent.com/chinese-poetry/chinese-poetry/master/";
 
-        String resp = HttpUtils.sendGet(parentPath + path, null);
+        String resp = HttpUtil.get(parentPath + path);
 
         parseAncient(type, resp, param);
 
