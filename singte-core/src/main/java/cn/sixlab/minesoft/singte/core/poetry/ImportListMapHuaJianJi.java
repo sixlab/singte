@@ -11,23 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Component("importlistmap")
-public class ImportListMap extends PoetryImportApi {
+@Component("importlistmaphuajianji")
+public class ImportListMapHuaJianJi extends PoetryImportApi {
 
     @Override
     public List<PoetryModel> paths() {
         List<PoetryModel> list = new ArrayList<>();
 
-        list.add(new PoetryModel("wudai/nantang/poetrys.json", "集部", "词曲类", "南唐二主词", "合著"));
-        list.add(new PoetryModel("yuanqu/yuanqu.json", "集部", "词曲类", "元曲全集", "合著"));
-        list.add(new PoetryModel("shijing/shijing.json", "经部", "五经类", "诗经", "诗经"));
-        list.add(new PoetryModel("sishuwujing/mengzi.json", "经部", "四书类", "孟子", "孟子"));
-        list.add(new PoetryModel("lunyu/lunyu.json", "经部", "四书类", "论语", "孔子"));
-        list.add(new PoetryModel("caocaoshiji/caocao.json", "经部", "诗类", "曹操诗集", "曹操"));
-        list.add(new PoetryModel("chuci/chuci.json", "集部", "楚辞类", "楚辞", "屈原"));
-        list.add(new PoetryModel("ci/宋词三百首.json", "集部", "词曲类", "宋词三百首", "合著"));
-        list.add(new PoetryModel("ci/ci.song.2009y.json", "集部", "词曲类", "全宋词", "合著"));
-        list.add(new PoetryModel("ci/ci.song.0.json", "集部", "词曲类", "全宋词", "合著"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-0-preface.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-1-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-2-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-3-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-4-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-5-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-6-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-7-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-8-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-9-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
+        list.add(new PoetryModel("wudai/huajianji/huajianji-x-juan.json","集部", "词曲类", "花间集", "赵崇祚"));
 
         return list;
     }

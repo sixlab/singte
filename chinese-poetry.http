@@ -11,14 +11,28 @@ POST {{server}}/admin/utils/importAncient
 Content-Type: application/x-www-form-urlencoded
 Authorization: {{Authorization}}
 
-type=importmaplistmap
+
+type=importdizigui
 
 ### 论语
-type=importmaplist
-type=importone
-type=importqianziwen
-type=importdizigui
-type=importlistmap
 type=importlistmapsongci
-type=importlistmaptangshi
+type=importmaplistmap
+type=importqianziwen
+type=importone
+type=importmaplist
 
+type=importlistmap
+type=importlistmaphuajianji
+
+type=importlistmapsongci
+type=importlistmapsongci1
+
+type=importlistmaptangshi
+type=importlistmaptangshi1
+type=importlistmaptangshi2
+type=importlistmaptangshi3
+type=importlistmaptangshi4
+type=importlistmaptangshi5
+type=importlistmaptangshi6
+type=importlistmaptangshi7
+type=importlistmaptangshi8

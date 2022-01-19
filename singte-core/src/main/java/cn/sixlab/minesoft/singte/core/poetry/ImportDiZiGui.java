@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.poetry;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
@@ -28,6 +29,9 @@ public class ImportDiZiGui extends PoetryImportApi {
      */
     @Override
     public void parseJson(String resp, SteAncientSection param) {
+        SteAncientSection ancientSection = new SteAncientSection();
+        BeanUtil.copyProperties(param, ancientSection);
+
         int sectionCount = 1;
         Map topMap = JsonUtils.toBean(resp, Map.class);
         List<Map> mapList = (List<Map>) topMap.get("content");
@@ -36,23 +40,23 @@ public class ImportDiZiGui extends PoetryImportApi {
         param.setAuthor(MapUtil.getStr(topMap, "author"));
 
         for (Map map : mapList) {
-            param.setId(null);
-            param.setWeight(sectionCount++);
+            ancientSection.setId(null);
+            ancientSection.setWeight(sectionCount++);
 
             String title = MapUtil.getStr(map, "title");
             if (StrUtil.isEmpty(title)) {
                 title = MapUtil.getStr(map, "chapter");
             }
-            param.setSectionName(title);
+            ancientSection.setSectionName(title);
 
             List<String> contentList = (List<String>) map.get("paragraphs");
             String contentText = StrUtil.join("。", contentList);
             contentText = StrUtil.replace(contentText, " ", "，");
 
-            param.setContentHtml(StrUtil.replace(contentText, "。", "。<br />"));
-            param.setContentText(contentText);
+            ancientSection.setContentHtml(StrUtil.replace(contentText, "。", "。<br />"));
+            ancientSection.setContentText(contentText);
 
-            ancientSectionDao.save(param);
+            ancientSectionDao.save(ancientSection);
         }
     }
 }

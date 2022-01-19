@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.poetry;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
@@ -28,22 +29,25 @@ public class ImportQianZiWen extends PoetryImportApi {
      */
     @Override
     public void parseJson(String resp, SteAncientSection param) {
+        SteAncientSection ancientSection = new SteAncientSection();
+        BeanUtil.copyProperties(param, ancientSection);
+
         int sectionCount = 1;
         Map map = JsonUtils.toBean(resp, Map.class);
 
-        param.setId(null);
-        param.setWeight(sectionCount);
+        ancientSection.setId(null);
+        ancientSection.setWeight(sectionCount);
 
         String title = MapUtil.getStr(map, "title");
         if (StrUtil.isEmpty(title)) {
             title = MapUtil.getStr(map, "chapter");
         }
 
-        param.setSectionName(title);
+        ancientSection.setSectionName(title);
 
         String author = MapUtil.getStr(map, "author");
         if (StrUtil.isNotEmpty(author)) {
-            param.setAuthor(author);
+            ancientSection.setAuthor(author);
         }
 
         List<String> qianziwenContent = (List<String>) map.get("paragraphs");
@@ -57,9 +61,9 @@ public class ImportQianZiWen extends PoetryImportApi {
             }
         }
         String qianziwen = qianziwenSb.toString();
-        param.setContentHtml(StrUtil.replace(qianziwen, "。", "。<br />"));
-        param.setContentText(qianziwen);
+        ancientSection.setContentHtml(StrUtil.replace(qianziwen, "。", "。<br />"));
+        ancientSection.setContentText(qianziwen);
 
-        ancientSectionDao.save(param);
+        ancientSectionDao.save(ancientSection);
     }
 }

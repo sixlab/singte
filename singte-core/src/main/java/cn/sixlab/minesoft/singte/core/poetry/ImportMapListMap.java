@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.poetry;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
@@ -35,6 +36,9 @@ public class ImportMapListMap extends PoetryImportApi {
      */
     @Override
     public void parseJson(String resp, SteAncientSection param) {
+        SteAncientSection ancientSection = new SteAncientSection();
+        BeanUtil.copyProperties(param, ancientSection);
+
         int sectionCount = 1;
         Map topMap = JsonUtils.toBean(resp, Map.class);
         List<Map> mapList = (List<Map>) topMap.get("content");
@@ -50,28 +54,28 @@ public class ImportMapListMap extends PoetryImportApi {
             List<Map> finalContent = (List<Map>) middleMap.get("content");
 
             for (Map finalMap : finalContent) {
-                param.setId(null);
-                param.setWeight(sectionCount++);
+                ancientSection.setId(null);
+                ancientSection.setWeight(sectionCount++);
 
                 String finalTitle = MapUtil.getStr(finalMap, "chapter");
                 if(StrUtil.isNotEmpty(parentTitle)){
                     finalTitle = parentTitle + "·" + finalTitle;
                 }
-                param.setSectionName(finalTitle);
+                ancientSection.setSectionName(finalTitle);
 
                 if (finalMap.containsKey("author")) {
                     String author = MapUtil.getStr(finalMap, "author");
                     if (finalMap.containsKey("source")) {
                         author = author + " - " + MapUtil.getStr(finalMap, "source");
                     }
-                    param.setAuthor(author);
+                    ancientSection.setAuthor(author);
                 }
 
                 List<String> contentList = (List<String>) finalMap.get("paragraphs");
-                param.setContentHtml(StrUtil.join("<br />", contentList));
-                param.setContentText(StrUtil.join("", contentList));
+                ancientSection.setContentHtml(StrUtil.join("<br />", contentList));
+                ancientSection.setContentText(StrUtil.join("", contentList));
 
-                ancientSectionDao.save(param);
+                ancientSectionDao.save(ancientSection);
             }
         }
     }
