@@ -18,6 +18,7 @@ import cn.sixlab.minesoft.singte.core.poetry.PoetryImportApi;
 import cn.sixlab.minesoft.singte.core.poetry.PoetryModel;
 import cn.sixlab.minesoft.singte.core.service.AncientService;
 import javafx.util.Callback;
+import lombok.extern.slf4j.Slf4j;
 import org.nlpcn.commons.lang.jianfan.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/admin/utils")
 public class AdminUtilsController extends BaseController {
@@ -172,7 +174,7 @@ public class AdminUtilsController extends BaseController {
     @ResponseBody
     @PostMapping(value = "/importOneAncient")
     public ModelResp importOneAncient(String type, PoetryModel model) throws IOException {
-
+        log.info("type>>>>>>>>");
         PoetryImportApi poetryApi = SpringUtil.getBean(type, PoetryImportApi.class);
         if (null != poetryApi) {
             poetryApi.parseOnePoetry(model);

@@ -7,6 +7,7 @@ import cn.sixlab.minesoft.singte.core.common.utils.WebUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.models.StUser;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
+@Slf4j
 @Component
 public class LoginStatusRequestFilter extends OncePerRequestFilter {
 
@@ -31,6 +33,7 @@ public class LoginStatusRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String token = WebUtils.getToken(request);
+        log.info("token:" + token);
 
         if (StrUtil.isNotEmpty(token)) {
             StUser stUser = userDetailsService.loadUserByToken(token);
