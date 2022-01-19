@@ -5,25 +5,9 @@ Content-Type: application/x-www-form-urlencoded
 Authorization: {{Authorization}}
 
 ###
-
-### import
-POST {{server}}/admin/utils/importAncient
-Content-Type: application/x-www-form-urlencoded
-Authorization: {{Authorization}}
-
-
 type=importdizigui
-
-### 论语
-type=importlistmapsongci
-type=importmaplistmap
-type=importqianziwen
-type=importone
-type=importmaplist
-
 type=importlistmap
 type=importlistmaphuajianji
-
 type=importlistmapsongci
 type=importlistmapsongci1
 
@@ -36,3 +20,23 @@ type=importlistmaptangshi5
 type=importlistmaptangshi6
 type=importlistmaptangshi7
 type=importlistmaptangshi8
+
+type=importmaplist
+type=importmaplistmap
+type=importone
+
+### import
+POST {{server}}/admin/utils/importAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+type=importqianziwen
+
+### 论语
+### 论语
+POST {{server}}/admin/utils/importOneAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+type=importlistmap&path=ci/ci.song.2009y.json&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=合著
+

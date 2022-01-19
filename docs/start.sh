@@ -1,6 +1,13 @@
 #!/bin/bash
 
-url='127.0.0.1:3306/singte'
-pwd='123456'
+cmd=$(ps aux | grep "singte-web" | grep java | awk '{print $2}')
+echo -e "PID: \n\033[31m\033[05m$cmd\033[0m"
+echo "PID:$cmd"
+for id in ${cmd}; do
+  kill -9 ${id}
+  echo "kill $id"
+done
+echo 'finish kill'
 
-nohup java -jar singte-web.jar --st.db.jdbc=${url} --st.db.pwd=${pwd} 2>&1 &
+cd ../../
+nohup java -jar singte-web.jar --spring.profiles.active=prod 2>&1 &

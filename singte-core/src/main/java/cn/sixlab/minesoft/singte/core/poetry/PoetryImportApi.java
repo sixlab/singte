@@ -39,4 +39,22 @@ public abstract class PoetryImportApi {
         }
     }
 
+    public void parseOnePoetry(PoetryModel model) {
+        SteAncientSection section = new SteAncientSection();
+        section.setViewCount(0);
+        section.setThumbCount(0);
+        section.setIntro("");
+        section.setStatus(StConst.YES);
+        section.setCreateTime(new Date());
+
+        String parentPath = "https://raw.githubusercontent.com/chinese-poetry/chinese-poetry/master/";
+        section.setAncientSet(model.getAncientSet());
+        section.setAncientCategory(model.getAncientCategory());
+        section.setBookName(model.getBookName());
+        section.setAuthor(model.getAuthor());
+        String resp = HttpUtil.get(parentPath + model.getPath());
+
+        parseJson(resp, section);
+    }
+
 }

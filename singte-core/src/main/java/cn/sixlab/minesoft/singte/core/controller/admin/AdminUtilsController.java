@@ -15,6 +15,7 @@ import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSet;
 import cn.sixlab.minesoft.singte.core.poetry.PoetryImportApi;
+import cn.sixlab.minesoft.singte.core.poetry.PoetryModel;
 import cn.sixlab.minesoft.singte.core.service.AncientService;
 import javafx.util.Callback;
 import org.nlpcn.commons.lang.jianfan.Converter;
@@ -162,6 +163,19 @@ public class AdminUtilsController extends BaseController {
         PoetryImportApi poetryApi = SpringUtil.getBean(type, PoetryImportApi.class);
         if (null != poetryApi) {
             poetryApi.parsePoetry();
+            return ModelResp.success();
+        }else{
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/importOneAncient")
+    public ModelResp importOneAncient(String type, PoetryModel model) throws IOException {
+
+        PoetryImportApi poetryApi = SpringUtil.getBean(type, PoetryImportApi.class);
+        if (null != poetryApi) {
+            poetryApi.parseOnePoetry(model);
             return ModelResp.success();
         }else{
             return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
