@@ -6,18 +6,28 @@ import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Component("importqianziwen")
 public class ImportQianZiWen extends PoetryImportApi {
 
+    @Override
+    public List<PoetryModel> paths() {
+        List<PoetryModel> list = new ArrayList<>();
+
+        list.add(new PoetryModel("mengxue/qianziwen.json", "经部", "蒙学类", "千字文", "周兴嗣"));
+
+        return list;
+    }
+
     /**
      * mengxue/qianziwen.json
      * 
      */
     @Override
-    public void parseAncient(String type, String resp, SteAncientSection param) {
+    public void parseJson(String resp, SteAncientSection param) {
         int sectionCount = 1;
         Map map = JsonUtils.toBean(resp, Map.class);
 

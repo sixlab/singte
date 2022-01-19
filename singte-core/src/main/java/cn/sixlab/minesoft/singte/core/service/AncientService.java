@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AncientService {
+    private final int pageSize = 100;
 
     @Autowired
     private SteAncientSetDao setDao;
@@ -30,7 +31,6 @@ public class AncientService {
 
     public void iterSets(Callback<SteAncientSet, Void> callback) {
         int pageNum = 0;
-        int pageSize = 10;
         boolean hasNex = true;
 
         while (hasNex) {
@@ -47,7 +47,6 @@ public class AncientService {
 
     public void iterCategories(Callback<SteAncientCategory, Void> callback) {
         int pageNum = 0;
-        int pageSize = 10;
         boolean hasNex = true;
 
         while (hasNex) {
@@ -64,7 +63,6 @@ public class AncientService {
 
     public void iterBooks(Callback<SteAncientBook, Void> callback) {
         int pageNum = 0;
-        int pageSize = 10;
         boolean hasNex = true;
 
         while (hasNex) {
@@ -81,7 +79,6 @@ public class AncientService {
 
     public void iterSections(Callback<SteAncientSection, Void> callback) {
         int pageNum = 0;
-        int pageSize = 10;
         boolean hasNex = true;
 
         while (hasNex) {

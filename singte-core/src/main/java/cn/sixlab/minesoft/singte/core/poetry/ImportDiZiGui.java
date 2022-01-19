@@ -10,22 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Component("importmaplist")
-public class ImportMapList extends PoetryImportApi {
+@Component("importdizigui")
+public class ImportDiZiGui extends PoetryImportApi {
 
     @Override
     public List<PoetryModel> paths() {
-        List<PoetryModel> list = new ArrayList<>();
+        List<PoetryModel> list= new ArrayList<>();
 
-        list.add(new PoetryModel("mengxue/zengguangxianwen.json", "经部", "蒙学类", "增广贤文", "佚名"));
-        list.add(new PoetryModel("mengxue/wenzimengqiu.json", "经部", "蒙学类", "文字蒙求", "王筠"));
+        list.add(new PoetryModel("mengxue/dizigui.json", "经部", "蒙学类", "弟子规", "李毓秀"));
 
         return list;
     }
 
     /**
-     * mengxue/zengguangxianwen.json
-     * mengxue/wenzimengqiu.json
+     * mengxue/dizigui.json
      *
      */
     @Override
@@ -35,6 +33,7 @@ public class ImportMapList extends PoetryImportApi {
         List<Map> mapList = (List<Map>) topMap.get("content");
 
         param.setBookName(MapUtil.getStr(topMap, "title"));
+        param.setAuthor(MapUtil.getStr(topMap, "author"));
 
         for (Map map : mapList) {
             param.setId(null);
@@ -47,8 +46,11 @@ public class ImportMapList extends PoetryImportApi {
             param.setSectionName(title);
 
             List<String> contentList = (List<String>) map.get("paragraphs");
-            param.setContentHtml(StrUtil.join("<br />", contentList));
-            param.setContentText(StrUtil.join("", contentList));
+            String contentText = StrUtil.join("。", contentList);
+            contentText = StrUtil.replace(contentText, " ", "，");
+
+            param.setContentHtml(StrUtil.replace(contentText, "。", "。<br />"));
+            param.setContentText(contentText);
 
             ancientSectionDao.save(param);
         }

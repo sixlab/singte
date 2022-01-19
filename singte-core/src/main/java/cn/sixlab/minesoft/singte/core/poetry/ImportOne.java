@@ -6,19 +6,35 @@ import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Component("importone")
 public class ImportOne extends PoetryImportApi {
 
+    @Override
+    public List<PoetryModel> paths() {
+        List<PoetryModel> list = new ArrayList<>();
+
+        list.add(new PoetryModel("sishuwujing/daxue.json", "经部", "四书类", "大学", "四书类"));
+        list.add(new PoetryModel("sishuwujing/zhongyong.json", "经部", "四书类", "中庸", "子思"));
+        list.add(new PoetryModel("mengxue/zhuzijiaxun.json", "经部", "蒙学类", "朱子家训", "朱柏庐"));
+        list.add(new PoetryModel("mengxue/sanzijing-new.json", "经部", "蒙学类", "三字经", "王应麟、章太炎等"));
+        list.add(new PoetryModel("mengxue/baijiaxing.json", "经部", "蒙学类", "百家姓", "佚名"));
+
+        return list;
+    }
+
     /**
      * sishuwujing/daxue.json
      * sishuwujing/zhongyong.json
      * mengxue/zhuzijiaxun.json
+     * mengxue/sanzijing-new.json
+     * mengxue/baijiaxing.json
      */
     @Override
-    public void parseAncient(String type, String resp, SteAncientSection param) {
+    public void parseJson(String resp, SteAncientSection param) {
         int sectionCount = 1;
         Map map = JsonUtils.toBean(resp, Map.class);
 
