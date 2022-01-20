@@ -43,6 +43,13 @@ $.fn.stDataTable = function (options) {
         return false;
     })
 
+    $(document).on("click", container + " .st-pager-size", function () {
+        let pageSizeVal = $(this).data("size");
+        pageSize.val(pageSizeVal);
+        StDataTable.formQuery();
+        return false;
+    })
+
     $(searchBtn).on("click", function () {
         pageNum.val("1");
         StDataTable.formQuery();

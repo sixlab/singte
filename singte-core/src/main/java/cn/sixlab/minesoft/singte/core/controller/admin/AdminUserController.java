@@ -21,6 +21,11 @@ public class AdminUserController extends BaseController {
     @Autowired
     private StUserDao userDao;
 
+    @GetMapping(value = "/info")
+    public String info() {
+        return "admin/user/info";
+    }
+
     @GetMapping(value = "/list")
     public String list() {
         return "admin/user/list";

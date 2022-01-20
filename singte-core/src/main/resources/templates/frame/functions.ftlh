@@ -105,10 +105,24 @@
 <#--  文章列表  -->
 <#macro AdminPager adminPageInfo url="">
     <div class="card-footer clearfix">
+        <#assign pageSizeList = [10,20,50,100,500,1000] />
+        <ul class="pagination pagination-sm m-0 float-left">
+            <#list pageSizeList as pageSizeItem>
+                <#if pageSizeItem==adminPageInfo.pageSize>
+                    <li class="page-item"><a class="page-link active" href="###">${pageSizeItem}</a></li>
+                <#else>
+                    <li class="page-item">
+                        <a class="page-link st-pager-size" data-size="${pageSizeItem}" href="###">${pageSizeItem}</a>
+                    </li>
+                </#if>
+            </#list>
+        </ul>
         <ul class="pagination pagination-sm m-0 float-right">
+            <li class="page-item disabled" style="margin-right: 10px;"><a class="page-link" href="###">${adminPageInfo.pageNum}/${adminPageInfo.totalPages}</a></li>
+
             <#--第一页，禁用“上一页”按钮-->
             <#if adminPageInfo.totalNum == 0 || adminPageInfo.pageNum == 1>
-                <li class="page-item disabled"><a class="page-link" href="#">&laquo;&laquo;</a></li>
+                <li class="page-item disabled"><a class="page-link" href="###">&laquo;&laquo;</a></li>
             <#else>
                 <li class="page-item st-pager"><a class="page-link" data-page="${adminPageInfo.pageNum-1}" href="#">&laquo;&laquo;</a></li>
             </#if>
