@@ -1,9 +1,4 @@
 
-### 统计
-POST {{server}}/admin/utils/countAncient
-Content-Type: application/x-www-form-urlencoded
-Authorization: {{Authorization}}
-
 ###
 type=importdizigui
 type=importlistmap
@@ -25,18 +20,37 @@ type=importmaplist
 type=importmaplistmap
 type=importone
 
-### import
+### 批量导入
 POST {{server}}/admin/utils/importAncient
 Content-Type: application/x-www-form-urlencoded
 Authorization: {{Authorization}}
 
 type=importqianziwen
 
-### 论语
-### 论语
+### 导入一个
 POST {{server}}/admin/utils/importOneAncient
 Content-Type: application/x-www-form-urlencoded
 Authorization: {{Authorization}}
 
-type=importlistmap&path=ci/ci.song.2009y.json&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=合著
+type=importlistmap&path=ci/ci.song.0.json&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=合著
+
+### 简化所有文章内容
+
+POST {{server}}/admin/utils/simplifySection
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+### 重新加载所有书籍
+
+POST {{server}}/admin/utils/reloadBook
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+### 重新统计分类的书籍数量
+
+POST {{server}}/admin/utils/countAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+
 

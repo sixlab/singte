@@ -52,21 +52,21 @@ public class InitAncient implements BaseInitComponent {
         checkCategory("史部", "传记类", 7);
         checkCategory("史部", "史钞类", 8);
 
-        checkCategory("史部", "儒家类", 1);
-        checkCategory("史部", "兵家类", 2);
-        checkCategory("史部", "法家类", 3);
-        checkCategory("史部", "农家类", 4);
-        checkCategory("史部", "医家类", 5);
-        checkCategory("史部", "天文算法类", 6);
-        checkCategory("史部", "术数类", 7);
-        checkCategory("史部", "艺术类", 8);
-        checkCategory("史部", "谱录类", 9);
+        checkCategory("子部", "儒家类", 1);
+        checkCategory("子部", "兵家类", 2);
+        checkCategory("子部", "法家类", 3);
+        checkCategory("子部", "农家类", 4);
+        checkCategory("子部", "医家类", 5);
+        checkCategory("子部", "天文算法类", 6);
+        checkCategory("子部", "术数类", 7);
+        checkCategory("子部", "艺术类", 8);
+        checkCategory("子部", "谱录类", 9);
 
-        checkCategory("史部", "楚辞类", 1);
-        checkCategory("史部", "别集类", 2);
-        checkCategory("史部", "总集类", 3);
-        checkCategory("史部", "诗文评类", 4);
-        checkCategory("史部", "词曲类", 5);
+        checkCategory("集部", "楚辞类", 1);
+        checkCategory("集部", "别集类", 2);
+        checkCategory("集部", "总集类", 3);
+        checkCategory("集部", "诗文评类", 4);
+        checkCategory("集部", "词曲类", 5);
     }
 
     private void checkSet(String ancientSet, int weight) {
