@@ -63,6 +63,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
+                        <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="category" class="col-sm-2 col-form-label">分类</label>
                             <div class="col-sm-10">

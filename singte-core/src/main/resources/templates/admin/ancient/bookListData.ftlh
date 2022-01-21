@@ -44,7 +44,7 @@
 
                     <button type="button" class="btn btn-primary stModifyBtn" data-item-id="${item.id}">修改</button>
 
-                    <a href="/ancient/content/${item.id}" target="_blank">查看</a>
+                    <a href="/ancient/section/${item.id}" target="_blank">查看</a>
                 </td>
             </tr>
         </#list>

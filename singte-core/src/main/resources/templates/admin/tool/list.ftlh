@@ -58,6 +58,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
+                        <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="toolName" class="col-sm-2 col-form-label">工具名称</label>
                             <div class="col-sm-10">

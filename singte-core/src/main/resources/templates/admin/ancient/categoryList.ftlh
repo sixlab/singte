@@ -17,6 +17,9 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
+                                <button type="button" class="btn btn-info stCountBtn">
+                                    重新统计书籍
+                                </button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#modal-default">
                                     新增古文分类
@@ -58,6 +61,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
+                        <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="ancientCategory" class="col-sm-2 col-form-label">分类</label>
                             <div class="col-sm-10">

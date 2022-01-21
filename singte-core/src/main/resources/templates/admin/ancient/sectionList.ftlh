@@ -17,6 +17,9 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
+                                <button type="button" class="btn btn-info stCountBtn">
+                                    重新统计书籍
+                                </button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#modal-default">
                                     新增古文章节
@@ -58,6 +61,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
+                        <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="sectionName" class="col-sm-2 col-form-label">标题</label>
                             <div class="col-sm-10">
@@ -99,6 +103,12 @@
                             <label for="intro" class="col-sm-2 col-form-label">简介</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="intro" id="intro" rows="3" placeholder="简介"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="contentHtml" class="col-sm-2 col-form-label">Html内容</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="contentHtml" id="contentHtml" rows="3" placeholder="内容"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">

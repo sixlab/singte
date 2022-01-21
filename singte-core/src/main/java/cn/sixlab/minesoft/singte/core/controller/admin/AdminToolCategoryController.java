@@ -27,7 +27,7 @@ public class AdminToolCategoryController extends BaseController {
     @PostMapping(value = "/listData")
     public String listData(ModelMap modelMap, String keyword,
                            @RequestParam(defaultValue = "1") Integer pageNum,
-                           @RequestParam(defaultValue = "10") Integer pageSize) {
+                           @RequestParam(defaultValue = "20") Integer pageSize) {
 
         PageResult<SteToolCategory> pageResult = toolCategoryDao.selectCategories(keyword, pageNum, pageSize);
 

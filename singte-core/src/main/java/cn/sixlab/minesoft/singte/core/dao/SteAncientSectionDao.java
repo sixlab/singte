@@ -20,6 +20,19 @@ public class SteAncientSectionDao extends BaseDao<SteAncientSection> {
         return SteAncientSection.class;
     }
 
+    public SteAncientSection selectSection(String ancientSet, String ancientCategory, String bookName, String sectionName) {
+        Criteria criteria = Criteria.where("ancientSet").is(ancientSet)
+                .and("ancientCategory").is(ancientCategory)
+                .and("bookName").is(bookName)
+                .and("sectionName").is(sectionName);
+
+        Sort sort = Sort.by("id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
     public List<SteAncientSection> listBookSections(String bookName) {
         Criteria criteria = Criteria.where("bookName").is(bookName);
 
@@ -72,4 +85,5 @@ public class SteAncientSectionDao extends BaseDao<SteAncientSection> {
 
         return pageQuery(query, entityClass(), pageNum, pageSize);
     }
+
 }

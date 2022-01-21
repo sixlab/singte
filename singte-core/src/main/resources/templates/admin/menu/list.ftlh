@@ -58,6 +58,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
+                        <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <div class="offset-sm-2 col-sm-10">
                                 <div class="form-check">

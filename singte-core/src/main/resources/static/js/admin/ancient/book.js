@@ -2,6 +2,35 @@ $(function () {
 
     let stDataTable = $("#queryForm").stDataTable("#queryData");
 
+    $(document).on("click", ".stCountBtn", function () {
+        $.ajax({
+            url: '/admin/ancient/book/reload',
+            type: 'post',
+            dataType: 'json',
+            success: function (res) {
+                if (200 === res.status) {
+                    stDataTable.formQuery(true);
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        text: res.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            },
+            error(err) {
+                console.log(err)
+                Swal.fire({
+                    icon: "error",
+                    text: "Error",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        })
+    })
+
     $(document).on("click", ".stSaveBtn", function () {
         $.ajax({
             url: '/admin/ancient/book/submitBook',

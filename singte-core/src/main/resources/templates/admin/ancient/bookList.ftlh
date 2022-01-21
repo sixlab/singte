@@ -17,6 +17,9 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
+                                <button type="button" class="btn btn-info stCountBtn">
+                                    重新统计书籍
+                                </button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#modal-default">
                                     新增古文
