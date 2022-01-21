@@ -43,8 +43,24 @@ $.fn.stDataTable = function (options) {
         return false;
     })
 
-    $(document).on("click", container + " .st-pager-size", function () {
-        let pageSizeVal = $(this).data("size");
+    $(document).on("click", container + " .st-pager-btn", function () {
+        let pageIndex = $(container + " .st-pager-input").val();
+        pageNum.val(pageIndex);
+        StDataTable.formQuery();
+        return false;
+    })
+
+    $(document).on("keydown", container + " .st-pager-input", function (e) {
+        if (e.keyCode === 13) {
+            let pageIndex = $(this).val();
+            pageNum.val(pageIndex);
+            StDataTable.formQuery();
+            return false;
+        }
+    })
+
+    $(document).on("change", container + " .st-pager-size", function () {
+        let pageSizeVal = $(this).val();
         pageSize.val(pageSizeVal);
         StDataTable.formQuery();
         return false;

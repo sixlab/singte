@@ -106,25 +106,20 @@
 <#macro AdminPager adminPageInfo url="">
     <div class="card-footer clearfix">
         <#assign pageSizeList = [10,20,50,100,500,1000] />
-        <ul class="pagination pagination-sm m-0 float-left">
-            <#list pageSizeList as pageSizeItem>
-                <#if pageSizeItem==adminPageInfo.pageSize>
-                    <li class="page-item"><a class="page-link active" href="###">${pageSizeItem}</a></li>
-                <#else>
-                    <li class="page-item">
-                        <a class="page-link st-pager-size" data-size="${pageSizeItem}" href="###">${pageSizeItem}</a>
-                    </li>
-                </#if>
-            </#list>
-        </ul>
-        <ul class="pagination pagination-sm m-0 float-right">
-            <li class="page-item disabled" style="margin-right: 10px;"><a class="page-link" href="###">${adminPageInfo.pageNum}/${adminPageInfo.totalPages}</a></li>
+        <div class="form-group float-right input-group-sm" style="margin-left: 5px;">
+            <select aria-label="pageSize" name="pageSize" class="custom-select st-pager-size">
+                <#list pageSizeList as pageSizeItem>
+                    <option value="${pageSizeItem}"<#if pageSizeItem==adminPageInfo.pageSize> selected</#if>>${pageSizeItem}</option>
+                </#list>
+            </select>
+        </div>
 
+        <ul class="pagination pagination-sm m-0 float-right">
             <#--第一页，禁用“上一页”按钮-->
             <#if adminPageInfo.totalNum == 0 || adminPageInfo.pageNum == 1>
-                <li class="page-item disabled"><a class="page-link" href="###">&laquo;&laquo;</a></li>
+                <li class="page-item disabled"><a class="page-link" href="###">&laquo;</a></li>
             <#else>
-                <li class="page-item st-pager"><a class="page-link" data-page="${adminPageInfo.pageNum-1}" href="#">&laquo;&laquo;</a></li>
+                <li class="page-item st-pager"><a class="page-link" data-page="${adminPageInfo.pageNum-1}" href="#">&laquo;</a></li>
             </#if>
 
             <#--第一页-->
@@ -163,5 +158,16 @@
                 <li class="page-item st-pager" data-page="${adminPageInfo.pageNum+1}"><a class="page-link" href="#">&raquo;</a></li>
             </#if>
         </ul>
+
+        <div class="input-group input-group-sm float-right" style="margin-right: 5px;width: 120px;">
+            <input type="text" class="form-control st-pager-input" value="${adminPageInfo.pageNum}">
+            <span class="input-group-append">
+                <button type="button" class="btn btn-primary btn-flat st-pager-btn">Go!</button>
+            </span>
+        </div>
+
+        <div class="float-right" style="margin-right: 5px;width: 100px;text-align: right;line-height: 31px;">
+            Total: ${adminPageInfo.totalNum}
+        </div>
     </div>
 </#macro>
