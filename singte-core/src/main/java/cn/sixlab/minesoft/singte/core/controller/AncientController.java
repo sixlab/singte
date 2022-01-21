@@ -90,7 +90,7 @@ public class AncientController extends BaseController {
 
         SteAncientSet ancientSet = ancientSetDao.selectByName(ancientSection.getAncientSet());
         SteAncientCategory ancientCategory = ancientCategoryDao.selectBySetAndName(ancientSection.getAncientSet(), ancientSection.getAncientCategory());
-        SteAncientBook ancientBook = ancientBookDao.selectByParents(ancientSection.getAncientSet(), ancientSection.getAncientCategory(), ancientSection.getBookName());
+        SteAncientBook ancientBook = ancientBookDao.selectBook(ancientSection.getAncientSet(), ancientSection.getAncientCategory(), ancientSection.getBookName());
 
         modelMap.put("setId", ancientSet.getId());
         modelMap.put("categoryId", ancientCategory.getId());

@@ -2,11 +2,11 @@ $(function () {
 
     let stDataTable = $("#queryForm").stDataTable("#queryData");
 
-    $(document).on("click", ".changeStatusBtn", function () {
+    $(document).on("click", ".stStatusBtn", function () {
         $.ajax({
             url: '/admin/widget/submitStatus',
             data: {
-                id: $(this).data("recordId"),
+                id: $(this).data("itemId"),
                 status: $(this).data("targetStatus")
             },
             type: 'post',

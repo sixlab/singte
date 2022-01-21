@@ -2,7 +2,7 @@ $(function () {
 
     let stDataTable = $("#queryForm").stDataTable("#queryData");
 
-    $(document).on("click", ".saveDataBtn", function () {
+    $(document).on("click", ".stSaveBtn", function () {
         $.ajax({
             url: '/admin/tool/category/submitCategory',
             data: $("#modalDataForm").serialize(),

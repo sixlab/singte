@@ -58,6 +58,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
+                        <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="username" class="col-sm-2 col-form-label">用户名</label>
                             <div class="col-sm-10">
@@ -91,7 +92,7 @@
                         <div class="form-group row">
                             <label for="role" class="col-sm-2 col-form-label">角色</label>
                             <div class="col-sm-10">
-                                <select name="role" class="custom-select">
+                                <select name="role" class="custom-select" id="role">
                                     <option value="ADMIN">管理</option>
                                     <option value="USER">普通用户</option>
                                 </select>
@@ -101,7 +102,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary saveDataBtn">保存</button>
+                    <button type="button" class="btn btn-primary stSaveBtn">保存</button>
                 </div>
             </div>
             <!-- /.modal-content -->

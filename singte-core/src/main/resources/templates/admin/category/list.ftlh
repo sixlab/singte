@@ -2,12 +2,8 @@
 
 <#assign title><@StI18n "page.title.categories"/></#assign>
 <#assign css>
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="/static/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 </#assign>
 <#assign js>
-    <!-- SweetAlert2 -->
-    <script src="/static/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
     <@StStatic src="common/stDataTable.js" />
@@ -89,7 +85,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary saveDataBtn">保存</button>
+                    <button type="button" class="btn btn-primary stSaveBtn">保存</button>
                 </div>
             </div>
             <!-- /.modal-content -->

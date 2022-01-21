@@ -77,7 +77,7 @@ public class AdminUtilsController extends BaseController {
         ancientService.iterSections(new Callback<SteAncientSection, Void>() {
             @Override
             public Void call(SteAncientSection param) {
-                SteAncientBook book = ancientBookDao.selectByParents(param.getAncientSet(), param.getAncientCategory(), param.getBookName());
+                SteAncientBook book = ancientBookDao.selectBook(param.getAncientSet(), param.getAncientCategory(), param.getBookName());
 
                 if (null == book) {
                     book = new SteAncientBook();

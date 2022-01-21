@@ -30,7 +30,7 @@ public class SteAncientBookDao extends BaseDao<SteAncientBook> {
         return mongoTemplate.find(query, entityClass());
     }
 
-    public SteAncientBook selectByParents(String ancientSet, String ancientCategory, String bookName) {
+    public SteAncientBook selectBook(String ancientSet, String ancientCategory, String bookName) {
         Criteria criteria = Criteria.where("ancientSet").is(ancientSet)
                 .and("ancientCategory").is(ancientCategory)
                 .and("bookName").is(bookName);

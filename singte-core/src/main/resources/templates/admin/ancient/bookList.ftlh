@@ -58,6 +58,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="modalDataForm">
+                        <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="bookName" class="col-sm-2 col-form-label">标题</label>
                             <div class="col-sm-10">
@@ -99,7 +100,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary saveDataBtn">保存</button>
+                    <button type="button" class="btn btn-primary stSaveBtn">保存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
