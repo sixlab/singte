@@ -78,12 +78,14 @@ $(function () {
                 if (200 === res.status) {
                     $('#modal-default').modal();
                     $("#id").val(res.data.id);
-                    $("#bookName").val(res.data.bookName);
+                    $("#alias").val(res.data.alias);
+                    $("#sourceUrl").val(res.data.sourceUrl);
+                    $("#title").val(res.data.title);
                     $("#author").val(res.data.author);
-                    $("#ancientSet").val(res.data.ancientSet);
-                    $("#ancientCategory").val(res.data.ancientCategory);
-                    $("#weight").val(res.data.weight);
-                    $("#intro").val(res.data.intro);
+                    $("#keywords").val(res.data.keywords.join(","));
+                    $("#summary").val(res.data.summary);
+                    $("#category").val(res.data.category);
+                    $("#content").val(res.data.content);
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -107,12 +109,14 @@ $(function () {
 
     $('#modal-default').on('hide.bs.modal', function (e) {
         $("#id").val("");
-        $("#bookName").val("");
+        $("#alias").val("");
+        $("#sourceUrl").val("");
+        $("#title").val("");
         $("#author").val("");
-        $("#ancientSet").val("");
-        $("#ancientCategory").val("");
-        $("#weight").val("");
-        $("#intro").val("");
+        $("#keywords").val("");
+        $("#summary").val("");
+        $("#category").val("");
+        $("#content").val("");
     })
 
 });

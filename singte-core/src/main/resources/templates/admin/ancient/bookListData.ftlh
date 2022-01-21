@@ -28,7 +28,7 @@
                 <td>${item.ancientSet}</td>
                 <td>${item.ancientCategory}</td>
 
-                <td>${item.count!'0'}</td>
+                <td>${item.count}</td>
                 <td>${item.weight}</td>
                 <td>${item.status}</td>
                 <td>
