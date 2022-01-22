@@ -46,7 +46,7 @@
     </div>
     <!-- /.row -->
 
-    <div class="modal fade" id="modal-default">
+    <div class="modal fade" id="modal-default" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
