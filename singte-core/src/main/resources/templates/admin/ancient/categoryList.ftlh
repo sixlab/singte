@@ -2,8 +2,7 @@
 
 <#assign title><@StI18n "page.title.ancient.category"/></#assign>
 <#assign js>
-    <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
-    <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
+    <@StStatic type="validate" />
     <@StStatic src="common/stDataTable.js" />
     <@StStatic src="admin/ancient/category.js" />
 </#assign>

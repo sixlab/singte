@@ -113,4 +113,12 @@ public class AdminCategoryController extends BaseController {
 
         return ModelResp.success(record);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ModelResp delete(String id) {
+        categoryDao.deleteById(id);
+
+        return ModelResp.success();
+    }
 }

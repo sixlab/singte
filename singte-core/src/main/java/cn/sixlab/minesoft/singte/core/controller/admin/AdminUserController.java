@@ -109,4 +109,12 @@ public class AdminUserController extends BaseController {
         return ModelResp.success(record);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ModelResp delete(String id) {
+        userDao.deleteById(id);
+
+        return ModelResp.success();
+    }
+
 }

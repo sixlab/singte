@@ -124,4 +124,12 @@ public class AdminAncientCategoryController extends BaseController {
         return ModelResp.success(record);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ModelResp delete(String id) {
+        ancientCategoryDao.deleteById(id);
+
+        return ModelResp.success();
+    }
+
 }

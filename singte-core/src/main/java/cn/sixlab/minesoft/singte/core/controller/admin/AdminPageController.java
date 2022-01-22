@@ -104,4 +104,12 @@ public class AdminPageController extends BaseController {
 
         return ModelResp.success(record);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ModelResp delete(String id) {
+        pageDao.deleteById(id);
+
+        return ModelResp.success();
+    }
 }

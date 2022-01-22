@@ -167,4 +167,12 @@ public class AdminAncientBookController extends BaseController {
 
         return ModelResp.success(record);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ModelResp delete(String id) {
+        ancientBookDao.deleteById(id);
+
+        return ModelResp.success();
+    }
 }

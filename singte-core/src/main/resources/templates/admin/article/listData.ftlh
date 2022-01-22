@@ -33,7 +33,7 @@
                 <td>${(item.publishTime?string("yyyy-MM-dd HH:mm:ss"))!''}</td>
                 <td>
                     <#if "1"==item.status>
-                        <button type="button" class="btn btn-danger stStatusBtn" data-target-status="0"
+                        <button type="button" class="btn btn-warning stStatusBtn" data-target-status="0"
                                 data-item-id="${item.id}">禁用
                         </button>
                     <#else>
@@ -41,6 +41,8 @@
                                 data-item-id="${item.id}">启用
                         </button>
                     </#if>
+
+                    <button type="button" class="btn btn-danger stDeleteBtn" data-item-id="${item.id}">删除</button>
 
                     <button type="button" class="btn btn-primary stModifyBtn" data-item-id="${item.id}">修改</button>
 

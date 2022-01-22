@@ -70,32 +70,45 @@ $(function () {
     })
 
     $(document).on("click", ".stDeleteBtn", function () {
-        $.ajax({
-            url: '/admin/config/delete',
-            data: {
-                id: $(this).data("itemId"),
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function (res) {
-                if (200 === res.status) {
-                    stDataTable.formQuery(true);
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        text: res.message,
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                }
-            },
-            error(err) {
-                console.log(err)
-                Swal.fire({
-                    icon: "error",
-                    text: "Error",
-                    showConfirmButton: false,
-                    timer: 2000
+        Swal.fire({
+            title: '警告',
+            text: "确定删除?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: '取消',
+            confirmButtonText: '确定'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/admin/config/delete',
+                    data: {
+                        id: $(this).data("itemId"),
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (res) {
+                        if (200 === res.status) {
+                            stDataTable.formQuery(true);
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                text: res.message,
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        }
+                    },
+                    error(err) {
+                        console.log(err)
+                        Swal.fire({
+                            icon: "error",
+                            text: "Error",
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    }
                 })
             }
         })

@@ -110,4 +110,12 @@ public class AdminSpiderController extends BaseController {
 
         return ModelResp.success(record);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ModelResp delete(String id) {
+        spiderDao.deleteById(id);
+
+        return ModelResp.success();
+    }
 }

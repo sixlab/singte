@@ -4,8 +4,7 @@
 <#assign css>
 </#assign>
 <#assign js>
-    <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
-    <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
+    <@StStatic type="validate" />
     <@StStatic src="common/stDataTable.js" />
     <@StStatic src="admin/category/list.js" />
 </#assign>

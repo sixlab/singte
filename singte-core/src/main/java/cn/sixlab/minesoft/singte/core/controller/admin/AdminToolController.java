@@ -104,4 +104,12 @@ public class AdminToolController extends BaseController {
 
         return ModelResp.success(record);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ModelResp delete(String id) {
+        toolItemDao.deleteById(id);
+
+        return ModelResp.success();
+    }
 }

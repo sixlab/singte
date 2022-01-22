@@ -25,7 +25,7 @@
                 <td>${item.status}</td>
                 <td>
                     <#if "1"==item.status>
-                        <button type="button" class="btn btn-danger stStatusBtn" data-target-status="0"
+                        <button type="button" class="btn btn-warning stStatusBtn" data-target-status="0"
                                 data-item-id="${item.id}">禁用
                         </button>
                     <#else>
