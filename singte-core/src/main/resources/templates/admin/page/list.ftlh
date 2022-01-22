@@ -61,25 +61,25 @@
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="title" class="col-sm-2 col-form-label">页面标题</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="title" id="title" class="form-control required" placeholder="页面标题">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="author" class="col-sm-2 col-form-label">作者</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="author" id="author" class="form-control required" placeholder="作者">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="alias" class="col-sm-2 col-form-label">页面别名</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="alias" id="alias" class="form-control required" placeholder="页面别名">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="content" class="col-sm-2 col-form-label">内容</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <textarea class="form-control" name="content" id="content" rows="3" placeholder="内容"></textarea>
                             </div>
                         </div>

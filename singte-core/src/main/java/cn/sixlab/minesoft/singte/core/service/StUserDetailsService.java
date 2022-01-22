@@ -63,7 +63,7 @@ public class StUserDetailsService implements UserDetailsService {
             userMapper.save(stUser);
         }
 
-        WebUtils.addCookie("Authorization", token, (int) (StConst.SECONDS_MIN_30 * 1000));
+        WebUtils.addCookie("Authorization", token, (int) (StConst.SECONDS_MIN_1 * expire * 1000));
     }
 
     public void updateTokenValid(String username, String token) {

@@ -17,17 +17,22 @@ public class StaticDirective implements TemplateDirectiveModel {
 
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
-
-
         String type = MapUtil.getStr(params, "type", "js");
         String src = MapUtil.getStr(params, "src");
+        String prefix = MapUtil.getStr(params, "prefix", "/static/");
 
-        if ("css".equals(type)) {
-            String prefix = MapUtil.getStr(params, "prefix","/static/css/");
-            env.getOut().append("<link rel='stylesheet' type='text/css' href='" + prefix + src + "?_t=" + StConst.DEPLOY_DATE + "'/>");
-        } else {
-            String prefix = MapUtil.getStr(params, "prefix","/static/js/");
-            env.getOut().append("<script type='text/javascript' src='" + prefix + src + "?_t=" + StConst.DEPLOY_DATE + "'></script>");
+        switch (type) {
+            case "validate":
+                env.getOut().append("<script type='text/javascript' src='/static/plugins/jquery-validation/jquery.validate.min.js'></script>");
+                env.getOut().append("<script type='text/javascript' src='/static/plugins/jquery-validation/additional-methods.min.js'></script>");
+                break;
+            case "css":
+                env.getOut().append("<link rel='stylesheet' type='text/css' href='" + prefix + "css/" + src + "?_t=" + StConst.DEPLOY_DATE + "'/>");
+                break;
+            case "js":
+            default:
+                env.getOut().append("<script type='text/javascript' src='" + prefix + "js/" + src + "?_t=" + StConst.DEPLOY_DATE + "'></script>");
+                break;
         }
     }
 }

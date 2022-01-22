@@ -1,16 +1,52 @@
 $(function () {
 
     let stDataTable = $("#queryForm").stDataTable("#queryData");
+    let stValidate = $("#modalDataForm").validate();
 
     $(document).on("click", ".stSaveBtn", function () {
+        if ($('#modalDataForm').valid()) {
+            $.ajax({
+                url: '/admin/config/submitConfig',
+                data: $("#modalDataForm").serialize(),
+                type: 'post',
+                dataType: 'json',
+                success: function (res) {
+                    if (200 === res.status) {
+                        $(".cancelBtn").trigger("click");
+                        stDataTable.formQuery(true);
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            text: res.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    }
+                },
+                error(err) {
+                    console.log(err)
+                    Swal.fire({
+                        icon: "error",
+                        text: "Error",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            })
+        }
+    })
+
+    $(document).on("click", ".stStatusBtn", function () {
         $.ajax({
-            url: '/admin/config/submitConfig',
-            data: $("#modalDataForm").serialize(),
+            url: '/admin/config/submitStatus',
+            data: {
+                id: $(this).data("itemId"),
+                status: $(this).data("targetStatus")
+            },
             type: 'post',
             dataType: 'json',
             success: function (res) {
                 if (200 === res.status) {
-                    $(".cancelBtn").trigger("click");
                     stDataTable.formQuery(true);
                 } else {
                     Swal.fire({
@@ -33,12 +69,11 @@ $(function () {
         })
     })
 
-    $(document).on("click", ".stStatusBtn", function () {
+    $(document).on("click", ".stDeleteBtn", function () {
         $.ajax({
-            url: '/admin/config/submitStatus',
+            url: '/admin/config/delete',
             data: {
                 id: $(this).data("itemId"),
-                status: $(this).data("targetStatus")
             },
             type: 'post',
             dataType: 'json',
@@ -109,6 +144,8 @@ $(function () {
         $("#configKey").val("");
         $("#configVal").val("");
         $("#intro").val("");
+
+        stValidate.resetForm();
     })
 
 });

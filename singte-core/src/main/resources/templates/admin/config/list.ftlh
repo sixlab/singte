@@ -2,8 +2,7 @@
 
 <#assign title><@StI18n "page.title.configs"/></#assign>
 <#assign js>
-    <script src="/static/plugins/jquery-validation/jquery.validate.min.js"></script>
-    <script src="/static/plugins/jquery-validation/additional-methods.min.js"></script>
+    <@StStatic type="validate" />
     <@StStatic src="common/stDataTable.js" />
     <@StStatic src="admin/config/list.js" />
 </#assign>
@@ -61,25 +60,25 @@
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="configGroup" class="col-sm-2 col-form-label">分组</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="configGroup" id="configGroup" class="form-control required" placeholder="分组">
+                            <div class="col-sm-10 form-control-container">
+                                <input type="text" name="configGroup" id="configGroup" class="form-control" placeholder="分组">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="configKey" class="col-sm-2 col-form-label">Key</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="configKey" id="configKey" class="form-control required" placeholder="Key">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="configVal" class="col-sm-2 col-form-label">值</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <textarea class="form-control" name="configVal" id="configVal" rows="3" placeholder="值"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="intro" class="col-sm-2 col-form-label">简介</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <textarea class="form-control" name="intro" id="intro" rows="3" placeholder="简介"></textarea>
                             </div>
                         </div>

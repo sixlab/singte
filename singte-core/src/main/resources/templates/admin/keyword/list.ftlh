@@ -66,19 +66,19 @@
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="keyword" class="col-sm-2 col-form-label">关键词</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="keyword" id="keyword" class="form-control required" placeholder="关键词">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="weight" class="col-sm-2 col-form-label">顺序</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="weight" id="weight" class="form-control" placeholder="顺序">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="intro" class="col-sm-2 col-form-label">描述</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <textarea class="form-control" name="intro" id="intro" rows="3" placeholder="描述"></textarea>
                             </div>
                         </div>

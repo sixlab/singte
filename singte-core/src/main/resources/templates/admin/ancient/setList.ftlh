@@ -64,19 +64,19 @@
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="ancientSet" class="col-sm-2 col-form-label">部属</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="ancientSet" id="ancientSet" class="form-control required" placeholder="部属">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="weight" class="col-sm-2 col-form-label">顺序</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="weight" id="weight" class="form-control" placeholder="顺序">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="intro" class="col-sm-2 col-form-label">简介</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <textarea class="form-control" name="intro" id="intro" rows="3" placeholder="简介"></textarea>
                             </div>
                         </div>

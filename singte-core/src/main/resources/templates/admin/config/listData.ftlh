@@ -34,6 +34,8 @@
                         </button>
                     </#if>
 
+                    <button type="button" class="btn btn-danger stDeleteBtn" data-item-id="${item.id}">删除</button>
+
                     <button type="button" class="btn btn-primary stModifyBtn" data-item-id="${item.id}">修改</button>
                 </td>
             </tr>

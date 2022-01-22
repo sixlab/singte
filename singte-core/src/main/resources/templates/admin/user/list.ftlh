@@ -61,37 +61,37 @@
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="username" class="col-sm-2 col-form-label">用户名</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="username" id="username" class="form-control required" placeholder="用户名">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="showName" class="col-sm-2 col-form-label">显示名称</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="showName" id="showName" class="form-control required" placeholder="显示名称">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="password" class="col-sm-2 col-form-label">密码</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="password" name="password" id="password" class="form-control required" placeholder="密码">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="mobile" class="col-sm-2 col-form-label">手机</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="mobile" id="mobile" class="form-control" placeholder="手机">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">邮箱</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="email" name="email" id="email" class="form-control" placeholder="邮箱">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="role" class="col-sm-2 col-form-label">角色</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <select name="role" class="custom-select" id="role">
                                     <option value="ADMIN">管理</option>
                                     <option value="USER">普通用户</option>

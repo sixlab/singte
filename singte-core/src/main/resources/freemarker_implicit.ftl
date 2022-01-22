@@ -6,7 +6,7 @@
 [#macro StConfig key default=""][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.ConfigDirective"  --]
 
-[#macro StStatic src type='js' prefix="/staic/type"][/#macro]
+[#macro StStatic type='js' src="" prefix="/staic/type"][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.StaticDirective"  --]
 
 [#macro StAside][/#macro]

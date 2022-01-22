@@ -61,73 +61,73 @@
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="spiderType" class="col-sm-2 col-form-label">爬虫类型</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="spiderType" id="spiderType" class="form-control required" placeholder="爬虫类型 PageLinkSpider">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="spiderName" class="col-sm-2 col-form-label">爬虫名称</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="spiderName" id="spiderName" class="form-control required" placeholder="爬虫名称">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="pagerRule" class="col-sm-2 col-form-label">页面规则</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="pagerRule" id="pagerRule" class="form-control" placeholder="页面 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="linkRule" class="col-sm-2 col-form-label">链接规则</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="linkRule" id="linkRule" class="form-control" placeholder="链接 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="titleRule" class="col-sm-2 col-form-label">标题规则</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="titleRule" id="titleRule" class="form-control" placeholder="标题 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="contentRule" class="col-sm-2 col-form-label">正文规则</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="contentRule" id="contentRule" class="form-control" placeholder="正文 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="summaryRule" class="col-sm-2 col-form-label">摘要规则</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="summaryRule" id="summaryRule" class="form-control" placeholder="摘要 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="categoryRule" class="col-sm-2 col-form-label">分类规则</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="categoryRule" id="categoryRule" class="form-control" placeholder="分类 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="keywordRule" class="col-sm-2 col-form-label">关键词规则</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="keywordRule" id="keywordRule" class="form-control" placeholder="关键词 xPath 规则">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="waitTimes" class="col-sm-2 col-form-label">任务间隔</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="waitTimes" id="waitTimes" class="form-control" placeholder="任务间隔，毫秒">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="startUrl" class="col-sm-2 col-form-label">开始链接</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="startUrl" id="startUrl" class="form-control required" placeholder="开始链接">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="urlParam" class="col-sm-2 col-form-label">链接参数</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <textarea class="form-control" name="urlParam" id="urlParam" rows="3" placeholder="链接参数"></textarea>
                             </div>
                         </div>

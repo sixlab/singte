@@ -61,49 +61,49 @@
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="title" class="col-sm-2 col-form-label">文章标题</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="title" id="title" class="form-control required" placeholder="文章标题">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="author" class="col-sm-2 col-form-label">作者</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="author" id="author" class="form-control required" placeholder="作者">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="alias" class="col-sm-2 col-form-label">文章别名</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="alias" id="alias" class="form-control required" placeholder="文章别名">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="sourceUrl" class="col-sm-2 col-form-label">来源网址</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="sourceUrl" id="sourceUrl" class="form-control" placeholder="来源网址">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="category" class="col-sm-2 col-form-label">分类</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="category" id="category" class="form-control" placeholder="分类">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="keywords" class="col-sm-2 col-form-label">关键词</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <input type="text" name="keywords" id="keywords" class="form-control" placeholder="关键词">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="summary" class="col-sm-2 col-form-label">摘要</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <textarea class="form-control" name="summary" id="summary" rows="3" placeholder="摘要"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="content" class="col-sm-2 col-form-label">内容</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 form-control-container">
                                 <textarea class="form-control" name="content" id="content" rows="3" placeholder="内容"></textarea>
                             </div>
                         </div>

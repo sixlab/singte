@@ -102,4 +102,12 @@ public class AdminConfigController extends BaseController {
 
         return ModelResp.success(record);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ModelResp delete(String id) {
+        configDao.deleteById(id);
+
+        return ModelResp.success();
+    }
 }
