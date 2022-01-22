@@ -85,7 +85,7 @@
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">邮箱</label>
                             <div class="col-sm-10 form-control-container">
-                                <input type="email" name="email" id="email" class="form-control" placeholder="邮箱">
+                                <input type="email" name="email" id="email" class="form-control email" placeholder="邮箱">
                             </div>
                         </div>
                         <div class="form-group row">

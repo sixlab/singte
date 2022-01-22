@@ -85,7 +85,7 @@
                         <div class="form-group row">
                             <label for="category" class="col-sm-2 col-form-label">分类</label>
                             <div class="col-sm-10 form-control-container">
-                                <input type="text" name="category" id="category" class="form-control" placeholder="分类">
+                                <input type="text" name="category" id="category" class="form-control required" placeholder="分类">
                             </div>
                         </div>
                         <div class="form-group row">

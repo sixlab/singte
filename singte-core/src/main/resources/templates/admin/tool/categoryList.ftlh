@@ -68,7 +68,7 @@
                         <div class="form-group row">
                             <label for="weight" class="col-sm-2 col-form-label">顺序</label>
                             <div class="col-sm-10 form-control-container">
-                                <input type="text" name="weight" id="weight" class="form-control"
+                                <input type="text" name="weight" id="weight" class="form-control number"
                                        placeholder="顺序">
                             </div>
                         </div>

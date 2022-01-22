@@ -115,7 +115,7 @@
                         <div class="form-group row">
                             <label for="waitTimes" class="col-sm-2 col-form-label">任务间隔</label>
                             <div class="col-sm-10 form-control-container">
-                                <input type="text" name="waitTimes" id="waitTimes" class="form-control" placeholder="任务间隔，毫秒">
+                                <input type="text" name="waitTimes" id="waitTimes" class="form-control number" placeholder="任务间隔，毫秒">
                             </div>
                         </div>
                         <div class="form-group row">
