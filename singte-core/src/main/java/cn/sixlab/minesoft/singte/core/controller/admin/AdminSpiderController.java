@@ -1,8 +1,10 @@
 package cn.sixlab.minesoft.singte.core.controller.admin;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StSpiderDao;
 import cn.sixlab.minesoft.singte.core.models.StSpider;
@@ -39,11 +41,73 @@ public class AdminSpiderController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/submitSpider")
-    public ModelResp submitSpider(StSpider stSpider) {
-        stSpider.setStatus(StConst.YES);
-        stSpider.setCreateTime(new Date());
-        spiderDao.save(stSpider);
+    public ModelResp submitSpider(StSpider params) {
+        StSpider nextInfo;
+
+        StSpider checkExist = spiderDao.selectByName(params.getSpiderName());
+
+        if (StrUtil.isNotEmpty(params.getId())) {
+            nextInfo = spiderDao.selectById(params.getId());
+
+            if (null == nextInfo) {
+                return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+            }
+
+            if (null != checkExist && !params.getId().equals(checkExist.getId())) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo.setUpdateTime(new Date());
+        } else {
+            if (null != checkExist) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo = new StSpider();
+            nextInfo.setStatus(StConst.YES);
+            nextInfo.setCreateTime(new Date());
+        }
+
+        nextInfo.setSpiderType(params.getSpiderType());
+        nextInfo.setSpiderName(params.getSpiderName());
+        nextInfo.setStartUrl(params.getStartUrl());
+        nextInfo.setPagerRule(params.getPagerRule());
+        nextInfo.setLinkRule(params.getLinkRule());
+        nextInfo.setTitleRule(params.getTitleRule());
+        nextInfo.setContentRule(params.getContentRule());
+        nextInfo.setSummaryRule(params.getSummaryRule());
+        nextInfo.setCategoryRule(params.getCategoryRule());
+        nextInfo.setKeywordRule(params.getKeywordRule());
+        nextInfo.setWaitTimes(params.getWaitTimes());
+        nextInfo.setUrlParam(params.getUrlParam());
+
+        spiderDao.save(nextInfo);
         return ModelResp.success();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/submitStatus")
+    public ModelResp submitStatus(String id, String status) {
+        StSpider record = spiderDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        record.setStatus(status);
+        spiderDao.save(record);
+        return ModelResp.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get")
+    public ModelResp get(String id) {
+        StSpider record = spiderDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        return ModelResp.success(record);
+    }
 }

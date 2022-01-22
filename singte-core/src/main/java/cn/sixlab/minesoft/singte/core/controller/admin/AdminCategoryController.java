@@ -1,7 +1,10 @@
 package cn.sixlab.minesoft.singte.core.controller.admin;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
@@ -23,6 +26,13 @@ public class AdminCategoryController extends BaseController {
     @Autowired
     private ArticleService articleService;
 
+    @ResponseBody
+    @RequestMapping(value = "/reload")
+    public ModelResp reload() {
+        int categorySize = articleService.countCategory();
+        return ModelResp.success(categorySize);
+    }
+
     @GetMapping(value = "/list")
     public String list() {
         return "admin/category/list";
@@ -42,18 +52,65 @@ public class AdminCategoryController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/submitCategory")
-    public ModelResp submitCategory(StCategory stCategory) {
-        stCategory.setCount(0);
-        stCategory.setCreateTime(new Date());
-        categoryDao.save(stCategory);
+    public ModelResp submitCategory(StCategory params) {
+        StCategory nextInfo;
+
+        StCategory checkExist = categoryDao.selectByCategory(params.getCategory());
+
+        if (StrUtil.isNotEmpty(params.getId())) {
+            nextInfo = categoryDao.selectById(params.getId());
+
+            if (null == nextInfo) {
+                return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+            }
+
+            if (null != checkExist && !params.getId().equals(checkExist.getId())) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo.setUpdateTime(new Date());
+        } else {
+            if (null != checkExist) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo = new StCategory();
+            nextInfo.setCount(0);
+            nextInfo.setStatus(StConst.YES);
+            nextInfo.setCreateTime(new Date());
+        }
+
+        nextInfo.setCategory(params.getCategory());
+        nextInfo.setWeight(params.getWeight());
+        nextInfo.setIntro(params.getIntro());
+
+        categoryDao.save(nextInfo);
         return ModelResp.success();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/resetCategory")
-    public ModelResp resetCategory() {
-        int categorySize = articleService.countCategory();
-        return ModelResp.success(categorySize);
+    @RequestMapping(value = "/submitStatus")
+    public ModelResp submitStatus(String id, String status) {
+        StCategory record = categoryDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        record.setStatus(status);
+        categoryDao.save(record);
+        return ModelResp.success();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/get")
+    public ModelResp get(String id) {
+        StCategory record = categoryDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        return ModelResp.success(record);
+    }
 }

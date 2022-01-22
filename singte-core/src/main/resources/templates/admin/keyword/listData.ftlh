@@ -24,7 +24,17 @@
                 <td>${item.weight!''}</td>
                 <td>${item.intro!''}</td>
                 <td>
+                    <#if "1"==item.status>
+                        <button type="button" class="btn btn-danger stStatusBtn" data-target-status="0"
+                                data-item-id="${item.id}">禁用
+                        </button>
+                    <#else>
+                        <button type="button" class="btn btn-success stStatusBtn" data-target-status="1"
+                                data-item-id="${item.id}">启用
+                        </button>
+                    </#if>
 
+                    <button type="button" class="btn btn-primary stModifyBtn" data-item-id="${item.id}">修改</button>
                 </td>
             </tr>
         </#list>

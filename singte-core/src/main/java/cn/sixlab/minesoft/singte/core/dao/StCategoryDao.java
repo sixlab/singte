@@ -47,7 +47,7 @@ public class StCategoryDao extends BaseDao<StCategory> {
                 Criteria.where("category").regex(keyword),
                 Criteria.where("intro").regex(keyword)
         );
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 

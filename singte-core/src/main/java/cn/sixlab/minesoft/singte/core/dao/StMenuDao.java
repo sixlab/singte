@@ -30,7 +30,7 @@ public class StMenuDao extends BaseDao<StMenu> {
         Criteria criteria = Criteria.where("menuGroup").is(menuGroup)
                 .and("status").is(StConst.YES);
 
-        Query query = new Query(criteria).with(Sort.by("weight"));
+        Query query = new Query(criteria).with(Sort.by("weight", "id"));
         return mongoTemplate.find(query, StMenu.class);
     }
 
@@ -50,7 +50,7 @@ public class StMenuDao extends BaseDao<StMenu> {
 
             criteria = criteria.andOperator(keywordCriteria);
         }
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 

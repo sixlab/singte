@@ -25,7 +25,7 @@ public class SteToolItemDao extends BaseDao<SteToolItem> {
         if (StrUtil.isNotEmpty(category)) {
             criteria = Criteria.where("category").is(category);
         }
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 
@@ -38,7 +38,7 @@ public class SteToolItemDao extends BaseDao<SteToolItem> {
         if (StrUtil.isNotEmpty(toolCode)) {
             criteria = Criteria.where("toolCode").is(toolCode);
         }
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 
@@ -56,7 +56,7 @@ public class SteToolItemDao extends BaseDao<SteToolItem> {
                     Criteria.where("intro").regex(keyword)
             );
         }
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 

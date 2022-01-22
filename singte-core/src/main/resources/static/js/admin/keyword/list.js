@@ -2,6 +2,35 @@ $(function () {
 
     let stDataTable = $("#queryForm").stDataTable("#queryData");
 
+    $(document).on("click", ".stCountBtn", function () {
+        $.ajax({
+            url: '/admin/keyword/reload',
+            type: 'post',
+            dataType: 'json',
+            success: function (res) {
+                if (200 === res.status) {
+                    stDataTable.formQuery(true);
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        text: res.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            },
+            error(err) {
+                console.log(err)
+                Swal.fire({
+                    icon: "error",
+                    text: "Error",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        })
+    })
+
     $(document).on("click", ".stSaveBtn", function () {
         $.ajax({
             url: '/admin/keyword/submitKeyword',
@@ -9,32 +38,104 @@ $(function () {
             type: 'post',
             dataType: 'json',
             success: function (res) {
-                console.log(res)
-                $(".cancelBtn").trigger("click");
-                stDataTable.formQuery(true);
+                if (200 === res.status) {
+                    $(".cancelBtn").trigger("click");
+                    stDataTable.formQuery(true);
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        text: res.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
             },
             error(err) {
                 console.log(err)
+                Swal.fire({
+                    icon: "error",
+                    text: "Error",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
             }
         })
     })
 
-    $("#resetKeyword").on("click", function () {
+    $(document).on("click", ".stStatusBtn", function () {
         $.ajax({
-            url: '/admin/keyword/resetKeyword',
+            url: '/admin/keyword/submitStatus',
+            data: {
+                id: $(this).data("itemId"),
+                status: $(this).data("targetStatus")
+            },
             type: 'post',
             dataType: 'json',
             success: function (res) {
-                Swal.fire(
-                    '操作成功',
-                    '重置关键词成功！',
-                    'success'
-                )
-                stDataTable.formQuery(true);
+                if (200 === res.status) {
+                    stDataTable.formQuery(true);
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        text: res.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
             },
             error(err) {
                 console.log(err)
+                Swal.fire({
+                    icon: "error",
+                    text: "Error",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
             }
         })
     })
+
+    $(document).on("click", ".stModifyBtn", function () {
+        $.ajax({
+            url: '/admin/keyword/get',
+            data: {
+                id: $(this).data("itemId")
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function (res) {
+                if (200 === res.status) {
+                    $('#modal-default').modal();
+                    $("#id").val(res.data.id);
+                    $("#keyword").val(res.data.keyword);
+                    $("#weight").val(res.data.weight);
+                    $("#intro").val(res.data.intro);
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        text: res.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            },
+            error(err) {
+                console.log(err)
+                Swal.fire({
+                    icon: "error",
+                    text: "Error",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        })
+    })
+
+    $('#modal-default').on('hide.bs.modal', function (e) {
+        $("#id").val("");
+        $("#keyword").val("");
+        $("#weight").val("");
+        $("#intro").val("");
+    })
+
 });

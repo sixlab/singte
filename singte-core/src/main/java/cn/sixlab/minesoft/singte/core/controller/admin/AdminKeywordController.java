@@ -1,7 +1,10 @@
 package cn.sixlab.minesoft.singte.core.controller.admin;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StKeywordDao;
 import cn.sixlab.minesoft.singte.core.models.StKeyword;
@@ -23,6 +26,13 @@ public class AdminKeywordController extends BaseController {
     @Autowired
     private ArticleService articleService;
 
+    @ResponseBody
+    @RequestMapping(value = "/reload")
+    public ModelResp reload() {
+        int keywordSize = articleService.countKeyword();
+        return ModelResp.success(keywordSize);
+    }
+
     @GetMapping(value = "/list")
     public String list() {
         return "admin/keyword/list";
@@ -42,17 +52,65 @@ public class AdminKeywordController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/submitKeyword")
-    public ModelResp submitKeyword(StKeyword stKeyword) {
-        stKeyword.setCount(0);
-        stKeyword.setCreateTime(new Date());
-        keywordDao.save(stKeyword);
+    public ModelResp submitKeyword(StKeyword params) {
+        StKeyword nextInfo;
+
+        StKeyword checkExist = keywordDao.selectByKeyword(params.getKeyword());
+
+        if (StrUtil.isNotEmpty(params.getId())) {
+            nextInfo = keywordDao.selectById(params.getId());
+
+            if (null == nextInfo) {
+                return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+            }
+
+            if (null != checkExist && !params.getId().equals(checkExist.getId())) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo.setUpdateTime(new Date());
+        } else {
+            if (null != checkExist) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo = new StKeyword();
+            nextInfo.setCount(0);
+            nextInfo.setStatus(StConst.YES);
+            nextInfo.setCreateTime(new Date());
+        }
+
+        nextInfo.setKeyword(params.getKeyword());
+        nextInfo.setWeight(params.getWeight());
+        nextInfo.setIntro(params.getIntro());
+
+        keywordDao.save(nextInfo);
         return ModelResp.success();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/resetKeyword")
-    public ModelResp resetKeyword() {
-        int keywordSize = articleService.countKeyword();
-        return ModelResp.success(keywordSize);
+    @RequestMapping(value = "/submitStatus")
+    public ModelResp submitStatus(String id, String status) {
+        StKeyword record = keywordDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        record.setStatus(status);
+        keywordDao.save(record);
+        return ModelResp.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get")
+    public ModelResp get(String id) {
+        StKeyword record = keywordDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        return ModelResp.success(record);
     }
 }

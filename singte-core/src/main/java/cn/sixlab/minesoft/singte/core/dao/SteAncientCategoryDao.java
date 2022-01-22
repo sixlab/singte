@@ -22,7 +22,7 @@ public class SteAncientCategoryDao extends BaseDao<SteAncientCategory> {
     public List<SteAncientCategory> listSetCategory(String ancientSet){
         Criteria criteria = Criteria.where("ancientSet").is(ancientSet);
 
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 

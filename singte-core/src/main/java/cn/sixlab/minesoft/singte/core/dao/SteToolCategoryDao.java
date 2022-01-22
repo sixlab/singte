@@ -21,7 +21,7 @@ public class SteToolCategoryDao extends BaseDao<SteToolCategory> {
 
     public List<SteToolCategory> list(){
         Criteria criteria = new Criteria();
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
         Query query = new Query(criteria).with(sort);
 
         return mongoTemplate.find(query, entityClass());
@@ -46,7 +46,7 @@ public class SteToolCategoryDao extends BaseDao<SteToolCategory> {
                     Criteria.where("intro").regex(keyword)
             );
         }
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 

@@ -1,7 +1,10 @@
 package cn.sixlab.minesoft.singte.core.controller.admin;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.SteToolCategoryDao;
 import cn.sixlab.minesoft.singte.core.models.SteToolCategory;
@@ -38,11 +41,65 @@ public class AdminToolCategoryController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/submitCategory")
-    public ModelResp submitCategory(SteToolCategory steToolCategory) {
-        steToolCategory.setCount(0);
-        steToolCategory.setCreateTime(new Date());
-        toolCategoryDao.save(steToolCategory);
+    public ModelResp submitCategory(SteToolCategory params) {
+        SteToolCategory nextInfo;
+
+        SteToolCategory checkExist = toolCategoryDao.selectByName(params.getCategory());
+
+        if (StrUtil.isNotEmpty(params.getId())) {
+            nextInfo = toolCategoryDao.selectById(params.getId());
+
+            if (null == nextInfo) {
+                return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+            }
+
+            if (null != checkExist && !params.getId().equals(checkExist.getId())) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo.setUpdateTime(new Date());
+        } else {
+            if (null != checkExist) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo = new SteToolCategory();
+            nextInfo.setCount(0);
+            nextInfo.setStatus(StConst.ST_PUBLISH_DID);
+            nextInfo.setCreateTime(new Date());
+        }
+
+        nextInfo.setCategory(params.getCategory());
+        nextInfo.setWeight(params.getWeight());
+        nextInfo.setIntro(params.getIntro());
+
+        toolCategoryDao.save(nextInfo);
         return ModelResp.success();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/submitStatus")
+    public ModelResp submitStatus(String id, String status) {
+        SteToolCategory record = toolCategoryDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        record.setStatus(status);
+        toolCategoryDao.save(record);
+        return ModelResp.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get")
+    public ModelResp get(String id) {
+        SteToolCategory record = toolCategoryDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        return ModelResp.success(record);
+    }
 }

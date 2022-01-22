@@ -44,7 +44,9 @@ public class ArticleService {
             StCategory stCategory = categoryDao.selectByCategory(item.getCategory());
             if (null == stCategory) {
                 item.setCreateTime(new Date());
+                item.setWeight(1);
                 item.setFlag(flag);
+                item.setStatus(StConst.YES);
                 categoryDao.save(item);
             } else {
                 stCategory.setUpdateTime(new Date());
@@ -79,6 +81,8 @@ public class ArticleService {
                         stKeyword = new StKeyword();
                         stKeyword.setKeyword(keyword);
                         stKeyword.setCount(0);
+                        stKeyword.setWeight(1);
+                        stKeyword.setStatus(StConst.YES);
                         stKeyword.setCreateTime(new Date());
                         keywordDao.save(stKeyword);
                     }

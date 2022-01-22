@@ -1,8 +1,10 @@
 package cn.sixlab.minesoft.singte.core.controller.admin;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StPageDao;
 import cn.sixlab.minesoft.singte.core.models.StPage;
@@ -39,13 +41,67 @@ public class AdminPageController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/submitPage")
-    public ModelResp submitPage(StPage stPage) {
-        stPage.setViewCount(0);
-        stPage.setStatus(StConst.ST_PUBLISH_DID);
-        stPage.setPublishTime(new Date());
-        stPage.setCreateTime(new Date());
-        pageDao.save(stPage);
+    public ModelResp submitPage(StPage params) {
+        StPage nextInfo;
+
+        StPage checkExist = pageDao.selectByAlias(params.getAlias());
+
+        if (StrUtil.isNotEmpty(params.getId())) {
+            nextInfo = pageDao.selectById(params.getId());
+
+            if (null == nextInfo) {
+                return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+            }
+
+            if (null != checkExist && !params.getId().equals(checkExist.getId())) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo.setUpdateTime(new Date());
+        } else {
+            if (null != checkExist) {
+                return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
+            }
+
+            nextInfo = new StPage();
+            nextInfo.setViewCount(0);
+            nextInfo.setStatus(StConst.ST_PUBLISH_DID);
+            nextInfo.setPublishTime(new Date());
+            nextInfo.setCreateTime(new Date());
+        }
+
+        nextInfo.setAlias(params.getAlias());
+        nextInfo.setTitle(params.getTitle());
+        nextInfo.setAuthor(params.getAuthor());
+        nextInfo.setContent(params.getContent());
+
+        pageDao.save(nextInfo);
         return ModelResp.success();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/submitStatus")
+    public ModelResp submitStatus(String id, String status) {
+        StPage record = pageDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        record.setStatus(status);
+        pageDao.save(record);
+        return ModelResp.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get")
+    public ModelResp get(String id) {
+        StPage record = pageDao.selectById(id);
+
+        if (null == record) {
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+
+        return ModelResp.success(record);
+    }
 }

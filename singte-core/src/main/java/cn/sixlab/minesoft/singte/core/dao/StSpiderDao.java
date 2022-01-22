@@ -19,6 +19,11 @@ public class StSpiderDao extends BaseDao<StSpider> {
         return StSpider.class;
     }
 
+    public StSpider selectByName(String spiderName) {
+        Query query = new Query(Criteria.where("spiderName").is(spiderName)).with(Sort.by("id"));
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
     /**
      * 查询已经启用的爬虫任务
      * 

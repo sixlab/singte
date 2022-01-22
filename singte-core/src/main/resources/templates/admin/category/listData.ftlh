@@ -10,6 +10,7 @@
             <th>文章数量</th>
             <th>标识</th>
             <th>顺序</th>
+            <th>状态</th>
             <th>简介</th>
             <th>操作</th>
         </tr>
@@ -22,9 +23,22 @@
                 <td>${item.count?string(",###")}</td>
                 <td>${item.flag!''}</td>
                 <td>${item.weight!''}</td>
+                <td>${item.status!''}</td>
                 <td>${item.intro!''}</td>
                 <td>
+                    <#if "1"==item.status>
+                        <button type="button" class="btn btn-danger stStatusBtn" data-target-status="0"
+                                data-item-id="${item.id}">禁用
+                        </button>
+                    <#else>
+                        <button type="button" class="btn btn-success stStatusBtn" data-target-status="1"
+                                data-item-id="${item.id}">启用
+                        </button>
+                    </#if>
 
+                    <button type="button" class="btn btn-primary stModifyBtn" data-item-id="${item.id}">修改</button>
+
+                    <a href="/category/${item.category}" target="_blank">查看</a>
                 </td>
             </tr>
         </#list>

@@ -21,7 +21,7 @@ public class SteAncientSetDao extends BaseDao<SteAncientSet> {
 
     public List<SteAncientSet> list(){
         Criteria criteria = new Criteria();
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
         Query query = new Query(criteria).with(sort);
 
         return mongoTemplate.find(query, entityClass());
@@ -46,7 +46,7 @@ public class SteAncientSetDao extends BaseDao<SteAncientSet> {
                     Criteria.where("intro").regex(keyword)
             );
         }
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 

@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
-                                <button type="button" class="btn btn-primary" id="resetKeyword">
+                                <button type="button" class="btn btn-primary stCountBtn">
                                     重置关键词
                                 </button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"

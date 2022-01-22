@@ -23,7 +23,7 @@ public class SteAncientBookDao extends BaseDao<SteAncientBook> {
     public List<SteAncientBook> listCategoryBook(String category) {
         Criteria criteria = Criteria.where("ancientCategory").is(category);
 
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 
@@ -65,7 +65,7 @@ public class SteAncientBookDao extends BaseDao<SteAncientBook> {
 
             criteria = criteria.andOperator(keywordCriteria);
         }
-        Sort sort = Sort.by("weight");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 
