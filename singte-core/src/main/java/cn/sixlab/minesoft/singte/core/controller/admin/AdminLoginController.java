@@ -3,6 +3,7 @@ package cn.sixlab.minesoft.singte.core.controller.admin;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.*;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
+import cn.sixlab.minesoft.singte.core.service.LangService;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,8 +26,14 @@ public class AdminLoginController extends BaseController {
     @Autowired
     private StUserDetailsService userDetailsService;
 
+    @Autowired
+    private LangService langService;
+
     @GetMapping(value = "/login")
     public String login() {
+
+
+
         return "admin/login";
     }
 
@@ -60,8 +67,6 @@ public class AdminLoginController extends BaseController {
 
             final String token = TokenUtils.generateToken(userDetails);
             userDetailsService.updateToken(username, token);
-
-            WebUtils.addCookie("lang", WebUtils.getLang(), (int) StConst.SECONDS_YEAR_1);
 
             return ModelResp.success().add("Authorization", token);
         } else {

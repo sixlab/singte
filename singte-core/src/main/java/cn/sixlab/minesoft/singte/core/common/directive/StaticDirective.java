@@ -2,12 +2,13 @@ package cn.sixlab.minesoft.singte.core.common.directive;
 
 import cn.hutool.core.map.MapUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.common.utils.WebUtils;
+import cn.sixlab.minesoft.singte.core.service.LangService;
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
 import freemarker.template.TemplateDirectiveModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -15,6 +16,9 @@ import java.util.Map;
 
 @Component
 public class StaticDirective implements TemplateDirectiveModel {
+
+    @Autowired
+    private LangService service;
 
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
@@ -26,7 +30,9 @@ public class StaticDirective implements TemplateDirectiveModel {
             case "validate":
                 env.getOut().append("<script type='text/javascript' src='/static/plugins/jquery-validation/jquery.validate.min.js'></script>");
                 env.getOut().append("<script type='text/javascript' src='/static/plugins/jquery-validation/additional-methods.min.js'></script>");
-                env.getOut().append("<script type='text/javascript' src='/static/plugins/jquery-validation/localization/messages_"+ WebUtils.getLang()+".min.js'></script>");
+
+                // TODO 是否是支持的语言，不是的话，用默认
+                env.getOut().append("<script type='text/javascript' src='/static/plugins/jquery-validation/localization/messages_"+ service.getLang()+".min.js'></script>");
                 break;
             case "css":
                 env.getOut().append("<link rel='stylesheet' type='text/css' href='" + prefix + "css/" + src + "?_t=" + StConst.DEPLOY_DATE + "'/>");

@@ -3,6 +3,7 @@ package cn.sixlab.minesoft.singte.core.common.utils;
 import cn.hutool.core.date.DateUtil;
 
 import java.util.Date;
+import java.util.Locale;
 
 public class StConst {
     public static final String DEPLOY_DATE = DateUtil.format(new Date(), "yyyyMMddHHmmss");
@@ -53,4 +54,7 @@ public class StConst {
 
     public static final String ROLE_USER = "USER";
     public static final String ROLE_ADMIN = "ADMIN";
+
+    public static final Locale DEFAULT_LOCALE = Locale.CHINESE;
+
 }

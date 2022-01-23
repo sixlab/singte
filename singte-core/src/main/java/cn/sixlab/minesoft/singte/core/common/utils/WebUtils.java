@@ -270,7 +270,4 @@ public class WebUtils {
         return getToken(WebUtils.getRequest());
     }
 
-    public static String getLang() {
-        return LocaleContextHolder.getLocale().toString();
-    }
 }
