@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/static/fonts/sourcesanspro.css">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
+    <!-- flag-icon-css -->
+    <link rel="stylesheet" href="/static/plugins/flag-icon-css/css/flag-icon.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="/static/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
@@ -84,6 +86,8 @@
 <script src="/static/plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/static/adminlte/js/adminlte.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/js/admin/admin.js"></script>
 ${js}
 </body>
 </html>
@@ -216,6 +220,22 @@ ${js}
                     <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                 </div>
             </li>
+            <!-- Language Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <@StLang>
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="flag-icon flag-icon-${stCurrentLangIcon!''}"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right p-0">
+                        <#list stLangList as stLang>
+                            <a href="#" class="dropdown-item<#if stLang.status=="2"> active<#else> stLang</#if>" data-lang="${stLang.langCode}">
+                                <i class="flag-icon flag-icon-${stLang.langIcon} mr-2"></i> ${stLang.langText}
+                            </a>
+                        </#list>
+                    </div>
+                </@StLang>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                     <i class="fas fa-expand-arrows-alt"></i>
@@ -237,7 +257,7 @@ ${js}
     <footer class="main-footer">
         <!-- To the right -->
         <div class="float-right d-none d-sm-inline">
-            Anything you want
+            <a href="https://minesoft.tech" target="_blank">Minesoft</a>
         </div>
         <!-- Default to the left -->
         <strong>Copyright &copy; 2021 <a href="/"><@StConfig key="st_site_name" default="singte"/></a>.</strong> All rights reserved.

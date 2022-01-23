@@ -2,6 +2,7 @@ package cn.sixlab.minesoft.singte.core.common.directive;
 
 import cn.hutool.core.map.MapUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import cn.sixlab.minesoft.singte.core.common.utils.WebUtils;
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
 import freemarker.template.TemplateDirectiveModel;
@@ -25,6 +26,7 @@ public class StaticDirective implements TemplateDirectiveModel {
             case "validate":
                 env.getOut().append("<script type='text/javascript' src='/static/plugins/jquery-validation/jquery.validate.min.js'></script>");
                 env.getOut().append("<script type='text/javascript' src='/static/plugins/jquery-validation/additional-methods.min.js'></script>");
+                env.getOut().append("<script type='text/javascript' src='/static/plugins/jquery-validation/localization/messages_"+ WebUtils.getLang()+".min.js'></script>");
                 break;
             case "css":
                 env.getOut().append("<link rel='stylesheet' type='text/css' href='" + prefix + "css/" + src + "?_t=" + StConst.DEPLOY_DATE + "'/>");
@@ -35,4 +37,5 @@ public class StaticDirective implements TemplateDirectiveModel {
                 break;
         }
     }
+
 }

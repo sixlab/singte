@@ -6,16 +6,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StKeyword extends BaseModel {
+public class StLang extends BaseModel {
 
-    private String keyword;
+    private String langCode;
 
-    private Integer count;
+    private String langText;
 
-    private Integer weight;
+    private String langIcon;
 
     private String intro;
-
-    private String flag;
 
 }

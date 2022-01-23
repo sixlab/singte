@@ -46,20 +46,22 @@ public class AdminLoginController extends BaseController {
 
             Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
             Stream<? extends GrantedAuthority> stream = authorities.stream().filter((Predicate<GrantedAuthority>) grantedAuthority -> grantedAuthority.getAuthority().equals(StConst.ROLE_USER));
-            if(stream.findAny().isPresent()){
+            if (stream.findAny().isPresent()) {
                 return ModelResp.error(StErr.NOT_EXIST, "login.user.none");
             }
 
             if (!BCrypt.checkpw(password, userDetails.getPassword())) {
-                return ModelResp.error(StErr.LOGIN_PWD_ERR, "login.pwd.error");
+                return ModelResp.error(StErr.LOGIN_PWD_ERR, "login.err.pwd");
             }
 
             if (!userDetails.isEnabled()) {
-                return ModelResp.error(StErr.LOGIN_DISABLE, "login.user.disable");
+                return ModelResp.error(StErr.LOGIN_DISABLE, "login.err.disable");
             }
 
             final String token = TokenUtils.generateToken(userDetails);
             userDetailsService.updateToken(username, token);
+
+            WebUtils.addCookie("lang", WebUtils.getLang(), (int) StConst.SECONDS_YEAR_1);
 
             return ModelResp.success().add("Authorization", token);
         } else {

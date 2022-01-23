@@ -45,7 +45,7 @@ public class StUserDetailsService implements UserDetailsService {
             List<GrantedAuthority> authorityList = new ArrayList<>();
             authorityList.add(new SimpleGrantedAuthority(stUser.getRole()));
 
-            return new User(username, stUser.getPassword(), enable, true, true, !enable, authorityList);
+            return new User(username, stUser.getPassword(), enable, true, true, true, authorityList);
         } else {
             throw new UsernameNotFoundException(I18nUtils.get("login.user.none"));
         }

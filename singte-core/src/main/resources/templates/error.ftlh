@@ -1,5 +1,5 @@
 <#-- @ftlvariable name="status" type="java.lang.Integer" -->
-<#-- @ftlvariable name="error" type="java.lang.String" -->
+<#-- @ftlvariable name="message" type="java.lang.String" -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -295,7 +295,7 @@
             <div class="col-md-6 align-self-center">
                 <h1>${status!'5002'}</h1>
                 <h2>UH OH! Error！</h2>
-                <p>${error!'页面处理异常'}</p>
+                <p>${message!'页面处理异常'}</p>
                 <button class="btn green" id="backHome">返回首页</button>
             </div>
         </div>

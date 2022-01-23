@@ -2,7 +2,11 @@
 package cn.sixlab.minesoft.singte.core.models;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class SteAncientSet extends BaseModel {
     // 经学、小学、诸子、天文、地理、医律、史学、金石、类书、词赋、书画、小说
     // 经史子集 -> 四库全书 -> 的订单 -> 的订单 -> 的订单
@@ -26,35 +30,4 @@ public class SteAncientSet extends BaseModel {
 
     private String intro;
 
-    public String getAncientSet() {
-        return ancientSet;
-    }
-
-    public void setAncientSet(String ancientSet) {
-        this.ancientSet = ancientSet;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public void setIntro(String intro) {
-        this.intro = intro;
-    }
 }

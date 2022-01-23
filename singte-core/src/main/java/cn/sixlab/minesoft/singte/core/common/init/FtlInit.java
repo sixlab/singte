@@ -21,6 +21,9 @@ public class FtlInit implements ApplicationRunner {
     private MenuDirective menuDirective;
 
     @Autowired
+    private LangDirective langDirective;
+
+    @Autowired
     private AsideDirective asideDirective;
 
     @Autowired
@@ -43,6 +46,7 @@ public class FtlInit implements ApplicationRunner {
     public void configFtl() {
         configuration.setSharedVariable("StConfig", configDirective);
         configuration.setSharedVariable("StStatic", staticDirective);
+        configuration.setSharedVariable("StLang", langDirective);
         configuration.setSharedVariable("StAside", asideDirective);
 
         configuration.setSharedVariable("StMenu", menuDirective);

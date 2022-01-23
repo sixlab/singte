@@ -1,6 +1,7 @@
 package cn.sixlab.minesoft.singte.core.common.utils;
 
 import cn.hutool.core.util.StrUtil;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -267,5 +268,9 @@ public class WebUtils {
 
     public static String getToken() {
         return getToken(WebUtils.getRequest());
+    }
+
+    public static String getLang() {
+        return LocaleContextHolder.getLocale().toString();
     }
 }

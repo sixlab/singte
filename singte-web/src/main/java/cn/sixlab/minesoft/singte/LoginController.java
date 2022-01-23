@@ -4,6 +4,7 @@ import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.utils.TokenUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
+import cn.sixlab.minesoft.singte.core.common.vo.StException;
 import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
@@ -40,9 +41,9 @@ public class LoginController extends BaseController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            throw new StException(StErr.LOGIN_DISABLE, "login.err.disable");
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new StException(StErr.LOGIN_PWD_ERR, "login.err.pwd");
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         final String token = TokenUtils.generateToken(userDetails);

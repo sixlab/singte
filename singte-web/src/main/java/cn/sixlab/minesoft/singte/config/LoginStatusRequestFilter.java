@@ -41,11 +41,11 @@ public class LoginStatusRequestFilter extends OncePerRequestFilter {
             if (null != stUser) {
                 if (!StConst.YES.equals(stUser.getStatus())) {
                     // 禁用
-                    WebUtils.getResponse().getWriter().write(ModelResp.error(StErr.LOGIN_DISABLE, "login.user.disable").toString());
+                    WebUtils.getResponse().getWriter().write(ModelResp.error(StErr.LOGIN_DISABLE, "login.err.disable").toString());
                     return;
                 } else if (new Date().compareTo(stUser.getTokenValid()) > 0) {
                     // 过期
-                    WebUtils.getResponse().getWriter().write(ModelResp.error(StErr.LOGIN_EXPIRED, "login.status.expired").toString());
+                    WebUtils.getResponse().getWriter().write(ModelResp.error(StErr.LOGIN_EXPIRED, "login.err.expired").toString());
                     return;
                 } else {
                     if (SecurityContextHolder.getContext().getAuthentication() == null) {
