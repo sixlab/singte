@@ -29,7 +29,7 @@ public class StLangDao extends BaseDao<StLang> {
         return mongoTemplate.find(query, entityClass());
     }
 
-    public PageResult<StLang> selectLangList(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StLang> queryLang(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

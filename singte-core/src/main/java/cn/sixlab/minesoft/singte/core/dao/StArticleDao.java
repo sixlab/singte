@@ -138,7 +138,7 @@ public class StArticleDao extends BaseDao<StArticle> {
         return output.getMappedResults();
     }
 
-    public PageResult<StArticle> selectArticles(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StArticle> queryArticles(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

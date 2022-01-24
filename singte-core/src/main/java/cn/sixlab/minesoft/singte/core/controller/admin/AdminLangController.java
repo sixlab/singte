@@ -6,8 +6,8 @@ import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
-import cn.sixlab.minesoft.singte.core.models.StArticle;
+import cn.sixlab.minesoft.singte.core.dao.StLangDao;
+import cn.sixlab.minesoft.singte.core.models.StLang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/admin/article")
-public class AdminArticleController extends BaseController {
+@RequestMapping("/admin/lang")
+public class AdminLangController extends BaseController {
 
     @Autowired
-    private StArticleDao articleDao;
+    private StLangDao langDao;
 
     @GetMapping(value = "/list")
     public String list() {
-        return "admin/article/list";
+        return "admin/lang/list";
     }
 
     @PostMapping(value = "/listData")
@@ -32,21 +32,22 @@ public class AdminArticleController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StArticle> pageResult = articleDao.queryArticles(keyword, status, pageNum, pageSize);
+        PageResult<StLang> pageResult = langDao.queryLang(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
-        return "admin/article/listData";
+        return "admin/lang/listData";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitArticle")
-    public ModelResp submitArticle(StArticle params) {
-        StArticle nextInfo;
-        StArticle checkExist = articleDao.selectByAlias(params.getAlias());
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(StLang params) {
+        StLang nextInfo;
+
+        StLang checkExist = langDao.selectByLang(params.getLangCode());
 
         if (StrUtil.isNotEmpty(params.getId())) {
-            nextInfo = articleDao.selectById(params.getId());
+            nextInfo = langDao.selectById(params.getId());
 
             if (null == nextInfo) {
                 return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
@@ -62,45 +63,38 @@ public class AdminArticleController extends BaseController {
                 return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
             }
 
-            nextInfo = new StArticle();
-            nextInfo.setViewCount(0);
-            nextInfo.setThumbCount(0);
-            nextInfo.setStatus(StConst.ST_PUBLISH_DID);
-            nextInfo.setPublishTime(new Date());
+            nextInfo = new StLang();
+            nextInfo.setStatus(StConst.YES);
             nextInfo.setCreateTime(new Date());
         }
 
-        nextInfo.setAlias(params.getAlias());
-        nextInfo.setSourceUrl(params.getSourceUrl());
-        nextInfo.setTitle(params.getTitle());
-        nextInfo.setAuthor(params.getAuthor());
-        nextInfo.setKeywords(params.getKeywords());
-        nextInfo.setSummary(params.getSummary());
-        nextInfo.setCategory(params.getCategory());
-        nextInfo.setContent(params.getContent());
+        nextInfo.setLangCode(params.getLangCode());
+        nextInfo.setLangIcon(params.getLangIcon());
+        nextInfo.setLangText(params.getLangText());
+        nextInfo.setIntro(params.getIntro());
 
-        articleDao.save(nextInfo);
+        langDao.save(nextInfo);
         return ModelResp.success();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
-        StArticle record = articleDao.selectById(id);
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
+        StLang record = langDao.selectById(id);
 
         if (null == record) {
             return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
         }
 
         record.setStatus(status);
-        articleDao.save(record);
+        langDao.save(record);
         return ModelResp.success();
     }
 
     @ResponseBody
     @RequestMapping(value = "/get")
     public ModelResp get(String id) {
-        StArticle record = articleDao.selectById(id);
+        StLang record = langDao.selectById(id);
 
         if (null == record) {
             return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
@@ -112,7 +106,7 @@ public class AdminArticleController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/delete")
     public ModelResp delete(String id) {
-        articleDao.deleteById(id);
+        langDao.deleteById(id);
 
         return ModelResp.success();
     }
