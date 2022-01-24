@@ -34,7 +34,7 @@ public class StMenuDao extends BaseDao<StMenu> {
         return mongoTemplate.find(query, StMenu.class);
     }
 
-    public PageResult<StMenu> selectMenus(String keyword, String status, int pageNum, int pageSize) {
+    public PageResult<StMenu> queryMenu(String keyword, String status, int pageNum, int pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

@@ -35,7 +35,7 @@ public class StUserDao extends BaseDao<StUser> {
         return mongoTemplate.findOne(query, StUser.class);
     }
 
-    public PageResult<StUser> selectUsers(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StUser> queryUser(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

@@ -32,7 +32,7 @@ public class AdminConfigController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StConfig> pageResult = configDao.selectConfigs(keyword, status, pageNum, pageSize);
+        PageResult<StConfig> pageResult = configDao.queryConfig(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

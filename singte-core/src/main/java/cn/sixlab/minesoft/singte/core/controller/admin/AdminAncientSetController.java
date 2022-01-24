@@ -60,7 +60,7 @@ public class AdminAncientSetController extends BaseController {
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteAncientSet> pageResult = ancientSetDao.selectAncientSets(keyword, pageNum, pageSize);
+        PageResult<SteAncientSet> pageResult = ancientSetDao.queryAncientSet(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

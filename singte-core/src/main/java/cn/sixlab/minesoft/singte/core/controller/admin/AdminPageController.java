@@ -32,7 +32,7 @@ public class AdminPageController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StPage> pageResult = pageDao.selectPages(keyword, status, pageNum, pageSize);
+        PageResult<StPage> pageResult = pageDao.queryPage(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

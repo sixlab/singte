@@ -42,7 +42,7 @@ public class StCategoryDao extends BaseDao<StCategory> {
         mongoTemplate.remove(new Query(criteria), StCategory.class);
     }
 
-    public PageResult<StCategory> selectCategories(String keyword, Integer pageNum, Integer pageSize) {
+    public PageResult<StCategory> queryCategory(String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria().orOperator(
                 Criteria.where("category").regex(keyword),
                 Criteria.where("intro").regex(keyword)

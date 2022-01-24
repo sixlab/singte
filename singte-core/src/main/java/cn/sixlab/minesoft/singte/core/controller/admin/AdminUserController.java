@@ -38,7 +38,7 @@ public class AdminUserController extends BaseController {
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StUser> pageResult = userDao.selectUsers(keyword, status, pageNum, pageSize);
+        PageResult<StUser> pageResult = userDao.queryUser(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

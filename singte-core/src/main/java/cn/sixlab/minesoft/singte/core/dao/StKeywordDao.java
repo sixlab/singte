@@ -61,7 +61,7 @@ public class StKeywordDao extends BaseDao<StKeyword> {
         mongoTemplate.remove(new Query(criteria), StKeyword.class);
     }
 
-    public PageResult<StKeyword> selectKeywords(String keyword, Integer pageNum, Integer pageSize) {
+    public PageResult<StKeyword> queryKeyword(String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria().orOperator(
                 Criteria.where("keyword").regex(keyword),
                 Criteria.where("intro").regex(keyword)

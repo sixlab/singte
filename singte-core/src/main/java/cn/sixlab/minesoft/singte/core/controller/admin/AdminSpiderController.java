@@ -32,7 +32,7 @@ public class AdminSpiderController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StSpider> pageResult = spiderDao.selectSpiders(keyword, status, pageNum, pageSize);
+        PageResult<StSpider> pageResult = spiderDao.querySpider(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

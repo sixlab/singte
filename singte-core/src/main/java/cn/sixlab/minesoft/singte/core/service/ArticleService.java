@@ -114,7 +114,7 @@ public class ArticleService {
     }
 
     public PageResult<StArticle> list(Integer pageNum, Integer pageSize) {
-        return articleDao.queryArticles(null, StConst.YES, pageNum, pageSize);
+        return articleDao.queryArticle(null, StConst.YES, pageNum, pageSize);
     }
 
     /**
@@ -235,7 +235,7 @@ public class ArticleService {
     }
 
     public PageResult<StArticle> selectSearch(String word, int pageNum, int pageSize) {
-        PageResult<StArticle> articleList = articleDao.selectByWord(word, pageNum, pageSize);
+        PageResult<StArticle> articleList = articleDao.queryByWord(word, pageNum, pageSize);
 
         return articleList;
     }

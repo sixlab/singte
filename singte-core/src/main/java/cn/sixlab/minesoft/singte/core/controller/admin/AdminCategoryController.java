@@ -43,7 +43,7 @@ public class AdminCategoryController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StCategory> pageResult = categoryDao.selectCategories(keyword, pageNum, pageSize);
+        PageResult<StCategory> pageResult = categoryDao.queryCategory(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

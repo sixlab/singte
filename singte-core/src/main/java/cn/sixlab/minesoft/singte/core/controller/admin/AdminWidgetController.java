@@ -27,7 +27,7 @@ public class AdminWidgetController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StWidget> pageResult = widgetDao.selectWidgets(keyword, status, pageNum, pageSize);
+        PageResult<StWidget> pageResult = widgetDao.queryWidget(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

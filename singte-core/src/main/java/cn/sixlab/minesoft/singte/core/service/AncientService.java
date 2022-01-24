@@ -35,7 +35,7 @@ public class AncientService {
 
         while (hasNex) {
             pageNum++;
-            PageResult<SteAncientSet> pageResult = setDao.selectAncientSets(null, pageNum, pageSize);
+            PageResult<SteAncientSet> pageResult = setDao.queryAncientSet(null, pageNum, pageSize);
 
             for (SteAncientSet set : pageResult.getList()) {
                 callback.call(set);
@@ -51,7 +51,7 @@ public class AncientService {
 
         while (hasNex) {
             pageNum++;
-            PageResult<SteAncientCategory> pageResult = categoryDao.selectAncientCategory(null, pageNum, pageSize);
+            PageResult<SteAncientCategory> pageResult = categoryDao.queryAncientCategory(null, pageNum, pageSize);
 
             for (SteAncientCategory category : pageResult.getList()) {
                 callback.call(category);
@@ -67,7 +67,7 @@ public class AncientService {
 
         while (hasNex) {
             pageNum++;
-            PageResult<SteAncientBook> pageResult = bookDao.selectBooks(null, null, pageNum, pageSize);
+            PageResult<SteAncientBook> pageResult = bookDao.queryBook(null, null, pageNum, pageSize);
 
             for (SteAncientBook book : pageResult.getList()) {
                 callback.call(book);
@@ -83,7 +83,7 @@ public class AncientService {
 
         while (hasNex) {
             pageNum++;
-            PageResult<SteAncientSection> pageResult = sectionDao.selectSections(null, null, pageNum, pageSize);
+            PageResult<SteAncientSection> pageResult = sectionDao.querySection(null, null, pageNum, pageSize);
 
             for (SteAncientSection section : pageResult.getList()) {
                 callback.call(section);

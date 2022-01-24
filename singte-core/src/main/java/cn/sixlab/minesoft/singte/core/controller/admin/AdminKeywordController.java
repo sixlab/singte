@@ -43,7 +43,7 @@ public class AdminKeywordController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StKeyword> pageResult = keywordDao.selectKeywords(keyword, pageNum, pageSize);
+        PageResult<StKeyword> pageResult = keywordDao.queryKeyword(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

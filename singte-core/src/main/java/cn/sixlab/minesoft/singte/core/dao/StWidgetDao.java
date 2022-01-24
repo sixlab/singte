@@ -48,7 +48,7 @@ public class StWidgetDao extends BaseDao<StWidget> {
         return mongoTemplate.findOne(query, entityClass());
     }
 
-    public PageResult<StWidget> selectWidgets(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StWidget> queryWidget(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

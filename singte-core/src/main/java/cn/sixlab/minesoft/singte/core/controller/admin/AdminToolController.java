@@ -32,7 +32,7 @@ public class AdminToolController extends BaseController {
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteToolItem> pageResult = toolItemDao.selectTools(keyword, pageNum, pageSize);
+        PageResult<SteToolItem> pageResult = toolItemDao.queryTool(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

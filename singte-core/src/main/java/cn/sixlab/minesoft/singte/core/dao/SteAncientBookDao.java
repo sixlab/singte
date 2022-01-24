@@ -42,7 +42,7 @@ public class SteAncientBookDao extends BaseDao<SteAncientBook> {
         return mongoTemplate.findOne(query, entityClass());
     }
 
-    public PageResult<SteAncientBook> selectBooks(SteAncientCategory ancientCategory, String keyword, Integer pageNum, Integer pageSize) {
+    public PageResult<SteAncientBook> queryBook(SteAncientCategory ancientCategory, String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
 
         if (null != ancientCategory) {

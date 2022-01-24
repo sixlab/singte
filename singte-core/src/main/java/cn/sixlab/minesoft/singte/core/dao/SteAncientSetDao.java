@@ -37,7 +37,7 @@ public class SteAncientSetDao extends BaseDao<SteAncientSet> {
         return mongoTemplate.findOne(query, entityClass());
     }
 
-    public PageResult<SteAncientSet> selectAncientSets(String keyword, Integer pageNum, Integer pageSize) {
+    public PageResult<SteAncientSet> queryAncientSet(String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
 
         if (StrUtil.isNotEmpty(keyword)) {

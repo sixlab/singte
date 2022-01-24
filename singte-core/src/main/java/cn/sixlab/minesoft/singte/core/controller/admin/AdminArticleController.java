@@ -32,7 +32,7 @@ public class AdminArticleController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StArticle> pageResult = articleDao.queryArticles(keyword, status, pageNum, pageSize);
+        PageResult<StArticle> pageResult = articleDao.queryArticle(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

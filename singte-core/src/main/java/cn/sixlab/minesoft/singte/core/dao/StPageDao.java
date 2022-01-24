@@ -36,7 +36,7 @@ public class StPageDao extends BaseDao<StPage> {
         save(page);
     }
 
-    public PageResult<StPage> selectPages(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StPage> queryPage(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

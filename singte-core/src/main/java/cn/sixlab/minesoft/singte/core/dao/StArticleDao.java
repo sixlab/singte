@@ -78,19 +78,6 @@ public class StArticleDao extends BaseDao<StArticle> {
         return pageQuery(query, StArticle.class, pageNum, pageSize);
     }
 
-    public PageResult<StArticle> selectByWord(String word, int pageNum, int pageSize) {
-        // TODO 待实现更好搜索方法
-        Criteria criteria = Criteria.where("status").is(StConst.YES);
-        if (StrUtil.isNotEmpty(word)) {
-            criteria = criteria.and("content").regex(word);
-        }
-        Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
-
-        Query query = new Query(criteria).with(sort);
-
-        return pageQuery(query, StArticle.class, pageNum, pageSize);
-    }
-
     public StArticle selectByAlias(String alias) {
         Criteria criteria = Criteria
                 .where("status").is(StConst.YES)
@@ -138,7 +125,20 @@ public class StArticleDao extends BaseDao<StArticle> {
         return output.getMappedResults();
     }
 
-    public PageResult<StArticle> queryArticles(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StArticle> queryByWord(String word, int pageNum, int pageSize) {
+        // TODO 待实现更好搜索方法
+        Criteria criteria = Criteria.where("status").is(StConst.YES);
+        if (StrUtil.isNotEmpty(word)) {
+            criteria = criteria.and("content").regex(word);
+        }
+        Sort sort = Sort.by(Sort.Direction.DESC, "publishTime");
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, StArticle.class, pageNum, pageSize);
+    }
+
+    public PageResult<StArticle> queryArticle(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

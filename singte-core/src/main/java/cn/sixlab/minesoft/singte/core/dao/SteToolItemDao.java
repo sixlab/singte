@@ -45,7 +45,7 @@ public class SteToolItemDao extends BaseDao<SteToolItem> {
         return mongoTemplate.findOne(query, entityClass());
     }
 
-    public PageResult<SteToolItem> selectTools(String keyword, Integer pageNum, Integer pageSize) {
+    public PageResult<SteToolItem> queryTool(String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
 
         if (StrUtil.isNotEmpty(keyword)) {

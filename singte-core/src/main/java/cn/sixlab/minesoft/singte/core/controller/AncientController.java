@@ -62,7 +62,7 @@ public class AncientController extends BaseController {
 
         String category = ancientCategory.getAncientCategory();
         modelMap.put("title", category);
-        modelMap.put("result", ancientBookDao.selectBooks(ancientCategory, null, pageNum, pageSize));
+        modelMap.put("result", ancientBookDao.queryBook(ancientCategory, null, pageNum, pageSize));
 
         return "ancient/book";
     }
@@ -79,7 +79,7 @@ public class AncientController extends BaseController {
 
         String bookName = ancientBook.getBookName();
         modelMap.put("title", bookName);
-        modelMap.put("result", ancientSectionDao.selectSections(ancientBook, null, pageNum, pageSize));
+        modelMap.put("result", ancientSectionDao.querySection(ancientBook, null, pageNum, pageSize));
 
         return "ancient/section";
     }

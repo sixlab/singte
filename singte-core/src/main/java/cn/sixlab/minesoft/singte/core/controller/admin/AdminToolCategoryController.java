@@ -32,7 +32,7 @@ public class AdminToolCategoryController extends BaseController {
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteToolCategory> pageResult = toolCategoryDao.selectCategories(keyword, pageNum, pageSize);
+        PageResult<SteToolCategory> pageResult = toolCategoryDao.queryCategory(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

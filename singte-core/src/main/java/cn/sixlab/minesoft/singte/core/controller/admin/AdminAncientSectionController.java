@@ -59,7 +59,7 @@ public class AdminAncientSectionController extends BaseController {
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteAncientSection> pageResult = ancientSectionDao.selectSections(null, keyword, pageNum, pageSize);
+        PageResult<SteAncientSection> pageResult = ancientSectionDao.querySection(null, keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

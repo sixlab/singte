@@ -32,7 +32,7 @@ public class AdminMenuController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StMenu> menuPageResult = menuDao.selectMenus(keyword, status, pageNum, pageSize);
+        PageResult<StMenu> menuPageResult = menuDao.queryMenu(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", menuPageResult);
 

@@ -100,7 +100,7 @@ public class AdminAncientBookController extends BaseController {
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteAncientBook> pageResult = ancientBookDao.selectBooks(null, keyword, pageNum, pageSize);
+        PageResult<SteAncientBook> pageResult = ancientBookDao.queryBook(null, keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

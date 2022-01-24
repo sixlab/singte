@@ -53,7 +53,7 @@ public class SteAncientSectionDao extends BaseDao<SteAncientSection> {
         return mongoTemplate.findDistinct(query, "author", entityClass(), String.class);
     }
 
-    public PageResult<SteAncientSection> selectSections(SteAncientBook ancientBook, String keyword, Integer pageNum, Integer pageSize) {
+    public PageResult<SteAncientSection> querySection(SteAncientBook ancientBook, String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (null != ancientBook) {
             if (StrUtil.isNotEmpty(ancientBook.getAncientSet())) {

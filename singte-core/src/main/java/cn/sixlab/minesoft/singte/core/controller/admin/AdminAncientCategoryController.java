@@ -58,7 +58,7 @@ public class AdminAncientCategoryController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteAncientCategory> pageResult = ancientCategoryDao.selectAncientCategory(keyword, pageNum, pageSize);
+        PageResult<SteAncientCategory> pageResult = ancientCategoryDao.queryAncientCategory(keyword, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
