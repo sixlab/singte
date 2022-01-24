@@ -106,7 +106,7 @@
 <#macro AdminPager adminPageInfo url="">
     <div class="card-footer clearfix">
         <#assign pageSizeList = [10,20,50,100,500,1000] />
-        <div class="form-group float-right input-group-sm" style="margin-left: 5px;">
+        <div class="form-group float-right input-group-sm ml-5">
             <select aria-label="pageSize" name="pageSize" class="custom-select st-pager-size">
                 <#list pageSizeList as pageSizeItem>
                     <option value="${pageSizeItem}"<#if pageSizeItem==adminPageInfo.pageSize> selected</#if>>${pageSizeItem}</option>
@@ -159,14 +159,14 @@
             </#if>
         </ul>
 
-        <div class="input-group input-group-sm float-right" style="margin-right: 5px;width: 120px;">
+        <div class="input-group input-group-sm float-right mr-5" style="width: 120px;">
             <input type="text" class="form-control st-pager-input" value="${adminPageInfo.pageNum}">
             <span class="input-group-append">
                 <button type="button" class="btn btn-primary btn-flat st-pager-btn">Go!</button>
             </span>
         </div>
 
-        <div class="float-right" style="margin-right: 5px;width: 100px;text-align: right;line-height: 31px;">
+        <div class="float-right mr-5" style="width: 100px;text-align: right;line-height: 31px;">
             Total: ${adminPageInfo.totalNum}
         </div>
     </div>

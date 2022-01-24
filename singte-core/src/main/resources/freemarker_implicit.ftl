@@ -9,6 +9,10 @@
 [#macro StStatic type='js' src="" prefix="/staic/type"][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.StaticDirective"  --]
 
+[#macro StUser][/#macro]
+[#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.UserDirective"  --]
+[#-- @ftlvariable name="stUser" type="cn.sixlab.minesoft.singte.core.models.StUser"  --]
+
 [#macro StLang][/#macro]
 [#-- @ftlvariable name="class" type="cn.sixlab.minesoft.singte.core.common.directive.LangDirective"  --]
 [#-- @ftlvariable name="stCurrentLangIcon" type="java.lang.String" --]

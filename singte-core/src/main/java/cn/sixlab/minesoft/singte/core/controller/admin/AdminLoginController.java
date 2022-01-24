@@ -3,10 +3,14 @@ package cn.sixlab.minesoft.singte.core.controller.admin;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.*;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.service.LangService;
+import cn.sixlab.minesoft.singte.core.dao.StUserDao;
+import cn.sixlab.minesoft.singte.core.models.StUser;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
@@ -24,17 +28,37 @@ import java.util.stream.Stream;
 public class AdminLoginController extends BaseController {
 
     @Autowired
-    private StUserDetailsService userDetailsService;
+    private StUserDao userDao;
 
     @Autowired
-    private LangService langService;
+    private StUserDetailsService userDetailsService;
 
     @GetMapping(value = "/login")
     public String login() {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        if(authentication instanceof AnonymousAuthenticationToken){
+            return "admin/login";
+        }
 
-        return "admin/login";
+        return "redirect:/admin/index";
+    }
+
+    @GetMapping(value = "/logout")
+    public String logout() {
+        StUser loginUser = WebUtils.getLoginUser();
+
+        StUser preUser = userDao.selectByUsername(loginUser.getUsername());
+        preUser.setToken(null);
+        preUser.setTokenValid(null);
+        userDao.save(preUser);
+
+        WebUtils.addCookie("Authorization", "", 0);
+
+        SecurityContextHolder.clearContext();
+
+        return "redirect:/admin/login";
     }
 
     @ResponseBody

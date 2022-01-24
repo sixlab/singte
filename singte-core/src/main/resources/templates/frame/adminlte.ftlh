@@ -60,7 +60,7 @@
 
         <!-- Main content -->
         <div class="content">
-            <div class="container-fluid" style="padding:1rem;">
+            <div class="container-fluid p-3">
                 <#nested>
             </div><!-- /.container-fluid -->
         </div>
@@ -224,23 +224,66 @@ ${js}
             <li class="nav-item dropdown">
                 <@StLang>
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="flag-icon flag-icon-${stCurrentLangIcon!''}"></i>
+                        <i class="${stCurrentLangIcon!''}"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right p-0">
                         <#list stLangList as stLang>
                             <a href="#" class="dropdown-item<#if stLang.status=="2"> active<#else> stLang</#if>" data-lang="${stLang.langCode}">
-                                <i class="flag-icon flag-icon-${stLang.langIcon} mr-2"></i> ${stLang.langText}
+                                <i class="${stLang.langIcon} mr-2"></i> ${stLang.langText}
                             </a>
                         </#list>
                     </div>
                 </@StLang>
             </li>
 
+            <#-- 全屏 -->
             <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                     <i class="fas fa-expand-arrows-alt"></i>
                 </a>
             </li>
+
+            <#-- 用户 -->
+            <@StUser>
+            <li class="nav-item dropdown user-menu">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/logo.png" class="user-image img-circle elevation-2"
+                         alt="User Image">
+                    <span class="d-none d-md-inline">${stUser.showName}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <!-- User image -->
+                    <li class="user-header bg-primary">
+                        <img src="/static/logo.png" class="img-circle elevation-2" alt="User Image">
+                        <p>
+                            <@StI18n "user.label.username"/>: ${stUser.username}
+                            <small><@StI18n "user.label.creatTime"/>: ${stUser.createTime?string("yyyy-MM-dd")}</small>
+                        </p>
+                    </li>
+<#--                    <!-- Menu Body &ndash;&gt;-->
+<#--                    <li class="user-body">-->
+<#--                        <div class="row">-->
+<#--                            <div class="col-4 text-center">-->
+<#--                                <a href="#">Followers</a>-->
+<#--                            </div>-->
+<#--                            <div class="col-4 text-center">-->
+<#--                                <a href="#">Sales</a>-->
+<#--                            </div>-->
+<#--                            <div class="col-4 text-center">-->
+<#--                                <a href="#">Friends</a>-->
+<#--                            </div>-->
+<#--                        </div>-->
+<#--                        <!-- /.row &ndash;&gt;-->
+<#--                    </li>-->
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <a href="/admin/user/info" class="btn btn-default btn-flat"><@StI18n "page.title.user.info"/></a>
+                        <a href="/admin/logout" class="btn btn-default btn-flat float-right"><@StI18n "common.logout"/></a>
+                    </li>
+                </ul>
+            </li>
+            </@StUser>
+
             <li class="nav-item">
                 <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                     <i class="fas fa-th-large"></i>
@@ -289,18 +332,8 @@ ${js}
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="/static/adminlte/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                </div>
-                <div class="info">
-                    <a href="/admin/user/info" class="d-block">个人中心</a>
-                </div>
-            </div>
-
             <!-- SidebarSearch Form -->
-            <div class="form-inline">
+            <div class="form-inline mt-2">
                 <div class="input-group" data-widget="sidebar-search">
                     <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                            aria-label="Search">

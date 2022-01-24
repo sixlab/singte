@@ -1,8 +1,11 @@
 package cn.sixlab.minesoft.singte.core.common.utils;
 
 import cn.hutool.core.util.StrUtil;
-import org.springframework.context.i18n.LocaleContextHolder;
+import cn.sixlab.minesoft.singte.core.common.vo.StUserDetails;
+import cn.sixlab.minesoft.singte.core.models.StUser;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -268,6 +271,17 @@ public class WebUtils {
 
     public static String getToken() {
         return getToken(WebUtils.getRequest());
+    }
+
+    public static StUser getLoginUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object details = authentication.getPrincipal();
+        if (details instanceof StUserDetails) {
+            StUserDetails userDetails = (StUserDetails) details;
+            userDetails.eraseCredentials();
+            return userDetails.getStUser();
+        }
+        return null;
     }
 
 }

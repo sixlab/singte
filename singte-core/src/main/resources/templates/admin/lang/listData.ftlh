@@ -20,7 +20,7 @@
                 <td>${item_index + 1}.</td>
                 <td>${item.langText}</td>
                 <td>${item.langCode}</td>
-                <td>${item.langIcon}</td>
+                <td><i class="${item.langIcon!''}"></i> ${item.langIcon}</td>
                 <td>${item.intro}</td>
                 <td>${item.status}</td>
                 <td>

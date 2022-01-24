@@ -59,21 +59,21 @@
                     <form class="form-horizontal" id="modalDataForm">
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
-                            <label for="langCode" class="col-sm-2 col-form-label">分组</label>
+                            <label for="langCode" class="col-sm-2 col-form-label">编号</label>
                             <div class="col-sm-10 form-control-container">
-                                <input type="text" name="langCode" id="langCode" class="form-control" placeholder="分组">
+                                <input type="text" name="langCode" id="langCode" class="form-control required" placeholder="编号">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="langText" class="col-sm-2 col-form-label">Key</label>
+                            <label for="langText" class="col-sm-2 col-form-label">语言</label>
                             <div class="col-sm-10 form-control-container">
-                                <input type="text" name="langText" id="langText" class="form-control required" placeholder="Key">
+                                <input type="text" name="langText" id="langText" class="form-control required" placeholder="语言">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="langIcon" class="col-sm-2 col-form-label">值</label>
+                            <label for="langIcon" class="col-sm-2 col-form-label">图标</label>
                             <div class="col-sm-10 form-control-container">
-                                <textarea class="form-control" name="langIcon" id="langIcon" rows="3" placeholder="值"></textarea>
+                                <input type="text" name="langIcon" id="langIcon" class="form-control required" placeholder="图标">
                             </div>
                         </div>
                         <div class="form-group row">

@@ -15,9 +15,9 @@ public class InitLang implements BaseInitComponent {
 
     @Override
     public void init() {
-        checkLang("zh", "简体中文", "cn");
-        checkLang("zh_TW", "繁体中文", "tw");
-        checkLang("en", "English", "us");
+        checkLang("zh", "简体中文", "flag-icon flag-icon-cn");
+        checkLang("zh_TW", "繁体中文", "flag-icon flag-icon-tw");
+        checkLang("en", "English", "flag-icon flag-icon-us");
     }
 
     public void checkLang(String langCode, String langText, String langIcon) {
