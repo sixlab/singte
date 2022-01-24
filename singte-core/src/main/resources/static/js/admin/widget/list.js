@@ -4,7 +4,7 @@ $(function () {
 
     $(document).on("click", ".stStatusBtn", function () {
         $.ajax({
-            url: '/admin/widget/submitStatus',
+            url: '/admin/widget/status',
             data: {
                 id: $(this).data("itemId"),
                 status: $(this).data("targetStatus")

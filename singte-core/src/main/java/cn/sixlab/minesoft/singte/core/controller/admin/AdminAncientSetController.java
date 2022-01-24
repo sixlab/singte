@@ -68,8 +68,8 @@ public class AdminAncientSetController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitSet")
-    public ModelResp submitSet(SteAncientSet params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(SteAncientSet params) {
         SteAncientSet nextInfo;
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = ancientSetDao.selectById(params.getId());
@@ -100,8 +100,8 @@ public class AdminAncientSetController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         SteAncientSet record = ancientSetDao.selectById(id);
 
         if (null == record) {

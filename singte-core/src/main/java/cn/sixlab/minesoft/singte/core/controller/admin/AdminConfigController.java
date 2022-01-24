@@ -40,8 +40,8 @@ public class AdminConfigController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitConfig")
-    public ModelResp submitConfig(StConfig params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(StConfig params) {
         StConfig nextInfo;
 
         StConfig checkExist = configDao.selectByKey(params.getConfigKey());
@@ -78,8 +78,8 @@ public class AdminConfigController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         StConfig record = configDao.selectById(id);
 
         if (null == record) {

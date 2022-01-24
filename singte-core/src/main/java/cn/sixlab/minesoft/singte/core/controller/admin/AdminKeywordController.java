@@ -51,8 +51,8 @@ public class AdminKeywordController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitKeyword")
-    public ModelResp submitKeyword(StKeyword params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(StKeyword params) {
         StKeyword nextInfo;
 
         StKeyword checkExist = keywordDao.selectByKeyword(params.getKeyword());
@@ -89,8 +89,8 @@ public class AdminKeywordController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         StKeyword record = keywordDao.selectById(id);
 
         if (null == record) {

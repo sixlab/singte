@@ -66,8 +66,8 @@ public class AdminAncientCategoryController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitCategory")
-    public ModelResp submitCategory(SteAncientCategory params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(SteAncientCategory params) {
         SteAncientCategory nextInfo;
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = ancientCategoryDao.selectById(params.getId());
@@ -99,8 +99,8 @@ public class AdminAncientCategoryController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         SteAncientCategory record = ancientCategoryDao.selectById(id);
 
         if (null == record) {

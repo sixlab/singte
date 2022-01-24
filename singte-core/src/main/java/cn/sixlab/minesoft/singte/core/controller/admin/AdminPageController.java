@@ -40,8 +40,8 @@ public class AdminPageController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitPage")
-    public ModelResp submitPage(StPage params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(StPage params) {
         StPage nextInfo;
 
         StPage checkExist = pageDao.selectByAlias(params.getAlias());
@@ -80,8 +80,8 @@ public class AdminPageController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         StPage record = pageDao.selectById(id);
 
         if (null == record) {

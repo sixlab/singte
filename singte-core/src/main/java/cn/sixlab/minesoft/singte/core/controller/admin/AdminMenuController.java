@@ -40,8 +40,8 @@ public class AdminMenuController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitMenu")
-    public ModelResp submitMenu(StMenu params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(StMenu params) {
         StMenu nextInfo;
 
         StMenu checkExist = menuDao.selectByMenuCode(params.getMenuCode());
@@ -86,8 +86,8 @@ public class AdminMenuController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         StMenu record = menuDao.selectById(id);
 
         if (null == record) {

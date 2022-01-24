@@ -51,8 +51,8 @@ public class AdminCategoryController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitCategory")
-    public ModelResp submitCategory(StCategory params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(StCategory params) {
         StCategory nextInfo;
 
         StCategory checkExist = categoryDao.selectByCategory(params.getCategory());
@@ -89,8 +89,8 @@ public class AdminCategoryController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         StCategory record = categoryDao.selectById(id);
 
         if (null == record) {

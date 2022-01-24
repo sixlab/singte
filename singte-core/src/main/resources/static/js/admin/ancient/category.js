@@ -35,7 +35,7 @@ $(function () {
     $(document).on("click", ".stSaveBtn", function () {
         if ($('#modalDataForm').valid()) {
             $.ajax({
-                url: '/admin/ancient/category/submitCategory',
+                url: '/admin/ancient/category/submit',
                 data: $("#modalDataForm").serialize(),
                 type: 'post',
                 dataType: 'json',
@@ -67,7 +67,7 @@ $(function () {
 
     $(document).on("click", ".stStatusBtn", function () {
         $.ajax({
-            url: '/admin/ancient/category/submitStatus',
+            url: '/admin/ancient/category/status',
             data: {
                 id: $(this).data("itemId"),
                 status: $(this).data("targetStatus")

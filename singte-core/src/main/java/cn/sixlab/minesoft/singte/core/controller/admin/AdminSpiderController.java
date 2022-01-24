@@ -40,8 +40,8 @@ public class AdminSpiderController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitSpider")
-    public ModelResp submitSpider(StSpider params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(StSpider params) {
         StSpider nextInfo;
 
         StSpider checkExist = spiderDao.selectByName(params.getSpiderName());
@@ -86,8 +86,8 @@ public class AdminSpiderController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         StSpider record = spiderDao.selectById(id);
 
         if (null == record) {

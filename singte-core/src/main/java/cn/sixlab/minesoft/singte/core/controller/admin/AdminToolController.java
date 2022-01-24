@@ -40,8 +40,8 @@ public class AdminToolController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitTool")
-    public ModelResp submitSet(SteToolItem params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(SteToolItem params) {
         SteToolItem nextInfo;
         SteToolItem checkExist = toolItemDao.selectByCode(params.getToolCode());
 
@@ -80,8 +80,8 @@ public class AdminToolController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         SteToolItem record = toolItemDao.selectById(id);
 
         if (null == record) {

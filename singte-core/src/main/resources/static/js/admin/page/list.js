@@ -6,7 +6,7 @@ $(function () {
     $(document).on("click", ".stSaveBtn", function () {
         if ($('#modalDataForm').valid()) {
             $.ajax({
-                url: '/admin/page/submitPage',
+                url: '/admin/page/submit',
                 data: $("#modalDataForm").serialize(),
                 type: 'post',
                 dataType: 'json',
@@ -38,7 +38,7 @@ $(function () {
 
     $(document).on("click", ".stStatusBtn", function () {
         $.ajax({
-            url: '/admin/page/submitStatus',
+            url: '/admin/page/status',
             data: {
                 id: $(this).data("itemId"),
                 status: $(this).data("targetStatus")

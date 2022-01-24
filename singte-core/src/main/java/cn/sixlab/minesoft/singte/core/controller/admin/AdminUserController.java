@@ -46,8 +46,8 @@ public class AdminUserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitUser")
-    public ModelResp submitUser(StUser params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(StUser params) {
         StUser nextInfo;
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = userDao.selectById(params.getId());
@@ -84,8 +84,8 @@ public class AdminUserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         StUser record = userDao.selectById(id);
 
         if (null == record) {

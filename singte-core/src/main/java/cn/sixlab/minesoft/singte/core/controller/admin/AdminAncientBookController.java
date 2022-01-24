@@ -108,8 +108,8 @@ public class AdminAncientBookController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitBook")
-    public ModelResp submitBook(SteAncientBook params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(SteAncientBook params) {
         SteAncientBook nextInfo;
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = ancientBookDao.selectById(params.getId());
@@ -143,8 +143,8 @@ public class AdminAncientBookController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         SteAncientBook record = ancientBookDao.selectById(id);
 
         if (null == record) {

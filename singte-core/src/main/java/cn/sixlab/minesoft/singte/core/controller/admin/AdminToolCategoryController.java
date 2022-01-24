@@ -40,8 +40,8 @@ public class AdminToolCategoryController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitCategory")
-    public ModelResp submitCategory(SteToolCategory params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(SteToolCategory params) {
         SteToolCategory nextInfo;
 
         SteToolCategory checkExist = toolCategoryDao.selectByName(params.getCategory());
@@ -78,8 +78,8 @@ public class AdminToolCategoryController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         SteToolCategory record = toolCategoryDao.selectById(id);
 
         if (null == record) {

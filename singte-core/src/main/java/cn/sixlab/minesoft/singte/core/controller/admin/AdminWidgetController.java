@@ -35,8 +35,8 @@ public class AdminWidgetController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         StWidget widget = widgetDao.selectById(id);
         widget.setStatus(status);
         widgetDao.save(widget);

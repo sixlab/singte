@@ -40,8 +40,8 @@ public class AdminArticleController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitArticle")
-    public ModelResp submitArticle(StArticle params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(StArticle params) {
         StArticle nextInfo;
         StArticle checkExist = articleDao.selectByAlias(params.getAlias());
 
@@ -84,8 +84,8 @@ public class AdminArticleController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         StArticle record = articleDao.selectById(id);
 
         if (null == record) {

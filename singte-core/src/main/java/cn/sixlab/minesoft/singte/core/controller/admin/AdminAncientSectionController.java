@@ -67,8 +67,8 @@ public class AdminAncientSectionController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitSection")
-    public ModelResp submitSection(SteAncientSection params) {
+    @RequestMapping(value = "/submit")
+    public ModelResp submit(SteAncientSection params) {
         SteAncientSection nextInfo;
 
         if (StrUtil.isNotEmpty(params.getId())) {
@@ -107,8 +107,8 @@ public class AdminAncientSectionController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/submitStatus")
-    public ModelResp submitStatus(String id, String status) {
+    @RequestMapping(value = "/status")
+    public ModelResp status(String id, String status) {
         SteAncientSection record = ancientSectionDao.selectById(id);
 
         if (null == record) {
