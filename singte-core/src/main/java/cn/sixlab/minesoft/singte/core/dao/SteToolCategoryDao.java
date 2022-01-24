@@ -37,15 +37,32 @@ public class SteToolCategoryDao extends BaseDao<SteToolCategory> {
         return mongoTemplate.findOne(query, entityClass());
     }
 
-    public PageResult<SteToolCategory> queryCategory(String keyword, Integer pageNum, Integer pageSize) {
+    @Override
+    public SteToolCategory selectExist(SteToolCategory record) {
+        Criteria criteria = Criteria.where("category").is(record.getCategory());
+
+        Sort sort = Sort.by("id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
+    public PageResult<SteToolCategory> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
+        if (StrUtil.isNotEmpty(status)) {
+            criteria = criteria.and("status").is(status);
+        }
 
         if (StrUtil.isNotEmpty(keyword)) {
-            criteria = criteria.orOperator(
+            Criteria keywordCriteria = new Criteria().orOperator(
                     Criteria.where("category").regex(keyword),
                     Criteria.where("intro").regex(keyword)
             );
+
+            criteria = criteria.andOperator(keywordCriteria);
         }
+
         Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);

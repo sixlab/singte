@@ -1,5 +1,6 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.StCategory;
@@ -28,6 +29,12 @@ public class StCategoryDao extends BaseDao<StCategory> {
         return mongoTemplate.findOne(query, StCategory.class);
     }
 
+    @Override
+    public StCategory selectExist(StCategory record) {
+        Query query = new Query(Criteria.where("category").is(record.getCategory())).with(Sort.by("id"));
+        return mongoTemplate.findOne(query, StCategory.class);
+    }
+
     public void updateFlag(String flag) {
         Criteria criteria = Criteria.where("flag").ne(flag);
 
@@ -42,11 +49,21 @@ public class StCategoryDao extends BaseDao<StCategory> {
         mongoTemplate.remove(new Query(criteria), StCategory.class);
     }
 
-    public PageResult<StCategory> queryCategory(String keyword, Integer pageNum, Integer pageSize) {
-        Criteria criteria = new Criteria().orOperator(
-                Criteria.where("category").regex(keyword),
-                Criteria.where("intro").regex(keyword)
-        );
+    public PageResult<StCategory> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
+        Criteria criteria = new Criteria();
+        if (StrUtil.isNotEmpty(status)) {
+            criteria = criteria.and("status").is(status);
+        }
+
+        if (StrUtil.isNotEmpty(keyword)) {
+            Criteria keywordCriteria = new Criteria().orOperator(
+                    Criteria.where("category").regex(keyword),
+                    Criteria.where("intro").regex(keyword)
+            );
+
+            criteria = criteria.andOperator(keywordCriteria);
+        }
+
         Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);

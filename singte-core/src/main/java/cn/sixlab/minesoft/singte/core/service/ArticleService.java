@@ -114,7 +114,7 @@ public class ArticleService {
     }
 
     public PageResult<StArticle> list(Integer pageNum, Integer pageSize) {
-        return articleDao.queryArticle(null, StConst.YES, pageNum, pageSize);
+        return articleDao.queryData(null, StConst.YES, pageNum, pageSize);
     }
 
     /**

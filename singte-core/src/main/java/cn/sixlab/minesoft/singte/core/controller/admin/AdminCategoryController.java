@@ -39,11 +39,11 @@ public class AdminCategoryController extends BaseController {
     }
 
     @PostMapping(value = "/listData")
-    public String listData(ModelMap modelMap, String keyword,
-                            @RequestParam(defaultValue = "1") Integer pageNum,
-                            @RequestParam(defaultValue = "20") Integer pageSize) {
+    public String listData(ModelMap modelMap, String keyword, String status,
+                           @RequestParam(defaultValue = "1") Integer pageNum,
+                           @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StCategory> pageResult = categoryDao.queryCategory(keyword, pageNum, pageSize);
+        PageResult<StCategory> pageResult = categoryDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -55,7 +55,7 @@ public class AdminCategoryController extends BaseController {
     public ModelResp submit(StCategory params) {
         StCategory nextInfo;
 
-        StCategory checkExist = categoryDao.selectByCategory(params.getCategory());
+        StCategory checkExist = categoryDao.selectExist(params);
 
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = categoryDao.selectById(params.getId());

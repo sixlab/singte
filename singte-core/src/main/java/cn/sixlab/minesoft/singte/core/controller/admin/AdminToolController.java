@@ -28,11 +28,11 @@ public class AdminToolController extends BaseController {
     }
 
     @PostMapping(value = "/listData")
-    public String listData(ModelMap modelMap, String keyword,
+    public String listData(ModelMap modelMap, String keyword, String status,
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteToolItem> pageResult = toolItemDao.queryTool(keyword, pageNum, pageSize);
+        PageResult<SteToolItem> pageResult = toolItemDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 

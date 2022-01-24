@@ -32,7 +32,7 @@ public class AdminLangController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StLang> pageResult = langDao.queryLang(keyword, status, pageNum, pageSize);
+        PageResult<StLang> pageResult = langDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -44,7 +44,7 @@ public class AdminLangController extends BaseController {
     public ModelResp submit(StLang params) {
         StLang nextInfo;
 
-        StLang checkExist = langDao.selectByLang(params.getLangCode());
+        StLang checkExist = langDao.selectExist(params);
 
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = langDao.selectById(params.getId());

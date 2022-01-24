@@ -32,7 +32,7 @@ public class AdminConfigController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StConfig> pageResult = configDao.queryConfig(keyword, status, pageNum, pageSize);
+        PageResult<StConfig> pageResult = configDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -44,7 +44,7 @@ public class AdminConfigController extends BaseController {
     public ModelResp submit(StConfig params) {
         StConfig nextInfo;
 
-        StConfig checkExist = configDao.selectByKey(params.getConfigKey());
+        StConfig checkExist = configDao.selectExist(params);
 
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = configDao.selectById(params.getId());

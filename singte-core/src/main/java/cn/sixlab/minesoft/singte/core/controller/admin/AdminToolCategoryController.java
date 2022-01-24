@@ -28,11 +28,11 @@ public class AdminToolCategoryController extends BaseController {
     }
 
     @PostMapping(value = "/listData")
-    public String listData(ModelMap modelMap, String keyword,
+    public String listData(ModelMap modelMap, String keyword, String status,
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteToolCategory> pageResult = toolCategoryDao.queryCategory(keyword, pageNum, pageSize);
+        PageResult<SteToolCategory> pageResult = toolCategoryDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -44,7 +44,7 @@ public class AdminToolCategoryController extends BaseController {
     public ModelResp submit(SteToolCategory params) {
         SteToolCategory nextInfo;
 
-        SteToolCategory checkExist = toolCategoryDao.selectByName(params.getCategory());
+        SteToolCategory checkExist = toolCategoryDao.selectExist(params);
 
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = toolCategoryDao.selectById(params.getId());

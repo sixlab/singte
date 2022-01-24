@@ -24,12 +24,18 @@ public class StLangDao extends BaseDao<StLang> {
         return mongoTemplate.findOne(query, entityClass());
     }
 
+    @Override
+    public StLang selectExist(StLang record) {
+        Query query = new Query(Criteria.where("langCode").is(record.getLangCode()));
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
     public List<StLang> selectLang(String status) {
         Query query = new Query(Criteria.where("status").is(status));
         return mongoTemplate.find(query, entityClass());
     }
 
-    public PageResult<StLang> queryLang(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StLang> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

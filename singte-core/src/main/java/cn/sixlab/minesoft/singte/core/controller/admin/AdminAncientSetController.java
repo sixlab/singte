@@ -56,11 +56,11 @@ public class AdminAncientSetController extends BaseController {
     }
 
     @PostMapping(value = "/listData")
-    public String listData(ModelMap modelMap, String keyword,
+    public String listData(ModelMap modelMap, String keyword, String status,
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteAncientSet> pageResult = ancientSetDao.queryAncientSet(keyword, pageNum, pageSize);
+        PageResult<SteAncientSet> pageResult = ancientSetDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -80,7 +80,7 @@ public class AdminAncientSetController extends BaseController {
 
             nextInfo.setUpdateTime(new Date());
         } else {
-            SteAncientSet checkExist = ancientSetDao.selectByName(params.getAncientSet());
+            SteAncientSet checkExist = ancientSetDao.selectExist(params);
             if (null != checkExist) {
                 return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
             }

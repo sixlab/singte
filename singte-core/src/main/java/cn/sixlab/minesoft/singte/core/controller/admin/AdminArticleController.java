@@ -32,7 +32,7 @@ public class AdminArticleController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StArticle> pageResult = articleDao.queryArticle(keyword, status, pageNum, pageSize);
+        PageResult<StArticle> pageResult = articleDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -43,7 +43,7 @@ public class AdminArticleController extends BaseController {
     @RequestMapping(value = "/submit")
     public ModelResp submit(StArticle params) {
         StArticle nextInfo;
-        StArticle checkExist = articleDao.selectByAlias(params.getAlias());
+        StArticle checkExist = articleDao.selectExist(params);
 
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = articleDao.selectById(params.getId());

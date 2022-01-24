@@ -96,11 +96,11 @@ public class AdminAncientBookController extends BaseController {
     }
 
     @PostMapping(value = "/listData")
-    public String listData(ModelMap modelMap, String keyword,
+    public String listData(ModelMap modelMap, String keyword, String status,
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteAncientBook> pageResult = ancientBookDao.queryBook(null, keyword, pageNum, pageSize);
+        PageResult<SteAncientBook> pageResult = ancientBookDao.queryData(keyword, status,pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -120,7 +120,7 @@ public class AdminAncientBookController extends BaseController {
 
             nextInfo.setUpdateTime(new Date());
         } else {
-            SteAncientBook checkExist = ancientBookDao.selectBook(params.getAncientSet(), params.getAncientCategory(), params.getBookName());
+            SteAncientBook checkExist = ancientBookDao.selectExist(params);
             if (null != checkExist) {
                 return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
             }

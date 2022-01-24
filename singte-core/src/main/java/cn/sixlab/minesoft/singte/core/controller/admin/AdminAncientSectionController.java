@@ -55,11 +55,11 @@ public class AdminAncientSectionController extends BaseController {
     }
 
     @PostMapping(value = "/listData")
-    public String listData(ModelMap modelMap, String keyword,
+    public String listData(ModelMap modelMap, String keyword, String status,
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteAncientSection> pageResult = ancientSectionDao.querySection(null, keyword, pageNum, pageSize);
+        PageResult<SteAncientSection> pageResult = ancientSectionDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -80,7 +80,7 @@ public class AdminAncientSectionController extends BaseController {
 
             nextInfo.setUpdateTime(new Date());
         } else {
-            SteAncientSection checkExist = ancientSectionDao.selectSection(params.getAncientSet(), params.getAncientCategory(), params.getBookName(), params.getSectionName());
+            SteAncientSection checkExist = ancientSectionDao.selectExist(params);
             if (null != checkExist) {
                 return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
             }

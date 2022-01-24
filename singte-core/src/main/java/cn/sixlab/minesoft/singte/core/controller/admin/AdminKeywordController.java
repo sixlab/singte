@@ -39,11 +39,11 @@ public class AdminKeywordController extends BaseController {
     }
 
     @PostMapping(value = "/listData")
-    public String listData(ModelMap modelMap, String keyword,
-                            @RequestParam(defaultValue = "1") Integer pageNum,
-                            @RequestParam(defaultValue = "20") Integer pageSize) {
+    public String listData(ModelMap modelMap, String keyword, String status,
+                           @RequestParam(defaultValue = "1") Integer pageNum,
+                           @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StKeyword> pageResult = keywordDao.queryKeyword(keyword, pageNum, pageSize);
+        PageResult<StKeyword> pageResult = keywordDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -55,7 +55,7 @@ public class AdminKeywordController extends BaseController {
     public ModelResp submit(StKeyword params) {
         StKeyword nextInfo;
 
-        StKeyword checkExist = keywordDao.selectByKeyword(params.getKeyword());
+        StKeyword checkExist = keywordDao.selectExist(params);
 
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = keywordDao.selectById(params.getId());

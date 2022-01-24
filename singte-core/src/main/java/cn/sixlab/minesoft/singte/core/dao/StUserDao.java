@@ -29,13 +29,20 @@ public class StUserDao extends BaseDao<StUser> {
         return mongoTemplate.findOne(query, StUser.class);
     }
 
+    @Override
+    public StUser selectExist(StUser record) {
+        Query query = new Query(Criteria.where("username").is(record.getUsername()));
+
+        return mongoTemplate.findOne(query, StUser.class);
+    }
+
     public StUser selectByToken(String token) {
         Query query = new Query(Criteria.where("token").is(token));
 
         return mongoTemplate.findOne(query, StUser.class);
     }
 
-    public PageResult<StUser> queryUser(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StUser> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

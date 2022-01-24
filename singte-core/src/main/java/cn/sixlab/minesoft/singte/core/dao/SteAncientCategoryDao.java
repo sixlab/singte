@@ -40,16 +40,34 @@ public class SteAncientCategoryDao extends BaseDao<SteAncientCategory> {
         return mongoTemplate.findOne(query, entityClass());
     }
 
-    public PageResult<SteAncientCategory> queryAncientCategory(String keyword, Integer pageNum, Integer pageSize) {
+    @Override
+    public SteAncientCategory selectExist(SteAncientCategory record) {
+        Criteria criteria = Criteria.where("ancientSet").is(record.getAncientSet())
+                .and("ancientCategory").is(record.getAncientCategory());
+
+        Sort sort = Sort.by("id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
+    public PageResult<SteAncientCategory> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
+        if (StrUtil.isNotEmpty(status)) {
+            criteria = criteria.and("status").is(status);
+        }
 
         if (StrUtil.isNotEmpty(keyword)) {
-            criteria = criteria.orOperator(
+            Criteria keywordCriteria = new Criteria().orOperator(
                     Criteria.where("ancientSet").regex(keyword),
                     Criteria.where("ancientCategory").regex(keyword),
                     Criteria.where("intro").regex(keyword)
             );
+
+            criteria = criteria.andOperator(keywordCriteria);
         }
+
         Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);

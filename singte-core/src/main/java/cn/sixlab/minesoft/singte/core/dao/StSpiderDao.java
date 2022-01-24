@@ -19,8 +19,9 @@ public class StSpiderDao extends BaseDao<StSpider> {
         return StSpider.class;
     }
 
-    public StSpider selectByName(String spiderName) {
-        Query query = new Query(Criteria.where("spiderName").is(spiderName)).with(Sort.by("id"));
+    @Override
+    public StSpider selectExist(StSpider record) {
+        Query query = new Query(Criteria.where("spiderName").is(record.getSpiderName())).with(Sort.by("id"));
         return mongoTemplate.findOne(query, entityClass());
     }
 
@@ -35,7 +36,7 @@ public class StSpiderDao extends BaseDao<StSpider> {
         return mongoTemplate.find(query, entityClass());
     }
 
-    public PageResult<StSpider> querySpider(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StSpider> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

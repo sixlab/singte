@@ -32,7 +32,7 @@ public class AdminMenuController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StMenu> menuPageResult = menuDao.queryMenu(keyword, status, pageNum, pageSize);
+        PageResult<StMenu> menuPageResult = menuDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", menuPageResult);
 
@@ -44,7 +44,7 @@ public class AdminMenuController extends BaseController {
     public ModelResp submit(StMenu params) {
         StMenu nextInfo;
 
-        StMenu checkExist = menuDao.selectByMenuCode(params.getMenuCode());
+        StMenu checkExist = menuDao.selectExist(params);
 
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = menuDao.selectById(params.getId());

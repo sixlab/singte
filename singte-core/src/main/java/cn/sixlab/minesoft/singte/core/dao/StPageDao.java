@@ -30,13 +30,24 @@ public class StPageDao extends BaseDao<StPage> {
         return mongoTemplate.findOne(query, StPage.class);
     }
 
+    @Override
+    public StPage selectExist(StPage record) {
+        Criteria criteria = Criteria.where("alias").is(record.getAlias());
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+
+        Query query = new Query(criteria).with(sort).limit(1);
+
+        return mongoTemplate.findOne(query, StPage.class);
+    }
+
     public void addView(String id) {
         StPage page = selectById(id);
         page.setViewCount(page.getViewCount() + 1);
         save(page);
     }
 
-    public PageResult<StPage> queryPage(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StPage> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

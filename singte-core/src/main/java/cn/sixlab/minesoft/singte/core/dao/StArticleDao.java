@@ -90,6 +90,17 @@ public class StArticleDao extends BaseDao<StArticle> {
         return mongoTemplate.findOne(query, StArticle.class);
     }
 
+    @Override
+    public StArticle selectExist(StArticle record) {
+        Criteria criteria = Criteria.where("alias").is(record.getAlias());
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+
+        Query query = new Query(criteria).with(sort).limit(1);
+
+        return mongoTemplate.findOne(query, StArticle.class);
+    }
+
     public void addView(String id) {
         StArticle article = selectById(id);
         article.setViewCount(article.getViewCount() + 1);
@@ -138,7 +149,7 @@ public class StArticleDao extends BaseDao<StArticle> {
         return pageQuery(query, StArticle.class, pageNum, pageSize);
     }
 
-    public PageResult<StArticle> queryArticle(String keyword, String status, Integer pageNum, Integer pageSize) {
+    public PageResult<StArticle> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

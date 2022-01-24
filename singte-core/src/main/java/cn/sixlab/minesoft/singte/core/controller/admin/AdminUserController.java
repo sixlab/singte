@@ -38,7 +38,7 @@ public class AdminUserController extends BaseController {
                            @RequestParam(defaultValue = "1") Integer pageNum,
                            @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StUser> pageResult = userDao.queryUser(keyword, status, pageNum, pageSize);
+        PageResult<StUser> pageResult = userDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -58,7 +58,7 @@ public class AdminUserController extends BaseController {
 
             nextInfo.setUpdateTime(new Date());
         } else {
-            StUser checkExist = userDao.selectByUsername(params.getUsername());
+            StUser checkExist = userDao.selectExist(params);
             if (null != checkExist) {
                 return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
             }

@@ -20,11 +20,12 @@ public class SteAncientSectionDao extends BaseDao<SteAncientSection> {
         return SteAncientSection.class;
     }
 
-    public SteAncientSection selectSection(String ancientSet, String ancientCategory, String bookName, String sectionName) {
-        Criteria criteria = Criteria.where("ancientSet").is(ancientSet)
-                .and("ancientCategory").is(ancientCategory)
-                .and("bookName").is(bookName)
-                .and("sectionName").is(sectionName);
+    @Override
+    public SteAncientSection selectExist(SteAncientSection record) {
+        Criteria criteria = Criteria.where("ancientSet").is(record.getAncientSet())
+                .and("ancientCategory").is(record.getAncientCategory())
+                .and("bookName").is(record.getBookName())
+                .and("sectionName").is(record.getSectionName());
 
         Sort sort = Sort.by("id");
 
@@ -79,6 +80,32 @@ public class SteAncientSectionDao extends BaseDao<SteAncientSection> {
 
             criteria = criteria.andOperator(keywordCriteria);
         }
+        Sort sort = Sort.by("weight", "id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, entityClass(), pageNum, pageSize);
+    }
+
+    public PageResult<SteAncientSection> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
+        Criteria criteria = new Criteria();
+        if (StrUtil.isNotEmpty(status)) {
+            criteria = criteria.and("status").is(status);
+        }
+
+        if (StrUtil.isNotEmpty(keyword)) {
+            Criteria keywordCriteria = new Criteria().orOperator(
+                    Criteria.where("ancientSet").regex(keyword),
+                    Criteria.where("ancientCategory").regex(keyword),
+                    Criteria.where("bookName").regex(keyword),
+                    Criteria.where("author").regex(keyword),
+                    Criteria.where("contentText").regex(keyword),
+                    Criteria.where("intro").regex(keyword)
+            );
+
+            criteria = criteria.andOperator(keywordCriteria);
+        }
+
         Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);

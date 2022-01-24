@@ -42,6 +42,19 @@ public class SteAncientBookDao extends BaseDao<SteAncientBook> {
         return mongoTemplate.findOne(query, entityClass());
     }
 
+    @Override
+    public SteAncientBook selectExist(SteAncientBook record) {
+        Criteria criteria = Criteria.where("ancientSet").is(record.getAncientSet())
+                .and("ancientCategory").is(record.getAncientCategory())
+                .and("bookName").is(record.getBookName());
+
+        Sort sort = Sort.by("id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
     public PageResult<SteAncientBook> queryBook(SteAncientCategory ancientCategory, String keyword, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
 
@@ -52,6 +65,30 @@ public class SteAncientBookDao extends BaseDao<SteAncientBook> {
             if (StrUtil.isNotEmpty(ancientCategory.getAncientCategory())) {
                 criteria = criteria.and("ancientCategory").is(ancientCategory.getAncientCategory());
             }
+        }
+
+        if (StrUtil.isNotEmpty(keyword)) {
+            Criteria keywordCriteria = new Criteria().orOperator(
+                    Criteria.where("ancientSet").regex(keyword),
+                    Criteria.where("ancientCategory").regex(keyword),
+                    Criteria.where("bookName").regex(keyword),
+                    Criteria.where("author").regex(keyword),
+                    Criteria.where("intro").regex(keyword)
+            );
+
+            criteria = criteria.andOperator(keywordCriteria);
+        }
+        Sort sort = Sort.by("weight", "id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, entityClass(), pageNum, pageSize);
+    }
+
+    public PageResult<SteAncientBook> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
+        Criteria criteria = new Criteria();
+        if (StrUtil.isNotEmpty(status)) {
+            criteria = criteria.and("status").is(status);
         }
 
         if (StrUtil.isNotEmpty(keyword)) {

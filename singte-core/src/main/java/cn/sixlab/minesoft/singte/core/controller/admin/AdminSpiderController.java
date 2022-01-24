@@ -32,7 +32,7 @@ public class AdminSpiderController extends BaseController {
                             @RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<StSpider> pageResult = spiderDao.querySpider(keyword, status, pageNum, pageSize);
+        PageResult<StSpider> pageResult = spiderDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -44,7 +44,7 @@ public class AdminSpiderController extends BaseController {
     public ModelResp submit(StSpider params) {
         StSpider nextInfo;
 
-        StSpider checkExist = spiderDao.selectByName(params.getSpiderName());
+        StSpider checkExist = spiderDao.selectExist(params);
 
         if (StrUtil.isNotEmpty(params.getId())) {
             nextInfo = spiderDao.selectById(params.getId());

@@ -28,7 +28,13 @@ public class StConfigDao extends BaseDao<StConfig> {
         return mongoTemplate.findOne(query, entityClass());
     }
 
-    public PageResult<StConfig> queryConfig(String keyword, String status, Integer pageNum, Integer pageSize) {
+    @Override
+    public StConfig selectExist(StConfig record) {
+        Query query = new Query(Criteria.where("configKey").is(record.getConfigKey()));
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
+    public PageResult<StConfig> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {
             criteria = criteria.and("status").is(status);

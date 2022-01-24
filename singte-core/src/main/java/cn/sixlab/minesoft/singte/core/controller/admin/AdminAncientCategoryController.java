@@ -54,11 +54,11 @@ public class AdminAncientCategoryController extends BaseController {
     }
 
     @PostMapping(value = "/listData")
-    public String listData(ModelMap modelMap, String keyword,
-                            @RequestParam(defaultValue = "1") Integer pageNum,
-                            @RequestParam(defaultValue = "20") Integer pageSize) {
+    public String listData(ModelMap modelMap, String keyword, String status,
+                           @RequestParam(defaultValue = "1") Integer pageNum,
+                           @RequestParam(defaultValue = "20") Integer pageSize) {
 
-        PageResult<SteAncientCategory> pageResult = ancientCategoryDao.queryAncientCategory(keyword, pageNum, pageSize);
+        PageResult<SteAncientCategory> pageResult = ancientCategoryDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
 
@@ -78,7 +78,7 @@ public class AdminAncientCategoryController extends BaseController {
 
             nextInfo.setUpdateTime(new Date());
         } else {
-            SteAncientCategory checkExist = ancientCategoryDao.selectBySetAndName(params.getAncientSet(), params.getAncientCategory());
+            SteAncientCategory checkExist = ancientCategoryDao.selectExist(params);
             if (null != checkExist) {
                 return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
             }
