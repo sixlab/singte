@@ -128,10 +128,14 @@ $(function () {
                     $("#id").val(res.data.id);
                     $("#username").val(res.data.username);
                     $("#showName").val(res.data.showName);
-                    $("#password").val("");
                     $("#mobile").val(res.data.mobile);
                     $("#email").val(res.data.email);
                     $("#role").val(res.data.role);
+
+                    let passwdInput = $("#password");
+                    passwdInput.val("");
+                    passwdInput.removeClass("required");
+                    passwdInput.attr("placeholder", StI18n["user.ph.passwd.update"]);
                 }else{
                     Swal.fire({
                         icon: "error",
@@ -157,11 +161,14 @@ $(function () {
         $("#id").val("");
         $("#username").val("");
         $("#showName").val("");
-        $("#password").val("");
         $("#mobile").val("");
         $("#email").val("");
         $("#role").val("");
 
+        let passwdInput = $("#password");
+        passwdInput.val("");
+        passwdInput.addClass("required");
+        passwdInput.attr("placeholder", StI18n["user.label.passwd.new"]);
         stValidate.resetForm();
     })
 

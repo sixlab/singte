@@ -2,6 +2,10 @@
 
 <#assign title><@StI18n "page.title.users"/></#assign>
 <#assign js>
+    <@StStatic type="i18n" keys=[
+    "user.label.passwd.new",
+    "user.ph.passwd.update"
+    ]/>
     <@StStatic type="validate" />
     <@StStatic src="common/stDataTable.js" />
     <@StStatic src="admin/user/list.js" />
