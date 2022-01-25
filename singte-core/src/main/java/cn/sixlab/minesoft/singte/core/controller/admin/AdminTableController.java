@@ -3,22 +3,20 @@ package cn.sixlab.minesoft.singte.core.controller.admin;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.server.HttpServerRequest;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
-import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
-import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.models.StCategory;
+import cn.sixlab.minesoft.singte.core.common.vo.StModelTable;
 import cn.sixlab.minesoft.singte.core.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Controller
@@ -31,9 +29,10 @@ public class AdminTableController extends BaseController {
     @GetMapping(value = "/{tableName}/list")
     public String list(ModelMap modelMap, @PathVariable String tableName) {
 
-        modelMap.put("tableName", tableName);
-        modelMap.put("title", I18nUtils.get("temp"));
-        modelMap.put("columns", tableService.getColumns(tableName));
+        StModelTable tableInfo = tableService.getTableInfo(tableName);
+
+        modelMap.put("tableInfo", tableInfo);
+        modelMap.put("columns", tableService.getColumns(tableName, true));
 
         return "admin/table/list";
     }
@@ -45,17 +44,17 @@ public class AdminTableController extends BaseController {
                            @RequestParam(defaultValue = "20") Integer pageSize) {
         BaseDao baseDao = tableService.getDao(tableName);
 
-        PageResult<StCategory> pageResult = baseDao.queryData(keyword, status, pageNum, pageSize);
+        PageResult<BaseModel> pageResult = baseDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
-        modelMap.put("columns", tableService.getColumns(tableName));
+        modelMap.put("columns", tableService.getColumns(tableName, false));
 
         return "admin/table/listData";
     }
 
     @ResponseBody
     @RequestMapping(value = "/{tableName}/submit")
-    public ModelResp submit(@PathVariable String tableName, HttpServerRequest request) {
+    public ModelResp submit(@PathVariable String tableName, HttpServletRequest request) {
         BaseModel params = tableService.getParams(tableName, request);
 
         BaseDao baseDao = tableService.getDao(tableName);
@@ -80,9 +79,7 @@ public class AdminTableController extends BaseController {
                 return ModelResp.error(StErr.EXIST_SAME, "common.same.found");
             }
 
-            nextInfo = new StCategory();
-            nextInfo.setStatus(StConst.YES);
-            nextInfo.setCreateTime(new Date());
+            nextInfo = tableService.newModel(tableName);
         }
 
         BeanUtil.copyProperties(params, nextInfo, CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
@@ -131,10 +128,4 @@ public class AdminTableController extends BaseController {
         return ModelResp.success();
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/{tableName}/reload")
-    public ModelResp reload(@PathVariable String tableName) {
-        // TODO
-        return ModelResp.success();
-    }
 }

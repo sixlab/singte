@@ -3,7 +3,7 @@ $(function () {
     let stDataTable = $("#queryForm").stDataTable("#queryData");
     let stValidate = $("#modalDataForm").validate();
 
-    $(document).on("click", ".stCountBtn", function () {
+    $(document).on("click", ".stReloadBtn", function () {
         $.ajax({
             url: '/admin/ancient/section/reload',
             type: 'post',

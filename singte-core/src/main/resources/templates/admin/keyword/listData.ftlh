@@ -9,9 +9,9 @@
             <th>关键词</th>
             <th>文章数量</th>
             <th>标识</th>
-            <th>顺序</th>
-            <th>简介</th>
-            <th>操作</th>
+            <th><@StI18n 'label.common.weight'/></th>
+            <th><@StI18n 'label.common.intro'/></th>
+            <th><@StI18n 'label.common.operate'/></th>
         </tr>
         </thead>
         <tbody>

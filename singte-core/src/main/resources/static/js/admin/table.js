@@ -4,9 +4,9 @@ $(function () {
     let stDataTable = $("#queryForm").stDataTable("#queryData");
     let stValidate = $("#modalDataForm").validate();
 
-    $(document).on("click", ".stCountBtn", function () {
+    $(document).on("click", ".stReloadBtn", function () {
         $.ajax({
-            url: '/admin/table/' + tableName + '/reload',
+            url: $("#reloadUri").val(),
             type: 'post',
             dataType: 'json',
             success: function (res) {
@@ -156,9 +156,12 @@ $(function () {
                 if (200 === res.status) {
                     $('#modal-default').modal();
                     $("#id").val(res.data.id);
-                    $("#category").val(res.data.category);
-                    $("#weight").val(res.data.weight);
-                    $("#intro").val(res.data.intro);
+
+                    $(".st-fields").each(function (index){
+                        let _this = $(this);
+                        let id = _this.id;
+                        _this.val(res.data[id]);
+                    });
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -181,10 +184,7 @@ $(function () {
     })
 
     $('#modal-default').on('hide.bs.modal', function (e) {
-        $("#id").val("");
-        $("#category").val("");
-        $("#weight").val("");
-        $("#intro").val("");
+        $(".st-fields").val("");
 
         stValidate.resetForm();
     })

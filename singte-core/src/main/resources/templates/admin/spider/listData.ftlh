@@ -9,8 +9,8 @@
             <th>爬虫名称</th>
             <th>爬虫类型</th>
             <th>时间</th>
-            <th>状态</th>
-            <th>操作</th>
+            <th><@StI18n 'label.common.status'/></th>
+            <th><@StI18n 'label.common.operate'/></th>
         </tr>
         </thead>
         <tbody>

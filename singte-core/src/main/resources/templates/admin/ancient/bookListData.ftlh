@@ -13,9 +13,9 @@
             <th>分类</th>
 
             <th>章节数量</th>
-            <th>顺序</th>
-            <th>状态</th>
-            <th>操作</th>
+            <th><@StI18n 'label.common.weight'/></th>
+            <th><@StI18n 'label.common.status'/></th>
+            <th><@StI18n 'label.common.operate'/></th>
         </tr>
         </thead>
         <tbody>

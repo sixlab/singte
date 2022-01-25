@@ -3,8 +3,8 @@
 <#assign title><@StI18n "page.title.users"/></#assign>
 <#assign js>
     <@StStatic type="i18n" keys=[
-    "user.label.passwd.new",
-    "user.ph.passwd.update"
+    "label.user.passwd.new",
+    "ph.user.passwd.update"
     ]/>
     <@StStatic type="validate" />
     <@StStatic src="common/stDataTable.js" />

@@ -1,24 +1,28 @@
 <#include '../../frame/functions.ftlh'>
 
+<#assign title><@StI18n tableInfo.title/></#assign>
 <#assign js>
     <@StStatic type="validate" />
     <@StStatic src="common/stDataTable.js" />
     <@StStatic src="admin/table.js" />
 </#assign>
 <@AdminFrame title="${title}" js=js>
-    <input type="hidden" id="StTableName" value="${tableName}">
+    <input type="hidden" id="StTableName" value="${tableInfo.tableName}">
+    <input type="hidden" id="reloadUri" value="${tableInfo.reloadUri}">
     <div class="row">
         <div class="col-12">
-            <form id="queryForm" action="/admin/table/${tableName}/listData">
+            <form id="queryForm" action="/admin/table/${tableInfo.tableName}/listData">
                 <input type="hidden" name="pageNum" class="pageNum" value="1">
                 <input type="hidden" name="pageSize" class="pageSize" value="10">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
-                                <button type="button" class="btn btn-primary stCountBtn">
-                                    重置
-                                </button>
+                                <#if tableInfo.reloadUri !='' >
+                                    <button type="button" class="btn btn-primary stReloadBtn">
+                                        重置
+                                    </button>
+                                </#if>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#modal-default">
                                     新增
@@ -63,20 +67,24 @@
                         <input type="hidden" name="id" id="id" value="">
                         <#list columns as column>
                             <div class="form-group row">
-                                <label for="${column.name}" class="col-sm-2 col-form-label">${column.placeholder}</label>
+                                <label for="${column.columnName}" class="col-sm-2 col-form-label"><@StI18n column.text /></label>
                                 <div class="col-sm-10 form-control-container">
-                                <#switch "input">
-                                    <#case "small">
-                                        <input type="text" name="${column.name}" id="${column.name}"
-                                               value="${column.defaultVal}" class="form-control ${column.cssClass}"
-                                               placeholder="${column.placeholder}">
+                                    <#switch column.type>
+                                        <#case "input">
+                                            <input type="text" class="form-control st-fields ${column.cssClass}"
+                                                   name="${column.columnName}" id="${column.columnName}"
+                                                   value="${column.defaultVal}" placeholder="${column.placeholder}">
+                                            <#break>
+                                        <#case "text">
+                                            <textarea class="form-control st-fields ${column.cssClass}" rows="3"
+                                                      name="${column.columnName}"
+                                                      id="${column.columnName}"
+                                                      placeholder="${column.placeholder}">${column.defaultVal}</textarea>
+                                            <#break>
+                                        <#default>
+                                            类型：[${column.type}] 未实现 under development
                                         <#break>
-                                    <#case "text">
-                                        <textarea class="form-control ${column.cssClass}" name="${column.name}" rows="3"
-                                                  id="${column.name}"
-                                                  placeholder="${column.placeholder}">${column.defaultVal}</textarea>
-                                        <#break>
-                                </#switch>
+                                    </#switch>
                                 </div>
                             </div>
                         </#list>

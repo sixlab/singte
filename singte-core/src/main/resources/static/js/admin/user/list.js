@@ -135,7 +135,7 @@ $(function () {
                     let passwdInput = $("#password");
                     passwdInput.val("");
                     passwdInput.removeClass("required");
-                    passwdInput.attr("placeholder", StI18n["user.ph.passwd.update"]);
+                    passwdInput.attr("placeholder", StI18n["ph.user.passwd.update"]);
                 }else{
                     Swal.fire({
                         icon: "error",
@@ -168,7 +168,7 @@ $(function () {
         let passwdInput = $("#password");
         passwdInput.val("");
         passwdInput.addClass("required");
-        passwdInput.attr("placeholder", StI18n["user.label.passwd.new"]);
+        passwdInput.attr("placeholder", StI18n["label.user.passwd.new"]);
         stValidate.resetForm();
     })
 

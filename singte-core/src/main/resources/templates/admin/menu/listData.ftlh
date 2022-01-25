@@ -11,10 +11,10 @@
             <th>菜单链接</th>
 
             <th>文件夹</th>
-            <th>菜单状态</th>
-            <th>菜单顺序</th>
-            <th>菜单简介</th>
-            <th>操作</th>
+            <th><@StI18n 'label.common.status'/></th>
+            <th><@StI18n 'label.common.weight'/></th>
+            <th><@StI18n 'label.common.intro'/></th>
+            <th><@StI18n 'label.common.operate'/></th>
         </tr>
         </thead>
         <tbody>

@@ -8,14 +8,14 @@
             <th style="width: 10px">#</th>
             <th>用户名</th>
             <th>显示名称</th>
-            <th>状态</th>
+            <th><@StI18n 'label.common.status'/></th>
 
             <th>手机</th>
             <th>邮箱</th>
             <th>角色</th>
             <th>token有效期</th>
-            <th>创建时间</th>
-            <th>操作</th>
+            <th><@StI18n 'label.common.creatTime'/></th>
+            <th><@StI18n 'label.common.operate'/></th>
         </tr>
         </thead>
         <tbody>

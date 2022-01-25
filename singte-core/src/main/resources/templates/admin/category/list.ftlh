@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
-                                <button type="button" class="btn btn-primary stCountBtn">
+                                <button type="button" class="btn btn-primary stReloadBtn">
                                     重置分类
                                 </button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -70,9 +70,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="weight" class="col-sm-2 col-form-label">顺序</label>
+                            <label for="weight" class="col-sm-2 col-form-label"><@StI18n 'label.common.weight'/></label>
                             <div class="col-sm-10 form-control-container">
-                                <input type="text" name="weight" id="weight" class="form-control number" placeholder="顺序">
+                                <input type="text" name="weight" id="weight" class="form-control number" placeholder="<@StI18n 'label.common.weight'/>">
                             </div>
                         </div>
                         <div class="form-group row">

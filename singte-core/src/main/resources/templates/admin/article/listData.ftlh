@@ -13,9 +13,9 @@
             <th>分类</th>
 
             <th>看/赞</th>
-            <th>状态</th>
+            <th><@StI18n 'label.common.status'/></th>
             <th>时间</th>
-            <th>操作</th>
+            <th><@StI18n 'label.common.operate'/></th>
         </tr>
         </thead>
         <tbody>

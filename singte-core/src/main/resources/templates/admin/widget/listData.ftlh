@@ -8,10 +8,10 @@
             <th style="width: 10px">#</th>
             <th>组件名称</th>
             <th>组件编号</th>
-            <th>组件简介</th>
-            <th>顺序</th>
-            <th>状态</th>
-            <th>操作</th>
+            <th><@StI18n 'label.common.intro'/></th>
+            <th><@StI18n 'label.common.weight'/></th>
+            <th><@StI18n 'label.common.status'/></th>
+            <th><@StI18n 'label.common.operate'/></th>
         </tr>
         </thead>
         <tbody>

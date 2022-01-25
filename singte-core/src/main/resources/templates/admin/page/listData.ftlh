@@ -11,9 +11,9 @@
             <th>别名</th>
 
             <th>看过人数</th>
-            <th>状态</th>
+            <th><@StI18n 'label.common.status'/></th>
             <th>时间</th>
-            <th>操作</th>
+            <th><@StI18n 'label.common.operate'/></th>
         </tr>
         </thead>
         <tbody>

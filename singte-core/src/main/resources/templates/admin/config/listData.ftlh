@@ -9,9 +9,9 @@
             <th>分组</th>
             <th>key</th>
             <th>值</th>
-            <th>简介</th>
-            <th>状态</th>
-            <th>操作</th>
+            <th><@StI18n 'label.common.intro'/></th>
+            <th><@StI18n 'label.common.status'/></th>
+            <th><@StI18n 'label.common.operate'/></th>
         </tr>
         </thead>
         <tbody>

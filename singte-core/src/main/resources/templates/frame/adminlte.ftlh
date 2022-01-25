@@ -256,8 +256,8 @@ ${js}
                     <li class="user-header bg-primary">
                         <img src="/static/logo.png" class="img-circle elevation-2" alt="User Image">
                         <p>
-                            <@StI18n "user.label.username"/>: ${stUser.username}
-                            <small><@StI18n "user.label.creatTime"/>: ${stUser.createTime?string("yyyy-MM-dd")}</small>
+                            <@StI18n "label.user.username"/>: ${stUser.username}
+                            <small><@StI18n "label.user.creatTime"/>: ${stUser.createTime?string("yyyy-MM-dd")}</small>
                         </p>
                     </li>
 <#--                    <!-- Menu Body &ndash;&gt;-->
