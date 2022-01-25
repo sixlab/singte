@@ -4,14 +4,10 @@ import cn.hutool.extra.spring.SpringUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
-import cn.sixlab.minesoft.singte.core.dao.SteAncientBookDao;
-import cn.sixlab.minesoft.singte.core.dao.SteAncientCategoryDao;
-import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
-import cn.sixlab.minesoft.singte.core.dao.SteAncientSetDao;
 import cn.sixlab.minesoft.singte.core.poetry.PoetryImportApi;
 import cn.sixlab.minesoft.singte.core.poetry.PoetryModel;
+import cn.sixlab.minesoft.singte.core.service.MessageTranslate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +42,19 @@ public class AdminUtilsController extends BaseController {
             poetryApi.parseOnePoetry(model);
             return ModelResp.success();
         }else{
+            return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
+        }
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/translate")
+    public ModelResp translate(String lang, String baiduLang) throws IOException {
+
+        MessageTranslate translate = SpringUtil.getBean(MessageTranslate.class);
+        if (null != translate) {
+            translate.trans(lang, baiduLang);
+            return ModelResp.success();
+        } else {
             return ModelResp.error(StErr.NOT_EXIST, "common.not.found");
         }
     }

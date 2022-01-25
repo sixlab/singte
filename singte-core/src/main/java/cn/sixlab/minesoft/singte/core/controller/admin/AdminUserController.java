@@ -6,6 +6,7 @@ import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
+import cn.sixlab.minesoft.singte.core.common.utils.WebUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
@@ -24,7 +25,10 @@ public class AdminUserController extends BaseController {
     private StUserDao userDao;
 
     @GetMapping(value = "/info")
-    public String info() {
+    public String info(ModelMap modelMap) {
+
+        modelMap.put("token", WebUtils.getToken());
+
         return "admin/user/info";
     }
 

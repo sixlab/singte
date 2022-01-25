@@ -52,5 +52,13 @@ POST {{server}}/admin/utils/countAncient
 Content-Type: application/x-www-form-urlencoded
 Authorization: {{Authorization}}
 
+### 翻译国际化文件
+
+POST {{server}}/admin/utils/translate
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+lang=en
+
 
 

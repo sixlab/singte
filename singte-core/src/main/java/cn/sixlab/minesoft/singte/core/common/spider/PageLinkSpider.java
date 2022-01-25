@@ -19,8 +19,8 @@ public class PageLinkSpider extends SpiderJob {
     @Override
     public void craw(StSpider spider) {
         String startUrl = spider.getStartUrl();
-        String urlParam = spider.getUrlParam();
-        StSpiderParam param = JsonUtils.toBean(urlParam, StSpiderParam.class);
+        String spiderParam = spider.getSpiderParam();
+        StSpiderParam param = JsonUtils.toBean(spiderParam, StSpiderParam.class);
         for (int i = param.getBegin(); i < param.getEnd(); i++) {
             String link = startUrl.replace("{num}", i + "");
             crawPage(spider, link);

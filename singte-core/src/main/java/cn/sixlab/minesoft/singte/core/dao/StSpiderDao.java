@@ -53,7 +53,7 @@ public class StSpiderDao extends BaseDao<StSpider> {
                     Criteria.where("summaryRule").regex(keyword),
                     Criteria.where("categoryRule").regex(keyword),
                     Criteria.where("keywordRule").regex(keyword),
-                    Criteria.where("urlParam").regex(keyword)
+                    Criteria.where("spiderParam").regex(keyword)
             );
 
             criteria = criteria.andOperator(keywordCriteria);
