@@ -20,16 +20,16 @@ public class SteToolItem extends BaseModel {
     @StColumn(text = "label.common.code", placeholder = "编号", order = 3, cssClass = "required")
     private String toolCode;
 
-    @StColumn(text = "label.tool.viewCount", type = "hidden", order = 4, defaultVal = "0")
+    @StColumn(text = "label.tool.viewCount", editable = false, order = 4, defaultVal = "0")
     private Integer viewCount;
 
-    @StColumn(text = "label.tool.thumbCount", type = "hidden", order = 5, defaultVal = "0")
+    @StColumn(text = "label.tool.thumbCount", editable = false, order = 5, defaultVal = "0")
     private Integer thumbCount;
 
-    @StColumn(text = "label.common.weight", placeholder = "顺序", order = 6, cssClass = "required number")
+    @StColumn(text = "label.common.weight", placeholder = "label.common.weight", order = 6, cssClass = "required number")
     private Integer weight;
 
-    @StColumn(text = "label.common.intro", placeholder = "简介", type = "text",order = 7, view = false)
+    @StColumn(text = "label.common.intro", placeholder = "label.common.intro", order = 6, type = "text", viewable = false)
     private String intro;
 
 }

@@ -18,15 +18,17 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
-                                <#if tableInfo.reloadUri !='' >
+                                <#if tableInfo.reload >
                                     <button type="button" class="btn btn-primary stReloadBtn">
                                         重置
                                     </button>
                                 </#if>
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modal-default">
-                                    新增
-                                </button>
+                                <#if tableInfo.insert >
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#modal-default">
+                                        新增
+                                    </button>
+                                </#if>
                             </div>
                             <div class="col-5">
 

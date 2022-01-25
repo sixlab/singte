@@ -38,11 +38,12 @@ public class InitMenu implements BaseInitComponent {
         checkMenu(false, "menu.tool.item", "menu.tool.manage", "far fa-circle", "/admin/table/SteToolItem/list", 700100, "工具列表");
         checkMenu(false, "menu.tool.category", "menu.tool.manage", "far fa-circle", "/admin/tool/category/list", 700200, "工具分类");
 
-        checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800100, "系统参数");
-        checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800200, "菜单管理");
-        checkMenu(false, "menu.lang.list", "menu.system.manage", "far fa-circle", "/admin/lang/list", 800200, "语言管理");
-        checkMenu(false, "menu.widget.list", "menu.system.manage", "far fa-circle", "/admin/widget/list", 800250, "组件列表");
-        checkMenu(false, "menu.user.list", "menu.system.manage", "far fa-circle", "/admin/user/list", 800300, "用户列表");
+        checkMenu(false, "menu.user.list", "menu.system.manage", "far fa-circle", "/admin/user/list", 800100, "用户列表");
+        checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800200, "系统参数");
+        checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800300, "菜单管理");
+        checkMenu(false, "menu.lang.list", "menu.system.manage", "far fa-circle", "/admin/lang/list", 800400, "语言管理");
+        checkMenu(false, "menu.widget.list", "menu.system.manage", "far fa-circle", "/admin/widget/list", 800500, "组件列表");
+        checkMenu(false, "menu.task.list", "menu.system.manage", "far fa-circle", "/admin/table/StTask/list", 800600, "定时任务管理");
 
         checkMenu(false, "nav.index", "nav", "far fa-circle", "/", 10, "首页");
         checkMenu(false, "nav.articles", "nav", "far fa-circle", "/article/list", 15, "文章");

@@ -12,6 +12,12 @@ public @interface StTable {
     // 页面标题
     String title() default "";
 
+    // 是否有新增按钮
+    boolean insertable() default true;
+
+    // 是否有重载按钮
+    boolean reloadable() default true;
+
     // 重载方法uri
     String reloadUri() default "";
 

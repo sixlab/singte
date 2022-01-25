@@ -8,6 +8,7 @@ import cn.sixlab.minesoft.singte.core.common.annotation.StTable;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import cn.sixlab.minesoft.singte.core.common.vo.ColumnModel;
 import cn.sixlab.minesoft.singte.core.common.vo.StModelColumn;
 import cn.sixlab.minesoft.singte.core.common.vo.StModelTable;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,8 @@ public class TableService {
             if (null != annotation) {
                 tableInfo.setTitle(annotation.title());
                 tableInfo.setReloadUri(annotation.reloadUri());
+                tableInfo.setInsert(annotation.insertable());
+                tableInfo.setReload(annotation.reloadable());
             }
 
         } catch (ClassNotFoundException e) {
@@ -65,7 +68,8 @@ public class TableService {
         return tableInfo;
     }
 
-    public List<StModelColumn> getColumns(String tableName, boolean containView) {
+    public List<StModelColumn> getColumns(String tableName, ColumnModel columnModel) {
+        // 模式：全要、仅 editable:true, 仅 viewable:true
         String clzName = "cn.sixlab.minesoft.singte.core.models." + tableName;
 
         List<StModelColumn> columnList = new ArrayList<>();
@@ -78,9 +82,19 @@ public class TableService {
 
                 StColumn annotation = field.getAnnotation(StColumn.class);
                 if (null != annotation) {
-                    boolean view = annotation.view();
+                    boolean view = annotation.viewable();
+                    boolean edit = annotation.editable();
 
-                    if (view && containView) {
+                    boolean contain;
+                    if (columnModel.equals(ColumnModel.VIEW)) {
+                        contain = view;
+                    } else if (columnModel.equals(ColumnModel.EDIT)) {
+                        contain = edit;
+                    }else{
+                        contain = true;
+                    }
+
+                    if (contain) {
                         StModelColumn column = new StModelColumn();
                         column.setColumnName(field.getName());
 
@@ -129,10 +143,9 @@ public class TableService {
 
                 StColumn annotation = field.getAnnotation(StColumn.class);
                 if (null != annotation) {
-                    String type = annotation.type();
                     String name = field.getName();
                     String val = request.getParameter(name);
-                    if ("hidden".equals(type)) {
+                    if (annotation.editable()) {
                         val = annotation.defaultVal();
                     }
 

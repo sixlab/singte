@@ -11,4 +11,7 @@ public class StModelTable {
 
     private String reloadUri;
 
+    private boolean reload;
+    private boolean insert;
+
 }

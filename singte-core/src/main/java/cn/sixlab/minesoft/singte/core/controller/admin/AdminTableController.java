@@ -8,6 +8,7 @@ import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.config.BaseModel;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
+import cn.sixlab.minesoft.singte.core.common.vo.ColumnModel;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.common.vo.StModelTable;
 import cn.sixlab.minesoft.singte.core.service.TableService;
@@ -32,7 +33,7 @@ public class AdminTableController extends BaseController {
         StModelTable tableInfo = tableService.getTableInfo(tableName);
 
         modelMap.put("tableInfo", tableInfo);
-        modelMap.put("columns", tableService.getColumns(tableName, true));
+        modelMap.put("columns", tableService.getColumns(tableName, ColumnModel.EDIT));
 
         return "admin/table/list";
     }
@@ -47,7 +48,7 @@ public class AdminTableController extends BaseController {
         PageResult<BaseModel> pageResult = baseDao.queryData(keyword, status, pageNum, pageSize);
 
         modelMap.put("result", pageResult);
-        modelMap.put("columns", tableService.getColumns(tableName, false));
+        modelMap.put("columns", tableService.getColumns(tableName, ColumnModel.VIEW));
 
         return "admin/table/listData";
     }
