@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@StTable(title = "page.title.configs")
+@StTable(title = "page.title.tool.item")
 public class SteToolItem extends BaseModel {
 
     @StColumn(text = "label.common.category", placeholder = "分类", order = 1, cssClass = "required")
@@ -26,10 +26,10 @@ public class SteToolItem extends BaseModel {
     @StColumn(text = "label.tool.thumbCount", type = "hidden", order = 5, defaultVal = "0")
     private Integer thumbCount;
 
-    @StColumn(text = "label.common.weight", placeholder = "顺序", order = 6, cssClass = "required")
+    @StColumn(text = "label.common.weight", placeholder = "顺序", order = 6, cssClass = "required number")
     private Integer weight;
 
-    @StColumn(text = "label.common.intro", placeholder = "简介", type = "text",order = 7)
+    @StColumn(text = "label.common.intro", placeholder = "简介", type = "text",order = 7, view = false)
     private String intro;
 
 }

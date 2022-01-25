@@ -13,4 +13,5 @@ public class StModelColumn {
     private String placeholder;
     private String defaultVal;
     private int order;
+    private boolean view;
 }

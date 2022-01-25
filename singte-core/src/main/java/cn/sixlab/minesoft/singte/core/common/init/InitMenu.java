@@ -28,14 +28,14 @@ public class InitMenu implements BaseInitComponent {
         checkMenu(false, "menu.article.category", "menu.article.manage", "far fa-circle", "/admin/category/list", 200200, "分类列表");
         checkMenu(false, "menu.article.keyword", "menu.article.manage", "far fa-circle", "/admin/keyword/list", 200300, "关键词列表");
 
-        checkMenu(false, "menu.spider.list", "menu.spider.manage", "far fa-circle", "/admin/spider/list", 500100, "爬虫列表");
+        checkMenu(false, "menu.spider.list", "menu.spider.manage", "far fa-circle", "/admin/table/StSpider/list", 500100, "爬虫列表");
 
         checkMenu(false, "menu.ancient.book", "menu.ancient.manage", "far fa-circle", "/admin/ancient/book/list", 600100, "古文列表");
         checkMenu(false, "menu.ancient.section", "menu.ancient.manage", "far fa-circle", "/admin/ancient/section/list", 600200, "章节列表");
         checkMenu(false, "menu.ancient.set", "menu.ancient.manage", "far fa-circle", "/admin/ancient/set/list", 600300, "古文部属");
         checkMenu(false, "menu.ancient.category", "menu.ancient.manage", "far fa-circle", "/admin/ancient/category/list", 600400, "古文分类");
 
-        checkMenu(false, "menu.tool.item", "menu.tool.manage", "far fa-circle", "/admin/tool/list", 700100, "工具列表");
+        checkMenu(false, "menu.tool.item", "menu.tool.manage", "far fa-circle", "/admin/table/SteToolItem/list", 700100, "工具列表");
         checkMenu(false, "menu.tool.category", "menu.tool.manage", "far fa-circle", "/admin/tool/category/list", 700200, "工具分类");
 
         checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800100, "系统参数");

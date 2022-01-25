@@ -65,7 +65,7 @@ public class TableService {
         return tableInfo;
     }
 
-    public List<StModelColumn> getColumns(String tableName, boolean skipHidden) {
+    public List<StModelColumn> getColumns(String tableName, boolean containView) {
         String clzName = "cn.sixlab.minesoft.singte.core.models." + tableName;
 
         List<StModelColumn> columnList = new ArrayList<>();
@@ -78,32 +78,31 @@ public class TableService {
 
                 StColumn annotation = field.getAnnotation(StColumn.class);
                 if (null != annotation) {
-                    String type = annotation.type();
+                    boolean view = annotation.view();
 
-                    if ("hidden".equals(type) && skipHidden) {
-                        continue;
-                    }
+                    if (view && containView) {
+                        StModelColumn column = new StModelColumn();
+                        column.setColumnName(field.getName());
 
-                    StModelColumn column = new StModelColumn();
-                    column.setColumnName(field.getName());
-
-                    if (StrUtil.isEmpty(type)) {
-                        Class<?> fieldType = field.getType();
-                        if (CharSequence.class.isAssignableFrom(fieldType)) {
-                            type = "input";
-                        } else if (Number.class.isAssignableFrom(fieldType)) {
-                            type = "input";
+                        String type = annotation.type();
+                        if (StrUtil.isEmpty(type)) {
+                            Class<?> fieldType = field.getType();
+                            if (CharSequence.class.isAssignableFrom(fieldType)) {
+                                type = "input";
+                            } else if (Number.class.isAssignableFrom(fieldType)) {
+                                type = "input";
+                            }
                         }
+                        column.setType(type);
+
+                        column.setText(annotation.text());
+                        column.setCssClass(annotation.cssClass());
+                        column.setPlaceholder(annotation.placeholder());
+                        column.setDefaultVal(annotation.defaultVal());
+                        column.setOrder(annotation.order());
+
+                        columnList.add(column);
                     }
-                    column.setType(type);
-
-                    column.setText(annotation.text());
-                    column.setCssClass(annotation.cssClass());
-                    column.setPlaceholder(annotation.placeholder());
-                    column.setDefaultVal(annotation.defaultVal());
-                    column.setOrder(annotation.order());
-
-                    columnList.add(column);
                 }
 
             }

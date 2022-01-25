@@ -21,6 +21,9 @@ public @interface StColumn {
     // 字段排序
     int order() default 0;
 
+    // 字段排序
+    boolean view() default true;
+
     // 字段样式
     String cssClass() default "";
 
