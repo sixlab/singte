@@ -29,6 +29,9 @@ public class InitMenu implements BaseInitComponent {
         checkMenu(false, "menu.article.keyword", "menu.article.manage", "far fa-circle", "/admin/keyword/list", 200300, "关键词列表");
 
         checkMenu(false, "menu.spider.list", "menu.spider.manage", "far fa-circle", "/admin/table/StSpider/list", 500100, "爬虫列表");
+        checkMenu(false, "menu.spider.log", "menu.spider.manage", "far fa-circle", "/admin/table/StSpiderLog/list", 500200, "爬虫记录");
+        checkMenu(false, "menu.spider.result", "menu.spider.manage", "far fa-circle", "/admin/table/StSpiderResult/list", 500300, "爬虫结果");
+        checkMenu(false, "menu.spider.push", "menu.spider.manage", "far fa-circle", "/admin/table/StSpiderPush/list", 500400, "推送规则");
 
         checkMenu(false, "menu.ancient.book", "menu.ancient.manage", "far fa-circle", "/admin/ancient/book/list", 600100, "古文列表");
         checkMenu(false, "menu.ancient.section", "menu.ancient.manage", "far fa-circle", "/admin/ancient/section/list", 600200, "章节列表");
