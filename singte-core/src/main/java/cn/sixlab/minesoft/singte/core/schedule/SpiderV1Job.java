@@ -25,7 +25,7 @@ public class SpiderV1Job {
         List<StSpider> spiderList = spiderMapper.selectByStatus(StConst.YES);
 
         spiderList.forEach(spider -> {
-            SpringUtil.getBean(spider.getSpiderType(), SpiderJob.class).craw(spider);
+            SpringUtil.getBean(spider.getSpiderBean(), SpiderJob.class).craw(spider);
         });
     }
 

@@ -145,7 +145,8 @@ public class TableService {
                 if (null != annotation) {
                     String name = field.getName();
                     String val = request.getParameter(name);
-                    if (annotation.editable()) {
+                    if (!annotation.editable()) {
+                        // 不可编辑，说明前端不会传值过来，或者前端不应该传值过来
                         val = annotation.defaultVal();
                     }
 

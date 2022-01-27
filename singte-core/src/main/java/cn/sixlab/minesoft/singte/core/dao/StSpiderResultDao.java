@@ -31,7 +31,7 @@ public class StSpiderResultDao extends BaseDao<StSpiderResult> {
         if (StrUtil.isNotEmpty(keyword)) {
             Criteria keywordCriteria = new Criteria().orOperator(
                     Criteria.where("spiderCode").regex(keyword),
-                    Criteria.where("spiderType").regex(keyword),
+                    Criteria.where("spiderBean").regex(keyword),
                     Criteria.where("spiderName").regex(keyword),
                     Criteria.where("spiderLink").regex(keyword),
                     Criteria.where("title").regex(keyword),

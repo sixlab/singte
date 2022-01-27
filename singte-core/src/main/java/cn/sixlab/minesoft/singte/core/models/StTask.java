@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@StTable(title = "page.title.task")
+@StTable(title = "page.title.task", reloadUri="/admin/reload/task")
 public class StTask extends BaseModel {
 
     @StColumn(text = "label.common.code", placeholder = "label.common.code", order = 1, cssClass = "required")

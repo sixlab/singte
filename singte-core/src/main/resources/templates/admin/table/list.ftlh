@@ -75,13 +75,13 @@
                                         <#case "input">
                                             <input type="text" class="form-control st-fields ${column.cssClass}"
                                                    name="${column.columnName}" id="${column.columnName}"
-                                                   value="${column.defaultVal}" placeholder="${column.placeholder}">
+                                                   value="${column.defaultVal}" placeholder="<@StI18n column.placeholder />">
                                             <#break>
                                         <#case "text">
                                             <textarea class="form-control st-fields ${column.cssClass}" rows="3"
                                                       name="${column.columnName}"
                                                       id="${column.columnName}"
-                                                      placeholder="${column.placeholder}">${column.defaultVal}</textarea>
+                                                      placeholder="<@StI18n column.placeholder />">${column.defaultVal}</textarea>
                                             <#break>
                                         <#default>
                                             类型：[${column.type}] 未实现 under development

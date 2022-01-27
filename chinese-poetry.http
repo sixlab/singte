@@ -58,7 +58,7 @@ POST {{server}}/admin/utils/translate
 Content-Type: application/x-www-form-urlencoded
 Authorization: {{Authorization}}
 
-lang=en
+lang=en&baiduLang=en
 
 
 

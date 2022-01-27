@@ -93,7 +93,7 @@ public class MessageTranslate {
 
             Map<String, Object> param = new HashMap<>();
             param.put("q", text);
-            param.put("from", "cn");
+            param.put("from", "zh");
             param.put("to", target);
             param.put("appid", appId);
             param.put("salt", salt);

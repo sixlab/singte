@@ -11,6 +11,12 @@ $(function () {
             dataType: 'json',
             success: function (res) {
                 if (200 === res.status) {
+                    Swal.fire({
+                        icon: "success",
+                        text: res.message,
+                        showConfirmButton: true,
+                        timer: 2000
+                    })
                     stDataTable.formQuery(true);
                 } else {
                     Swal.fire({
