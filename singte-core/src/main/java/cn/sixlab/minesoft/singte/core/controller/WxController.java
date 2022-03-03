@@ -2,6 +2,8 @@ package cn.sixlab.minesoft.singte.core.controller;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
+import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.service.WxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +20,13 @@ public class WxController extends BaseController {
     @Autowired
     private WxService service;
 
+    @Autowired
+    private ConfigUtils configUtils;
+
     @ResponseBody
     @GetMapping(value = "/push")
     public String push(String signature, String timestamp, String nonce, String echostr) {
-        String token = service.wxToken();
+        String token = configUtils.getConfig(StConst.WX_APP_ID);
 
         String[] paramArr = new String[]{token, timestamp, nonce};
         Arrays.sort(paramArr);

@@ -17,11 +17,11 @@ public class WxService {
     @Autowired
     private ConfigUtils configUtils;
 
-    public String wxToken() {
+    public String wxAccessToken() {
         Object o = StCacheHolder.CACHE_90m.get(StCacheHolder.KEY_WX_TOKEN);
 
         if (null == o) {
-            o = requestToken();
+            o = requestAccessToken();
             if (null != o) {
                 StCacheHolder.CACHE_90m.put(StCacheHolder.KEY_WX_TOKEN, o);
             } else {
@@ -31,7 +31,7 @@ public class WxService {
         return o.toString();
     }
 
-    public String requestToken() {
+    public String requestAccessToken() {
         String appId = configUtils.getConfig(StConst.WX_APP_ID);
         String secret = configUtils.getConfig(StConst.WX_APP_SECRET);
         String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appId + "&secret=" + secret;

@@ -35,7 +35,10 @@ public class StConst {
     public static final String ST_COPY_YEAR = "st_copyright_year";
     public static final String ST_ICP       = "st_icp";
 
+    public static final String SERVER_SH_PATH = "server_sh_path";
+
     public static final String WX_APP_ID = "wx_app_id";
+    public static final String WX_APP_TOKEN = "wx_app_token";
     public static final String WX_APP_SECRET = "wx_app_secret";
 
     public static final long SECONDS_1      = 1;
@@ -62,5 +65,4 @@ public class StConst {
     public static final String ROLE_ADMIN = "ADMIN";
 
     public static final Locale DEFAULT_LOCALE = Locale.CHINESE;
-
 }
