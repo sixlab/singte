@@ -5,6 +5,7 @@ import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+@Slf4j
 @Controller
 @RequestMapping("/admin/server")
 public class AdminServerController extends BaseController {
@@ -61,10 +63,10 @@ public class AdminServerController extends BaseController {
             exec = Runtime.getRuntime().exec("kill.sh", null, new File(path));
             exec.waitFor();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("脚本运行异常", e);
             return ModelResp.error(StErr.UNKNOWN, "脚本运行异常");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("脚本运行中断", e);
             return ModelResp.error(StErr.UNKNOWN, "脚本运行中断");
         }
 
