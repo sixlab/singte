@@ -26,7 +26,7 @@ public class WxController extends BaseController {
     @ResponseBody
     @GetMapping(value = "/push")
     public String push(String signature, String timestamp, String nonce, String echostr) {
-        String token = configUtils.getConfig(StConst.WX_APP_ID);
+        String token = configUtils.getConfig(StConst.WX_APP_TOKEN);
 
         String[] paramArr = new String[]{token, timestamp, nonce};
         Arrays.sort(paramArr);
