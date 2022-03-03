@@ -13,9 +13,9 @@
                 <div class="card-body box-profile">
                     <p class="text-muted text-center">发布时间：${startTime?string("yyyy-MM-dd HH:mm:ss")}</p>
 
-                    <a href="#" class="btn btn-primary btn-block stRebootBtn"><b>重启</b></a>
+                    <a href="#" class="btn btn-primary btn-block stRebootBtn"><b>重启服务</b></a>
 
-                    <a href="#" class="btn btn-primary btn-block stUpdateBtn"><b>更新</b></a>
+                    <a href="#" class="btn btn-primary btn-block stUpdateBtn"><b>重启服务</b></a>
                 </div>
                 <!-- /.card-body -->
             </div>
