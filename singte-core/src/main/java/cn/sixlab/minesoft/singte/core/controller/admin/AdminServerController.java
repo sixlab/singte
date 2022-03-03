@@ -36,31 +36,22 @@ public class AdminServerController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/update")
     public ModelResp update() {
-        String path = configUtils.getConfig(StConst.SERVER_SH_PATH);
-
-        Process exec;
-        try {
-            exec = Runtime.getRuntime().exec("update.sh", null, new File(path));
-            exec.waitFor();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ModelResp.error(StErr.UNKNOWN, "脚本运行异常");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return ModelResp.error(StErr.UNKNOWN, "脚本运行中断");
-        }
-
-        return ModelResp.success();
+        return runShell("update.sh");
     }
 
     @ResponseBody
     @RequestMapping(value = "/reboot")
     public ModelResp reboot() {
+        return runShell("kill.sh");
+    }
+
+    private ModelResp runShell(String file) {
         String path = configUtils.getConfig(StConst.SERVER_SH_PATH);
 
         Process exec;
         try {
-            exec = Runtime.getRuntime().exec("kill.sh", null, new File(path));
+            String[] cmd = {"/bin/sh", "-c", file};
+            exec = Runtime.getRuntime().exec(cmd, null, new File(path));
             exec.waitFor();
         } catch (IOException e) {
             log.error("脚本运行异常", e);
@@ -72,5 +63,4 @@ public class AdminServerController extends BaseController {
 
         return ModelResp.success();
     }
-
 }
