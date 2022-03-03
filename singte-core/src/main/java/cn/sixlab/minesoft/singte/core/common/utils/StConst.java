@@ -35,6 +35,9 @@ public class StConst {
     public static final String ST_COPY_YEAR = "st_copyright_year";
     public static final String ST_ICP       = "st_icp";
 
+    public static final String WX_APP_ID = "wx_app_id";
+    public static final String WX_APP_SECRET = "wx_app_secret";
+
     public static final long SECONDS_1      = 1;
     public static final long SECONDS_MIN_1  = 60;
     public static final long SECONDS_MIN_2  = SECONDS_MIN_1 * 2;
@@ -47,6 +50,9 @@ public class StConst {
     public static final long SECONDS_MIN_25 = SECONDS_MIN_1 * 25;
     public static final long SECONDS_MIN_30 = SECONDS_MIN_1 * 30;
     public static final long SECONDS_MIN_35 = SECONDS_MIN_1 * 35;
+    public static final long SECONDS_MIN_90 = SECONDS_MIN_1 * 90;
+    public static final long SECONDS_HOUR_1 = SECONDS_MIN_1 * 60;
+    public static final long SECONDS_HOUR_2 = SECONDS_MIN_1 * 60 * 2;
     public static final long SECONDS_YEAR_1 = SECONDS_MIN_1 * 365 * 24 * 60;
 
     public final static String ST_PUBLISH_WILL = "0";
