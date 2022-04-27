@@ -136,6 +136,9 @@ public class TableService {
             params = (BaseModel) clz.newInstance();
             Field[] fieldList = clz.getDeclaredFields();
 
+            params.setId(request.getParameter("id"));
+            params.setStatus(request.getParameter("status"));
+
             for (Field field : fieldList) {
                 if (!field.isAccessible()) {
                     field.setAccessible(true);

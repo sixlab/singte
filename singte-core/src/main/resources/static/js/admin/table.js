@@ -165,7 +165,7 @@ $(function () {
 
                     $(".st-fields").each(function (index){
                         let _this = $(this);
-                        let id = _this.id;
+                        let id = _this.attr("id");
                         _this.val(res.data[id]);
                     });
                 } else {
