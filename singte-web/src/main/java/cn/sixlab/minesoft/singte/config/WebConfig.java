@@ -1,6 +1,7 @@
 package cn.sixlab.minesoft.singte.config;
 
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -17,6 +18,9 @@ import java.util.*;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+    @Autowired
+    private StMultiDomainInterceptor multiDomainInterceptor;
 
     @Bean
     public SimpleUrlHandlerMapping customFaviconHandlerMapping() {
@@ -55,6 +59,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(multiDomainInterceptor);
         registry.addInterceptor(localeChangeInterceptor());
     }
 }

@@ -24,9 +24,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private LoginStatusRequestFilter jwtRequestFilter;
+    private StLoginStatusFilter loginStatusFilter;
     @Autowired
-    private AuthenticationHandler authenticationHandler;
+    private StAuthenticationHandler authenticationHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority(StConst.ROLE_ADMIN)
                 .anyRequest().permitAll();
 
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(loginStatusFilter, UsernamePasswordAuthenticationFilter.class);
 
         //添加 校验过滤器
 //        Filter authenticationFilter = new JwtAuthenticationFilter(authenticationManager());

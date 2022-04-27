@@ -25,7 +25,7 @@ import java.util.Date;
 
 @Slf4j
 @Component
-public class LoginStatusRequestFilter extends OncePerRequestFilter {
+public class StLoginStatusFilter extends OncePerRequestFilter {
 
     @Autowired
     private StUserDetailsService userDetailsService;

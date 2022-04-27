@@ -10,7 +10,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Enumeration;
@@ -18,7 +17,7 @@ import java.util.Enumeration;
 @Component
 @Order(1)
 @Slf4j
-public class ParamFilter implements Filter {
+public class StParamFilter implements Filter {
 
     @Autowired
     private LangService langService;
