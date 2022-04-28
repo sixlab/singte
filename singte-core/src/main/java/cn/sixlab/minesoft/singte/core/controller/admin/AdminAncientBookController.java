@@ -12,7 +12,7 @@ import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
 import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import cn.sixlab.minesoft.singte.core.service.AncientService;
-import javafx.util.Callback;
+import cn.sixlab.minesoft.singte.core.common.utils.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,9 +37,9 @@ public class AdminAncientBookController extends BaseController {
     @ResponseBody
     @PostMapping(value = "/reload")
     public ModelResp reload() {
-        ancientService.iterSections(new Callback<SteAncientSection, Void>() {
+        ancientService.iterSections(new Callback<SteAncientSection>() {
             @Override
-            public Void call(SteAncientSection param) {
+            public void call(SteAncientSection param) {
                 SteAncientBook book = ancientBookDao.selectBook(param.getAncientSet(), param.getAncientCategory(), param.getBookName());
 
                 if (null == book) {
@@ -55,14 +55,12 @@ public class AdminAncientBookController extends BaseController {
                     book.setCreateTime(new Date());
                     ancientBookDao.save(book);
                 }
-
-                return null;
             }
         });
 
-        ancientService.iterBooks(new Callback<SteAncientBook, Void>() {
+        ancientService.iterBooks(new Callback<SteAncientBook>() {
             @Override
-            public Void call(SteAncientBook param) {
+            public void call(SteAncientBook param) {
                 List<SteAncientSection> sectionList = ancientSectionDao.listBookSections(param.getBookName());
 
                 if (CollUtil.isEmpty(sectionList)) {
@@ -82,8 +80,6 @@ public class AdminAncientBookController extends BaseController {
                     param.setStatus(StConst.YES);
                     ancientBookDao.save(param);
                 }
-
-                return null;
             }
         });
 

@@ -1,6 +1,7 @@
 package cn.sixlab.minesoft.singte.core.service;
 
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
+import cn.sixlab.minesoft.singte.core.common.utils.Callback;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientBookDao;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientCategoryDao;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
@@ -9,7 +10,6 @@ import cn.sixlab.minesoft.singte.core.models.SteAncientBook;
 import cn.sixlab.minesoft.singte.core.models.SteAncientCategory;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSet;
-import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ public class AncientService {
     @Autowired
     private SteAncientSectionDao sectionDao;
 
-    public void iterSets(Callback<SteAncientSet, Void> callback) {
+    public void iterSets(Callback<SteAncientSet> callback) {
         int pageNum = 0;
         boolean hasNex = true;
 
@@ -45,7 +45,7 @@ public class AncientService {
         }
     }
 
-    public void iterCategories(Callback<SteAncientCategory, Void> callback) {
+    public void iterCategories(Callback<SteAncientCategory> callback) {
         int pageNum = 0;
         boolean hasNex = true;
 
@@ -61,7 +61,7 @@ public class AncientService {
         }
     }
 
-    public void iterBooks(Callback<SteAncientBook, Void> callback) {
+    public void iterBooks(Callback<SteAncientBook> callback) {
         int pageNum = 0;
         boolean hasNex = true;
 
@@ -77,7 +77,8 @@ public class AncientService {
         }
     }
 
-    public void iterSections(Callback<SteAncientSection, Void> callback) {
+    public void iterSections(Callback<SteAncientSection> callback) {
+
         int pageNum = 0;
         boolean hasNex = true;
 

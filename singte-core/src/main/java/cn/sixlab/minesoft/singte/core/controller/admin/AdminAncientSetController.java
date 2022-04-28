@@ -10,7 +10,7 @@ import cn.sixlab.minesoft.singte.core.dao.SteAncientBookDao;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientSetDao;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSet;
 import cn.sixlab.minesoft.singte.core.service.AncientService;
-import javafx.util.Callback;
+import cn.sixlab.minesoft.singte.core.common.utils.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -34,16 +34,14 @@ public class AdminAncientSetController extends BaseController {
     @ResponseBody
     @PostMapping(value = "/reload")
     public ModelResp reload() {
-        ancientService.iterSets(new Callback<SteAncientSet, Void>() {
+        ancientService.iterSets(new Callback<SteAncientSet>() {
             @Override
-            public Void call(SteAncientSet param) {
+            public void call(SteAncientSet param) {
                 String set = param.getAncientSet();
                 int count = ancientBookDao.countSet(set);
                 param.setCount(count);
                 param.setStatus(StConst.YES);
                 ancientSetDao.save(param);
-
-                return null;
             }
         });
 

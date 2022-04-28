@@ -9,7 +9,7 @@ import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.SteAncientSectionDao;
 import cn.sixlab.minesoft.singte.core.models.SteAncientSection;
 import cn.sixlab.minesoft.singte.core.service.AncientService;
-import javafx.util.Callback;
+import cn.sixlab.minesoft.singte.core.common.utils.Callback;
 import org.nlpcn.commons.lang.jianfan.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,9 +32,9 @@ public class AdminAncientSectionController extends BaseController {
     @PostMapping(value = "/reload")
     public ModelResp reload() {
 
-        ancientService.iterSections(new Callback<SteAncientSection, Void>() {
+        ancientService.iterSections(new Callback<SteAncientSection>() {
             @Override
-            public Void call(SteAncientSection param) {
+            public void call(SteAncientSection param) {
                 param.setAuthor(Converter.SIMPLIFIED.convert(param.getAuthor()));
                 param.setBookName(Converter.SIMPLIFIED.convert(param.getBookName()));
                 param.setSectionName(Converter.SIMPLIFIED.convert(param.getSectionName()));
@@ -42,7 +42,6 @@ public class AdminAncientSectionController extends BaseController {
                 param.setContentText(Converter.SIMPLIFIED.convert(param.getContentText()));
 
                 ancientSectionDao.save(param);
-                return null;
             }
         });
 
