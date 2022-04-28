@@ -38,16 +38,16 @@ public class WebUtils {
      *
      * @return
      */
-    public static String getDomainName(String host) {
-        if (host.endsWith(".")) {
-            host = host.substring(0, host.length() - 1);
+    public static String getTopDomain(String domain) {
+        if (domain.endsWith(".")) {
+            domain = domain.substring(0, domain.length() - 1);
         }
 
-        if (IP_PATTERN.matcher(host).matches()) {
-            return host;
+        if (IP_PATTERN.matcher(domain).matches()) {
+            return domain;
         }
         int index = 0;
-        String candidate = host;
+        String candidate = domain;
         while (index >= 0) {
             index = candidate.indexOf('.');
             String subCandidate = candidate.substring(index + 1);
@@ -193,30 +193,40 @@ public class WebUtils {
         return getDomain(getRequest(), true);
     }
 
+    /**
+     * 获取域名,例子  192.168.1.100   www.a.com
+     */
+    public static String getDomainWithPort() {
+        return getDomain(getRequest(), false);
+    }
+
     public static String getDomain(HttpServletRequest request, boolean excludePort) {
         String domain = request.getHeader("HOST");
+
+        if (StrUtil.isEmpty(domain)) {
+            String requestURL = request.getRequestURL().toString();
+            String requestURI = request.getRequestURI();
+
+            int beginIndex = requestURL.indexOf("://");
+            int endIndex = requestURL.length() - requestURI.length();
+            if (beginIndex < 0) {
+                beginIndex = 0;
+            } else {
+                beginIndex += "://".length();
+            }
+            domain = requestURL.substring(beginIndex, endIndex);
+        }
+
         if (StrUtil.isNotEmpty(domain) && excludePort) {
             int endIdx = domain.indexOf(":");
             if (endIdx >= 0) {
                 domain = domain.substring(0, endIdx);
             }
         }
-        if (StrUtil.isNotEmpty(domain)) {
-            return domain;
-        }
-        String requestURL = request.getRequestURL().toString();
-        String requestURI = request.getRequestURI();
-        int endIndex = requestURL.length() - requestURI.length();
-        int beginIndex = requestURL.indexOf("://");
-        if (beginIndex < 0) {
-            beginIndex = 0;
-        } else {
-            beginIndex += "://".length();
-        }
-        domain = requestURL.substring(beginIndex, endIndex);
         if (StrUtil.isEmpty(domain)) {
             domain = "";
         }
+
         return domain;
     }
 

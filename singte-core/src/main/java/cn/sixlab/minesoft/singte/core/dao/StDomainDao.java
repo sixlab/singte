@@ -23,7 +23,7 @@ public class StDomainDao extends BaseDao<StDomain> {
     public StDomain selectExist(StDomain record) {
         Criteria criteria = Criteria.where("domainUrl").is(record.getDomainUrl());
 
-        Sort sort = Sort.by("id");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 
@@ -41,13 +41,15 @@ public class StDomainDao extends BaseDao<StDomain> {
             Criteria keywordCriteria = new Criteria().orOperator(
                     Criteria.where("domainName").regex(keyword),
                     Criteria.where("domainUrl").regex(keyword),
+                    Criteria.where("tplPath").regex(keyword),
+                    Criteria.where("domainBean").regex(keyword),
                     Criteria.where("domainRemark").regex(keyword)
             );
 
             criteria = criteria.andOperator(keywordCriteria);
         }
 
-        Sort sort = Sort.by("id");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 
@@ -57,10 +59,30 @@ public class StDomainDao extends BaseDao<StDomain> {
     public List<StDomain> selectStatus(String status) {
         Criteria criteria = Criteria.where("status").is(status);
 
-        Sort sort = Sort.by("id");
+        Sort sort = Sort.by("weight", "id");
 
         Query query = new Query(criteria).with(sort);
 
         return mongoTemplate.find(query, entityClass());
+    }
+
+    public StDomain selectActiveDomain(String domain) {
+        Criteria criteria = Criteria.where("domainUrl").is(domain).and("status").is("1");
+
+        Sort sort = Sort.by("weight", "id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
+    public StDomain selectHighWeight() {
+        Criteria criteria = Criteria.where("status").is("1");
+
+        Sort sort = Sort.by("weight", "id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
     }
 }
