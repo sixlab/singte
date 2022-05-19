@@ -6,6 +6,8 @@ import cn.sixlab.minesoft.singte.core.models.StDomain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DomainService {
 
@@ -20,6 +22,10 @@ public class DomainService {
             activeDomain = domainDao.selectHighWeight();
         }
         return activeDomain;
+    }
+
+    public List<StDomain> selectDomainByBean(String domainBean) {
+        return domainDao.selectByBean(domainBean);
     }
 
 }

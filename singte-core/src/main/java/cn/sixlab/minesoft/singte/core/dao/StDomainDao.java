@@ -66,6 +66,16 @@ public class StDomainDao extends BaseDao<StDomain> {
         return mongoTemplate.find(query, entityClass());
     }
 
+    public List<StDomain> selectByBean(String domainBean) {
+        Criteria criteria = Criteria.where("status").is("1").and("domainBean").is(domainBean);
+
+        Sort sort = Sort.by("weight", "id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.find(query, entityClass());
+    }
+
     public StDomain selectActiveDomain(String domain) {
         Criteria criteria = Criteria.where("domainUrl").is(domain).and("status").is("1");
 
