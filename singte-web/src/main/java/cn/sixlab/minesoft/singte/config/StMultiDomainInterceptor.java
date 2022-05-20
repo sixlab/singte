@@ -31,6 +31,7 @@ public class StMultiDomainInterceptor implements HandlerInterceptor {
                 String domainBean = annotation.value();
 
                 if (null == activeDomain || !domainBean.equals(activeDomain.getDomainBean())) {
+                    response.sendError(404);
                     return false;
                 }
             }

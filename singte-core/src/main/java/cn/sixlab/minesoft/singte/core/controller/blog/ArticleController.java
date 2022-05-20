@@ -1,4 +1,4 @@
-package cn.sixlab.minesoft.singte.core.controller;
+package cn.sixlab.minesoft.singte.core.controller.blog;
 
 import cn.sixlab.minesoft.singte.core.common.annotation.StDomainDeclare;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
