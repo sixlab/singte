@@ -15,7 +15,7 @@
 
                     <a href="#" class="btn btn-primary btn-block stRebootBtn"><b>重启服务</b></a>
 
-                    <a href="#" class="btn btn-primary btn-block stUpdateBtn"><b>重启服务</b></a>
+                    <a href="#" class="btn btn-primary btn-block stUpdateBtn"><b>更新服务</b></a>
                 </div>
                 <!-- /.card-body -->
             </div>
