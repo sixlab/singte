@@ -4,6 +4,11 @@
       "name": "st.login.expire",
       "type": "java.lang.String",
       "description": "登录 Token 的有效期."
+    },
+    {
+      "name": "singte.initPWD",
+      "type": "java.lang.String",
+      "description": "初始化或者重置时的默认密码."
     }
   ]
 }

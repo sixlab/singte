@@ -43,3 +43,6 @@ spring:
     template-loader-path: file:./st_templates,classpath:/templates/
   aop:
     auto: true
+
+singte:
+  initPWD:
