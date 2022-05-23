@@ -54,8 +54,6 @@ public class InitAdmin implements BaseInitComponent {
             stUser = new StUser();
             stUser.setUsername("singte");
             stUser.setShowName("singte");
-            stUser.setStatus(StConst.YES);
-            stUser.setRole(StConst.ROLE_ADMIN);
             stUser.setCreateTime(new Date());
         }
 
@@ -63,6 +61,8 @@ public class InitAdmin implements BaseInitComponent {
             initPWD = "123456";
         }
         stUser.setPassword(BCrypt.hashpw(initPWD));
+        stUser.setRole(StConst.ROLE_ADMIN);
+        stUser.setStatus(StConst.YES);
 
         userDao.save(stUser);
     }
