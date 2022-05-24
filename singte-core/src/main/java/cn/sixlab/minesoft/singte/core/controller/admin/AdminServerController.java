@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Date;
 
 @Slf4j
@@ -52,6 +54,25 @@ public class AdminServerController extends BaseController {
         try {
             String[] cmd = {"/bin/sh", "-c", file};
             exec = Runtime.getRuntime().exec(cmd, null, new File(path));
+
+            InputStreamReader streamReader = new InputStreamReader(exec.getInputStream());
+            BufferedReader reader = new BufferedReader(streamReader);
+            String line;
+
+            StringBuilder sb = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            log.info("命令行输出：\n" + sb);
+
+            sb = new StringBuilder();
+            streamReader = new InputStreamReader(exec.getErrorStream());
+            reader = new BufferedReader(streamReader);
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            log.error("命令行异常输出：\n" + sb);
+
             exec.waitFor();
         } catch (IOException e) {
             log.error("脚本运行异常", e);
@@ -63,4 +84,5 @@ public class AdminServerController extends BaseController {
 
         return ModelResp.success();
     }
+
 }
