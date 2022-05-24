@@ -9,7 +9,7 @@ public class StModelColumn {
     private String columnName;
     private String text;
     private String type;
-    private String cssClass;
+    private String inputCss;
     private String placeholder;
     private String defaultVal;
     private int order;

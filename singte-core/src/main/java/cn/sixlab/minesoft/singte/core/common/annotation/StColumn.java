@@ -22,7 +22,7 @@ public @interface StColumn {
     int order() default 0;
 
     // 字段样式
-    String cssClass() default "";
+    String inputCss() default "";
 
     // 默认值
     String defaultVal() default "";

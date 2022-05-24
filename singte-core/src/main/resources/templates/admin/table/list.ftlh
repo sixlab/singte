@@ -73,12 +73,12 @@
                                 <div class="col-sm-10 form-control-container">
                                     <#switch column.type>
                                         <#case "input">
-                                            <input type="text" class="form-control st-fields ${column.cssClass}"
+                                            <input type="text" class="form-control st-fields ${column.inputCss}"
                                                    name="${column.columnName}" id="${column.columnName}"
                                                    value="${column.defaultVal}" placeholder="<@StI18n column.placeholder />">
                                             <#break>
                                         <#case "text">
-                                            <textarea class="form-control st-fields ${column.cssClass}" rows="3"
+                                            <textarea class="form-control st-fields ${column.inputCss}" rows="3"
                                                       name="${column.columnName}"
                                                       id="${column.columnName}"
                                                       placeholder="<@StI18n column.placeholder />">${column.defaultVal}</textarea>

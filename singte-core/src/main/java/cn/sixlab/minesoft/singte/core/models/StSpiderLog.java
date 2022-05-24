@@ -13,16 +13,16 @@ import java.util.Date;
 @StTable(title = "page.title.spider.log",insertable = false)
 public class StSpiderLog extends BaseModel {
 
-    @StColumn(text = "label.common.code", placeholder = "label.common.code", order = 10, cssClass = "required")
+    @StColumn(text = "label.common.code", placeholder = "label.common.code", order = 10, inputCss = "required")
     private String spiderCode;
 
-    @StColumn(text = "label.task.taskBean", placeholder = "label.task.taskBean", order = 20, cssClass = "required")
+    @StColumn(text = "label.task.taskBean", placeholder = "label.task.taskBean", order = 20, inputCss = "required")
     private String spiderBean;
 
-    @StColumn(text = "label.common.name", placeholder = "label.common.name", order = 30, cssClass = "required")
+    @StColumn(text = "label.common.name", placeholder = "label.common.name", order = 30, inputCss = "required")
     private String spiderName;
 
-    @StColumn(text = "label.spider.spiderLink", placeholder = "ph.spider.spiderLink", order = 40, cssClass = "required")
+    @StColumn(text = "label.spider.spiderLink", placeholder = "ph.spider.spiderLink", order = 40, inputCss = "required")
     private String spiderLink;
 
     private Date crawlerTime;

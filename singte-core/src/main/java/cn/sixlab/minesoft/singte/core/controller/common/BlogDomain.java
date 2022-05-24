@@ -23,4 +23,9 @@ public class BlogDomain implements BaseDomain {
         return "/index";
     }
 
+    @Override
+    public String test(ModelMap modelMap) {
+        return "/test";
+    }
+
 }

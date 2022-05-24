@@ -24,6 +24,16 @@ public class DomainService {
         return activeDomain;
     }
 
+    /**
+     * 获取到当前域名，是否配置了指定类，如果配置了返回对应配置
+     * @param domainBean 指定类
+     * @return StDomain
+     */
+    public StDomain activeDomain(String domainBean) {
+        String domain = WebUtils.getDomainWithPort();
+        return domainDao.selectActiveDomain(domain, domainBean);
+    }
+
     public List<StDomain> selectDomainByBean(String domainBean) {
         return domainDao.selectByBean(domainBean);
     }

@@ -21,6 +21,7 @@ public class InitMenu implements BaseInitComponent {
         checkMenu(true, "menu.spider.manage", "menu.st-level1", "fas fa-th", "", 500, "爬虫管理");
         checkMenu(true, "menu.ancient.manage", "menu.st-level1", "fas fa-th", "", 600, "古文管理");
         checkMenu(true, "menu.tool.manage", "menu.st-level1", "fas fa-th", "", 700, "工具管理");
+        checkMenu(true, "menu.stack.manage", "menu.st-level1", "fas fa-th", "", 710, "工具管理");
         checkMenu(true, "menu.system.manage", "menu.st-level1", "fas fa-th", "", 800, "系统管理");
 
         checkMenu(false, "menu.article.list", "menu.article.manage", "far fa-circle", "/admin/article/list", 200100, "文章列表");
@@ -40,6 +41,10 @@ public class InitMenu implements BaseInitComponent {
 
         checkMenu(false, "menu.tool.item", "menu.tool.manage", "far fa-circle", "/admin/table/SteToolItem/list", 700100, "工具列表");
         checkMenu(false, "menu.tool.category", "menu.tool.manage", "far fa-circle", "/admin/tool/category/list", 700200, "工具分类");
+
+        checkMenu(false, "menu.stack.domain", "menu.stack.manage", "far fa-circle", "/admin/table/StLinkDomain/list", 710100, "导航站点");
+        checkMenu(false, "menu.stack.type", "menu.stack.manage", "far fa-circle", "/admin/table/StLinkType/list", 710150, "导航分类");
+        checkMenu(false, "menu.stack.link", "menu.stack.manage", "far fa-circle", "/admin/table/StLink/list", 710200, "导航网址");
 
         checkMenu(false, "menu.user.list", "menu.system.manage", "far fa-circle", "/admin/user/list", 800100, "用户列表");
         checkMenu(false, "menu.domain.list", "menu.system.manage", "far fa-circle", "/admin/table/StDomain/list", 800150, "域名列表");

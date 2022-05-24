@@ -19,22 +19,37 @@ public class CommonController {
 
     @GetMapping(value = {"", "/", "/index", "/home"})
     public String index(ModelMap modelMap) {
+        BaseDomain baseDomain = domain();
 
-        StDomain stDomain = domainService.activeDomain();
-
-        if (stDomain != null) {
-            BaseDomain baseDomain = null;
-            try {
-                baseDomain = SpringUtil.getBean(stDomain.getDomainBean());
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            if (null != baseDomain) {
-                return baseDomain.index(modelMap);
-            }
-
+        if (baseDomain != null) {
+            return baseDomain.index(modelMap);
         }
         return "index";
+    }
+
+    @GetMapping(value = {"/test"})
+    public String test(ModelMap modelMap) {
+        BaseDomain baseDomain = domain();
+
+        if (baseDomain != null) {
+            return baseDomain.test(modelMap);
+        }
+        return "index";
+    }
+
+    private BaseDomain domain(){
+        BaseDomain baseDomain = null;
+
+        StDomain stDomain = domainService.activeDomain();
+        if (stDomain != null) {
+            try {
+                baseDomain = SpringUtil.getBean(stDomain.getDomainBean());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return baseDomain;
     }
 
 }

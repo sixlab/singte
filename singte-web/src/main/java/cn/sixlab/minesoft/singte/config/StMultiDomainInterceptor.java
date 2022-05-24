@@ -18,21 +18,25 @@ public class StMultiDomainInterceptor implements HandlerInterceptor {
     @Autowired
     private DomainService domainService;
 
+    private static ThreadLocal<StDomain> threadLocal = new ThreadLocal<>();
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if(handler instanceof HandlerMethod){
+        if (handler instanceof HandlerMethod) {
             HandlerMethod methodHandle = (HandlerMethod) handler;
             StDomainDeclare annotation = methodHandle.getMethodAnnotation(StDomainDeclare.class);
-            if(null==annotation){
+            if (null == annotation) {
                 annotation = methodHandle.getBeanType().getAnnotation(StDomainDeclare.class);
             }
             if (null != annotation) {
-                StDomain activeDomain = domainService.activeDomain();
-                String domainBean = annotation.value();
+                // 含有 StDomainDeclare 的类或者方法，必需配置有对应的域名，否则不能访问
+                StDomain activeDomain = domainService.activeDomain(annotation.value());
 
-                if (null == activeDomain || !domainBean.equals(activeDomain.getDomainBean())) {
+                if (null == activeDomain) {
                     response.sendError(404);
                     return false;
+                } else {
+                    threadLocal.set(activeDomain);
                 }
             }
         }
@@ -45,7 +49,12 @@ public class StMultiDomainInterceptor implements HandlerInterceptor {
         if (null != modelAndView) {
             String viewName = modelAndView.getViewName();
             if (null != viewName && viewName.startsWith("/") && !viewName.endsWith("/")) {
-                StDomain activeDomain = domainService.activeDomain();
+                // 先判断是否是配置了 StDomainDeclare ，如果是直接取
+                StDomain activeDomain = threadLocal.get();
+                if (activeDomain == null) {
+                    // 未配置 StDomainDeclare，获取权重最高的或者默认的
+                    activeDomain = domainService.activeDomain();
+                }
 
                 if (null != activeDomain) {
                     String tplPath = activeDomain.getTplPath();

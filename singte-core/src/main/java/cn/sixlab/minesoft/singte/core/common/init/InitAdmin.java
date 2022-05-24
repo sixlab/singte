@@ -22,7 +22,7 @@ public class InitAdmin implements BaseInitComponent {
     @Autowired
     private StConfigDao configDao;
 
-    @Value("${singte.initPWD}")
+    @Value("${st.initPWD}")
     private String initPWD;
 
     @Override

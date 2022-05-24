@@ -21,7 +21,8 @@ public class StDomainDao extends BaseDao<StDomain> {
 
     @Override
     public StDomain selectExist(StDomain record) {
-        Criteria criteria = Criteria.where("domainUrl").is(record.getDomainUrl());
+        Criteria criteria = Criteria.where("domainUrl").is(record.getDomainUrl())
+                .and("domainBean").is(record.getDomainBean());
 
         Sort sort = Sort.by("weight", "id");
 
@@ -49,7 +50,7 @@ public class StDomainDao extends BaseDao<StDomain> {
             criteria = criteria.andOperator(keywordCriteria);
         }
 
-        Sort sort = Sort.by("weight", "id");
+        Sort sort = Sort.by("domainUrl", "weight", "id");
 
         Query query = new Query(criteria).with(sort);
 
@@ -78,6 +79,18 @@ public class StDomainDao extends BaseDao<StDomain> {
 
     public StDomain selectActiveDomain(String domain) {
         Criteria criteria = Criteria.where("domainUrl").is(domain).and("status").is("1");
+
+        Sort sort = Sort.by("weight", "id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return mongoTemplate.findOne(query, entityClass());
+    }
+
+    public StDomain selectActiveDomain(String domain, String domainBean) {
+        Criteria criteria = Criteria.where("domainUrl").is(domain)
+                .and("domainBean").is(domainBean)
+                .and("status").is("1");
 
         Sort sort = Sort.by("weight", "id");
 

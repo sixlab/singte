@@ -110,7 +110,7 @@ public class TableService {
                         column.setType(type);
 
                         column.setText(annotation.text());
-                        column.setCssClass(annotation.cssClass());
+                        column.setInputCss(annotation.inputCss());
                         column.setPlaceholder(annotation.placeholder());
                         column.setDefaultVal(annotation.defaultVal());
                         column.setOrder(annotation.order());

@@ -11,22 +11,22 @@ import lombok.Setter;
 @StTable(title = "page.title.domain", reloadUri="/admin/reload/domain")
 public class StDomain extends BaseModel {
 
-    @StColumn(text = "label.domain.name", placeholder = "label.domain.name", order = 1, cssClass = "required")
+    @StColumn(text = "label.domain.name", placeholder = "label.domain.name", order = 100, inputCss = "required")
     private String domainName;
 
-    @StColumn(text = "label.domain.url", placeholder = "label.domain.url", order = 2, cssClass = "required")
+    @StColumn(text = "label.domain.url", placeholder = "label.domain.url", order = 200, inputCss = "required")
     private String domainUrl;
 
-    @StColumn(text = "label.domain.tplPath", placeholder = "label.domain.tplPath", order = 3, cssClass = "required")
-    private String tplPath;
-
-    @StColumn(text = "label.domain.bean", placeholder = "label.domain.bean", order = 4, cssClass = "required")
+    @StColumn(text = "label.domain.bean", placeholder = "label.domain.bean", order = 300, inputCss = "required")
     private String domainBean;
 
-    @StColumn(text = "label.common.weight", placeholder = "label.common.weight", order = 5, cssClass = "required number")
+    @StColumn(text = "label.domain.tplPath", placeholder = "label.domain.tplPath", order = 400, inputCss = "required")
+    private String tplPath;
+
+    @StColumn(text = "label.common.weight", placeholder = "label.common.weight", order = 500, inputCss = "required number")
     private Integer weight;
 
-    @StColumn(text = "label.common.remark", placeholder = "label.common.remark", order = 6)
+    @StColumn(text = "label.common.remark", placeholder = "label.common.remark", order = 600)
     private String domainRemark;
 
 }
