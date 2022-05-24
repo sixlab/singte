@@ -29,6 +29,9 @@ public class StLinkDomain extends BaseModel {
     @StColumn(text = "label.linkDomain.description", placeholder = "label.linkDomain.description", order = 600, inputCss = "required")
     private String domainDescription;
 
+    @StColumn(text = "label.linkDomain.logo", placeholder = "label.linkDomain.logo", order = 650, inputCss = "required")
+    private String domainLogo;
+
     @StColumn(text = "label.linkDomain.favicon", placeholder = "label.linkDomain.favicon", order = 700, inputCss = "required")
     private String domainFavicon;
 
