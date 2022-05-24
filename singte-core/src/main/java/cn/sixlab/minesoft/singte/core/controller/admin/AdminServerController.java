@@ -52,7 +52,7 @@ public class AdminServerController extends BaseController {
 
         Process exec;
         try {
-            String[] cmd = {"/bin/sh", "-c", file};
+            String[] cmd = {"/bin/sh", "-c", path + file};
             exec = Runtime.getRuntime().exec(cmd, null, new File(path));
 
             InputStreamReader streamReader = new InputStreamReader(exec.getInputStream());
