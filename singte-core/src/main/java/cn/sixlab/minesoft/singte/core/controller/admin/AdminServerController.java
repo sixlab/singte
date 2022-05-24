@@ -59,19 +59,17 @@ public class AdminServerController extends BaseController {
             BufferedReader reader = new BufferedReader(streamReader);
             String line;
 
-            StringBuilder sb = new StringBuilder();
+            log.info("命令行输出：\n");
             while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+                log.info(line);
             }
-            log.info("命令行输出：\n" + sb);
 
-            sb = new StringBuilder();
             streamReader = new InputStreamReader(exec.getErrorStream());
             reader = new BufferedReader(streamReader);
+            log.error("命令行异常输出：\n");
             while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+                log.info(line);
             }
-            log.error("命令行异常输出：\n" + sb);
 
             exec.waitFor();
         } catch (IOException e) {
