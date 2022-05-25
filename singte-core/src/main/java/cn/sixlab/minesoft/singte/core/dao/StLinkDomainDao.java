@@ -43,6 +43,9 @@ public class StLinkDomainDao extends BaseDao<StLinkDomain> {
                     Criteria.where("domainTitle").regex(keyword),
                     Criteria.where("domainKeyword").regex(keyword),
                     Criteria.where("domainDescription").regex(keyword),
+                    Criteria.where("domainLogo").regex(keyword),
+                    Criteria.where("domainH5Logo").regex(keyword),
+                    Criteria.where("domainFavicon").regex(keyword),
                     Criteria.where("domainRemark").regex(keyword)
             );
 

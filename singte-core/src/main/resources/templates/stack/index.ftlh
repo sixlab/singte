@@ -50,10 +50,10 @@
                     <!-- logo -->
                     <div class="logo">
                         <a href="index.html" class="logo-expanded">
-                            <img src="/static/stack/images/logo@2x.png" width="100%" alt="" />
+                            <img src="${linkDomain.domainLogo}" width="100%" alt="" />
                         </a>
                         <a href="index.html" class="logo-collapsed">
-                            <img src="/static/stack/images/logo-collapsed@2x.png" width="40" alt="" />
+                            <img src="${linkDomain.domainH5Logo}" width="40" alt="" />
                         </a>
                     </div>
                     <div class="mobile-menu-toggle visible-xs">

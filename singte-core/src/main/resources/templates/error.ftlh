@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Error Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/plugins/bootstrap/js/bootstrap.min.js">
+    <script type="application/javascript" src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
