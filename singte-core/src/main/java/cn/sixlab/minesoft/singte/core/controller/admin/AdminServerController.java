@@ -38,7 +38,8 @@ public class AdminServerController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/update")
     public ModelResp update() {
-        return runShell("update.sh");
+        runShell("update.sh");
+        return runShell("kill.sh");
     }
 
     @ResponseBody
