@@ -4,13 +4,11 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.GifCaptcha;
 import cn.hutool.captcha.generator.RandomGenerator;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
-import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
-import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
-import cn.sixlab.minesoft.singte.core.common.utils.StErr;
-import cn.sixlab.minesoft.singte.core.common.utils.TokenUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.*;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StPageDao;
 import cn.sixlab.minesoft.singte.core.models.StPage;
+import cn.sixlab.minesoft.singte.core.service.ArticleService;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,7 +32,20 @@ public class IndexController extends BaseController {
     private StPageDao pageDao;
 
     @Autowired
+    private ArticleService service;
+
+    @Autowired
+    private ConfigUtils configUtils;
+
+    @Autowired
     private StUserDetailsService userDetailsService;
+
+    @GetMapping(value = {"", "/", "/index", "/home"})
+    public String index(ModelMap modelMap) {
+        service.listList(modelMap, 1, 10);
+        modelMap.put("title", configUtils.getConfig("st_site_name"));
+        return "index";
+    }
 
     @GetMapping(value = "/about")
     public String article(ModelMap modelMap) {

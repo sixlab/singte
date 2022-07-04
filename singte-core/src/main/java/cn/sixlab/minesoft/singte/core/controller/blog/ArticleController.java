@@ -1,6 +1,5 @@
 package cn.sixlab.minesoft.singte.core.controller.blog;
 
-import cn.sixlab.minesoft.singte.core.common.annotation.StDomainDeclare;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
@@ -13,7 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@StDomainDeclare("blogDomain")
 @RequestMapping("/article")
 public class ArticleController extends BaseController {
 
