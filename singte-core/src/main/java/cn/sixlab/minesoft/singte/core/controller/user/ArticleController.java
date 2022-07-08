@@ -1,4 +1,4 @@
-package cn.sixlab.minesoft.singte.core.controller.blog;
+package cn.sixlab.minesoft.singte.core.controller.user;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
+@ApiIgnore
 @Controller
 @RequestMapping("/article")
 public class ArticleController extends BaseController {

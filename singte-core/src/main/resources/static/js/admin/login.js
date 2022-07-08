@@ -3,7 +3,7 @@ $(function () {
         let key = Date.now().toString(36) + Math.random().toString(36);
 
         $("#captchaKey").val(key);
-        $("#captchaImg").attr("src", "/captcha?width=100&height=41&key=" + key);
+        $("#captchaImg").attr("src", "/captcha/image?width=100&height=41&key=" + key);
     }
 
     function login(){

@@ -1,11 +1,11 @@
-package cn.sixlab.minesoft.singte.core.controller.api;
+package cn.sixlab.minesoft.singte.core.controller.user;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.utils.TokenUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.UserUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.common.vo.StException;
-import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
 import io.swagger.annotations.Api;
@@ -17,19 +17,16 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
-
 @Controller
 @RequestMapping("/user")
-@Api(tags = "登录接口", description = "/user 用于登录")
-public class ApiLoginController extends BaseController {
+@Api(tags = "用户操作", description = "/user 用户操作")
+public class UserController extends BaseController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -37,15 +34,13 @@ public class ApiLoginController extends BaseController {
     @Autowired
     private StUserDetailsService userDetailsService;
 
-    @Autowired
-    private StUserDao userMapper;
-
     @ResponseBody
     @PostMapping(value = "/login")
-    @ApiOperation(value = "用户登录", notes = "用户登录 - 说明", consumes = "application/x-www-form-urlencoded", produces = "application/json")
-    public ModelResp userLogin(
-            @ApiParam(name = "用户名", value = "username") @RequestParam(value = "username", required = false) String username,
-            @ApiParam(name = "密码", value = "password") @RequestParam(value = "password", required = false) String password) {
+    @ApiOperation(value = "用户登录", notes = "用户登录", consumes = "application/x-www-form-urlencoded", produces = "application/json")
+    public ModelResp login(
+            @ApiParam(name = "username", value = "用户名") @RequestParam(required = false) String username,
+            @ApiParam(name = "password", value = "密码") @RequestParam(required = false) String password
+    ) {
         logger.info(" username:" + username + " begin login ");
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -62,28 +57,12 @@ public class ApiLoginController extends BaseController {
     }
 
     @ResponseBody
-    @PostMapping(value = "/add")
-    @ApiOperation(value = "新增用户", notes = "用户登录 - 说明", consumes = "application/x-www-form-urlencoded", produces = "application/json")
-    public ModelResp addUser(
-            @ApiParam(name = "用户名", value = "username") @RequestParam(value = "username", required = false) String username,
-            @ApiParam(name = "密码", value = "password") @RequestParam(value = "password", required = false) String password) {
-        logger.info(" username:" + username + " begin add ");
+    @PostMapping(value = "/info")
+    @ApiOperation(value = "用户信息", notes = "用户信息", consumes = "application/x-www-form-urlencoded", produces = "application/json")
+    public ModelResp info() {
+        StUser stUser = userDetailsService.loadUser(UserUtils.getUsername());
 
-        StUser stUser = userMapper.selectByUsername(username);
-
-        if(null == stUser){
-            stUser = new StUser();
-            stUser.setUsername(username);
-            stUser.setShowName(username);
-            stUser.setPassword(new BCryptPasswordEncoder().encode(password));
-            stUser.setStatus("1");
-            stUser.setCreateTime(new Date());
-
-            userMapper.save(stUser);
-        }else{
-            return ModelResp.error(StErr.EXIST_SAME, "用户已存在");
-        }
-
-        return ModelResp.success();
+        return ModelResp.success(stUser);
     }
+
 }

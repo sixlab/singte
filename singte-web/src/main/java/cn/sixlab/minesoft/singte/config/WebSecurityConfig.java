@@ -61,36 +61,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // dont authenticate this particular request
         httpSecurity.authorizeRequests()
                 .antMatchers("/**/login/**").permitAll()
-                .antMatchers("/user/**").hasAuthority(StConst.ROLE_USER)
+                .antMatchers("/user/**").hasAnyAuthority(StConst.ROLE_USER, StConst.ROLE_ADMIN)
                 .antMatchers("/admin/**").hasAuthority(StConst.ROLE_ADMIN)
                 .anyRequest().permitAll();
 
         httpSecurity.addFilterBefore(loginStatusFilter, UsernamePasswordAuthenticationFilter.class);
 
         //添加 校验过滤器
-//        Filter authenticationFilter = new JwtAuthenticationFilter(authenticationManager());
-//        httpSecurity.addFilter(authenticationFilter);
+        //        Filter authenticationFilter = new JwtAuthenticationFilter(authenticationManager());
+        //        httpSecurity.addFilter(authenticationFilter);
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         // AuthenticationTokenFilter will ignore the below paths
-        web
-                .ignoring()
-                .antMatchers(
-                        HttpMethod.POST,
-                        "/api/**"
-                )
-                .and()
-                .ignoring()
-                .antMatchers(
-                        HttpMethod.GET,
-                        "/",
-                        "/favicon.ico",
-                        "/static/**",
-                        "/api/**",
-                        "/MP_verify_*.txt",
-                        "/file/files/*"
-                );
+        web.ignoring().antMatchers(
+                HttpMethod.GET,
+                "/",
+                "/favicon.ico",
+                "/static/**",
+                "/MP_verify_*.txt",
+                "/file/files/*"
+        );
     }
 }

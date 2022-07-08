@@ -1,4 +1,4 @@
-package cn.sixlab.minesoft.singte.core.controller;
+package cn.sixlab.minesoft.singte.core.controller.user;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
+@ApiIgnore
 @Controller
 @RequestMapping("/ancient")
 public class AncientController extends BaseController {

@@ -2,9 +2,7 @@ package cn.sixlab.minesoft.singte.config;
 
 import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
-import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.utils.WebUtils;
-import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.models.StUser;
 import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,13 +38,15 @@ public class StLoginStatusFilter extends OncePerRequestFilter {
 
             if (null != stUser) {
                 if (!StConst.YES.equals(stUser.getStatus())) {
-                    // 禁用
-                    WebUtils.getResponse().getWriter().write(ModelResp.error(StErr.LOGIN_DISABLE, "login.err.disable").toString());
-                    return;
+                    // // 禁用
+                    // response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+                    // response.getWriter().write(ModelResp.error(StErr.LOGIN_DISABLE, I18nUtils.get("login.err.disable")).toString());
+                    // return;
                 } else if (new Date().compareTo(stUser.getTokenValid()) > 0) {
-                    // 过期
-                    WebUtils.getResponse().getWriter().write(ModelResp.error(StErr.LOGIN_EXPIRED, "login.err.expired").toString());
-                    return;
+                    // // 过期
+                    // response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+                    // response.getWriter().write(ModelResp.error(StErr.LOGIN_EXPIRED, I18nUtils.get("login.err.expired")).toString());
+                    // return;
                 } else {
                     if (SecurityContextHolder.getContext().getAuthentication() == null) {
                         UserDetails userDetails = userDetailsService.loadUserByUsername(stUser.getUsername());

@@ -1,4 +1,4 @@
-package cn.sixlab.minesoft.singte.core.controller;
+package cn.sixlab.minesoft.singte.core.controller.user;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Arrays;
 
+@ApiIgnore
 @Controller
 @RequestMapping("/wx")
 public class WxController extends BaseController {

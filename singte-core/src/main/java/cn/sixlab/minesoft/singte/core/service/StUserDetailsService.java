@@ -42,6 +42,12 @@ public class StUserDetailsService implements UserDetailsService {
         }
     }
 
+    public StUser loadUser(String username) {
+        StUser stUser = userMapper.selectByUsername(username);
+        stUser.setPassword(null);
+        return stUser;
+    }
+
     public StUser loadUserByToken(String token) {
         return userMapper.selectByToken(token);
     }
