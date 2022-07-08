@@ -90,32 +90,4 @@ public class IndexController extends BaseController {
         }
     }
 
-    @ResponseBody
-    @GetMapping(value = "/initTest")
-    public String initTest() {
-
-        return I18nUtils.get("login.forbidden");
-    }
-
-    @ResponseBody
-    @PostMapping(value = "/user/login")
-    public ModelResp login(String username, String password) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        if (null == userDetails) {
-            return ModelResp.error(StErr.NOT_EXIST, "login.user.none");
-        }
-
-        if (!BCrypt.checkpw(password, userDetails.getPassword())) {
-            return ModelResp.error(StErr.LOGIN_PWD_ERR, "login.err.pwd");
-        }
-
-        if (!userDetails.isEnabled()) {
-            return ModelResp.error(StErr.LOGIN_DISABLE, "login.err.disable");
-        }
-
-        final String token = TokenUtils.generateToken(userDetails);
-        userDetailsService.updateToken(username, token);
-
-        return ModelResp.success().add("Authorization", token);
-    }
 }
