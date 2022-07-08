@@ -17,7 +17,8 @@ public class SwaggerConfiguration {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).groupName("Singte")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("cn.sixlab.minesoft.singte"))//指定的API包，可以是controller，可以是专门的对外接口，列如：com.base.zijie.controller,根据实际情况而言
+                //
+                .apis(RequestHandlerSelectors.basePackage("cn.sixlab.minesoft.singte.core.controller.api"))//指定的API包，可以是controller，可以是专门的对外接口，列如：com.base.zijie.controller,根据实际情况而言
                 .build();
     }
 
