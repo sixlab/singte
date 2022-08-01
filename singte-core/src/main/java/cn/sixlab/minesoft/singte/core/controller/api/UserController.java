@@ -1,4 +1,4 @@
-package cn.sixlab.minesoft.singte.core.controller.user;
+package cn.sixlab.minesoft.singte.core.controller.api;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
@@ -36,7 +36,7 @@ public class UserController extends BaseController {
 
     @ResponseBody
     @PostMapping(value = "/login")
-    @ApiOperation(value = "用户登录", notes = "用户登录", consumes = "application/x-www-form-urlencoded", produces = "application/json")
+    @ApiOperation(value = "用户登录", consumes = "application/x-www-form-urlencoded", produces = "application/json")
     public ModelResp login(
             @ApiParam(name = "username", value = "用户名") @RequestParam(required = false) String username,
             @ApiParam(name = "password", value = "密码") @RequestParam(required = false) String password
@@ -58,7 +58,7 @@ public class UserController extends BaseController {
 
     @ResponseBody
     @PostMapping(value = "/info")
-    @ApiOperation(value = "用户信息", notes = "用户信息", consumes = "application/x-www-form-urlencoded", produces = "application/json")
+    @ApiOperation(value = "用户信息", consumes = "application/x-www-form-urlencoded", produces = "application/json")
     public ModelResp info() {
         StUser stUser = userDetailsService.loadUser(UserUtils.getUsername());
 

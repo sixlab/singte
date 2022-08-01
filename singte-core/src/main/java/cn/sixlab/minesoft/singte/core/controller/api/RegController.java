@@ -1,7 +1,8 @@
-package cn.sixlab.minesoft.singte.core.controller.user;
+package cn.sixlab.minesoft.singte.core.controller.api;
 
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.CaptchaUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.utils.StErr;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.StUserDao;
@@ -11,15 +12,14 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
-@Controller
+@RestController
 @RequestMapping("/reg")
 @Api(tags = "注册", description = "/reg 注册")
 public class RegController extends BaseController {
@@ -27,9 +27,8 @@ public class RegController extends BaseController {
     @Autowired
     private StUserDao userMapper;
 
-    @ResponseBody
     @PostMapping(value = "/submit")
-    @ApiOperation(value = "注册用户", notes = "注册用户", consumes = "application/x-www-form-urlencoded", produces = "application/json")
+    @ApiOperation(value = "注册用户", consumes = "application/x-www-form-urlencoded", produces = "application/json")
     public ModelResp addUser(
             @ApiParam(name = "username", value = "用户名", required = true) @RequestParam String username,
             @ApiParam(name = "password", value = "密码", required = true) @RequestParam String password,
@@ -47,6 +46,7 @@ public class RegController extends BaseController {
                 stUser.setShowName(username);
                 stUser.setPassword(new BCryptPasswordEncoder().encode(password));
                 stUser.setStatus("1");
+                stUser.setRole(StConst.ROLE_USER);
                 stUser.setCreateTime(new Date());
 
                 userMapper.save(stUser);

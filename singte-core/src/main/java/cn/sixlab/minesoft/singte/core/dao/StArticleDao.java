@@ -149,6 +149,7 @@ public class StArticleDao extends BaseDao<StArticle> {
         return pageQuery(query, StArticle.class, pageNum, pageSize);
     }
 
+    @Override
     public PageResult<StArticle> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
         Criteria criteria = new Criteria();
         if (StrUtil.isNotEmpty(status)) {

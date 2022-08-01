@@ -1,4 +1,4 @@
-package cn.sixlab.minesoft.singte.core.controller.user;
+package cn.sixlab.minesoft.singte.core.controller.api;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.GifCaptcha;
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class CaptchaController extends BaseController {
 
     @GetMapping(value = "/image")
-    @ApiOperation(value = "显示图片验证码", notes = "显示图片版本验证码", produces = "image/gif")
+    @ApiOperation(value = "显示图片验证码", produces = "image/gif")
     public void captcha(
             @ApiParam(name = "key", value = "图片唯一标示符", required = true) @RequestParam String key,
             @ApiParam(name = "width", value = "图片宽", required = true) @RequestParam int width,
@@ -43,7 +43,7 @@ public class CaptchaController extends BaseController {
 
     @ResponseBody
     @PostMapping(value = "/verify")
-    @ApiOperation(value = "验证验证码-用于测试", notes = "验证验证码-用于测试", consumes = "application/x-www-form-urlencoded", produces = "application/json")
+    @ApiOperation(value = "验证验证码-用于测试", consumes = "application/x-www-form-urlencoded", produces = "application/json")
     public ModelResp verify(
             @ApiParam(name = "key", value = "图片唯一标示符", required = true) @RequestParam String key,
             @ApiParam(name = "code", value = "用户输入的验证码", required = true) @RequestParam String code
