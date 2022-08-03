@@ -89,13 +89,17 @@ public class ApiDingTalkController extends BaseController {
                 } else if (StrUtil.startWithAny(content, "d", "delete", "删除")) {
                     String[] strings = StrUtil.splitToArray(content, " ");
                     if (strings.length == 2 && NumberUtil.isNumber(strings[1])) {
-                        StTodo stTodo = todoDao.selectByUserNo(username, Integer.valueOf(strings[1]));
+                        Integer indexNo = Integer.valueOf(strings[1]);
+                        StTodo stTodo = todoDao.selectByUserNo(username, indexNo);
                         if (null != stTodo) {
                             todoDao.deleteById(stTodo.getId());
 
-                            sb.append("编号[").append(content).append("]任务已删除：").append(stTodo.getTodoName());
+                            sb.append("编号[").append(indexNo).append("]任务已删除：").append(stTodo.getTodoName());
+
+                            String message = dingTalkJob.userMessage(stUser);
+                            sb.append("\n\n").append(message);
                         } else {
-                            sb.append("未发现任务编号：").append(content);
+                            sb.append("未发现任务编号：").append(indexNo);
                         }
                     }
                 } else if (StrUtil.startWithAny(content, "a", "add", "添加")) {
@@ -128,7 +132,7 @@ public class ApiDingTalkController extends BaseController {
                         todoDao.save(todo);
 
                         String message = dingTalkJob.userMessage(stUser);
-                        sb.append("任务添加完成：").append(todo.getTodoName()).append("\n").append(message);
+                        sb.append("任务添加完成：").append(todo.getTodoName()).append("\n\n").append(message);
                     }else{
                         sb.append("参数无效，长度小于2");
                     }
