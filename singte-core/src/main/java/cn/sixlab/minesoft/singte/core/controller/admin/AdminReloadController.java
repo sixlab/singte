@@ -52,6 +52,15 @@ public class AdminReloadController extends BaseController {
 
     @SneakyThrows
     @ResponseBody
+    @PostMapping(value = "/todo")
+    public ModelResp todo() {
+
+
+        return ModelResp.success();
+    }
+
+    @SneakyThrows
+    @ResponseBody
     @PostMapping(value = "/spider")
     public ModelResp spider() {
         List<StSpider> spiderList = spiderDao.selectByStatus(StConst.YES);

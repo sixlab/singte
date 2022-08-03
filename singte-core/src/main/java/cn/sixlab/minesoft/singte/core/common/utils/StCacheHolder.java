@@ -15,4 +15,5 @@ public class StCacheHolder {
     }
 
     public static final String KEY_WX_TOKEN = "key_wx_token";
+    public static final String KEY_DINGTALK_TOKEN = "key_dingtalk_token";
 }

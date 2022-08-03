@@ -18,6 +18,7 @@ public class InitMenu implements BaseInitComponent {
         checkMenu(false, "menu.index", "menu.st-level1", "fas fa-tachometer-alt", "/admin/index", 100, "首页");
 
         checkMenu(true, "menu.article.manage", "menu.st-level1", "fas fa-th", "", 200, "文章管理");
+        checkMenu(true, "menu.todo.manage", "menu.st-level1", "fas fa-th", "", 300, "待办管理");
         checkMenu(true, "menu.spider.manage", "menu.st-level1", "fas fa-th", "", 500, "爬虫管理");
         checkMenu(true, "menu.ancient.manage", "menu.st-level1", "fas fa-th", "", 600, "古文管理");
         checkMenu(true, "menu.tool.manage", "menu.st-level1", "fas fa-th", "", 700, "工具管理");
@@ -28,6 +29,8 @@ public class InitMenu implements BaseInitComponent {
         checkMenu(false, "menu.page.list", "menu.article.manage", "far fa-circle", "/admin/page/list", 200130, "页面列表");
         checkMenu(false, "menu.article.category", "menu.article.manage", "far fa-circle", "/admin/category/list", 200200, "分类列表");
         checkMenu(false, "menu.article.keyword", "menu.article.manage", "far fa-circle", "/admin/keyword/list", 200300, "关键词列表");
+
+        checkMenu(false, "menu.todo.list", "menu.todo.manage", "far fa-circle", "/admin/table/SteTodo/list", 300100, "待办列表");
 
         checkMenu(false, "menu.spider.list", "menu.spider.manage", "far fa-circle", "/admin/table/StSpider/list", 500100, "爬虫列表");
         checkMenu(false, "menu.spider.log", "menu.spider.manage", "far fa-circle", "/admin/table/StSpiderLog/list", 500200, "爬虫记录");
@@ -47,6 +50,7 @@ public class InitMenu implements BaseInitComponent {
         checkMenu(false, "menu.stack.link", "menu.stack.manage", "far fa-circle", "/admin/table/StLink/list", 710200, "导航网址");
 
         checkMenu(false, "menu.user.list", "menu.system.manage", "far fa-circle", "/admin/user/list", 800100, "用户列表");
+        checkMenu(false, "menu.usermeta.list", "menu.system.manage", "far fa-circle", "/admin/table/StUserMeta/list", 800150, "用户参数");
         checkMenu(false, "menu.config.list", "menu.system.manage", "far fa-circle", "/admin/config/list", 800200, "系统参数");
         checkMenu(false, "menu.menu.list", "menu.system.manage", "far fa-circle", "/admin/menu/list", 800300, "菜单管理");
         checkMenu(false, "menu.lang.list", "menu.system.manage", "far fa-circle", "/admin/lang/list", 800400, "语言管理");

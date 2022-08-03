@@ -1,10 +1,12 @@
 package cn.sixlab.minesoft.singte.core.controller.user;
 
+import cn.hutool.extra.spring.SpringUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import cn.sixlab.minesoft.singte.core.common.vo.ModelResp;
 import cn.sixlab.minesoft.singte.core.dao.*;
 import cn.sixlab.minesoft.singte.core.models.*;
+import cn.sixlab.minesoft.singte.core.schedule.DingTalkJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +24,8 @@ public class ToolController extends BaseController {
 
     @GetMapping(value = "/list")
     public String listSet(ModelMap modelMap) {
+
+        SpringUtil.getBean(DingTalkJob.class).morning();
 
 //        modelMap.put("result", toolCategoryDao.list());
 

@@ -41,6 +41,9 @@ public class StConst {
     public static final String WX_APP_TOKEN = "wx_app_token";
     public static final String WX_APP_SECRET = "wx_app_secret";
 
+    public static final String DT_APP_KEY = "dt_app_key";
+    public static final String DT_APP_SECRET = "dt_app_secret";
+
     public static final long SECONDS_1      = 1;
     public static final long SECONDS_MIN_1  = 60;
     public static final long SECONDS_MIN_2  = SECONDS_MIN_1 * 2;
