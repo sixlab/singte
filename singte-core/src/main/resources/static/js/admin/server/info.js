@@ -58,7 +58,7 @@ $(function () {
                         type: 'post',
                         dataType: 'json',
                         success: function (res) {
-                            if (200 === res.status) {
+                            if (200 === res.status && res.newServer) {
                                 clearInterval(intervalId);
                                 Swal.fire({
                                     icon: "success",

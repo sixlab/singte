@@ -25,6 +25,7 @@ import java.util.Date;
 @RequestMapping("/admin/server")
 public class AdminServerController extends BaseController {
     private static final Date startTime = new Date();
+    private static boolean newServer = true;
 
     @Autowired
     private ConfigUtils configUtils;
@@ -41,6 +42,7 @@ public class AdminServerController extends BaseController {
     public ModelResp info() {
         ModelResp resp = ModelResp.success();
         resp.put("startTime", startTime);
+        resp.put("newServer", newServer);
         return resp;
     }
 
@@ -58,6 +60,7 @@ public class AdminServerController extends BaseController {
     }
 
     private ModelResp runShell(String file) {
+        newServer = false;
         String path = configUtils.getConfig(StConst.SERVER_SH_PATH);
 
         Process exec;
