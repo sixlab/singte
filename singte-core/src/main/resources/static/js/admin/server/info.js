@@ -65,7 +65,9 @@ $(function () {
                                     text: "操作完成",
                                     showConfirmButton: false,
                                     timer: 2000
-                                })
+                                }).then(function () {
+                                    location.reload();
+                                });
                             }
                         },
                         error(err) {
