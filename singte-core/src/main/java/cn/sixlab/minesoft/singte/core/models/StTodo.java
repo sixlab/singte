@@ -26,7 +26,7 @@ public class StTodo extends BaseModel {
     @StColumn(text = "label.todo.todoType", placeholder = "ph.todo.todoType", order = 400, inputCss = "required", defaultVal = "1")
     private String todoType;
 
-    @StColumn(text = "label.task.taskCron", placeholder = "ph.task.taskCron", order = 500)
+    @StColumn(text = "label.task.taskCron", placeholder = "label.task.taskCron", order = 500)
     private String todoCron;
 
     @StColumn(text = "label.common.weight", placeholder = "label.common.weight", order = 600, inputCss = "required number")

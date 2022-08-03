@@ -76,7 +76,7 @@ public class DingTalkJob {
         }
     }
 
-    private String userMessage(StUser stUser) {
+    public String userMessage(StUser stUser) {
         List<StTodo> todoList = todoDao.selectStatus(stUser.getUsername(), StConst.YES);
         int index = 0;
 
