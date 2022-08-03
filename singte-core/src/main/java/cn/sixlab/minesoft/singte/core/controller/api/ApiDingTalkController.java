@@ -68,8 +68,9 @@ public class ApiDingTalkController extends BaseController {
                     sb.append("回复 h/help: 返回帮助内容\n");
                     sb.append("回复 l/list: 返回待办列表\n");
                     sb.append("回复 数字: 完成待办列表里的指定序号的任务\n");
-                    sb.append("回复 d 数字: 删除待办列表里的指定序号的任务\n");
-                    sb.append("回复 以“添加”开头的字符串: 添加任务，多个参数以空格分割，示例：\n");
+                    sb.append("回复 以“d/delete/删除”开头的字符串: 删除任务，多个参数以空格分割，示例：\n");
+                    sb.append("    - 删除 1：删除序号是1的任务\n");
+                    sb.append("回复 以“a/add/添加”开头的字符串: 添加任务，多个参数以空格分割，示例：\n");
                     sb.append("    - 添加 任务名称：添加一次性任务，并默认启用\n");
                     sb.append("    - 添加 任务名称 cron表达式：添加循环任务，并默认不启用，等下次cron表达式生效才启用\n");
                     sb.append("    - 添加 任务名称 cron表达式 1：添加循环任务，并默认启用\n");
@@ -85,7 +86,7 @@ public class ApiDingTalkController extends BaseController {
                     } else {
                         sb.append("未发现任务编号：").append(content);
                     }
-                } else if (content.startsWith("d")) {
+                } else if (StrUtil.startWithAny(content, "d", "delete", "删除")) {
                     String[] strings = StrUtil.splitToArray(content, " ");
                     if (strings.length == 2 && NumberUtil.isNumber(strings[1])) {
                         StTodo stTodo = todoDao.selectByUserNo(username, Integer.valueOf(strings[1]));
@@ -97,7 +98,7 @@ public class ApiDingTalkController extends BaseController {
                             sb.append("未发现任务编号：").append(content);
                         }
                     }
-                } else if (content.startsWith("添加")) {
+                } else if (StrUtil.startWithAny(content, "a", "add", "添加")) {
                     String[] strings = StrUtil.splitToArray(content, " ");
                     if (strings.length >= 2) {
                         StTodo todo = new StTodo();
