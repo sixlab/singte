@@ -89,7 +89,13 @@ public class ApiDingTalkController extends BaseController {
                     String[] strings = StrUtil.splitToArray(content, " ");
                     if (strings.length == 2 && NumberUtil.isNumber(strings[1])) {
                         StTodo stTodo = todoDao.selectByUserNo(username, Integer.valueOf(strings[1]));
-                        todoDao.deleteById(stTodo.getId());
+                        if (null != stTodo) {
+                            todoDao.deleteById(stTodo.getId());
+
+                            sb.append("编号[").append(content).append("]任务已删除：").append(stTodo.getTodoName());
+                        } else {
+                            sb.append("未发现任务编号：").append(content);
+                        }
                     }
                 } else if (content.startsWith("添加")) {
                     String[] strings = StrUtil.splitToArray(content, " ");
