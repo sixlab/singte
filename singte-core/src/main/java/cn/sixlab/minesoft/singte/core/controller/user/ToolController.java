@@ -25,8 +25,6 @@ public class ToolController extends BaseController {
     @GetMapping(value = "/list")
     public String listSet(ModelMap modelMap) {
 
-        SpringUtil.getBean(DingTalkJob.class).morning();
-
 //        modelMap.put("result", toolCategoryDao.list());
 
         modelMap.put("title", I18nUtils.get("page.title.tool.category.front"));

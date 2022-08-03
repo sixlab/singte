@@ -50,7 +50,29 @@ $(function () {
                             timer: 2000
                         })
                     }
-                })
+                });
+
+                let intervalId = setInterval(function () {
+                    $.ajax({
+                        url: "/admin/server/info",
+                        type: 'post',
+                        dataType: 'json',
+                        success: function (res) {
+                            if (200 === res.status) {
+                                clearInterval(intervalId);
+                                Swal.fire({
+                                    icon: "success",
+                                    text: "操作完成",
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                            }
+                        },
+                        error(err) {
+                            console.log(err)
+                        }
+                    });
+                }, 5000);
             }
         })
     }
