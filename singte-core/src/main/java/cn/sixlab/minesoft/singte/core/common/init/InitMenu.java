@@ -30,7 +30,7 @@ public class InitMenu implements BaseInitComponent {
         checkMenu(false, "menu.article.category", "menu.article.manage", "far fa-circle", "/admin/category/list", 200200, "分类列表");
         checkMenu(false, "menu.article.keyword", "menu.article.manage", "far fa-circle", "/admin/keyword/list", 200300, "关键词列表");
 
-        checkMenu(false, "menu.todo.list", "menu.todo.manage", "far fa-circle", "/admin/table/SteTodo/list", 300100, "待办列表");
+        checkMenu(false, "menu.todo.list", "menu.todo.manage", "far fa-circle", "/admin/table/StTodo/list", 300100, "待办列表");
 
         checkMenu(false, "menu.spider.list", "menu.spider.manage", "far fa-circle", "/admin/table/StSpider/list", 500100, "爬虫列表");
         checkMenu(false, "menu.spider.log", "menu.spider.manage", "far fa-circle", "/admin/table/StSpiderLog/list", 500200, "爬虫记录");

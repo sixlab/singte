@@ -36,6 +36,9 @@ public class InitConfig implements BaseInitComponent {
 
         checkConfig(StConst.ST_COPY_YEAR, "2021", "版权年份");
         checkConfig(StConst.ST_ICP, "", "ICP备案号");
+
+        checkConfig(StConst.DT_APP_KEY, "1", "钉钉 key");
+        checkConfig(StConst.DT_APP_SECRET, "1", "钉钉 secret");
     }
 
     public void checkConfig(String key, String val, String intro) {

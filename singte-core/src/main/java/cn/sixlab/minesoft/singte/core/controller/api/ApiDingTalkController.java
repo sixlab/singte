@@ -50,7 +50,7 @@ public class ApiDingTalkController extends BaseController {
                     if (null != userMeta) {
                         String username = userMeta.getUsername();
 
-                        StTodo stTodo = todoDao.selectByUserNo(username, content);
+                        StTodo stTodo = todoDao.selectByUserNo(username, Integer.valueOf(content));
                         if (null != stTodo) {
                             stTodo.setStatus("0");
                             todoDao.save(stTodo);

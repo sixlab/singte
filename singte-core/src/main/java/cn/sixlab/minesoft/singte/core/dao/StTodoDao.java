@@ -70,7 +70,7 @@ public class StTodoDao extends BaseDao<StTodo> {
         return mongoTemplate.find(query, entityClass());
     }
 
-    public StTodo selectByUserNo(String username, String indexNo) {
+    public StTodo selectByUserNo(String username, Integer indexNo) {
         Criteria criteria = Criteria.where("status").is(StConst.YES)
                 .and("username").is(username).and("indexNo").is(indexNo);
 
