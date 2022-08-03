@@ -70,10 +70,10 @@ public class ApiDingTalkController extends BaseController {
                     sb.append("回复 数字: 完成待办列表里的指定序号的任务\n");
                     sb.append("回复 以“d/delete/删除”开头的字符串: 删除任务，多个参数以空格分割，示例：\n");
                     sb.append("    - 删除 1：删除序号是1的任务\n");
-                    sb.append("回复 以“a/add/添加”开头的字符串: 添加任务，多个参数以空格分割，示例：\n");
+                    sb.append("回复 以“a/add/添加”开头的字符串: 添加任务，多个参数以换行符分割，示例：\n");
                     sb.append("    - 添加 任务名称：添加一次性任务，并默认启用\n");
-                    sb.append("    - 添加 任务名称 cron表达式：添加循环任务，并默认不启用，等下次cron表达式生效才启用\n");
-                    sb.append("    - 添加 任务名称 cron表达式 1：添加循环任务，并默认启用\n");
+                    sb.append("    - 添加 任务名称+cron表达式：添加循环任务，并默认不启用，等下次cron表达式生效才启用\n");
+                    sb.append("    - 添加 任务名称+cron表达式+1：添加循环任务，并默认启用\n");
                 } else if (StrUtil.equalsAny(content, "l", "list")) {
                     sb.append(dingTalkJob.userMessage(stUser));
                 } else if (NumberUtil.isNumber(content)) {
@@ -99,7 +99,7 @@ public class ApiDingTalkController extends BaseController {
                         }
                     }
                 } else if (StrUtil.startWithAny(content, "a", "add", "添加")) {
-                    String[] strings = StrUtil.splitToArray(content, " ");
+                    String[] strings = StrUtil.splitToArray(content, "\n");
                     if (strings.length >= 2) {
                         StTodo todo = new StTodo();
 
