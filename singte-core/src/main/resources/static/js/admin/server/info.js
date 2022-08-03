@@ -25,31 +25,18 @@ $(function () {
                     type: 'post',
                     dataType: 'json',
                     success: function (res) {
-                        if (200 === res.status) {
-                            Swal.fire({
-                                icon: "success",
-                                text: data.message,
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                text: res.message,
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                        }
+                        console.log(res)
                     },
                     error(err) {
                         console.log(err)
-                        Swal.fire({
-                            icon: "error",
-                            text: "Error",
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
                     }
+                });
+
+                Swal.fire({
+                    title: "Loading...",
+                    showConfirmButton: false,
+                    imageUrl: "/static/images/loading.gif",
+                    showCancelButton: false,
                 });
 
                 let intervalId = setInterval(function () {
