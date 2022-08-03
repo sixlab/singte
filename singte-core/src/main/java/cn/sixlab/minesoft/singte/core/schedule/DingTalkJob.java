@@ -55,6 +55,12 @@ public class DingTalkJob {
     }
 
 
+    @Scheduled(cron = "0 0 18 * * ?")
+    public void afternoon() {
+        notifyTask();
+    }
+
+
     @Scheduled(cron = "0 0 22 * * ?")
     public void evening() {
         notifyTask();
