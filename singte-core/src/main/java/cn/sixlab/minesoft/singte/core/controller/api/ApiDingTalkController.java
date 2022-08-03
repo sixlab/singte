@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -64,7 +63,19 @@ public class ApiDingTalkController extends BaseController {
             if (null != text) {
                 StringBuilder sb = new StringBuilder();
                 String content = text.getStr("content");
-                if (NumberUtil.isNumber(content)) {
+
+                if (StrUtil.equalsAny(content, "h", "help")) {
+                    sb.append("回复 h/help: 返回帮助内容\n");
+                    sb.append("回复 l/list: 返回待办列表\n");
+                    sb.append("回复 数字: 完成待办列表里的指定序号的任务\n");
+                    sb.append("回复 d 数字: 删除待办列表里的指定序号的任务\n");
+                    sb.append("回复 以“添加”开头的字符串: 添加任务，多个参数以空格分割，示例：\n");
+                    sb.append("    - 添加 任务名称：添加一次性任务，并默认启用\n");
+                    sb.append("    - 添加 任务名称 cron表达式：添加循环任务，并默认不启用，等下次cron表达式生效才启用\n");
+                    sb.append("    - 添加 任务名称 cron表达式 1：添加循环任务，并默认启用\n");
+                } else if (StrUtil.equalsAny(content, "l", "list")) {
+                    sb.append(dingTalkJob.userMessage(stUser));
+                } else if (NumberUtil.isNumber(content)) {
                     StTodo stTodo = todoDao.selectByUserNo(username, Integer.valueOf(content));
                     if (null != stTodo) {
                         stTodo.setStatus("0");
@@ -74,19 +85,15 @@ public class ApiDingTalkController extends BaseController {
                     } else {
                         sb.append("未发现任务编号：").append(content);
                     }
-                } else if (StrUtil.equalsAny(content, "h", "help")) {
-                    sb.append("回复 h/help: 返回帮助内容\n");
-                    sb.append("回复 l/list: 返回待办列表\n");
-                    sb.append("回复 数字: 完成待办列表里的指定序号的任务\n");
-                    sb.append("回复 以“添加”开头的字符串: 添加任务，多个参数以空格分割，示例：\n");
-                    sb.append("    - 添加 任务名称：添加一次性任务，并默认启用\n");
-                    sb.append("    - 添加 任务名称 cron表达式：添加循环任务，并默认不启用，等下次cron表达式生效才启用\n");
-                    sb.append("    - 添加 任务名称 cron表达式 1：添加循环任务，并默认启用\n");
-                } else if (StrUtil.equalsAny(content, "l", "list")) {
-                    sb.append(dingTalkJob.userMessage(stUser));
+                } else if (content.startsWith("d")) {
+                    String[] strings = StrUtil.splitToArray(content, " ");
+                    if (strings.length == 2 && NumberUtil.isNumber(strings[1])) {
+                        StTodo stTodo = todoDao.selectByUserNo(username, Integer.valueOf(strings[1]));
+                        todoDao.deleteById(stTodo.getId());
+                    }
                 } else if (content.startsWith("添加")) {
-                    List<String> strings = StrUtil.split(content, " ");
-                    if (strings.size() >= 2) {
+                    String[] strings = StrUtil.splitToArray(content, " ");
+                    if (strings.length >= 2) {
                         StTodo todo = new StTodo();
 
                         todo.setTodoCode(dingUserId + new Date().getTime());
@@ -94,14 +101,14 @@ public class ApiDingTalkController extends BaseController {
 
                         // 先设置为默认启用
                         todo.setStatus(StConst.YES);
-                        todo.setTodoName(strings.get(1));
+                        todo.setTodoName(strings[1]);
 
-                        if (strings.size() >= 3) {
-                            todo.setTodoCron(strings.get(2));
+                        if (strings.length >= 3) {
+                            todo.setTodoCron(strings[2]);
                             // 如果长度超过2，先设置为禁用
                             todo.setStatus(StConst.No);
                         }
-                        if (strings.size() >= 4 && "1".equals(strings.get(3))) {
+                        if (strings.length >= 4 && "1".equals(strings[3])) {
                             // 第四个参数是1的，再启用
                             todo.setStatus(StConst.YES);
                         }
