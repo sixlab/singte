@@ -1,6 +1,7 @@
 package cn.sixlab.minesoft.singte.core.service;
 
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
@@ -23,17 +24,18 @@ public class DingTalkService {
     private ConfigUtils configUtils;
 
     public String accessToken() {
-        Object o = StCacheHolder.CACHE_90m.get(StCacheHolder.KEY_DINGTALK_TOKEN);
+        Object token = StCacheHolder.CACHE_90m.get(StCacheHolder.KEY_DINGTALK_TOKEN);
 
-        if (null == o) {
-            o = requestAccessToken();
-            if (null != o && StrUtil.isNotEmpty((CharSequence) o)) {
-                StCacheHolder.CACHE_90m.put(StCacheHolder.KEY_DINGTALK_TOKEN, o);
+
+        if (ObjectUtil.isEmpty(token)) {
+            token = requestAccessToken();
+            if (ObjectUtil.isNotEmpty(token)) {
+                StCacheHolder.CACHE_90m.put(StCacheHolder.KEY_DINGTALK_TOKEN, token);
             } else {
                 return "";
             }
         }
-        return o.toString();
+        return token.toString();
     }
 
     public String requestAccessToken() {
