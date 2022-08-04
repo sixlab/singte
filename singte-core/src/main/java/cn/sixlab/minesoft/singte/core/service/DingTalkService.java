@@ -8,12 +8,14 @@ import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import com.google.common.collect.ImmutableMap;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class DingTalkService {
 
@@ -25,7 +27,7 @@ public class DingTalkService {
 
         if (null == o) {
             o = requestAccessToken();
-            if (null != o) {
+            if (null != o && StrUtil.isNotEmpty((CharSequence) o)) {
                 StCacheHolder.CACHE_90m.put(StCacheHolder.KEY_DINGTALK_TOKEN, o);
             } else {
                 return "";
@@ -41,6 +43,9 @@ public class DingTalkService {
         Map<String, Object> param = ImmutableMap.of("appKey", appKey, "appSecret", appSecret);
 
         String resp = HttpUtil.post("https://api.dingtalk.com/v1.0/oauth2/accessToken", JSONUtil.toJsonStr(param));
+
+        log.info("请求 Token 返回：" + resp);
+
         Map json = JSONUtil.toBean(resp, Map.class);
 
         return MapUtil.getStr(json, "accessToken");
@@ -55,9 +60,11 @@ public class DingTalkService {
             param.put("msgKey", "sampleText");
             param.put("msgParam", JSONUtil.toJsonStr(ImmutableMap.of("content", text)));
 
-            HttpUtil.createPost("https://api.dingtalk.com/v1.0/robot/oToMessages/batchSend")
+            String resp = HttpUtil.createPost("https://api.dingtalk.com/v1.0/robot/oToMessages/batchSend")
                     .header("x-acs-dingtalk-access-token", accessToken)
                     .body(JSONUtil.toJsonStr(param)).execute().body();
+
+            log.info("请求返回：" + resp);
         }
     }
 }
