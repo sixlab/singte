@@ -101,14 +101,21 @@ public class ApiDingTalkController extends BaseController {
                     dingTalkService.sendSampleText(dingUserId, sb.toString());
                     sb.setLength(0);
                 } else if (StrUtil.equalsAny(content, "l", "list")) {
-                    sb.append(dingTalkJob.listStatusTodo(stUser, StConst.YES));
+                    sb.append(dingTalkJob.listTodo(stUser));
                 } else if (StrUtil.equalsAny(content, "ll")) {
-                    sb.append(dingTalkJob.listStatusTodo(stUser, StConst.NO));
+                    sb.append(dingTalkJob.listAllTask(stUser));
+                    dingTalkService.sendSampleText(dingUserId, sb.toString());
+                    sb.setLength(0);
+
+                    sb.append(dingTalkJob.listTodo(stUser));
+                    dingTalkService.sendSampleText(dingUserId, sb.toString());
+                    sb.setLength(0);
                 // 以下是内容为数字的
                 } else if (NumberUtil.isNumber(content)) {
-                    StTodo stTodo = todoDao.selectStatusByUserNo(username, Integer.valueOf(content), StConst.YES);
+                    StTodo stTodo = todoDao.selectByUserNo(username, Integer.valueOf(content));
                     if (null != stTodo) {
                         stTodo.setStatus(StConst.NO);
+                        stTodo.setIndexNo(null);
                         todoDao.save(stTodo);
 
                         sb.append("编号[").append(content).append("]任务完成：").append(stTodo.getTodoName());
@@ -145,7 +152,7 @@ public class ApiDingTalkController extends BaseController {
 
                         todoDao.save(todo);
 
-                        String message = dingTalkJob.listStatusTodo(stUser, StConst.YES);
+                        String message = dingTalkJob.listTodo(stUser);
                         sb.append("任务添加完成：").append(todo.getTodoName()).append("\n\n").append(message);
                     } else {
                         sb.append("参数无效，长度小于2");
@@ -156,12 +163,13 @@ public class ApiDingTalkController extends BaseController {
                         for (int i = 1; i < strings.length; i++) {
                             if (NumberUtil.isNumber(strings[1])) {
                                 Integer indexNo = Integer.valueOf(strings[1]);
-                                StTodo stTodo = todoDao.selectStatusByUserNo(username, indexNo, StConst.YES);
+                                StTodo stTodo = todoDao.selectByUserNo(username, indexNo);
                                 if (null != stTodo) {
+                                    stTodo.setIndexNo(null);
                                     stTodo.setStatus(StConst.NO);
                                     todoDao.save(stTodo);
 
-                                    sb.append("编号[").append(content).append("]任务完成：").append(stTodo.getTodoName());
+                                    sb.append("编号[").append(content).append("]任务完成：").append(stTodo.getTodoName()).append("\n");
                                 } else {
                                     sb.append("未发现任务编号：").append(indexNo);
                                 }
@@ -172,13 +180,13 @@ public class ApiDingTalkController extends BaseController {
                     String[] strings = StrUtil.splitToArray(content, " ");
                     if (strings.length == 2 && NumberUtil.isNumber(strings[1])) {
                         Integer indexNo = Integer.valueOf(strings[1]);
-                        StTodo stTodo = todoDao.selectStatusByUserNo(username, indexNo, StConst.YES);
+                        StTodo stTodo = todoDao.selectByUserNo(username, indexNo);
                         if (null != stTodo) {
                             todoDao.deleteById(stTodo.getId());
 
                             sb.append("编号[").append(indexNo).append("]任务已删除：").append(stTodo.getTodoName());
 
-                            String message = dingTalkJob.listStatusTodo(stUser, StConst.YES);
+                            String message = dingTalkJob.listTodo(stUser);
                             sb.append("\n\n").append(message);
                         } else {
                             sb.append("未发现任务编号：").append(indexNo);
@@ -188,14 +196,15 @@ public class ApiDingTalkController extends BaseController {
                     String[] strings = StrUtil.splitToArray(content, " ");
                     if (strings.length == 2 && NumberUtil.isNumber(strings[1])) {
                         Integer indexNo = Integer.valueOf(strings[1]);
-                        StTodo stTodo = todoDao.selectStatusByUserNo(username, indexNo, StConst.NO);
+                        StTodo stTodo = todoDao.selectByUserNo(username, indexNo);
                         if (null != stTodo) {
+                            stTodo.setIndexNo(null);
                             stTodo.setStatus(StConst.YES);
                             todoDao.save(stTodo);
 
                             sb.append("编号[").append(indexNo).append("]任务已启用：").append(stTodo.getTodoName());
 
-                            String message = dingTalkJob.listStatusTodo(stUser, StConst.YES);
+                            String message = dingTalkJob.listTodo(stUser);
                             sb.append("\n\n").append(message);
                         } else {
                             sb.append("未发现任务编号：").append(indexNo);

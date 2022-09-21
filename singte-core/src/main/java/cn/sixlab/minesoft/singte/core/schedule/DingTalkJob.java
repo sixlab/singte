@@ -74,19 +74,19 @@ public class DingTalkJob {
     private void notifyUser(StUser stUser) {
         StUserMeta talkUserId = userMetaDao.selectUserMeta(stUser.getUsername(), "dingTalk_UserId");
         if (null != talkUserId) {
-            String msg = listStatusTodo(stUser, StConst.YES);
+            String msg = listTodo(stUser);
             service.sendSampleText(talkUserId.getMetaVal(), msg);
         }
     }
 
-    public String listStatusTodo(StUser stUser, String status) {
-        List<StTodo> todoList = todoDao.selectStatus(stUser.getUsername(), status);
+    public String listAllTask(StUser stUser) {
+        List<StTodo> todoList = todoDao.selectStatus(stUser.getUsername(), StConst.NO);
         int index = 0;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("您好，").append(stUser.getShowName()).append("，您的待办清单：\n\n");
+        sb.append("您好，").append(stUser.getShowName()).append("，您的任务清单：\n\n");
         for (StTodo stTodo : todoList) {
-            stTodo.setIndexNo(++index);
+            stTodo.setIndexNo(--index);
             todoDao.save(stTodo);
 
             sb.append(index).append(". ").append(stTodo.getTodoName()).append("\n");
@@ -95,12 +95,12 @@ public class DingTalkJob {
         return sb.toString();
     }
 
-    public String listDisTodo(StUser stUser) {
-        List<StTodo> todoList = todoDao.selectStatus(stUser.getUsername(), StConst.NO);
+    public String listTodo(StUser stUser) {
+        List<StTodo> todoList = todoDao.selectStatus(stUser.getUsername(), StConst.YES);
         int index = 0;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("您好，").append(stUser.getShowName()).append("，您的任务清单：\n\n");
+        sb.append("您好，").append(stUser.getShowName()).append("，您的待办清单：\n\n");
         for (StTodo stTodo : todoList) {
             stTodo.setIndexNo(++index);
             todoDao.save(stTodo);

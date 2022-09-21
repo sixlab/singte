@@ -69,8 +69,8 @@ public class StTodoDao extends BaseDao<StTodo> {
         return mongoTemplate.find(query, entityClass());
     }
 
-    public StTodo selectStatusByUserNo(String username, Integer indexNo, String status) {
-        Criteria criteria = Criteria.where("status").is(status)
+    public StTodo selectByUserNo(String username, Integer indexNo) {
+        Criteria criteria = Criteria.where("status")
                 .and("username").is(username).and("indexNo").is(indexNo);
 
         Sort sort = Sort.by("weight", "id");
