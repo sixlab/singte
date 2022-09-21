@@ -96,7 +96,7 @@ public class ApiDingTalkController extends BaseController {
                 } else if (StrUtil.equalsAny(content, "l", "list")) {
                     sb.append(dingTalkJob.listStatusTodo(stUser, StConst.YES));
                 } else if (StrUtil.equalsAny(content, "ll")) {
-                    sb.append(dingTalkJob.listStatusTodo(stUser, StConst.YES));
+                    sb.append(dingTalkJob.listStatusTodo(stUser, StConst.NO));
                 } else if (NumberUtil.isNumber(content)) {
                     StTodo stTodo = todoDao.selectStatusByUserNo(username, Integer.valueOf(content), StConst.YES);
                     if (null != stTodo) {
