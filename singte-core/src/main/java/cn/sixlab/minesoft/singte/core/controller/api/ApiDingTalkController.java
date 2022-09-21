@@ -13,6 +13,7 @@ import cn.sixlab.minesoft.singte.core.models.StTodo;
 import cn.sixlab.minesoft.singte.core.models.StUser;
 import cn.sixlab.minesoft.singte.core.models.StUserMeta;
 import cn.sixlab.minesoft.singte.core.schedule.DingTalkJob;
+import cn.sixlab.minesoft.singte.core.service.AdminServerService;
 import cn.sixlab.minesoft.singte.core.service.DingTalkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -43,6 +44,9 @@ public class ApiDingTalkController extends BaseController {
     @Autowired
     private DingTalkService dingTalkService;
 
+    @Autowired
+    private AdminServerService adminServerService;
+
     @ResponseBody
     @PostMapping(value = "/callback")
     @ApiOperation(value = "钉钉机器人回调", consumes = "application/json", produces = "application/json")
@@ -66,6 +70,13 @@ public class ApiDingTalkController extends BaseController {
 
                 // 以下第一部分是完全匹配内容的
                 if (StrUtil.equalsAny(content, "h", "help")) {
+                    if(StConst.ROLE_ADMIN.equals(stUser.getRole())){
+                        sb.append("回复 重启: 重启服务器\n");
+                        sb.append("回复 更新: 更新服务器\n");
+
+                        dingTalkService.sendSampleText(dingUserId, sb.toString());
+                        sb.setLength(0);
+                    }
                     sb.append("回复 h/help: 返回帮助内容\n");
                     sb.append("回复 l/list: 返回待办列表\n");
                     sb.append("回复 ll: 返回所有任务列表\n");
@@ -100,6 +111,22 @@ public class ApiDingTalkController extends BaseController {
 
                     dingTalkService.sendSampleText(dingUserId, sb.toString());
                     sb.setLength(0);
+                } else if (StrUtil.equalsAny(content, "更新")) {
+                    if (StConst.ROLE_ADMIN.equals(stUser.getRole())) {
+                        dingTalkService.sendSampleText(dingUserId, "准备更新");
+                        sb.setLength(0);
+                        adminServerService.runShell("update.sh");
+
+                        dingTalkService.sendSampleText(dingUserId, "更新完毕，准备重启");
+                        sb.setLength(0);
+                        adminServerService.runShell("kill.sh");
+                    }
+                } else if (StrUtil.equalsAny(content, "重启")) {
+                    if (StConst.ROLE_ADMIN.equals(stUser.getRole())) {
+                        dingTalkService.sendSampleText(dingUserId, "准备重启");
+                        sb.setLength(0);
+                        adminServerService.runShell("update.sh");
+                    }
                 } else if (StrUtil.equalsAny(content, "l", "list")) {
                     sb.append(dingTalkJob.listTodo(stUser));
                 } else if (StrUtil.equalsAny(content, "ll")) {
