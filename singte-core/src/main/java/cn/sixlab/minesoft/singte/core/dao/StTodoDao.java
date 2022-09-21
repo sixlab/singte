@@ -70,8 +70,8 @@ public class StTodoDao extends BaseDao<StTodo> {
     }
 
     public StTodo selectByUserNo(String username, Integer indexNo) {
-        Criteria criteria = Criteria.where("status")
-                .and("username").is(username).and("indexNo").is(indexNo);
+        Criteria criteria = Criteria.where("username").is(username)
+                .and("indexNo").is(indexNo);
 
         Sort sort = Sort.by("weight", "id");
 
