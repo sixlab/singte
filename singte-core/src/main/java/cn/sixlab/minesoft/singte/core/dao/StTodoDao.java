@@ -3,7 +3,6 @@ package cn.sixlab.minesoft.singte.core.dao;
 import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
-import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.models.StTodo;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -70,8 +69,8 @@ public class StTodoDao extends BaseDao<StTodo> {
         return mongoTemplate.find(query, entityClass());
     }
 
-    public StTodo selectByUserNo(String username, Integer indexNo) {
-        Criteria criteria = Criteria.where("status").is(StConst.YES)
+    public StTodo selectStatusByUserNo(String username, Integer indexNo, String status) {
+        Criteria criteria = Criteria.where("status").is(status)
                 .and("username").is(username).and("indexNo").is(indexNo);
 
         Sort sort = Sort.by("weight", "id");
@@ -80,4 +79,5 @@ public class StTodoDao extends BaseDao<StTodo> {
 
         return mongoTemplate.findOne(query, entityClass());
     }
+
 }

@@ -20,7 +20,6 @@ import java.util.List;
 
 @Component
 public class DingTalkJob {
-
     @Autowired
     private StTodoDao todoDao;
 
@@ -54,12 +53,10 @@ public class DingTalkJob {
         notifyTask();
     }
 
-
     @Scheduled(cron = "0 0 18 * * ?")
     public void afternoon() {
         notifyTask();
     }
-
 
     @Scheduled(cron = "0 0 22 * * ?")
     public void evening() {
@@ -77,13 +74,13 @@ public class DingTalkJob {
     private void notifyUser(StUser stUser) {
         StUserMeta talkUserId = userMetaDao.selectUserMeta(stUser.getUsername(), "dingTalk_UserId");
         if (null != talkUserId) {
-            String msg = userMessage(stUser);
+            String msg = listStatusTodo(stUser, StConst.YES);
             service.sendSampleText(talkUserId.getMetaVal(), msg);
         }
     }
 
-    public String userMessage(StUser stUser) {
-        List<StTodo> todoList = todoDao.selectStatus(stUser.getUsername(), StConst.YES);
+    public String listStatusTodo(StUser stUser, String status) {
+        List<StTodo> todoList = todoDao.selectStatus(stUser.getUsername(), status);
         int index = 0;
 
         StringBuilder sb = new StringBuilder();
@@ -97,4 +94,21 @@ public class DingTalkJob {
 
         return sb.toString();
     }
+
+    public String listDisTodo(StUser stUser) {
+        List<StTodo> todoList = todoDao.selectStatus(stUser.getUsername(), StConst.NO);
+        int index = 0;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("您好，").append(stUser.getShowName()).append("，您的任务清单：\n\n");
+        for (StTodo stTodo : todoList) {
+            stTodo.setIndexNo(++index);
+            todoDao.save(stTodo);
+
+            sb.append(index).append(". ").append(stTodo.getTodoName()).append("\n");
+        }
+
+        return sb.toString();
+    }
+
 }

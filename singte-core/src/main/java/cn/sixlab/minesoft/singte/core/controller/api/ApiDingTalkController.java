@@ -67,36 +67,74 @@ public class ApiDingTalkController extends BaseController {
                 if (StrUtil.equalsAny(content, "h", "help")) {
                     sb.append("回复 h/help: 返回帮助内容\n");
                     sb.append("回复 l/list: 返回待办列表\n");
+                    sb.append("回复 ll: 返回所有任务列表\n");
                     sb.append("回复 数字: 完成待办列表里的指定序号的任务\n");
+
+                    dingTalkService.sendSampleText(dingUserId, sb.toString());
+                    sb.setLength(0);
+
                     sb.append("回复 以“d/delete/删除”开头的字符串: 删除任务，多个参数以空格分割，示例：\n");
                     sb.append("    - 删除 1：删除序号是1的任务\n");
+
+                    dingTalkService.sendSampleText(dingUserId, sb.toString());
+                    sb.setLength(0);
+
+                    sb.append("回复 以“s/status/状态”开头的字符串: 将未开启的任务置为待办，示例：\n");
+                    sb.append("    - 状态 1：将序号是1的任务启用[ll里边的顺序]\n");
+
+                    dingTalkService.sendSampleText(dingUserId, sb.toString());
+                    sb.setLength(0);
+
                     sb.append("回复 以“a/add/添加”开头的字符串: 添加任务，多个参数以换行符分割，示例：\n");
                     sb.append("    - 添加 任务名称：添加一次性任务，并默认启用\n");
                     sb.append("    - 添加 任务名称+cron表达式：添加循环任务，并默认不启用，等下次cron表达式生效才启用\n");
                     sb.append("    - 添加 任务名称+cron表达式+1：添加循环任务，并默认启用\n");
+                    sb.append("    - MON,TUE,WED,THU,FRI,SAT,SUN\n");
+
+                    dingTalkService.sendSampleText(dingUserId, sb.toString());
+                    sb.setLength(0);
                 } else if (StrUtil.equalsAny(content, "l", "list")) {
-                    sb.append(dingTalkJob.userMessage(stUser));
+                    sb.append(dingTalkJob.listStatusTodo(stUser, StConst.YES));
+                } else if (StrUtil.equalsAny(content, "ll")) {
+                    sb.append(dingTalkJob.listStatusTodo(stUser, StConst.YES));
                 } else if (NumberUtil.isNumber(content)) {
-                    StTodo stTodo = todoDao.selectByUserNo(username, Integer.valueOf(content));
+                    StTodo stTodo = todoDao.selectStatusByUserNo(username, Integer.valueOf(content), StConst.YES);
                     if (null != stTodo) {
-                        stTodo.setStatus("0");
+                        stTodo.setStatus(StConst.NO);
                         todoDao.save(stTodo);
 
                         sb.append("编号[").append(content).append("]任务完成：").append(stTodo.getTodoName());
                     } else {
                         sb.append("未发现任务编号：").append(content);
                     }
+                } else if (StrUtil.startWithAny(content, "s", "status", "状态")) {
+                    String[] strings = StrUtil.splitToArray(content, " ");
+                    if (strings.length == 2 && NumberUtil.isNumber(strings[1])) {
+                        Integer indexNo = Integer.valueOf(strings[1]);
+                        StTodo stTodo = todoDao.selectStatusByUserNo(username, indexNo, StConst.NO);
+                        if (null != stTodo) {
+                            stTodo.setStatus(StConst.YES);
+                            todoDao.save(stTodo);
+
+                            sb.append("编号[").append(indexNo).append("]任务已启用：").append(stTodo.getTodoName());
+
+                            String message = dingTalkJob.listStatusTodo(stUser, StConst.YES);
+                            sb.append("\n\n").append(message);
+                        } else {
+                            sb.append("未发现任务编号：").append(indexNo);
+                        }
+                    }
                 } else if (StrUtil.startWithAny(content, "d", "delete", "删除")) {
                     String[] strings = StrUtil.splitToArray(content, " ");
                     if (strings.length == 2 && NumberUtil.isNumber(strings[1])) {
                         Integer indexNo = Integer.valueOf(strings[1]);
-                        StTodo stTodo = todoDao.selectByUserNo(username, indexNo);
+                        StTodo stTodo = todoDao.selectStatusByUserNo(username, indexNo, StConst.YES);
                         if (null != stTodo) {
                             todoDao.deleteById(stTodo.getId());
 
                             sb.append("编号[").append(indexNo).append("]任务已删除：").append(stTodo.getTodoName());
 
-                            String message = dingTalkJob.userMessage(stUser);
+                            String message = dingTalkJob.listStatusTodo(stUser, StConst.YES);
                             sb.append("\n\n").append(message);
                         } else {
                             sb.append("未发现任务编号：").append(indexNo);
@@ -117,7 +155,7 @@ public class ApiDingTalkController extends BaseController {
                         if (strings.length >= 3) {
                             todo.setTodoCron(strings[2]);
                             // 如果长度超过2，先设置为禁用
-                            todo.setStatus(StConst.No);
+                            todo.setStatus(StConst.NO);
                         }
                         if (strings.length >= 4 && "1".equals(strings[3])) {
                             // 第四个参数是1的，再启用
@@ -131,7 +169,7 @@ public class ApiDingTalkController extends BaseController {
 
                         todoDao.save(todo);
 
-                        String message = dingTalkJob.userMessage(stUser);
+                        String message = dingTalkJob.listStatusTodo(stUser, StConst.YES);
                         sb.append("任务添加完成：").append(todo.getTodoName()).append("\n\n").append(message);
                     }else{
                         sb.append("参数无效，长度小于2");

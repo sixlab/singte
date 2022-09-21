@@ -9,7 +9,7 @@ public class StConst {
     public static final String DEPLOY_DATE = DateUtil.format(new Date(), "yyyyMMddHHmmss");
 
     public static final String YES = "1";
-    public static final String No = "0";
+    public static final String NO = "0";
 
     public final static String ST_VERSION   = "st_version";
     public final static String ST_INIT   = "st_init";

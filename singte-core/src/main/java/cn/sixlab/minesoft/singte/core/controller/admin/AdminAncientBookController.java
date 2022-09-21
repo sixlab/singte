@@ -65,7 +65,7 @@ public class AdminAncientBookController extends BaseController {
 
                 if (CollUtil.isEmpty(sectionList)) {
                     param.setCount(0);
-                    param.setStatus(StConst.No);
+                    param.setStatus(StConst.NO);
                     ancientBookDao.save(param);
                 } else {
                     List<String> authorList = ancientSectionDao.listBookAuthor(param.getBookName());
