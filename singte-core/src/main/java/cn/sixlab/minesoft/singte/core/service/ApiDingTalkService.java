@@ -3,8 +3,10 @@ package cn.sixlab.minesoft.singte.core.service;
 import cn.sixlab.minesoft.singte.core.common.config.BaseController;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.StTodoDao;
+import cn.sixlab.minesoft.singte.core.dao.StUserMetaDao;
 import cn.sixlab.minesoft.singte.core.models.StTodo;
 import cn.sixlab.minesoft.singte.core.models.StUser;
+import cn.sixlab.minesoft.singte.core.models.StUserMeta;
 import cn.sixlab.minesoft.singte.core.schedule.DingTalkJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class ApiDingTalkService extends BaseController {
 
     @Autowired
     private DingTalkJob dingTalkJob;
+
+    @Autowired
+    private StUserMetaDao userMetaDao;
 
     @Autowired
     private DingTalkService dingTalkService;
@@ -48,7 +53,9 @@ public class ApiDingTalkService extends BaseController {
         sb.append("    - 删除 1 -2：删除序号是1、-2的任务\n\n");
 
         sb.append("回复 以“b/batch/批量”开头的字符串: 批量完成任务，示例：\n");
-        sb.append("    - 批量 1 2 5：将序号是1/2/5的任务完成\n");
+        sb.append("    - 批量 1 2 5：将序号是1/2/5的任务完成\n\n");
+        sb.append("回复 以“t/tip/提示”开头的字符串: 设置提示，多个参数以换行符分割，示例：\n");
+        sb.append("    - 提示 xxxxxxx：设置提示语，放置于待办结尾\n");
 
         dingTalkService.sendSampleText(dingUserId, sb.toString());
         sb.setLength(0);
@@ -165,4 +172,20 @@ public class ApiDingTalkService extends BaseController {
         }
     }
 
+    public void tips(String dingUserId, StUser stUser, String[] params) {
+        StUserMeta talkUserTips = userMetaDao.selectUserMeta(stUser.getUsername(), "dingTalk_UserTips");
+        if(null== talkUserTips){
+            talkUserTips = new StUserMeta();
+            talkUserTips.setUsername(stUser.getUsername());
+            talkUserTips.setStatus(StConst.YES);
+            talkUserTips.setWeight(1);
+            talkUserTips.setIntro("");
+            talkUserTips.setMetaKey("dingTalk_UserTips");
+            talkUserTips.setCreateTime(new Date());
+        }else{
+            talkUserTips.setUpdateTime(new Date());
+        }
+        talkUserTips.setMetaVal(params[1]);
+        userMetaDao.save(talkUserTips);
+    }
 }

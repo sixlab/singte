@@ -104,6 +104,13 @@ public class ApiDingTalkController extends BaseController {
 
                         service.listTask(dingUserId, stUser);
                     }
+                } else if (StrUtil.startWithAny(content, "t", "tips", "提示")) {
+                    String[] params = StrUtil.splitToArray(content, "\n");
+                    if (params.length >= 2) {
+                        service.tips(dingUserId, stUser, params);
+                    } else {
+                        dingTalkService.sendSampleText(dingUserId, "参数无效，长度小于2");
+                    }
                 }
             }
         }

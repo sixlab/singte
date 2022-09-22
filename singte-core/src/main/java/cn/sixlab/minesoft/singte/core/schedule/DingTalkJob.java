@@ -108,11 +108,17 @@ public class DingTalkJob {
 
         StringBuilder sb = new StringBuilder();
         sb.append("您好，").append(stUser.getShowName()).append("，您的待办清单：\n\n");
+
         for (StTodo stTodo : todoList) {
             stTodo.setIndexNo(++index);
             todoDao.save(stTodo);
 
             sb.append(index).append(". ").append(stTodo.getTodoName()).append("\n");
+        }
+
+        StUserMeta talkUserTips = userMetaDao.selectUserMeta(stUser.getUsername(), "dingTalk_UserTips");
+        if (talkUserTips != null) {
+            sb.append("\n").append(talkUserTips.getMetaVal()).append("\n");
         }
 
         return sb.toString();
