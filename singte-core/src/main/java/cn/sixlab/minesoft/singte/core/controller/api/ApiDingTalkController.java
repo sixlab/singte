@@ -70,6 +70,8 @@ public class ApiDingTalkController extends BaseController {
                 } else if (NumberUtil.isNumber(content)) {
                     Integer indexNo = Integer.valueOf(content);
                     service.status(dingUserId, stUser, indexNo);
+
+                    service.listTask(dingUserId, stUser);
                     // 以下是以具体内容开头的
                 } else if (StrUtil.startWithAny(content, "a", "add", "添加")) {
                     String[] params = StrUtil.splitToArray(content, "\n");
@@ -82,11 +84,13 @@ public class ApiDingTalkController extends BaseController {
                     String[] params = StrUtil.splitToArray(content, " ");
                     if (params.length >= 2) {
                         for (int i = 1; i < params.length; i++) {
-                            if (NumberUtil.isNumber(params[1])) {
-                                Integer indexNo = Integer.valueOf(params[1]);
+                            if (NumberUtil.isNumber(params[i])) {
+                                Integer indexNo = Integer.valueOf(params[i]);
                                 service.status(dingUserId, stUser, indexNo);
                             }
                         }
+
+                        service.listTask(dingUserId, stUser);
                     }
                 } else if (StrUtil.startWithAny(content, "d", "delete", "删除")) {
                     String[] params = StrUtil.splitToArray(content, " ");
@@ -97,6 +101,8 @@ public class ApiDingTalkController extends BaseController {
                                 service.delete(dingUserId, stUser, indexNo);
                             }
                         }
+
+                        service.listTask(dingUserId, stUser);
                     }
                 }
             }
