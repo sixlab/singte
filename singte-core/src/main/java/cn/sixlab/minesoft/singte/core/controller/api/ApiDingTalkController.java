@@ -96,8 +96,8 @@ public class ApiDingTalkController extends BaseController {
                     String[] params = StrUtil.splitToArray(content, " ");
                     if (params.length >= 2) {
                         for (int i = 1; i < params.length; i++) {
-                            if (NumberUtil.isNumber(params[1])) {
-                                Integer indexNo = Integer.valueOf(params[1]);
+                            if (NumberUtil.isNumber(params[i])) {
+                                Integer indexNo = Integer.valueOf(params[i]);
                                 service.delete(dingUserId, stUser, indexNo);
                             }
                         }
