@@ -26,7 +26,7 @@ public class AdminIndexController extends BaseController {
 
         try {
             Class clz = Class.forName(clzName);
-            Object bean = SpringUtil.getBean(clzName);
+            Object bean = SpringUtil.getBean(clz);
             Method clzMethod = clz.getMethod(method, null);
             clzMethod.invoke(bean, null);
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {

@@ -10,8 +10,6 @@ import java.beans.PropertyEditorSupport;
 import java.util.Date;
 
 public class BaseController {
-    protected Logger logger = LoggerFactory.getLogger(getClass());
-
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {

@@ -11,6 +11,7 @@ import cn.sixlab.minesoft.singte.core.service.StUserDetailsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Slf4j
 @Controller
 @RequestMapping("/user")
 @Api(tags = "用户操作", description = "/user 用户操作")
@@ -41,7 +43,7 @@ public class UserController extends BaseController {
             @ApiParam(name = "username", value = "用户名") @RequestParam(required = false) String username,
             @ApiParam(name = "password", value = "密码") @RequestParam(required = false) String password
     ) {
-        logger.info(" username:" + username + " begin login ");
+        log.info(" username:" + username + " begin login ");
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {

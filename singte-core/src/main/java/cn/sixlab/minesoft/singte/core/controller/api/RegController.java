@@ -10,6 +10,7 @@ import cn.sixlab.minesoft.singte.core.models.StUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
+@Slf4j
 @RestController
 @RequestMapping("/reg")
 @Api(tags = "注册", description = "/reg 注册")
@@ -35,7 +37,7 @@ public class RegController extends BaseController {
             @ApiParam(name = "key", value = "图片唯一标示符", required = true) @RequestParam String key,
             @ApiParam(name = "code", value = "用户输入的验证码", required = true) @RequestParam String code
     ) {
-        logger.info(" username:" + username + " begin reg ");
+        log.info(" username:" + username + " begin reg ");
 
         if (CaptchaUtils.verify(key, code)) {
             StUser stUser = userMapper.selectByUsername(username);
