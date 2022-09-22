@@ -9,6 +9,7 @@ import cn.sixlab.minesoft.singte.core.models.StTodo;
 import cn.sixlab.minesoft.singte.core.models.StUser;
 import cn.sixlab.minesoft.singte.core.models.StUserMeta;
 import cn.sixlab.minesoft.singte.core.service.DingTalkService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.support.CronExpression;
@@ -16,8 +17,10 @@ import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@Slf4j
 @Component
 public class DingTalkJob {
     @Autowired
@@ -34,12 +37,16 @@ public class DingTalkJob {
 
     @Scheduled(cron = "1 0 0 * * ?")
     public void initToday() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
         LocalDateTime now = LocalDateTime.now();
         List<StTodo> todoList = todoDao.selectStatus(null, "0");
         for (StTodo stTodo : todoList) {
             if (StrUtil.isNotEmpty(stTodo.getTodoCron())) {
                 CronExpression cronExpression = CronExpression.parse(stTodo.getTodoCron());
                 LocalDateTime next = cronExpression.next(now);
+                log.info("定时任务：" + stTodo.getTodoName() + " ,cron:" + stTodo.getTodoCron() + " ,下次时间:" + next.format(formatter));
+                log.info("定时任务：" + stTodo.getTodoName() + " ,cron:" + stTodo.getTodoCron() + " ,日期间隔:" + Duration.between(now, next).toDays());
                 if (Duration.between(now, next).toDays() == 0) {
                     stTodo.setStatus(StConst.YES);
                     todoDao.save(stTodo);
