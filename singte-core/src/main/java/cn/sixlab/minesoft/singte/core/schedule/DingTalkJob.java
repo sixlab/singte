@@ -118,7 +118,7 @@ public class DingTalkJob {
 
         StUserMeta talkUserTips = userMetaDao.selectUserMeta(stUser.getUsername(), "dingTalk_UserTips");
         if (talkUserTips != null) {
-            sb.append("\n").append(talkUserTips.getMetaVal()).append("\n");
+            sb.append("\n提示：").append(talkUserTips.getMetaVal()).append("\n");
         }
 
         return sb.toString();

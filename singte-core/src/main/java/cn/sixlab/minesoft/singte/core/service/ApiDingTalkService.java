@@ -187,5 +187,7 @@ public class ApiDingTalkService extends BaseController {
         }
         talkUserTips.setMetaVal(params[1]);
         userMetaDao.save(talkUserTips);
+
+        dingTalkService.sendSampleText(dingUserId, "提示设置成功");
     }
 }
