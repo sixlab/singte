@@ -1,7 +1,11 @@
 package cn.sixlab.minesoft.singte.core.common.utils;
 
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
+import cn.sixlab.minesoft.singte.core.common.vo.StUserDetails;
+import cn.sixlab.minesoft.singte.core.models.StUser;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -34,16 +38,16 @@ public class WebUtils {
      *
      * @return
      */
-    public static String getDomainName(String host) {
-        if (host.endsWith(".")) {
-            host = host.substring(0, host.length() - 1);
+    public static String getTopDomain(String domain) {
+        if (domain.endsWith(".")) {
+            domain = domain.substring(0, domain.length() - 1);
         }
 
-        if (IP_PATTERN.matcher(host).matches()) {
-            return host;
+        if (IP_PATTERN.matcher(domain).matches()) {
+            return domain;
         }
         int index = 0;
-        String candidate = host;
+        String candidate = domain;
         while (index >= 0) {
             index = candidate.indexOf('.');
             String subCandidate = candidate.substring(index + 1);
@@ -189,30 +193,40 @@ public class WebUtils {
         return getDomain(getRequest(), true);
     }
 
+    /**
+     * 获取域名,例子  192.168.1.100   www.a.com
+     */
+    public static String getDomainWithPort() {
+        return getDomain(getRequest(), false);
+    }
+
     public static String getDomain(HttpServletRequest request, boolean excludePort) {
         String domain = request.getHeader("HOST");
-        if (StringUtils.isNotEmpty(domain) && excludePort) {
+
+        if (StrUtil.isEmpty(domain)) {
+            String requestURL = request.getRequestURL().toString();
+            String requestURI = request.getRequestURI();
+
+            int beginIndex = requestURL.indexOf("://");
+            int endIndex = requestURL.length() - requestURI.length();
+            if (beginIndex < 0) {
+                beginIndex = 0;
+            } else {
+                beginIndex += "://".length();
+            }
+            domain = requestURL.substring(beginIndex, endIndex);
+        }
+
+        if (StrUtil.isNotEmpty(domain) && excludePort) {
             int endIdx = domain.indexOf(":");
             if (endIdx >= 0) {
                 domain = domain.substring(0, endIdx);
             }
         }
-        if (StringUtils.isNotEmpty(domain)) {
-            return domain;
-        }
-        String requestURL = request.getRequestURL().toString();
-        String requestURI = request.getRequestURI();
-        int endIndex = requestURL.length() - requestURI.length();
-        int beginIndex = requestURL.indexOf("://");
-        if (beginIndex < 0) {
-            beginIndex = 0;
-        } else {
-            beginIndex += "://".length();
-        }
-        domain = requestURL.substring(beginIndex, endIndex);
-        if (StringUtils.isEmpty(domain)) {
+        if (StrUtil.isEmpty(domain)) {
             domain = "";
         }
+
         return domain;
     }
 
@@ -255,12 +269,12 @@ public class WebUtils {
     }
 
     public static String getToken(HttpServletRequest request) {
-        String token = getCookie("Authorization");
-        if (StringUtils.isEmpty(token)) {
-            token = request.getParameter("Authorization");
-        }
-        if (StringUtils.isEmpty(token)) {
+        String token = request.getParameter("Authorization");
+        if (StrUtil.isEmpty(token)) {
             token = request.getHeader("Authorization");
+        }
+        if (StrUtil.isEmpty(token)) {
+            token = getCookie("Authorization");
         }
         return token;
     }
@@ -268,4 +282,16 @@ public class WebUtils {
     public static String getToken() {
         return getToken(WebUtils.getRequest());
     }
+
+    public static StUser getLoginUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object details = authentication.getPrincipal();
+        if (details instanceof StUserDetails) {
+            StUserDetails userDetails = (StUserDetails) details;
+            userDetails.eraseCredentials();
+            return userDetails.getStUser();
+        }
+        return null;
+    }
+
 }

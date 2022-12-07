@@ -1,8 +1,7 @@
 package cn.sixlab.minesoft.singte.core.common.vo;
 
-import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
+import cn.hutool.core.map.MapUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.JsonUtils;
-import org.apache.commons.collections4.MapUtils;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -11,19 +10,14 @@ import java.util.Map;
 public class ModelResp extends LinkedHashMap<String, Object> {
 
 //    private Integer status = 200; // 状态码
-//    private String error = "";    // 代码错误信息
 //    private String message = "";  // 用户信息提醒
 
     public ModelResp() {
-        this(200, "common.success", "");
+        this(200, "common.success");
     }
 
     public ModelResp(Integer status) {
-        this(status, "", "");
-    }
-
-    public ModelResp(Integer status, String message) {
-        this(status, message, "");
+        this(status, "");
     }
 
     /**
@@ -31,13 +25,11 @@ public class ModelResp extends LinkedHashMap<String, Object> {
      *
      * @param status 编号，200是正确返回，其他的都是错误
      * @param message 信息提示，给用户的提示
-     * @param error 错误信息，给代码的信息
      */
-    public ModelResp(Integer status, String message, String error) {
+    public ModelResp(Integer status, String message) {
         super();
         setStatus(status);
         setMessage(message);
-        setError(error);
     }
 
     public static ModelResp resp() {
@@ -52,20 +44,16 @@ public class ModelResp extends LinkedHashMap<String, Object> {
         return new ModelResp(status, message);
     }
 
-    public static ModelResp error(Integer status, String message, String error) {
-        return new ModelResp(status, message, error);
-    }
-
     public static ModelResp success() {
         return new ModelResp();
     }
 
-    public static ModelResp success(Object data, String message) {
-        return new ModelResp().setMessage(message).setData(data);
-    }
-
     public static ModelResp success(Object data) {
         return new ModelResp().setData(data);
+    }
+
+    public static ModelResp success(Object data, String message) {
+        return new ModelResp().setMessage(message).setData(data);
     }
 
     public ModelResp add(String key, Object val) {
@@ -82,7 +70,7 @@ public class ModelResp extends LinkedHashMap<String, Object> {
     }
 
     public Integer getStatus() {
-        return MapUtils.getInteger(this, "status");
+        return MapUtil.getInt(this, "status");
     }
 
     public ModelResp setStatus(Integer status) {
@@ -90,21 +78,12 @@ public class ModelResp extends LinkedHashMap<String, Object> {
         return this;
     }
 
-    public String getError() {
-        return MapUtils.getString(this, "error");
-    }
-
-    public ModelResp setError(String error) {
-        put("error", error);
-        return this;
-    }
-
     public String getMessage() {
-        return MapUtils.getString(this, "message");
+        return MapUtil.getStr(this, "message");
     }
 
     public ModelResp setMessage(String message) {
-        put("message", I18nUtils.get(message));
+        put("message", message);
         return this;
     }
 

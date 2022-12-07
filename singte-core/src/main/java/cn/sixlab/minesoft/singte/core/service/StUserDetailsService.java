@@ -1,25 +1,21 @@
 package cn.sixlab.minesoft.singte.core.service;
 
+import cn.hutool.core.date.DateUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
 import cn.sixlab.minesoft.singte.core.common.utils.StCacheHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.common.utils.WebUtils;
+import cn.sixlab.minesoft.singte.core.common.vo.StUserDetails;
 import cn.sixlab.minesoft.singte.core.dao.StUserDao;
 import cn.sixlab.minesoft.singte.core.models.StUser;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class StUserDetailsService implements UserDetailsService {
@@ -40,15 +36,16 @@ public class StUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         StUser stUser = userMapper.selectByUsername(username);
         if (stUser != null) {
-            boolean enable = StConst.YES.equals(stUser.getStatus());
-
-            List<GrantedAuthority> authorityList = new ArrayList<>();
-            authorityList.add(new SimpleGrantedAuthority(stUser.getRole()));
-
-            return new User(username, stUser.getPassword(), enable, true, true, !enable, authorityList);
+            return new StUserDetails(stUser);
         } else {
             throw new UsernameNotFoundException(I18nUtils.get("login.user.none"));
         }
+    }
+
+    public StUser loadUser(String username) {
+        StUser stUser = userMapper.selectByUsername(username);
+        stUser.setPassword(null);
+        return stUser;
     }
 
     public StUser loadUserByToken(String token) {
@@ -59,11 +56,11 @@ public class StUserDetailsService implements UserDetailsService {
         StUser stUser = userMapper.selectByUsername(username);
         if (stUser != null) {
             stUser.setToken(token);
-            stUser.setTokenValid(DateUtils.addMinutes(new Date(), expire));
+            stUser.setTokenValid(DateUtil.offsetMinute(new Date(), expire));
             userMapper.save(stUser);
         }
 
-        WebUtils.addCookie("Authorization", token, (int) (StConst.SECONDS_MIN_30 * 1000));
+        WebUtils.addCookie("Authorization", token, (int) (StConst.SECONDS_MIN_1 * expire * 1000));
     }
 
     public void updateTokenValid(String username, String token) {

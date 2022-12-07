@@ -1,29 +1,121 @@
 package cn.sixlab.minesoft.singte.core.service;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.common.utils.I18nUtils;
+import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.dao.StCategoryDao;
+import cn.sixlab.minesoft.singte.core.dao.StKeywordDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
+import cn.sixlab.minesoft.singte.core.models.StCategory;
+import cn.sixlab.minesoft.singte.core.models.StKeyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
-import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticleService {
 
     @Autowired
-    private StArticleDao articleMapper;
+    private StArticleDao articleDao;
 
     @Autowired
-    private StCategoryDao categoryMapper;
+    private StKeywordDao keywordDao;
+
+    @Autowired
+    private StCategoryDao categoryDao;
+
+    public int countCategory() {
+        categoryDao.updateFlag("1");
+
+        String flag = "update" + new Date().getTime();
+
+        List<StCategory> categoryList = articleDao.countCategory();
+        for (StCategory item : categoryList) {
+            StCategory stCategory = categoryDao.selectByCategory(item.getCategory());
+            if (null == stCategory) {
+                item.setCreateTime(new Date());
+                item.setWeight(1);
+                item.setFlag(flag);
+                item.setStatus(StConst.YES);
+                categoryDao.save(item);
+            } else {
+                stCategory.setUpdateTime(new Date());
+                stCategory.setCount(item.getCount());
+                stCategory.setFlag(flag);
+                categoryDao.save(stCategory);
+            }
+        }
+
+        categoryDao.delWithoutFlag(flag);
+
+        return categoryList.size();
+    }
+
+    public int countKeyword() {
+        keywordDao.updateFlag("1");
+
+        String flag = "update" + new Date().getTime();
+
+        int pageNum = 1;
+        Map<String, Integer> keywordCount = new HashMap<>();
+        while (pageNum > 0) {
+            PageResult<StArticle> pageResult = articleDao.selectByCategory("", pageNum, 10);
+
+            List<StArticle> articleList = pageResult.getList();
+
+            for (StArticle article : articleList) {
+                List<String> keywords = article.getKeywords();
+                for (String keyword : keywords) {
+                    StKeyword stKeyword = keywordDao.selectByKeyword(keyword);
+                    if (stKeyword == null) {
+                        stKeyword = new StKeyword();
+                        stKeyword.setKeyword(keyword);
+                        stKeyword.setCount(0);
+                        stKeyword.setWeight(1);
+                        stKeyword.setStatus(StConst.YES);
+                        stKeyword.setCreateTime(new Date());
+                        keywordDao.save(stKeyword);
+                    }
+                    String keywordId = stKeyword.getId();
+                    int count = keywordCount.getOrDefault(keywordId, 0) + 1;
+                    keywordCount.put(keywordId, count);
+                }
+                articleDao.save(article);
+            }
+
+            if (pageResult.isHasNext()) {
+                pageNum++;
+            } else {
+                pageNum = 0;
+            }
+        }
+
+        keywordCount.forEach((key, val) -> {
+            StKeyword stKeyword = keywordDao.selectById(key);
+            stKeyword.setCount(val);
+            stKeyword.setUpdateTime(new Date());
+            stKeyword.setFlag(flag);
+            keywordDao.save(stKeyword);
+        });
+
+        keywordDao.delWithoutFlag(flag);
+
+        return keywordCount.size();
+    }
+
+    public PageResult<StArticle> list(Integer pageNum, Integer pageSize) {
+        return articleDao.queryData(null, StConst.YES, pageNum, pageSize);
+    }
 
     /**
      * 查询最热门的文章
@@ -32,7 +124,7 @@ public class ArticleService {
      * @return 文章列表
      */
     public List<StArticle> topHot(int size) {
-        return articleMapper.selectHot(size);
+        return articleDao.selectHot(size);
     }
 
     /**
@@ -42,7 +134,7 @@ public class ArticleService {
      * @return 文章列表
      */
     public List<StArticle> topLast(int size) {
-        return articleMapper.selectLast(size);
+        return articleDao.selectLast(size);
     }
 
     /**
@@ -52,7 +144,11 @@ public class ArticleService {
      * @return 文章列表
      */
     public List<StArticle> random(int size) {
-        return articleMapper.selectRandom(size);
+        return articleDao.selectRandom(size);
+    }
+
+    public List<StArticle> topView(int size) {
+        return null;
     }
 
     public void listParam(ModelMap modelMap, Integer pageNum, Integer pageSize, String pageType, String uriPrefix) {
@@ -102,22 +198,18 @@ public class ArticleService {
     public PageResult<StArticle> selectByDate(String date, int pageNum, int pageSize) {
 
         Date begin = null;
-        if (StringUtils.isNotEmpty(date)) {
-            try {
-                begin = DateUtils.parseDate(date, "yyyyMMdd");
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+        if (StrUtil.isNotEmpty(date)) {
+            begin = DateUtil.parse(date, DatePattern.PURE_DATE_FORMAT);
         }
 
         if (null == begin) {
             begin = new Date();
         }
 
-        begin = DateUtils.truncate(begin, Calendar.DAY_OF_MONTH);
-        Date end = DateUtils.addDays(begin, 1);
+        begin = DateUtil.truncate(begin, DateField.DAY_OF_MONTH);
+        Date end = DateUtil.offsetDay(begin, 1);
 
-        PageResult<StArticle> articleList = articleMapper.selectByDate(begin, end, pageNum, pageSize);
+        PageResult<StArticle> articleList = articleDao.selectByDate(begin, end, pageNum, pageSize);
 
         return articleList;
     }
@@ -131,19 +223,19 @@ public class ArticleService {
      * @return 文章列表(分页)
      */
     public PageResult<StArticle> selectCategory(String category, int pageNum, int pageSize) {
-        PageResult<StArticle> articleList = articleMapper.selectByCategory(category, pageNum, pageSize);
+        PageResult<StArticle> articleList = articleDao.selectByCategory(category, pageNum, pageSize);
 
         return articleList;
     }
 
     public PageResult<StArticle> selectKeyword(String keyword, int pageNum, int pageSize) {
-        PageResult<StArticle> articleList = articleMapper.selectByKeyword(keyword, pageNum, pageSize);
+        PageResult<StArticle> articleList = articleDao.selectByKeyword(keyword, pageNum, pageSize);
 
         return articleList;
     }
 
     public PageResult<StArticle> selectSearch(String word, int pageNum, int pageSize) {
-        PageResult<StArticle> articleList = articleMapper.selectByWord(word, pageNum, pageSize);
+        PageResult<StArticle> articleList = articleDao.queryByWord(word, pageNum, pageSize);
 
         return articleList;
     }

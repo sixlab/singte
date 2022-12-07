@@ -1,6 +1,8 @@
 package cn.sixlab.minesoft.singte.core.dao;
 
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.config.BaseDao;
+import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
 import cn.sixlab.minesoft.singte.core.models.StKeyword;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -32,6 +34,12 @@ public class StKeywordDao extends BaseDao<StKeyword> {
         return mongoTemplate.findOne(query, StKeyword.class);
     }
 
+    @Override
+    public StKeyword selectExist(StKeyword record) {
+        Query query = new Query(Criteria.where("keyword").is(record.getKeyword())).with(Sort.by("id"));
+        return mongoTemplate.findOne(query, StKeyword.class);
+    }
+
     /**
      * 随机查询关键词
      *
@@ -58,5 +66,27 @@ public class StKeywordDao extends BaseDao<StKeyword> {
         Criteria criteria = Criteria.where("flag").ne(flag);
 
         mongoTemplate.remove(new Query(criteria), StKeyword.class);
+    }
+
+    public PageResult<StKeyword> queryData(String keyword, String status, Integer pageNum, Integer pageSize) {
+        Criteria criteria = new Criteria();
+        if (StrUtil.isNotEmpty(status)) {
+            criteria = criteria.and("status").is(status);
+        }
+
+        if (StrUtil.isNotEmpty(keyword)) {
+            Criteria keywordCriteria = new Criteria().orOperator(
+                    Criteria.where("keyword").regex(keyword),
+                    Criteria.where("intro").regex(keyword)
+            );
+
+            criteria = criteria.andOperator(keywordCriteria);
+        }
+
+        Sort sort = Sort.by("weight", "id");
+
+        Query query = new Query(criteria).with(sort);
+
+        return pageQuery(query, StKeyword.class, pageNum, pageSize);
     }
 }

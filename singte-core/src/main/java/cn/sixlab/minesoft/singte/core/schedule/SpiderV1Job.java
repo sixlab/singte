@@ -1,7 +1,7 @@
 package cn.sixlab.minesoft.singte.core.schedule;
 
+import cn.hutool.extra.spring.SpringUtil;
 import cn.sixlab.minesoft.singte.core.common.spider.SpiderJob;
-import cn.sixlab.minesoft.singte.core.common.utils.CtxHolder;
 import cn.sixlab.minesoft.singte.core.common.utils.StConst;
 import cn.sixlab.minesoft.singte.core.dao.StSpiderDao;
 import cn.sixlab.minesoft.singte.core.models.StSpider;
@@ -25,7 +25,7 @@ public class SpiderV1Job {
         List<StSpider> spiderList = spiderMapper.selectByStatus(StConst.YES);
 
         spiderList.forEach(spider -> {
-            CtxHolder.getBean(spider.getSpiderType(), SpiderJob.class).craw(spider);
+            SpringUtil.getBean(spider.getSpiderBean(), SpiderJob.class).craw(spider);
         });
     }
 

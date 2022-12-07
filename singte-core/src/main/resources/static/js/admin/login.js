@@ -3,13 +3,10 @@ $(function () {
         let key = Date.now().toString(36) + Math.random().toString(36);
 
         $("#captchaKey").val(key);
-        $("#captchaImg").attr("src", "/captcha?width=100&height=41&key=" + key);
+        $("#captchaImg").attr("src", "/captcha/image?width=100&height=41&key=" + key);
     }
 
-    loadCaptcha();
-    $(document).on("click", ".reloadImg", loadCaptcha);
-
-    $(document).on("click", "#loginBtn", function () {
+    function login(){
         $.ajax({
             url: "/admin/login",
             type: "post",
@@ -37,6 +34,20 @@ $(function () {
                 console.log(err);
             }
         })
+    }
+
+    loadCaptcha();
+    $(document).on("click", ".reloadImg", loadCaptcha);
+
+    $(document).on("keydown", "#captchaCode", function (e) {
+        if (e.keyCode === 13) {
+            login();
+            return false;
+        }
+    })
+
+    $(document).on("click", "#loginBtn", function () {
+        login();
         return false;
     });
 });

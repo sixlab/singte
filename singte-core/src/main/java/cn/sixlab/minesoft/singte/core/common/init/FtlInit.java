@@ -21,6 +21,15 @@ public class FtlInit implements ApplicationRunner {
     private MenuDirective menuDirective;
 
     @Autowired
+    private LangDirective langDirective;
+
+    @Autowired
+    private UserDirective userDirective;
+
+    @Autowired
+    private AsideDirective asideDirective;
+
+    @Autowired
     private ConfigDirective configDirective;
 
     @Autowired
@@ -38,11 +47,15 @@ public class FtlInit implements ApplicationRunner {
     }
 
     public void configFtl() {
-        configuration.setSharedVariable("StMenu", menuDirective);
         configuration.setSharedVariable("StConfig", configDirective);
+        configuration.setSharedVariable("StStatic", staticDirective);
+        configuration.setSharedVariable("StUser", userDirective);
+        configuration.setSharedVariable("StLang", langDirective);
+        configuration.setSharedVariable("StAside", asideDirective);
+
+        configuration.setSharedVariable("StMenu", menuDirective);
         configuration.setSharedVariable("StKeyword", keywordDirective);
         configuration.setSharedVariable("StArticles", articlesDirective);
-        configuration.setSharedVariable("StStatic", staticDirective);
     }
 
 }

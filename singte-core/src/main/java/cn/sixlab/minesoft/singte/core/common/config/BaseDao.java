@@ -18,6 +18,10 @@ public abstract class BaseDao<T extends BaseModel> {
 
     public abstract Class<T> entityClass();
 
+    public abstract T selectExist(T record);
+
+    public abstract PageResult<T> queryData(String keyword, String status, Integer pageNum, Integer pageSize);
+
     public T save(T record) {
         mongoTemplate.save(record);
         return record;

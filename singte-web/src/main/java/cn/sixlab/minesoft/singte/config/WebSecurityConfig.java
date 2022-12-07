@@ -24,9 +24,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private LoginStatusRequestFilter jwtRequestFilter;
+    private StLoginStatusFilter loginStatusFilter;
     @Autowired
-    private AuthenticationHandler authenticationHandler;
+    private StAuthenticationHandler authenticationHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,16 +54,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        //        // 登录
-        //        httpSecurity.formLogin().loginProcessingUrl("/login")
-        //                .successHandler(loginSuccessHandler)
-        //                .failureHandler(myFailHandler);
-        //
-        //        // 退出
-        //        httpSecurity.logout().logoutUrl("/logout")
-        //                .addLogoutHandler(logoutHandler)
-        //                .logoutSuccessHandler(logoutHandler);
-
         httpSecurity.exceptionHandling()
                 .accessDeniedHandler(authenticationHandler)
                 .authenticationEntryPoint(authenticationHandler);
@@ -71,36 +61,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // dont authenticate this particular request
         httpSecurity.authorizeRequests()
                 .antMatchers("/**/login/**").permitAll()
-                .antMatchers("/user/**").hasAuthority(StConst.ROLE_USER)
+                .antMatchers("/user/**").hasAnyAuthority(StConst.ROLE_USER, StConst.ROLE_ADMIN)
                 .antMatchers("/admin/**").hasAuthority(StConst.ROLE_ADMIN)
                 .anyRequest().permitAll();
 
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(loginStatusFilter, UsernamePasswordAuthenticationFilter.class);
 
         //添加 校验过滤器
-//        Filter authenticationFilter = new JwtAuthenticationFilter(authenticationManager());
-//        httpSecurity.addFilter(authenticationFilter);
+        //        Filter authenticationFilter = new JwtAuthenticationFilter(authenticationManager());
+        //        httpSecurity.addFilter(authenticationFilter);
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         // AuthenticationTokenFilter will ignore the below paths
-        web
-                .ignoring()
-                .antMatchers(
-                        HttpMethod.POST,
-                        "/api/**"
-                )
-                .and()
-                .ignoring()
-                .antMatchers(
-                        HttpMethod.GET,
-                        "/",
-                        "/favicon.ico",
-                        "/static/**",
-                        "/api/**",
-                        "/MP_verify_*.txt",
-                        "/file/files/*"
-                );
+        web.ignoring().antMatchers(
+                HttpMethod.GET,
+                "/",
+                "/favicon.ico",
+                "/static/**",
+                "/MP_verify_*.txt",
+                "/file/files/*"
+        );
     }
 }

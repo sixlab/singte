@@ -5,6 +5,8 @@ public class StErr {
     public static final int NOT_EXIST = 404;
     public static final int EXIST_SAME = 504;
 
+    public static final int VERIFY_ERROR = 1301;
+
     public static final int LOGIN_EXPIRED = 1402;
     public static final int LOGIN_DISABLE = 1403;
     public static final int LOGIN_CAPTCHA = 1404;

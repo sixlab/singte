@@ -1,6 +1,6 @@
 <#include '../frame/functions.ftlh'>
 
-<#assign title><@spring.message code="page.title.index"/></#assign>
+<#assign title><@StI18n "page.title.index"/></#assign>
 <@AdminFrame title="${title}">
     <div class="row">
         <div class="col-lg-6">

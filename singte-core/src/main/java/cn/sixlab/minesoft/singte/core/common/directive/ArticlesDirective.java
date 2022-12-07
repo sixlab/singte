@@ -1,11 +1,10 @@
 package cn.sixlab.minesoft.singte.core.common.directive;
 
-import cn.sixlab.minesoft.singte.core.common.pager.PageResult;
+import cn.hutool.core.map.MapUtil;
+import cn.sixlab.minesoft.singte.core.dao.StArticleDao;
 import cn.sixlab.minesoft.singte.core.models.StArticle;
-import cn.sixlab.minesoft.singte.core.service.ArticleService;
 import freemarker.core.Environment;
 import freemarker.template.*;
-import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,53 +16,30 @@ import java.util.Map;
 public class ArticlesDirective implements TemplateDirectiveModel {
 
     @Autowired
-    private ArticleService articleService;
+    private StArticleDao articleDao;
 
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
-        String type = MapUtils.getString(params, "type", "random");
-        int size = Integer.parseInt(MapUtils.getString(params, "size", "10"));
-        int num = Integer.parseInt(MapUtils.getString(params, "num", "1"));
-        String word = MapUtils.getString(params, "word", "");
+        String type = MapUtil.getStr(params, "type", "random");
+        int size = Integer.parseInt(MapUtil.getStr(params, "size", "10"));
 
         List<StArticle> articleList = null;
-        PageResult<StArticle> pageInfo = null;
         switch (type) {
             case "hot":
-                articleList = articleService.topHot(size);
+                articleList = articleDao.selectHot(size);
                 break;
             case "last":
-                articleList = articleService.topLast(size);
+                articleList = articleDao.selectLast(size);
                 break;
             case "random":
-                articleList = articleService.random(size);
+                articleList = articleDao.selectRandom(size);
                 break;
-            case "date":
-                String date = MapUtils.getString(params, "date");
-                pageInfo = articleService.selectByDate(date, num, size);
-                break;
-
-            case "category":
-                pageInfo = articleService.selectCategory(word, num, size);
-                break;
-            case "keyword":
-                pageInfo = articleService.selectKeyword(word, num, size);
-                break;
-            case "search":
-                pageInfo = articleService.selectSearch(word, num, size);
-                break;
-            case "index":
-                pageInfo = articleService.selectCategory("", 1, size);
-                break;
-            case "list":
-                pageInfo = articleService.selectCategory("", num, size);
+            case "view":
+                articleList = articleDao.selectView(size);
                 break;
         }
 
-        if(null!=pageInfo){
-            env.setVariable("tArticlePageInfo", ObjectWrapper.DEFAULT_WRAPPER.wrap(pageInfo));
-        }
-        env.setVariable("tArticleList", ObjectWrapper.DEFAULT_WRAPPER.wrap(articleList));
+        env.setVariable("stArticleList", ObjectWrapper.DEFAULT_WRAPPER.wrap(articleList));
 
         if (body != null) {
             body.render(env.getOut());

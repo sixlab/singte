@@ -1,13 +1,13 @@
 package cn.sixlab.minesoft.singte.core.common.directive;
 
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.sixlab.minesoft.singte.core.common.utils.ConfigUtils;
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
 import freemarker.template.TemplateDirectiveModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
-import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,15 +23,15 @@ public class ConfigDirective implements TemplateDirectiveModel {
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
         String config = "";
-        String key = MapUtils.getString(params, "key");
-        if (StringUtils.isNotEmpty(key)) {
+        String key = MapUtil.getStr(params, "key");
+        if (StrUtil.isNotEmpty(key)) {
             String val = configUtils.getConfig(key);
-            if (StringUtils.isNotEmpty(val)) {
+            if (StrUtil.isNotEmpty(val)) {
                 config = val;
             }
         }
-        if(StringUtils.isEmpty(key)){
-            config = MapUtils.getString(params, "default");
+        if(StrUtil.isEmpty(config)){
+            config = MapUtil.getStr(params, "default");
         }
 
         env.getOut().append(config);

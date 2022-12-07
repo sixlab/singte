@@ -1,6 +1,6 @@
 package cn.sixlab.minesoft.singte.core.common.utils;
 
-import org.apache.commons.io.IOUtils;
+import cn.hutool.core.io.IoUtil;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
@@ -12,7 +12,8 @@ public class IoUtils {
         ClassPathResource classPathResource = new ClassPathResource(filename);
         try {
             InputStream inputStream = classPathResource.getInputStream();
-            return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+
+            return IoUtil.read(inputStream, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }

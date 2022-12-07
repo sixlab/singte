@@ -1,0 +1,64 @@
+
+###
+type=importdizigui
+type=importlistmap
+type=importlistmaphuajianji
+type=importlistmapsongci
+type=importlistmapsongci1
+
+type=importlistmaptangshi
+type=importlistmaptangshi1
+type=importlistmaptangshi2
+type=importlistmaptangshi3
+type=importlistmaptangshi4
+type=importlistmaptangshi5
+type=importlistmaptangshi6
+type=importlistmaptangshi7
+type=importlistmaptangshi8
+
+type=importmaplist
+type=importmaplistmap
+type=importone
+
+### 批量导入
+POST {{server}}/admin/utils/importAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+type=importqianziwen
+
+### 导入一个
+POST {{server}}/admin/utils/importOneAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+type=importlistmap&path=ci/ci.song.0.json&ancientSet=集部&ancientCategory=词曲类&bookName=全宋词&author=合著
+
+### 简化所有文章内容
+
+POST {{server}}/admin/utils/simplifySection
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+### 重新加载所有书籍
+
+POST {{server}}/admin/utils/reloadBook
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+### 重新统计分类的书籍数量
+
+POST {{server}}/admin/utils/countAncient
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+### 翻译国际化文件
+
+POST {{server}}/admin/utils/translate
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{Authorization}}
+
+lang=en&baiduLang=en
+
+
+
